@@ -554,7 +554,7 @@ namespace Server
 				return defaultValue;
 			}
 		}
-#if Framework_4_0
+
 		public static DateTimeOffset GetXMLDateTimeOffset( string dateTimeOffsetString, DateTimeOffset defaultValue )
 		{
 			try
@@ -571,7 +571,7 @@ namespace Server
 				return defaultValue;
 			}
 		}
-#endif
+
 		public static TimeSpan GetXMLTimeSpan( string timeSpanString, TimeSpan defaultValue )
 		{
 			try
@@ -1326,17 +1326,10 @@ namespace Server
 				m.FacialHairHue = m.Race.RandomHairHue();
 		}
 
-#if MONO
-		public static List<TOutput> CastConvertList<TInput, TOutput>( List<TInput> list ) where TInput : class where TOutput : class
-		{
-			return list.ConvertAll<TOutput>( new  Converter<TInput, TOutput>( delegate( TInput value ) { return value as TOutput; } ) );
-		}
-#else
 		public static List<TOutput> CastConvertList<TInput, TOutput>( List<TInput> list ) where TOutput : TInput
 		{
 			return list.ConvertAll<TOutput>( new Converter<TInput, TOutput>( delegate( TInput value ) { return (TOutput)value; } ) );
 		}
-#endif
 
 		public static List<TOutput> SafeConvertList<TInput, TOutput>( List<TInput> list ) where TOutput : class
 		{

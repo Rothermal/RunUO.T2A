@@ -177,13 +177,7 @@ namespace Server.Network {
 		public static readonly ICompressor Compressor;
 
 		static Compression() {
-			if ( Core.Unix ) {
-				if ( Core.Is64Bit ) {
-					Compressor = new CompressorUnix64();
-				} else {
-					Compressor = new CompressorUnix32();
-				}
-			} else if ( Core.Is64Bit ) {
+			if ( Core.Is64Bit ) {
 				Compressor = new Compressor64();
 			} else {
 				Compressor = new Compressor32();
@@ -281,85 +275,6 @@ namespace Server.Network {
 
 		public ZLibError Decompress( byte[] dest, ref int destLength, byte[] source, int sourceLength ) {
 			return uncompress( dest, ref destLength, source, sourceLength );
-		}
-	}
-
-	public sealed class CompressorUnix32 : ICompressor {
-		[DllImport( "libz" )]
-		private static extern string zlibVersion();
-
-		[DllImport( "libz" )]
-		private static extern ZLibError compress( byte[] dest, ref int destLength, byte[] source, int sourceLength );
-
-		[DllImport( "libz" )]
-		private static extern ZLibError compress2( byte[] dest, ref int destLength, byte[] source, int sourceLength, ZLibQuality quality );
-
-		[DllImport( "libz" )]
-		private static extern ZLibError uncompress( byte[] dest, ref int destLen, byte[] source, int sourceLen );
-
-		public CompressorUnix32() {
-		}
-
-		public string Version {
-			get {
-				return zlibVersion();
-			}
-		}
-
-		public ZLibError Compress( byte[] dest, ref int destLength, byte[] source, int sourceLength ) {
-			return compress( dest, ref destLength, source, sourceLength );
-		}
-
-		public ZLibError Compress( byte[] dest, ref int destLength, byte[] source, int sourceLength, ZLibQuality quality ) {
-			return compress2( dest, ref destLength, source, sourceLength, quality );
-		}
-
-		public ZLibError Decompress( byte[] dest, ref int destLength, byte[] source, int sourceLength ) {
-			return uncompress( dest, ref destLength, source, sourceLength );
-		}
-	}
-
-	public sealed class CompressorUnix64 : ICompressor {
-		[DllImport( "libz" )]
-		private static extern string zlibVersion();
-
-		[DllImport( "libz" )]
-		private static extern ZLibError compress( byte[] dest, ref ulong destLength, byte[] source, int sourceLength );
-
-		[DllImport( "libz" )]
-		private static extern ZLibError compress2( byte[] dest, ref ulong destLength, byte[] source, int sourceLength, ZLibQuality quality );
-
-		[DllImport( "libz" )]
-		private static extern ZLibError uncompress( byte[] dest, ref ulong destLen, byte[] source, int sourceLen );
-
-		public CompressorUnix64() {
-		}
-
-		public string Version {
-			get {
-				return zlibVersion();
-			}
-		}
-
-		public ZLibError Compress( byte[] dest, ref int destLength, byte[] source, int sourceLength ) {
-			ulong destLengthLong = (ulong)destLength;
-			ZLibError z = compress( dest, ref destLengthLong, source, sourceLength );
-			destLength = (int)destLengthLong;
-			return z;
-		}
-
-		public ZLibError Compress( byte[] dest, ref int destLength, byte[] source, int sourceLength, ZLibQuality quality ) {
-			ulong destLengthLong = (ulong)destLength;
-			ZLibError z = compress2( dest, ref destLengthLong, source, sourceLength, quality );
-			destLength = (int)destLengthLong;
-			return z;
-		}
-
-		public ZLibError Decompress( byte[] dest, ref int destLength, byte[] source, int sourceLength ) {
-			ulong destLengthLong = (ulong)destLength;
-			ZLibError z = uncompress( dest, ref destLengthLong, source, sourceLength );
-			destLength = (int)destLengthLong;
-			return z;
 		}
 	}
 

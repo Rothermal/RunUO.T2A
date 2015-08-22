@@ -27,10 +27,7 @@ namespace Server {
 		private static readonly INativeReader m_NativeReader;
 
 		static NativeReader() {
-			if ( Core.Unix )
-				m_NativeReader = new NativeReaderUnix();
-			else
-				m_NativeReader = new NativeReaderWin32();
+			m_NativeReader = new NativeReaderWin32();
 		}
 
 		public static unsafe void Read( IntPtr ptr, void *buffer, int length ) {

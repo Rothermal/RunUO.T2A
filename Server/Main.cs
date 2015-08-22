@@ -28,9 +28,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-#if Framework_4_0
 using System.Threading.Tasks;
-#endif
 
 using Server;
 using Server.Accounting;
@@ -112,21 +110,13 @@ namespace Server
 		public static Thread Thread { get { return m_Thread; } }
 		public static MultiTextWriter MultiConsoleOut { get { return m_MultiConOut; } }
 
-#if Framework_4_0
-		public static readonly bool Is64Bit = Environment.Is64BitProcess;
-#else
-		public static readonly bool Is64Bit = (IntPtr.Size == 8);	//Returns the size for the current /process/
-#endif
 
+		public static readonly bool Is64Bit = Environment.Is64BitProcess;
 		private static bool m_MultiProcessor;
 		private static int m_ProcessorCount;
 
 		public static bool MultiProcessor { get { return m_MultiProcessor; } }
 		public static int ProcessorCount { get { return m_ProcessorCount; } }
-
-		private static bool m_Unix;
-		
-		public static bool Unix { get { return m_Unix; } }
 
 		public static string FindDataFile( string path )
 		{
@@ -457,16 +447,9 @@ namespace Server
 			if( m_MultiProcessor || Is64Bit )
 				Console.WriteLine( "Core: Optimizing for {0} {2}processor{1}", m_ProcessorCount, m_ProcessorCount == 1 ? "" : "s", Is64Bit ? "64-bit " : "" );
 
-			int platform = (int)Environment.OSVersion.Platform;
-			if( platform == 4 || platform == 128 ) { // MS 4, MONO 128
-				m_Unix = true;
-				Console.WriteLine( "Core: Unix environment detected" );
-			}
-			else {
-				m_ConsoleEventHandler = new ConsoleEventHandler( OnConsoleEvent );
-				SetConsoleCtrlHandler( m_ConsoleEventHandler, true );
-			}
-
+			m_ConsoleEventHandler = new ConsoleEventHandler( OnConsoleEvent );
+			SetConsoleCtrlHandler( m_ConsoleEventHandler, true );
+			
 			if ( GCSettings.IsServerGC )
 				Console.WriteLine("Core: Server garbage collection mode enabled");
 
@@ -672,17 +655,10 @@ namespace Server
 			if( a == null )
 				return;
 
-#if Framework_4_0
 			Parallel.ForEach(a.GetTypes(), t => 
 				{
 					VerifyType(t);
 				});
-#else
-			foreach (Type t in a.GetTypes())
-			{
-				VerifyType(t);
-			}
-#endif
 		}
 	}
 

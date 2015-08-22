@@ -55,11 +55,7 @@ namespace Server
 		{
 			List<string> list = new List<string>();
 
-#if Framework_4_0
 			string path = Path.Combine( Core.BaseDirectory, "Data/Assemblies_4_0.cfg" );
-#else
-			string path = Path.Combine( Core.BaseDirectory, "Data/Assemblies.cfg" );
-#endif
 
 			if( File.Exists( path ) )
 			{
@@ -89,18 +85,11 @@ namespace Server
 			if( !debug )
 				AppendCompilerOption( ref sb, "/optimize" );
 
-#if MONO
-			AppendCompilerOption( ref sb, "/d:MONO" );
-#endif
-
 			//These two defines are legacy, ie, depreciated.
 			if( Core.Is64Bit )
 				AppendCompilerOption( ref sb, "/d:x64" );
 
-			AppendCompilerOption( ref sb, "/d:Framework_2_0" );
-#if Framework_4_0
 			AppendCompilerOption( ref sb, "/d:Framework_4_0" );
-#endif
 
 			return (sb == null ? null : sb.ToString());
 		}
@@ -233,33 +222,17 @@ namespace Server
 				if( Core.HaltOnWarning )
 					parms.WarningLevel = 4;
 
-#if !MONO
 				CompilerResults results = provider.CompileAssemblyFromFile( parms, files );
-#else
-				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts/*.cs", parms.CompilerOptions );
-				CompilerResults results = provider.CompileAssemblyFromFile( parms, "" );
-#endif
+
 				m_AdditionalReferences.Add( path );
 
 				Display( results );
 
-#if !MONO
 				if( results.Errors.Count > 0 )
 				{
 					assembly = null;
 					return false;
 				}
-#else
-				if( results.Errors.Count > 0 ) {
-					foreach( CompilerError err in results.Errors ) {
-						if ( !err.IsWarning ) {
-							assembly = null;
-							return false;
-						}
-					}
-				}
-#endif
-
 
 				if( cache && Path.GetFileName( path ) == "Scripts.CS.dll" )
 				{
