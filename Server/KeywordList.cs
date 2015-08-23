@@ -18,11 +18,10 @@
  *
  ***************************************************************************/
 
-using System;
 
 namespace Server
 {
-	public class KeywordList
+    public class KeywordList
 	{
 		private int[] m_Keywords;
 		private int m_Count;

@@ -19,16 +19,13 @@
  ***************************************************************************/
 
 using System;
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-
-using Server;
 using Server.Network;
 
-namespace Server {
-	public delegate void FileCommitCallback( FileQueue.Chunk chunk );
+namespace Server
+{
+    public delegate void FileCommitCallback( FileQueue.Chunk chunk );
 
 	public sealed class FileQueue : IDisposable {
 		public sealed class Chunk {

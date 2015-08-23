@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Server;
 using Server.Items;
-using Server.Targeting;
 using Server.Targets;
 using Server.Network;
 using Server.Regions;
@@ -17,7 +15,7 @@ using Server.Spells.Spellweaving;
 
 namespace Server.Mobiles
 {
-	public enum AIType
+    public enum AIType
 	{
 		AI_Use_Default,
 		AI_Melee,

@@ -20,12 +20,11 @@
 
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Server
 {
-	public class AggressorInfo
+    public class AggressorInfo
 	{
 		private Mobile m_Attacker, m_Defender;
 		private DateTime m_LastCombatTime;

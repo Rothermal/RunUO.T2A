@@ -21,15 +21,14 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Server.Network
 {
-	/// <summary>
-	/// Provides functionality for writing primitive binary data.
-	/// </summary>
-	public class PacketWriter
+    /// <summary>
+    /// Provides functionality for writing primitive binary data.
+    /// </summary>
+    public class PacketWriter
 	{
 		private static Stack<PacketWriter> m_Pool = new Stack<PacketWriter>();
 

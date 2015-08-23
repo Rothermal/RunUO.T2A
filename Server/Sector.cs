@@ -19,13 +19,13 @@
  ***************************************************************************/
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Server.Items;
 using Server.Network;
 
-namespace Server {
-	public class RegionRect : IComparable {
+namespace Server
+{
+    public class RegionRect : IComparable {
 		private Region m_Region;
 		private Rectangle3D m_Rect;
 

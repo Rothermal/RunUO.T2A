@@ -18,13 +18,11 @@
  *
  ***************************************************************************/
 
-using System;
-using System.Collections;
 using Server.Network;
 
 namespace Server
 {
-	public enum EffectLayer
+    public enum EffectLayer
 	{
 		Head = 0,
 		RightHand = 1,

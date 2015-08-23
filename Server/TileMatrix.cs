@@ -21,11 +21,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace Server
 {
-	public class TileMatrix
+    public class TileMatrix
 	{
 		private StaticTile[][][][][] m_StaticTiles;
 		private LandTile[][][] m_LandTiles;

@@ -20,16 +20,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Threading;
-using System.Diagnostics;
-
-using Server;
 using Server.Guilds;
 
-namespace Server {
-	public class StandardSaveStrategy : SaveStrategy {
+namespace Server
+{
+    public class StandardSaveStrategy : SaveStrategy {
 		public enum SaveOption
 		{
 			Normal,

@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using Server;
 using Server.Items;
-using Server.Mobiles;
 using Server.Gumps;
 using Server.Prompts;
 using Server.Targeting;
@@ -14,7 +12,7 @@ using Server.ContextMenus;
 
 namespace Server.Mobiles
 {
-	[AttributeUsage( AttributeTargets.Class )]
+    [AttributeUsage( AttributeTargets.Class )]
 	public class PlayerVendorTargetAttribute : Attribute
 	{
 		public PlayerVendorTargetAttribute()

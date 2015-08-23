@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Collections;
-using Server;
 using Server.Commands.Generic;
 using Server.Network;
 using Server.Prompts;
@@ -9,7 +8,7 @@ using Server.Commands;
 
 namespace Server.Gumps
 {
-	public class SetObjectGump : Gump
+    public class SetObjectGump : Gump
 	{
 		private PropertyInfo m_Property;
 		private Mobile m_Mobile;

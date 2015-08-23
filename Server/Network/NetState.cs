@@ -25,17 +25,16 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using Server;
 using Server.Accounting;
-using Server.Network;
 using Server.Items;
 using Server.Gumps;
 using Server.Menus;
 using Server.HuePickers;
 using Server.Diagnostics;
 
-namespace Server.Network {
-	public interface IPacketEncoder {
+namespace Server.Network
+{
+    public interface IPacketEncoder {
 		void EncodeOutgoingPacket( NetState to, ref byte[] buffer, ref int length );
 		void DecodeIncomingPacket( NetState from, ref byte[] buffer, ref int length );
 	}

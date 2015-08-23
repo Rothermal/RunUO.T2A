@@ -19,18 +19,14 @@
  ***************************************************************************/
 
 using System;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using Server.Accounting;
 using Server.Gumps;
 using Server.Targeting;
 using Server.Items;
 using Server.Menus;
 using Server.Mobiles;
-using Server.Movement;
 using Server.Prompts;
 using Server.HuePickers;
 using Server.ContextMenus;
@@ -39,7 +35,7 @@ using CV = Server.ClientVersion;
 
 namespace Server.Network
 {
-	public enum MessageType
+    public enum MessageType
 	{
 		Regular = 0x00,
 		System = 0x01,

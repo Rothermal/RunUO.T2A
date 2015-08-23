@@ -20,20 +20,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Collections.Concurrent;
-using System.Linq;
-
-using Server;
 using Server.Guilds;
 
 namespace Server
 {
-	public sealed class DynamicSaveStrategy : SaveStrategy
+    public sealed class DynamicSaveStrategy : SaveStrategy
 	{
 		public override string Name { get { return "Dynamic"; } }
 

@@ -19,14 +19,13 @@
  ***************************************************************************/
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Server.Items;
 using Server.Network;
 
 namespace Server
 {
-	public class SecureTrade
+    public class SecureTrade
 	{
 		private SecureTradeInfo m_From, m_To;
 		private bool m_Valid;

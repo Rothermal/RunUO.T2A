@@ -18,11 +18,10 @@
  *
  ***************************************************************************/
 
-using System;
 
 namespace Server
 {
-	public class TileList
+    public class TileList
 	{
 		private StaticTile[] m_Tiles;
 		private int m_Count;

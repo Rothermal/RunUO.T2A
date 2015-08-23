@@ -19,11 +19,10 @@
  ***************************************************************************/
 
 using System;
-using System.IO;
 
 namespace Server.Network
 {
-	public class ByteQueue
+    public class ByteQueue
 	{
 		private int m_Head;
 		private int m_Tail;

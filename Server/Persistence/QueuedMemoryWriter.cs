@@ -18,14 +18,12 @@
  *
  ***************************************************************************/
 
-using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Server
 {
-	public sealed class QueuedMemoryWriter : BinaryFileWriter
+    public sealed class QueuedMemoryWriter : BinaryFileWriter
 	{
 		private struct IndexInfo
 		{

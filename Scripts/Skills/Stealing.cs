@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Server;
 using Server.Mobiles;
 using Server.Targeting;
 using Server.Items;
@@ -8,13 +7,12 @@ using Server.Network;
 using Server.Factions;
 using Server.Spells.Seventh;
 using Server.Spells.Fifth;
-using Server.Spells.Necromancy;
 using Server.Spells;
 using Server.Spells.Ninjitsu;
 
 namespace Server.SkillHandlers
 {
-	public class Stealing
+    public class Stealing
 	{
 		public static void Initialize()
 		{

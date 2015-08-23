@@ -18,11 +18,10 @@
  *
  ***************************************************************************/
 
-using System;
 
 namespace Server
 {
-	public class Point3DList
+    public class Point3DList
 	{
 		private Point3D[] m_List;
 		private int m_Count;

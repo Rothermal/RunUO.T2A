@@ -21,14 +21,13 @@
 
 using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Text;
 
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-namespace Server {
-	public static class FileOperations {
+namespace Server
+{
+    public static class FileOperations {
 		public const int KB = 1024;
 		public const int MB = 1024 * KB;
 

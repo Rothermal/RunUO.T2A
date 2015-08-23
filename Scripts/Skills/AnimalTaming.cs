@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Server;
 using Server.Targeting;
 using Server.Network;
 using Server.Mobiles;
@@ -10,7 +9,7 @@ using Server.Spells.Spellweaving;
 
 namespace Server.SkillHandlers
 {
-	public class AnimalTaming
+    public class AnimalTaming
 	{
 		private static Hashtable m_BeingTamed = new Hashtable();
 

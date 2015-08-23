@@ -1,17 +1,13 @@
 using System;
 using System.Reflection;
 using System.Collections;
-using Server;
 using Server.Commands.Generic;
 using Server.Network;
-using Server.Menus;
-using Server.Menus.Questions;
-using Server.Targeting;
 using CPA = Server.CommandPropertyAttribute;
 
 namespace Server.Gumps
 {
-	public class PropertiesGump : Gump
+    public class PropertiesGump : Gump
 	{
 		private ArrayList m_List;
 		private int m_Page;

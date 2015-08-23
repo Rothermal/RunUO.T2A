@@ -20,12 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Server.Network;
 
 namespace Server
 {
-	[Parsable]
+    [Parsable]
 	public abstract class Race
 	{
 		public static Race DefaultRace { get { return m_Races[0];  } }

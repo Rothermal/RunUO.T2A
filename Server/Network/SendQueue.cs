@@ -19,12 +19,11 @@
  ***************************************************************************/
 
 using System;
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 
-namespace Server.Network {
-	public class SendQueue {
+namespace Server.Network
+{
+    public class SendQueue {
 		public class Gram {
 			private static Stack<Gram> _pool = new Stack<Gram>();
 

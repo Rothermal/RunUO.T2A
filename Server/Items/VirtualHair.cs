@@ -18,13 +18,11 @@
  *
  ***************************************************************************/
 
-using System;
-using Server;
 using Server.Network;
 
 namespace Server
 {
-	public abstract class BaseHairInfo
+    public abstract class BaseHairInfo
 	{
 		private int m_ItemID;
 		private int m_Hue;

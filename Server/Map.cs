@@ -21,14 +21,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Server.Items;
 using Server.Network;
 using Server.Targeting;
 
 namespace Server
 {
-	[Flags]
+    [Flags]
 	public enum MapRules
 	{
 		None					= 0x0000,

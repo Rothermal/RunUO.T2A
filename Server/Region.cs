@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using Server.Network;
@@ -27,7 +26,7 @@ using Server.Targeting;
 
 namespace Server
 {
-	public enum MusicName
+    public enum MusicName
 	{
 		Invalid = -1,
 		OldUlt01 = 0,

@@ -21,9 +21,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
-using Server;
 using Server.Accounting;
 using Server.Commands;
 using Server.ContextMenus;
@@ -39,8 +37,8 @@ using Server.Targeting;
 
 namespace Server
 {
-	#region Callbacks
-	public delegate void TargetCallback( Mobile from, object targeted );
+    #region Callbacks
+    public delegate void TargetCallback( Mobile from, object targeted );
 	public delegate void TargetStateCallback( Mobile from, object targeted, object state );
 	public delegate void TargetStateCallback<T>( Mobile from, object targeted, T state );
 

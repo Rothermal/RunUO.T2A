@@ -1,13 +1,12 @@
 using System;
 using System.Reflection;
 using System.Collections;
-using Server;
 using Server.Network;
 using Server.Commands;
 
 namespace Server.Gumps
 {
-	public class SetTimeSpanGump : Gump
+    public class SetTimeSpanGump : Gump
 	{
 		private PropertyInfo m_Property;
 		private Mobile m_Mobile;

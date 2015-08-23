@@ -19,9 +19,7 @@
  ***************************************************************************/
 
 using System;
-using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -33,7 +31,7 @@ using System.Diagnostics;
 
 namespace Server
 {
-	public static class ScriptCompiler
+    public static class ScriptCompiler
 	{
 		private static Assembly[] m_Assemblies;
 

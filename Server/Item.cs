@@ -19,8 +19,6 @@
  ***************************************************************************/
 
 using System;
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using Server.Network;
 using Server.Items;
@@ -28,10 +26,10 @@ using Server.ContextMenus;
 
 namespace Server
 {
-	/// <summary>
-	/// Enumeration of item layer values.
-	/// </summary>
-	public enum Layer : byte
+    /// <summary>
+    /// Enumeration of item layer values.
+    /// </summary>
+    public enum Layer : byte
 	{
 		/// <summary>
 		/// Invalid layer.

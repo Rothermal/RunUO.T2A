@@ -19,12 +19,11 @@
  ***************************************************************************/
 
 using System;
-using System.Collections;
 using System.IO;
 
 namespace Server
 {
-	public static class MultiData
+    public static class MultiData
 	{
 		private static MultiComponentList[] m_Components;
 

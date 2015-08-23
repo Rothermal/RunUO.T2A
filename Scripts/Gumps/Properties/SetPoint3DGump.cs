@@ -1,14 +1,12 @@
-using System;
 using System.Reflection;
 using System.Collections;
-using Server;
 using Server.Targeting;
 using Server.Network;
 using Server.Commands;
 
 namespace Server.Gumps
 {
-	public class SetPoint3DGump : Gump
+    public class SetPoint3DGump : Gump
 	{
 		private PropertyInfo m_Property;
 		private Mobile m_Mobile;

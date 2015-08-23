@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using System.Collections;
-using Server;
 using Server.Items;
 using Server.Gumps;
 using Server.Network;
@@ -12,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Server.Engines.ConPVP
 {
-	public enum TournamentStage
+    public enum TournamentStage
 	{
 		Inactive,
 		Signup,

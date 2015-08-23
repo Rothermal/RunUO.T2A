@@ -21,12 +21,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using Server.Network;
 
 namespace Server
 {
-	public delegate TimeSpan SkillUseCallback( Mobile user );
+    public delegate TimeSpan SkillUseCallback( Mobile user );
 
 	public enum SkillLock : byte
 	{

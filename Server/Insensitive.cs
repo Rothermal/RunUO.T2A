@@ -18,12 +18,11 @@
  *
  ***************************************************************************/
 
-using System;
 using System.Collections;
 
 namespace Server
 {
-	public static class Insensitive
+    public static class Insensitive
 	{
 		private static IComparer m_Comparer = CaseInsensitiveComparer.Default;
 
