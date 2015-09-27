@@ -163,16 +163,9 @@ namespace Server.Items
 
 		public override TimeSpan OnSwing( Mobile attacker, Mobile defender )
 		{
-			if ( !Core.AOS )
-				CheckPreAOSMoves( attacker, defender );
-
+			CheckPreAOSMoves( attacker, defender );
 			return base.OnSwing( attacker, defender );
 		}
-
-		/*public override void OnMiss( Mobile attacker, Mobile defender )
-		{
-			base.PlaySwingAnimation( attacker );
-		}*/
 
 		public override void Serialize( GenericWriter writer )
 		{
@@ -219,9 +212,6 @@ namespace Server.Items
 
 		private static void EventSink_DisarmRequest( DisarmRequestEventArgs e )
 		{
-			if ( Core.AOS )
-				return;
-
 			Mobile m = e.Mobile;
 
 			#region Dueling
@@ -252,9 +242,6 @@ namespace Server.Items
 
 		private static void EventSink_StunRequest( StunRequestEventArgs e )
 		{
-			if ( Core.AOS )
-				return;
-
 			Mobile m = e.Mobile;
 
 			#region Dueling

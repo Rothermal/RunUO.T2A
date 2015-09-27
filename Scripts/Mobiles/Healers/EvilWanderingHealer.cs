@@ -21,7 +21,7 @@ namespace Server.Mobiles
 		[Constructable]
 		public EvilWanderingHealer()
 		{
-			Title = ( Core.AOS ) ? "the Priest Of Mondain" : "the evil wandering healer";
+			Title = "the evil wandering healer";
 			Karma = -10000;
 
 			AddItem( new GnarledStaff() );
@@ -33,17 +33,6 @@ namespace Server.Mobiles
 
 		public override bool AlwaysMurderer{ get{ return true; } }
 		public override bool ClickTitle{ get{ return false; } } // Do not display title in OnSingleClick
-
-		public override bool CheckResurrect( Mobile m )
-		{
-			if ( Core.AOS && m.Criminal )
-			{
-				Say( 501222 ); // Thou art a criminal.  I shall not resurrect thee.
-				return false;
-			}
-
-			return true;
-		}
 
 		public override void OnDeath( Container c )
 		{
@@ -69,9 +58,6 @@ namespace Server.Mobiles
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
-
-			if ( version < 1 && Title == "the wandering healer" && Core.AOS )
-				Title = "the priest of Mondain";
 		}
 	}
 }

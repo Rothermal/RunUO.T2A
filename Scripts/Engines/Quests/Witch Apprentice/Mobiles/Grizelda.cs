@@ -114,16 +114,9 @@ namespace Server.Engines.Quests.Hag
 								{
 									BaseWeapon weapon = Loot.RandomWeapon();
 
-									if ( Core.AOS )
-									{
-										BaseRunicTool.ApplyAttributesTo( weapon, 2, 20, 30 );
-									}
-									else
-									{
-										weapon.DamageLevel = (WeaponDamageLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
-										weapon.AccuracyLevel = (WeaponAccuracyLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
-										weapon.DurabilityLevel = (WeaponDurabilityLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
-									}
+									weapon.DamageLevel = (WeaponDamageLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
+									weapon.AccuracyLevel = (WeaponAccuracyLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
+									weapon.DurabilityLevel = (WeaponDurabilityLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
 
 									cont.DropItem( weapon );
 								}
@@ -131,23 +124,11 @@ namespace Server.Engines.Quests.Hag
 								{
 									Item item;
 							
-									if ( Core.AOS )
-									{
-										item = Loot.RandomArmorOrShieldOrJewelry();
+									BaseArmor armor = Loot.RandomArmorOrShield();
+									item = armor;
 
-										if ( item is BaseArmor )
-											BaseRunicTool.ApplyAttributesTo( (BaseArmor)item, 2, 20, 30 );
-										else if ( item is BaseJewel )
-											BaseRunicTool.ApplyAttributesTo( (BaseJewel)item, 2, 20, 30 );
-									}
-									else
-									{
-										BaseArmor armor = Loot.RandomArmorOrShield();
-										item = armor;
-
-										armor.ProtectionLevel = (ArmorProtectionLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
-										armor.Durability = (ArmorDurabilityLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
-									}
+									armor.ProtectionLevel = (ArmorProtectionLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
+									armor.Durability = (ArmorDurabilityLevel)BaseCreature.RandomMinMaxScaled( 2, 3 );
 
 									cont.DropItem( item );
 								}

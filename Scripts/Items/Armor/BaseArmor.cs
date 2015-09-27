@@ -112,7 +112,7 @@ namespace Server.Items
 		[CommandProperty( AccessLevel.GameMaster )]
 		public AMA MeditationAllowance
 		{
-			get{ return ( m_Meditate == (AMA)(-1) ? Core.AOS ? AosMedAllowance : OldMedAllowance : m_Meditate ); }
+			get{ return ( m_Meditate == (AMA)(-1) ? OldMedAllowance : m_Meditate ); }
 			set{ m_Meditate = value; }
 		}
 
@@ -180,42 +180,42 @@ namespace Server.Items
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int StrBonus
 		{
-			get{ return ( m_StrBonus == -1 ? Core.AOS ? AosStrBonus : OldStrBonus : m_StrBonus ); }
+			get{ return ( m_StrBonus == -1 ? OldStrBonus : m_StrBonus ); }
 			set{ m_StrBonus = value; InvalidateProperties(); }
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int DexBonus
 		{
-			get{ return ( m_DexBonus == -1 ? Core.AOS ? AosDexBonus : OldDexBonus : m_DexBonus ); }
+			get{ return ( m_DexBonus == -1 ? OldDexBonus : m_DexBonus ); }
 			set{ m_DexBonus = value; InvalidateProperties(); }
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int IntBonus
 		{
-			get{ return ( m_IntBonus == -1 ? Core.AOS ? AosIntBonus : OldIntBonus : m_IntBonus ); }
+			get{ return ( m_IntBonus == -1 ? OldIntBonus : m_IntBonus ); }
 			set{ m_IntBonus = value; InvalidateProperties(); }
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int StrRequirement
 		{
-			get{ return ( m_StrReq == -1 ? Core.AOS ? AosStrReq : OldStrReq : m_StrReq ); }
+			get{ return ( m_StrReq == -1 ? OldStrReq : m_StrReq ); }
 			set{ m_StrReq = value; InvalidateProperties(); }
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int DexRequirement
 		{
-			get{ return ( m_DexReq == -1 ? Core.AOS ? AosDexReq : OldDexReq : m_DexReq ); }
+			get{ return ( m_DexReq == -1 ? OldDexReq : m_DexReq ); }
 			set{ m_DexReq = value; InvalidateProperties(); }
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int IntRequirement
 		{
-			get{ return ( m_IntReq == -1 ? Core.AOS ? AosIntReq : OldIntReq : m_IntReq ); }
+			get{ return ( m_IntReq == -1 ? OldIntReq : m_IntReq ); }
 			set{ m_IntReq = value; InvalidateProperties(); }
 		}
 
@@ -389,7 +389,7 @@ namespace Server.Items
 			else
 				v = IntRequirement;
 
-			return AOS.Scale( v, 100 - GetLowerStatReq() );
+			return AOS.Scale( v, 100 );
 		}
 
 		public int ComputeStatBonus( StatType type )
@@ -531,20 +531,6 @@ namespace Server.Items
 				case ArmorDurabilityLevel.Indestructible: bonus += 120; break;
 			}
 
-			if ( Core.AOS )
-			{
-				bonus += m_AosArmorAttributes.DurabilityBonus;
-
-				CraftResourceInfo resInfo = CraftResources.GetInfo( m_Resource );
-				CraftAttributeInfo attrInfo = null;
-
-				if ( resInfo != null )
-					attrInfo = resInfo.AttributeInfo;
-
-				if ( attrInfo != null )
-					bonus += attrInfo.ArmorDurability;
-			}
-
 			return bonus;
 		}
 
@@ -642,37 +628,11 @@ namespace Server.Items
 			}
 		}
 
-		public int GetLowerStatReq()
-		{
-			if ( !Core.AOS )
-				return 0;
-
-			int v = m_AosArmorAttributes.LowerStatReq;
-
-			CraftResourceInfo info = CraftResources.GetInfo( m_Resource );
-
-			if ( info != null )
-			{
-				CraftAttributeInfo attrInfo = info.AttributeInfo;
-
-				if ( attrInfo != null )
-					v += attrInfo.ArmorLowerRequirements;
-			}
-
-			if ( v > 100 )
-				v = 100;
-
-			return v;
-		}
-
 		public override void OnAdded( object parent )
 		{
 			if ( parent is Mobile )
 			{
 				Mobile from = (Mobile)parent;
-
-				if ( Core.AOS )
-					m_AosSkillBonuses.AddTo( from );
 
 				from.Delta( MobileDelta.Armor ); // Tell them armor rating has changed
 			}
@@ -1103,9 +1063,6 @@ namespace Server.Items
 			if ( m_AosSkillBonuses == null )
 				m_AosSkillBonuses = new AosSkillBonuses( this );
 
-			if ( Core.AOS && Parent is Mobile )
-				m_AosSkillBonuses.AddTo( (Mobile)Parent );
-
 			int strBonus = ComputeStatBonus( StatType.Str );
 			int dexBonus = ComputeStatBonus( StatType.Dex );
 			int intBonus = ComputeStatBonus( StatType.Int );
@@ -1274,9 +1231,6 @@ namespace Server.Items
 				m.RemoveStatMod( modName + "Dex" );
 				m.RemoveStatMod( modName + "Int" );
 
-				if ( Core.AOS )
-					m_AosSkillBonuses.Remove();
-
 				((Mobile)parent).Delta( MobileDelta.Armor ); // Tell them armor rating has changed
 				m.CheckStatTimers();
 			}
@@ -1284,68 +1238,61 @@ namespace Server.Items
 			base.OnRemoved( parent );
 		}
 
-		public virtual int OnHit( BaseWeapon weapon, int damageTaken )
-		{
-			double HalfAr = ArmorRating / 2.0;
-			int Absorbed = (int)(HalfAr + HalfAr*Utility.RandomDouble());
+        public virtual int OnHit(BaseWeapon weapon, int damageTaken)
+        {
+            double HalfAr = ArmorRating / 2.0;
+            int Absorbed = (int)(HalfAr + HalfAr * Utility.RandomDouble());
 
-			damageTaken -= Absorbed;
-			if ( damageTaken < 0 ) 
-				damageTaken = 0;
+            damageTaken -= Absorbed;
+            if (damageTaken < 0)
+                damageTaken = 0;
 
-			if ( Absorbed < 2 )
-				Absorbed = 2;
+            if (Absorbed < 2)
+                Absorbed = 2;
 
-			if ( 25 > Utility.Random( 100 ) ) // 25% chance to lower durability
-			{
-				if ( Core.AOS && m_AosArmorAttributes.SelfRepair > Utility.Random( 10 ) )
-				{
-					HitPoints += 2;
-				}
-				else
-				{
-					int wear;
+            if (25 > Utility.Random(100)) // 25% chance to lower durability
+            {
+                int wear;
 
-					if ( weapon.Type == WeaponType.Bashing )
-						wear = Absorbed / 2;
-					else
-						wear = Utility.Random( 2 );
+                if (weapon.Type == WeaponType.Bashing)
+                    wear = Absorbed / 2;
+                else
+                    wear = Utility.Random(2);
 
-					if ( wear > 0 && m_MaxHitPoints > 0 )
-					{
-						if ( m_HitPoints >= wear )
-						{
-							HitPoints -= wear;
-							wear = 0;
-						}
-						else
-						{
-							wear -= HitPoints;
-							HitPoints = 0;
-						}
+                if (wear > 0 && m_MaxHitPoints > 0)
+                {
+                    if (m_HitPoints >= wear)
+                    {
+                        HitPoints -= wear;
+                        wear = 0;
+                    }
+                    else
+                    {
+                        wear -= HitPoints;
+                        HitPoints = 0;
+                    }
 
-						if ( wear > 0 )
-						{
-							if ( m_MaxHitPoints > wear )
-							{
-								MaxHitPoints -= wear;
+                    if (wear > 0)
+                    {
+                        if (m_MaxHitPoints > wear)
+                        {
+                            MaxHitPoints -= wear;
 
-								if ( Parent is Mobile )
-									((Mobile)Parent).LocalOverheadMessage( MessageType.Regular, 0x3B2, 1061121 ); // Your equipment is severely damaged.
-							}
-							else
-							{
-								Delete();
-							}
-						}
-					}
-				}
-			}
+                            if (Parent is Mobile)
+                                ((Mobile)Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
+                        }
+                        else
+                        {
+                            Delete();
+                        }
+                    }
+                }
+            }
 
-			return damageTaken;
-		}
+            return damageTaken;
+        }
 
-		private string GetNameString()
+        private string GetNameString()
 		{
 			string name = this.Name;
 
@@ -1484,9 +1431,6 @@ namespace Server.Items
 			if ( (prop = m_AosAttributes.LowerRegCost) != 0 )
 				list.Add( 1060434, prop.ToString() ); // lower reagent cost ~1_val~%
 
-			if ( (prop = GetLowerStatReq()) != 0 )
-				list.Add( 1060435, prop.ToString() ); // lower requirements ~1_val~%
-
 			if ( (prop = (GetLuckBonus() + m_AosAttributes.Luck)) != 0 )
 				list.Add( 1060436, prop.ToString() ); // luck ~1_val~
 
@@ -1528,9 +1472,6 @@ namespace Server.Items
 
 			if ( (prop = m_AosAttributes.WeaponSpeed) != 0 )
 				list.Add( 1060486, prop.ToString() ); // swing speed increase ~1_val~%
-
-			if ( Core.ML && (prop = m_AosAttributes.IncreasedKarmaLoss) != 0 )
-				list.Add( 1075210, prop.ToString() ); // Increased Karma Loss ~1val~%
 
 			base.AddResistanceProperties( list );
 
@@ -1619,31 +1560,8 @@ namespace Server.Items
 
 			if( Quality == ArmorQuality.Exceptional )
 			{
-				if ( !( Core.ML && this is BaseShield ))		// Guessed Core.ML removed exceptional resist bonuses from crafted shields
-					DistributeBonuses( (tool is BaseRunicTool ? 6 : Core.SE ? 15 : 14) ); // Not sure since when, but right now 15 points are added, not 14.
-
-				if( Core.ML && !(this is BaseShield) )
-				{
-					int bonus = (int)(from.Skills.ArmsLore.Value / 20);
-
-					for( int i = 0; i < bonus; i++ )
-					{
-						switch( Utility.Random( 5 ) )
-						{
-							case 0: m_PhysicalBonus++;	break;
-							case 1: m_FireBonus++;		break;
-							case 2: m_ColdBonus++;		break;
-							case 3: m_EnergyBonus++;	break;
-							case 4: m_PoisonBonus++;	break;
-						}
-					}
-
-					from.CheckSkill( SkillName.ArmsLore, 0, 100 );
-				}
+				DistributeBonuses( (tool is BaseRunicTool ? 6 : 14) );
 			}
-
-			if ( Core.AOS && tool is BaseRunicTool )
-				((BaseRunicTool)tool).ApplyAttributesTo( this );
 
 			return quality;
 		}

@@ -17,9 +17,6 @@ namespace Server.Items
 				list.Add( new LockKarmaEntry( (PlayerMobile)from ) );
 
 			list.Add( new ResurrectEntry( from, item ) );
-
-			if ( Core.AOS )
-				list.Add( new TitheEntry( from ) );
 		}
 
 		public static void Resurrect( Mobile m, Item item )

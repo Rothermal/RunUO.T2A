@@ -166,8 +166,6 @@ namespace Server.Engines.MLQuests.Gumps
 
 			if ( from.Race == targetRace )
 				from.SendLocalizedMessage( 1111918 ); // You are already that race.
-			else if ( !MondainsLegacy.CheckML( from, false ) )
-				from.SendLocalizedMessage( 1073651 ); // You must have Mondain's Legacy before proceeding...
 			else if ( !from.Alive )
 				from.SendLocalizedMessage( 1073646 ); // Only the living may proceed...
 			else if ( from.Mounted )

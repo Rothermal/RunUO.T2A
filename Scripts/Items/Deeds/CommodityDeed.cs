@@ -172,14 +172,7 @@ namespace Server.Items
 				}
 				else
 				{
-					if( Core.ML )
-					{
-						number = 1080526; // That must be in your bank box or commodity deed box to use it.
-					}
-					else
-					{
-						number = 1047024; // To claim the resources ....
-					}
+					number = 1047024; // To claim the resources ....
 				}
 			}
 			else if ( cox != null && !cox.IsSecure )
@@ -188,14 +181,7 @@ namespace Server.Items
 			}
 			else if ( ( box == null || !IsChildOf( box ) ) && cox == null )
 			{
-				if( Core.ML )
-				{
-					number = 1080526; // That must be in your bank box or commodity deed box to use it.
-				}
-				else
-				{
-					number = 1047026; // That must be in your bank box to use it.
-				}
+				number = 1047026; // That must be in your bank box to use it.
 			}
 			else
 			{
@@ -248,14 +234,7 @@ namespace Server.Items
 					}
 					else
 					{
-						if( Core.ML )
-						{
-							number = 1080526; // That must be in your bank box or commodity deed box to use it.
-						}
-						else
-						{
-							number = 1047026; // That must be in your bank box to use it.
-						}
+						number = 1047026; // That must be in your bank box to use it.
 					}
 				}
 				else

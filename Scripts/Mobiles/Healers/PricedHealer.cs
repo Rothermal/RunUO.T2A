@@ -22,9 +22,7 @@ namespace Server.Mobiles
 		public PricedHealer( int price )
 		{
 			m_Price = price;
-
-			if ( !Core.AOS )
-				NameHue = 0x35;
+			NameHue = 0x35;
 		}
 
 		public override bool IsInvulnerable{ get{ return true; } }

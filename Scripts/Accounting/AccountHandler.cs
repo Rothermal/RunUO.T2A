@@ -47,23 +47,6 @@ namespace Server.Misc
 				new CityInfo( "Vesper",		"The Ironwood Inn",	1075080, 2771,	976,	0  )
 			};
 
-		/* Old Haven/Magincia Locations
-			new CityInfo( "Britain", "Sweet Dreams Inn", 1496, 1628, 10 );
-			// ..
-			// Trinsic
-			new CityInfo( "Magincia", "The Great Horns Tavern", 3734, 2222, 20 ),
-			// Jhelom
-			// ..
-			new CityInfo( "Haven", "Buckler's Hideaway", 3667, 2625, 0 )
-
-			if ( Core.AOS )
-			{
-				//CityInfo haven = new CityInfo( "Haven", "Uzeraan's Mansion", 3618, 2591, 0 );
-				CityInfo haven = new CityInfo( "Haven", "Uzeraan's Mansion", 3503, 2574, 14 );
-				StartingCities[StartingCities.Length - 1] = haven;
-			}
-		*/
-
 		private static bool PasswordCommandEnabled = false;
 
 		public static void Initialize()

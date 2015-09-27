@@ -25,29 +25,12 @@ namespace Server.Spells.Bushido
 		{
 		}
 
-		public static bool CheckExpansion( Mobile from )
-		{
-			if ( !( from is PlayerMobile ) )
-				return true;
-
-			if ( from.NetState == null )
-				return false;
-
-			return from.NetState.SupportsExpansion( Expansion.SE );
-		}
-
 		public override bool CheckCast()
 		{
 			int mana = ScaleMana ( RequiredMana );
 
 			if ( !base.CheckCast() )
 				return false;
-
-			if ( !CheckExpansion( Caster ) )
-			{
-				Caster.SendLocalizedMessage( 1063456 ); // You must upgrade to Samurai Empire in order to use that ability.
-				return false;
-			}
 
 			if ( Caster.Skills[CastSkill].Value < RequiredSkill )
 			{

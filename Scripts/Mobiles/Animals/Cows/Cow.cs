@@ -57,9 +57,6 @@ namespace Server.Mobiles
 			Tamable = true;
 			ControlSlots = 1;
 			MinTameSkill = 11.1;
-
-			if ( Core.AOS && Utility.Random( 1000 ) == 0 ) // 0.1% chance to have mad cows
-				FightMode = FightMode.Closest;
 		}
 
 		public override int Meat{ get{ return 8; } }

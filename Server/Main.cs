@@ -150,47 +150,6 @@ namespace Server
 		{
 			get { return m_Expansion >= Expansion.T2A; }
 		}
-
-		public static bool UOR
-		{
-			get { return m_Expansion >= Expansion.UOR; }
-		}
-
-		public static bool UOTD
-		{
-			get { return m_Expansion >= Expansion.UOTD; }
-		}
-
-		public static bool LBR
-		{
-			get { return m_Expansion >= Expansion.LBR; }
-		}
-
-		public static bool AOS
-		{
-			get { return m_Expansion >= Expansion.AOS; }
-		}
-
-		public static bool SE
-		{
-			get { return m_Expansion >= Expansion.SE; }
-		}
-
-		public static bool ML
-		{
-			get { return m_Expansion >= Expansion.ML; }
-		}
-
-		public static bool SA
-		{
-			get { return m_Expansion >= Expansion.SA; }
-		}
-
-		public static bool HS
-		{
-			get { return m_Expansion >= Expansion.HS; }
-		}
-
 		#endregion
 
 		public static string ExePath

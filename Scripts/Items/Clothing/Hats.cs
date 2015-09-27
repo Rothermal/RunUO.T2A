@@ -74,7 +74,7 @@ namespace Server.Items
 			Quality = (ClothingQuality)quality;
 
 			if( Quality == ClothingQuality.Exceptional )
-				DistributeBonuses( (tool is BaseRunicTool ? 6 : (Core.SE ? 15 : 14)) );	//BLAME OSI. (We can't confirm it's an OSI bug yet.)
+				DistributeBonuses( (tool is BaseRunicTool ? 6 : 14) );
 
 			return base.OnCraft( quality, makersMark, from, craftSystem, typeRes, tool, craftItem, resHue );
 		}
@@ -336,9 +336,8 @@ namespace Server.Items
 		public override int BaseColdResistance{ get{ return 5; } }
 		public override int BasePoisonResistance{ get{ return 8; } }
 		public override int BaseEnergyResistance{ get{ return 8; } }
-
-		public override int InitMinHits{ get{ return ( Core.ML ? 14 : 7 ); } }
-		public override int InitMaxHits{ get{ return ( Core.ML ? 28 : 12 ); } }
+		public override int InitMinHits{ get{ return 7; } }
+		public override int InitMaxHits{ get{ return 12; } }
 
 		[Constructable]
 		public SkullCap() : this( 0 )

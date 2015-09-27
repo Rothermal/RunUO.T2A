@@ -227,7 +227,7 @@ namespace Server.Engines.BulkOrders
 		private static Item CreateRunicHammer( int type )
 		{
 			if ( type >= 1 && type <= 8 )
-				return new RunicHammer( CraftResource.Iron + type, Core.AOS ? ( 55 - (type*5) ) : 50 );
+				return new RunicHammer( CraftResource.Iron + type, 50 );
 
 			throw new InvalidOperationException();
 		}
@@ -593,58 +593,6 @@ namespace Server.Engines.BulkOrders
 			return points;
 		}
 
-		private static int[][][] m_AosGoldTable = new int[][][]
-			{
-				new int[][] // 1-part (regular)
-				{
-					new int[]{ 150, 150, 300, 300 },
-					new int[]{ 225, 225, 450, 450 },
-					new int[]{ 300, 400, 600, 750 }
-				},
-				new int[][] // 1-part (exceptional)
-				{
-					new int[]{ 300, 300,  600,  600 },
-					new int[]{ 450, 450,  900,  900 },
-					new int[]{ 600, 750, 1200, 1800 }
-				},
-				new int[][] // 4-part (regular)
-				{
-					new int[]{  4000,  4000,  5000,  5000 },
-					new int[]{  6000,  6000,  7500,  7500 },
-					new int[]{  8000, 10000, 10000, 15000 }
-				},
-				new int[][] // 4-part (exceptional)
-				{
-					new int[]{  5000,  5000,  7500,  7500 },
-					new int[]{  7500,  7500, 11250, 11250 },
-					new int[]{ 10000, 15000, 15000, 20000 }
-				},
-				new int[][] // 5-part (regular)
-				{
-					new int[]{  5000,  5000,  7500,  7500 },
-					new int[]{  7500,  7500, 11250, 11250 },
-					new int[]{ 10000, 15000, 15000, 20000 }
-				},
-				new int[][] // 5-part (exceptional)
-				{
-					new int[]{  7500,  7500, 10000, 10000 },
-					new int[]{ 11250, 11250, 15000, 15000 },
-					new int[]{ 15000, 20000, 20000, 30000 }
-				},
-				new int[][] // 6-part (regular)
-				{
-					new int[]{  7500,  7500, 10000, 10000 },
-					new int[]{ 11250, 11250, 15000, 15000 },
-					new int[]{ 15000, 20000, 20000, 30000 }
-				},
-				new int[][] // 6-part (exceptional)
-				{
-					new int[]{ 10000, 10000, 15000, 15000 },
-					new int[]{ 15000, 15000, 22500, 22500 },
-					new int[]{ 20000, 30000, 30000, 50000 }
-				}
-			};
-
 		private static int[][][] m_OldGoldTable = new int[][][]
 			{
 				new int[][] // 1-part (regular)
@@ -699,7 +647,7 @@ namespace Server.Engines.BulkOrders
 
 		public override int ComputeGold( int quantity, bool exceptional, BulkMaterialType material, int itemCount, Type type )
 		{
-			int[][][] goldTable = ( Core.AOS ? m_AosGoldTable : m_OldGoldTable );
+			int[][][] goldTable = ( m_OldGoldTable );
 
 			int typeIndex = (( itemCount == 6 ? 3 : itemCount == 5 ? 2 : itemCount == 4 ? 1 : 0 ) * 2) + (exceptional ? 1 : 0);
 			int quanIndex = ( quantity == 20 ? 2 : quantity == 15 ? 1 : 0 );

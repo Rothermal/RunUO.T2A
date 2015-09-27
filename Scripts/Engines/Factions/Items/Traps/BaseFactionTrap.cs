@@ -60,14 +60,8 @@ namespace Server.Factions
 
 		public virtual TimeSpan DecayPeriod
 		{
-			get
-			{
-				if ( Core.AOS )
-					return TimeSpan.FromDays( 1.0 );
-
-				return TimeSpan.MaxValue; // no decay
-			}
-		}
+			get { return TimeSpan.MaxValue; } // no decay
+        }
 
 		public override void OnTrigger( Mobile from )
 		{
@@ -118,15 +112,6 @@ namespace Server.Factions
 		{
 			if( m == null )
 				return 502956; // You cannot place a trap on that.
-
-			if( Core.ML )
-			{
-				foreach( Item item in m.GetItemsInRange( p, 0 ) )
-				{
-					if( item is BaseFactionTrap && ((BaseFactionTrap)item).Faction == this.Faction )
-						return 1075263; // There is already a trap belonging to your faction at this location.;
-				}
-			}
 
 			switch( AllowedPlacing )
 			{

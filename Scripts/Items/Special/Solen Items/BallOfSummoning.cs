@@ -150,14 +150,6 @@ namespace Server.Items
 				return;
 			}
 
-			AnimalFormContext animalContext = AnimalForm.GetContext( from );
-
-			if( Core.ML && animalContext != null )
-			{
-				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1080073 ); // You cannot use a Crystal Ball of Pet Summoning while in animal form.
-				return;
-			}
-
 			if ( Pet == null )
 			{
 				LinkPet( from );
@@ -258,16 +250,9 @@ namespace Server.Items
 			{
 				from.Send( new AsciiMessage( this.Serial, this.ItemID, MessageType.Regular, 0x22, 3, "", "You cannot summon your pet to this location." ) );
 			}
-			else if ( Core.ML && from is PlayerMobile && DateTime.Now < ((PlayerMobile)from).LastPetBallTime.AddSeconds( 15.0 ) )
-			{
-				MessageHelper.SendLocalizedMessageTo( this, from, 1080072, 0x22 ); // You must wait a few seconds before you can summon your pet.
-			}
 			else
 			{
-				if( Core.ML )
-					new PetSummoningSpell( this, from ).Cast();
-				else
-					SummonPet( from );
+				SummonPet( from );
 			}
 
 		}
@@ -374,95 +359,6 @@ namespace Server.Items
 					m_PetName = reader.ReadString();
 					break;
 				}
-			}
-		}
-
-		private class PetSummoningSpell : Spell
-		{
-			private static SpellInfo m_Info = new SpellInfo( "Ball Of Summoning", "", 230 );
-
-			private BallOfSummoning m_Ball;
-			private Mobile m_Caster;
-
-			public PetSummoningSpell( BallOfSummoning ball, Mobile caster )
-				: base( caster, null, m_Info )
-			{
-				m_Caster = caster;
-				m_Ball = ball;
-			}
-
-			public override bool ClearHandsOnCast { get { return false; } }
-			public override bool RevealOnCast { get { return true; } }
-
-			public override TimeSpan GetCastRecovery()
-			{
-				return TimeSpan.Zero;
-			}
-
-			public override double CastDelayFastScalar { get { return 0; } }
-
-			public override TimeSpan CastDelayBase
-			{
-				get
-				{
-					return TimeSpan.FromSeconds( 2.0 );
-				}
-			}
-
-			public override int GetMana()
-			{
-				return 0;
-			}
-
-			public override bool ConsumeReagents()
-			{
-				return true;
-			}
-
-			public override bool CheckFizzle()
-			{
-				return true;
-			}
-
-			private bool m_Stop;
-
-			public void Stop()
-			{
-				m_Stop = true;
-				Disturb( DisturbType.Hurt, false, false );
-			}
-
-			public override bool CheckDisturb( DisturbType type, bool checkFirst, bool resistable )
-			{
-				if( type == DisturbType.EquipRequest || type == DisturbType.UseRequest/* || type == DisturbType.Hurt*/ )
-					return false;
-
-				return true;
-			}
-
-			public override void DoHurtFizzle()
-			{
-				if( !m_Stop )
-					base.DoHurtFizzle();
-			}
-
-			public override void DoFizzle()
-			{
-				if( !m_Stop )
-					base.DoFizzle();
-			}
-
-			public override void OnDisturb( DisturbType type, bool message )
-			{
-				if( message && !m_Stop )
-					Caster.SendLocalizedMessage( 1080074 ); // You have been disrupted while attempting to summon your pet!
-			}
-
-			public override void OnCast()
-			{
-				m_Ball.SummonPet( m_Caster );
-
-				FinishSequence();
 			}
 		}
 	}

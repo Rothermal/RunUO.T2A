@@ -97,13 +97,7 @@ namespace Server.Items
 		[CommandProperty( AccessLevel.GameMaster )]
 		public virtual bool InstancedCorpse
 		{
-			get
-			{
-				if ( !Core.SE )
-					return false;
-
-				return ( DateTime.Now < (m_TimeOfDeath + InstancedCorpseTime) );
-			}
+			get { return false; }
 		}
 
 		private Dictionary<Item, InstancedItemInfo> m_InstancedItems;
@@ -485,25 +479,8 @@ namespace Server.Items
 				{
 					Item item = initialContent[i];
 
-					if ( Core.AOS && owner.Player && item.Parent == owner.Backpack )
-						c.AddItem( item );
-					else
-						c.DropItem( item );
-
-					if ( owner.Player && Core.AOS )
-						c.SetRestoreInfo( item, item.Location );
-				}
-
-				if ( Core.SE && !owner.Player )
-				{
-					c.AssignInstancedLoot();
-				}
-				else if ( Core.AOS )
-				{
-					PlayerMobile pm = owner as PlayerMobile;
-
-					if ( pm != null )
-						c.RestoreEquip = pm.EquipSnapshot;
+					c.DropItem( item );
+                    c.SetRestoreInfo( item, item.Location );
 				}
 			}
 			else
@@ -966,14 +943,6 @@ namespace Server.Items
 			}
 		}
 
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-
-			if ( Core.AOS && m_Owner == from && from.Alive )
-				list.Add( new OpenCorpseEntry() );
-		}
-
 		private Dictionary<Item, Point3D> m_RestoreTable;
 
 		public bool GetRestoreInfo( Item item, ref Point3D loc )
@@ -1199,7 +1168,7 @@ namespace Server.Items
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			Open( from, Core.AOS );
+			Open( from, false );
 		}
 
 		public override bool CheckContentDisplay( Mobile from )

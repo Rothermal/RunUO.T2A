@@ -18,9 +18,6 @@ namespace Server.Items
 
 			AttuneWeaponSpell.TryAbsorb( defender, ref damage );
 
-			if ( Core.AOS )
-				return damage;
-
 			int absorb = defender.MeleeDamageAbsorb;
 
 			if ( absorb > 0 )

@@ -119,7 +119,7 @@ namespace Server.Misc
 					m.SendLocalizedMessage( 1019063 ); // You have lost a little karma.
 			}
 
-			if ( !Core.AOS && wasPositiveKarma && m.Karma < 0 && m is PlayerMobile && !((PlayerMobile)m).KarmaLocked )
+			if ( wasPositiveKarma && m.Karma < 0 && m is PlayerMobile && !((PlayerMobile)m).KarmaLocked )
 			{
 				((PlayerMobile)m).KarmaLocked = true;
 				m.SendLocalizedMessage( 1042511, "", 0x22 ); // Karma is locked.  A mantra spoken at a shrine will unlock it again.
@@ -243,23 +243,7 @@ namespace Server.Misc
 		private static Skill GetHighestSkill( Mobile m )
 		{
 			Skills skills = m.Skills;
-
-			if ( !Core.AOS )
-				return skills.Highest;
-
-			Skill highest = null;
-
-			for ( int i = 0; i < m.Skills.Length; ++i )
-			{
-				Skill check = m.Skills[i];
-
-				if ( highest == null || check.BaseFixedPoint > highest.BaseFixedPoint )
-					highest = check;
-				else if ( highest != null && highest.Lock != SkillLock.Up && check.Lock == SkillLock.Up && check.BaseFixedPoint == highest.BaseFixedPoint )
-					highest = check;
-			}
-
-			return highest;
+			return skills.Highest;
 		}
 
 		private static string[,] m_Levels = new string[,]

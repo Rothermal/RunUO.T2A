@@ -47,67 +47,42 @@ namespace Server.Spells.Third
 				{
 					int level;
 
-					if ( Core.AOS )
-					{
-						if ( Caster.InRange( m, 2 ) )
-						{
-							int total = (Caster.Skills.Magery.Fixed + Caster.Skills.Poisoning.Fixed) / 2;
+                    #region Dueling
+                    double total = Caster.Skills[SkillName.Magery].Value;
 
-							if ( total >= 1000 )
-								level = 3;
-							else if ( total > 850 )
-								level = 2;
-							else if ( total > 650 )
-								level = 1;
-							else
-								level = 0;
-						}
-						else
-						{
-							level = 0;
-						}
-					}
-					else
-					{
-						//double total = Caster.Skills[SkillName.Magery].Value + Caster.Skills[SkillName.Poisoning].Value;
+                    if (Caster is Mobiles.PlayerMobile)
+                    {
+                        Mobiles.PlayerMobile pm = (Mobiles.PlayerMobile)Caster;
 
-						#region Dueling
-						double total = Caster.Skills[SkillName.Magery].Value;
+                        if (pm.DuelContext != null && pm.DuelContext.Started && !pm.DuelContext.Finished && !pm.DuelContext.Ruleset.GetOption("Skills", "Poisoning"))
+                        {
+                        }
+                        else
+                        {
+                            total += Caster.Skills[SkillName.Poisoning].Value;
+                        }
+                    }
+                    else
+                    {
+                        total += Caster.Skills[SkillName.Poisoning].Value;
+                    }
+                    #endregion
 
-						if ( Caster is Mobiles.PlayerMobile )
-						{
-							Mobiles.PlayerMobile pm = (Mobiles.PlayerMobile)Caster;
+                    double dist = Caster.GetDistanceToSqrt(m);
 
-							if ( pm.DuelContext != null && pm.DuelContext.Started && !pm.DuelContext.Finished && !pm.DuelContext.Ruleset.GetOption( "Skills", "Poisoning" ) )
-							{
-							}
-							else
-							{
-								total += Caster.Skills[SkillName.Poisoning].Value;
-							}
-						}
-						else
-						{
-							total += Caster.Skills[SkillName.Poisoning].Value;
-						}
-						#endregion
+                    if (dist >= 3.0)
+                        total -= (dist - 3.0) * 10.0;
 
-						double dist = Caster.GetDistanceToSqrt( m );
+                    if (total >= 200.0 && 1 > Utility.Random(10))
+                        level = 3;
+                    else if (total > 170.0)
+                        level = 2;
+                    else if (total > 130.0)
+                        level = 1;
+                    else
+                        level = 0;
 
-						if ( dist >= 3.0 )
-							total -= (dist - 3.0) * 10.0;
-
-						if ( total >= 200.0 && 1 > Utility.Random( 10 ) )
-							level = 3;
-						else if ( total > (Core.AOS ? 170.1 : 170.0) )
-							level = 2;
-						else if ( total > (Core.AOS ? 130.1 : 130.0) )
-							level = 1;
-						else
-							level = 0;
-					}
-
-					m.ApplyPoison( Caster, Poison.GetPoison( level ) );
+                    m.ApplyPoison( Caster, Poison.GetPoison( level ) );
 				}
 
 				m.FixedParticles( 0x374A, 10, 15, 5021, EffectLayer.Waist );
@@ -123,7 +98,7 @@ namespace Server.Spells.Third
 		{
 			private PoisonSpell m_Owner;
 
-			public InternalTarget( PoisonSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+			public InternalTarget( PoisonSpell owner ) : base( 12, false, TargetFlags.Harmful )
 			{
 				m_Owner = owner;
 			}

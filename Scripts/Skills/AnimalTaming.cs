@@ -106,7 +106,7 @@ namespace Server.SkillHandlers
 		{
 			private bool m_SetSkillTime = true;
 
-			public InternalTarget() : base ( Core.AOS ? 3 : 2, false, TargetFlags.None )
+			public InternalTarget() : base ( 2, false, TargetFlags.None )
 			{
 			}
 
@@ -262,7 +262,7 @@ namespace Server.SkillHandlers
 					DamageEntry de = m_Creature.FindMostRecentDamageEntry( false );
 					bool alreadyOwned = m_Creature.Owners.Contains( m_Tamer );
 
-					if ( !m_Tamer.InRange( m_Creature, Core.AOS ? 7 : 6 ) )
+					if ( !m_Tamer.InRange( m_Creature, 6 ) )
 					{
 						m_BeingTamed.Remove( m_Creature );
 						m_Tamer.NextSkillTime = DateTime.Now;

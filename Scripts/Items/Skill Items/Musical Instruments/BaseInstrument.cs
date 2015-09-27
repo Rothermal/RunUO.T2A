@@ -284,9 +284,6 @@ namespace Server.Items
 			if ( bc != null && bc.IsParagon )
 				val += 40.0;
 
-			if ( Core.SE && val > 160.0 )
-				val = 160.0;
-
 			return val;
 		}
 

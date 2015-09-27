@@ -253,18 +253,8 @@ namespace Server.Network
 		public bool NewCharacterCreation { get { return ((_ProtocolChanges & ProtocolChanges.NewCharacterCreation) != 0); } }
 		public bool ExtendedStatus { get { return ((_ProtocolChanges & ProtocolChanges.ExtendedStatus) != 0); } }
 		public bool NewMobileIncoming { get { return ( ( _ProtocolChanges & ProtocolChanges.NewMobileIncoming ) != 0 ); } }
-
-		public bool IsUOTDClient {
-			get {
-				return ( (m_Flags & ClientFlags.UOTD) != 0 || ( m_Version != null && m_Version.Type == ClientType.UOTD ) );
-			}
-		}
-
-		public bool IsSAClient {
-			get {
-				return ( m_Version != null && m_Version.Type == ClientType.SA );
-			}
-		}
+		public bool IsUOTDClient { get { return ( m_Version != null && m_Version.Type == ClientType.UOTD );	} }
+		public bool IsSAClient { get { return ( m_Version != null && m_Version.Type == ClientType.SA ); } }
 
 		public List<SecureTrade> Trades {
 			get {

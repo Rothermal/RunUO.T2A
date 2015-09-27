@@ -32,9 +32,7 @@ namespace Server.Items
 		public BaseAddonDeed() : base( 0x14F0 )
 		{
 			Weight = 1.0;
-
-			if ( !Core.AOS )
-				LootType = LootType.Newbied;
+			LootType = LootType.Newbied;
 		}
 
 		public BaseAddonDeed( Serial serial ) : base( serial )

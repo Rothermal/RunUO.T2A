@@ -74,52 +74,11 @@ namespace Server.Items
 				SkillName.Spellweaving
 			};
 
-		/*
-		private static SkillName[] m_SASkills = new SkillName[]
-			{
-				SkillName.Throwing,
-				SkillName.Mysticism,
-				SkillName.Imbuing
-			};
-
-		private static SkillName[] m_HSSkills = new SkillName[]
-			{
-				SkillName.Fishing
-			};
-		*/
-
 		private static List<SkillName> _Skills = new List<SkillName>();
 
 		public static List<SkillName> Skills
 		{
-			get
-			{
-				if ( _Skills.Count == 0 )
-				{
-					_Skills.AddRange( m_Skills );
-					if (Core.AOS)
-					{
-						_Skills.AddRange( m_AOSSkills );
-						if (Core.SE)
-						{
-							_Skills.AddRange( m_SESkills );
-							if (Core.ML)
-							{
-								_Skills.AddRange( m_MLSkills );
-								/*
-								if (Core.SA)
-								{
-									_Skills.AddRange( m_SASkills );
-									if (Core.HS)
-										_Skills.AddRange( m_HSSkills );
-								}
-								*/
-							}
-						}
-					}
-				}
-				return _Skills;
-			}
+			get { return _Skills; }
 		}
 
 		public static PowerScroll CreateRandom( int min, int max )

@@ -45,14 +45,6 @@ namespace Server.Items
 		public Banner( Serial serial ) : base( serial )
 		{
 		}
-
-		public override void GetProperties( ObjectPropertyList list )
-		{
-			base.GetProperties( list );
-			
-			if ( Core.ML && m_IsRewardItem )
-				list.Add( 1076218 ); // 2nd Year Veteran Reward
-		}
 		
 		public override void OnDoubleClick( Mobile from )
 		{

@@ -19,8 +19,7 @@ namespace Server.Items
 
 		public static readonly TimeSpan FreezeDelayDuration = TimeSpan.FromSeconds( 8.0 );
 
-		// No longer active in pub21:
-		/*public override bool CheckSkills( Mobile from )
+		public override bool CheckSkills( Mobile from )
 		{
 			if ( !base.CheckSkills( from ) )
 				return false;
@@ -36,16 +35,6 @@ namespace Server.Items
 			from.SendLocalizedMessage( 1061811 ); // You lack the required anatomy skill to perform that attack!
 
 			return false;
-		}*/
-
-		public override bool RequiresTactics( Mobile from )
-		{
-			BaseWeapon weapon = from.Weapon as BaseWeapon;
-
-			if ( weapon == null )
-				return true;
-
-			return weapon.Skill != SkillName.Wrestling;
 		}
 
 		public override bool OnBeforeSwing( Mobile attacker, Mobile defender )

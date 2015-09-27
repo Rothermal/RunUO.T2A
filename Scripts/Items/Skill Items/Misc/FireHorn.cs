@@ -38,7 +38,7 @@ namespace Server.Items
 				return false;
 			}
 
-			int sulfAsh = Core.AOS ? 4 : 15;
+			int sulfAsh = 15;
 			if ( from.Backpack == null || from.Backpack.GetAmount( typeof( SulfurousAsh ) ) < sulfAsh )
 			{
 				from.SendLocalizedMessage( 1049617 ); // You do not have enough sulfurous ash.
@@ -63,7 +63,7 @@ namespace Server.Items
 				return;
 
 			from.BeginAction( typeof( FireHorn ) );
-			Timer.DelayCall( Core.AOS ? TimeSpan.FromSeconds( 6.0 ) : TimeSpan.FromSeconds( 12.0 ), new TimerStateCallback( EndAction ), from );
+			Timer.DelayCall( TimeSpan.FromSeconds( 12.0 ), new TimerStateCallback( EndAction ), from );
 
 			int music = from.Skills[SkillName.Musicianship].Fixed;
 
@@ -77,7 +77,7 @@ namespace Server.Items
 				return;
 			}
 
-			int sulfAsh = Core.AOS ? 4 : 15;
+			int sulfAsh = 15;
 			from.Backpack.ConsumeUpTo( typeof( SulfurousAsh ), sulfAsh );
 
 			from.PlaySound( 0x15F );
@@ -92,9 +92,6 @@ namespace Server.Items
 			{
 				if ( from != m && SpellHelper.ValidIndirectTarget( from, m ) && from.CanBeHarmful( m, false ) )
 				{
-					if ( Core.AOS && !from.InLOS( m ) )
-						continue;
-
 					targets.Add( m );
 
 					if ( m.Player )
@@ -112,41 +109,15 @@ namespace Server.Items
 
 				int minDamage, maxDamage;
 
-				if ( Core.AOS )
-				{
-					int musicScaled = music + Math.Max( 0, music - 900 ) * 2;
-					int provScaled = prov + Math.Max( 0, prov - 900 ) * 2;
-					int discScaled = disc + Math.Max( 0, disc - 900 ) * 2;
-					int peaceScaled = peace + Math.Max( 0, peace - 900 ) * 2;
+				int total = prov + disc / 5 + peace / 5;
 
-					int weightAvg = ( musicScaled + provScaled * 3 + discScaled * 3 + peaceScaled ) / 80;
+				if ( playerVsPlayer )
+					total /= 3;
 
-					int avgDamage;
-					if ( playerVsPlayer )
-						avgDamage = weightAvg / 3;
-					else
-						avgDamage = weightAvg / 2;
+				maxDamage = ( total * 2 ) / 30;
+				minDamage = ( maxDamage * 7 ) / 10;
 
-					minDamage = ( avgDamage * 9 ) / 10;
-					maxDamage = ( avgDamage * 10 ) / 9;
-				}
-				else
-				{
-					int total = prov + disc / 5 + peace / 5;
-
-					if ( playerVsPlayer )
-						total /= 3;
-
-					maxDamage = ( total * 2 ) / 30;
-					minDamage = ( maxDamage * 7 ) / 10;
-				}
-
-				double damage = Utility.RandomMinMax( minDamage, maxDamage );
-
-				if ( Core.AOS && targets.Count > 1 )
-					damage = (damage * 2) / targets.Count;
-				else if ( !Core.AOS )
-					damage /= targets.Count;
+				double damage = Utility.RandomMinMax( minDamage, maxDamage ) / targets.Count;
 
 				for ( int i = 0; i < targets.Count; ++i )
 				{
@@ -154,7 +125,7 @@ namespace Server.Items
 
 					double toDeal = damage;
 
-					if ( !Core.AOS && m.CheckSkill( SkillName.MagicResist, 0.0, 120.0 ) )
+					if ( m.CheckSkill( SkillName.MagicResist, 0.0, 120.0 ) )
 					{
 						toDeal *= 0.5;
 						m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
@@ -167,7 +138,7 @@ namespace Server.Items
 				}
 			}
 
-			double breakChance = Core.AOS ? 0.01 : 0.16;
+			double breakChance = 0.16;
 			if ( Utility.RandomDouble() < breakChance )
 			{
 				from.SendLocalizedMessage( 1049619 ); // The fire horn crumbles in your hands.
@@ -187,7 +158,7 @@ namespace Server.Items
 		{
 			private FireHorn m_Horn;
 
-			public InternalTarget( FireHorn horn ) : base( Core.AOS ? 3 : 2, true, TargetFlags.Harmful )
+			public InternalTarget( FireHorn horn ) : base( 2, true, TargetFlags.Harmful )
 			{
 				m_Horn = horn;
 			}

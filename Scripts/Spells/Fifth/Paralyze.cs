@@ -33,44 +33,23 @@ namespace Server.Spells.Fifth
 			{
 				Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
 			}
-			else if ( Core.AOS && (m.Frozen || m.Paralyzed || (m.Spell != null && m.Spell.IsCasting && !(m.Spell is PaladinSpell))) )
-			{
-				Caster.SendLocalizedMessage( 1061923 ); // The target is already frozen.
-			}
 			else if ( CheckHSequence( m ) )
 			{
 				SpellHelper.Turn( Caster, m );
 
 				SpellHelper.CheckReflect( (int)this.Circle, Caster, ref m );
 
-				double duration;
-				
-				if ( Core.AOS )
-				{
-					int secs = (int)((GetDamageSkill( Caster ) / 10) - (GetResistSkill( m ) / 10));
-					
-					if( !Core.SE )
-						secs += 2;
+                double duration;
 
-					if ( !m.Player )
-						secs *= 3;
+                // Algorithm: ((20% of magery) + 7) seconds [- 50% if resisted]
 
-					if ( secs < 0 )
-						secs = 0;
+                duration = 7.0 + (Caster.Skills[SkillName.Magery].Value * 0.2);
 
-					duration = secs;
-				}
-				else
-				{
-					// Algorithm: ((20% of magery) + 7) seconds [- 50% if resisted]
+                if (CheckResisted(m))
+                    duration *= 0.75;
 
-					duration = 7.0 + (Caster.Skills[SkillName.Magery].Value * 0.2);
 
-					if ( CheckResisted( m ) )
-						duration *= 0.75;
-				}
-
-				if ( m is PlagueBeastLord )
+                if ( m is PlagueBeastLord )
 				{
 					( (PlagueBeastLord) m ).OnParalyzed( Caster );
 					duration = 120;
@@ -91,7 +70,7 @@ namespace Server.Spells.Fifth
 		{
 			private ParalyzeSpell m_Owner;
 
-			public InternalTarget( ParalyzeSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+			public InternalTarget( ParalyzeSpell owner ) : base( 12, false, TargetFlags.Harmful )
 			{
 				m_Owner = owner;
 			}

@@ -33,16 +33,6 @@ namespace Server.Items
 			return false;
 		}*/
 
-		public override bool RequiresTactics( Mobile from )
-		{
-			BaseWeapon weapon = from.Weapon as BaseWeapon;
-
-			if ( weapon == null )
-				return false;
-
-			return weapon.Skill != SkillName.Wrestling;
-		}
-
 		public static readonly TimeSpan BlockEquipDuration = TimeSpan.FromSeconds( 5.0 );
 
 		public override void OnHit( Mobile attacker, Mobile defender, int damage )
@@ -63,7 +53,7 @@ namespace Server.Items
 			{
 				attacker.SendLocalizedMessage( 1004001 ); // You cannot disarm your opponent.
 			}
-			else if (toDisarm == null || toDisarm is BaseShield || toDisarm is Spellbook && !Core.ML )
+			else if (toDisarm == null || toDisarm is BaseShield || toDisarm is Spellbook )
 			{
 				attacker.SendLocalizedMessage( 1060849 ); // Your target is already unarmed!
 			}

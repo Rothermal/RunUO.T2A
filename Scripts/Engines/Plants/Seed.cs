@@ -75,7 +75,7 @@ namespace Server.Engines.Plants
 		public Seed( PlantType plantType, PlantHue plantHue, bool showType ) : base( 0xDCF )
 		{
 			Weight = 1.0;
-			Stackable = Core.SA;
+			Stackable = false;
 
 			m_PlantType = plantType;
 			m_PlantHue = plantHue;
@@ -242,7 +242,7 @@ namespace Server.Engines.Plants
 				Weight = 1.0;
 
 			if ( version < 1 )
-				Stackable = Core.SA;
+				Stackable = false;
 
 			if ( version < 2 && PlantHueInfo.IsCrossable( m_PlantHue ) )
 				m_PlantHue |= PlantHue.Reproduces;

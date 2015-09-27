@@ -324,12 +324,9 @@ namespace Server.Mobiles
 					pet.IsStabled = true;
 					pet.StabledBy = from;
 
-					if ( Core.SE )
-						pet.Loyalty = BaseCreature.MaxLoyalty; // Wonderfully happy
-
 					from.Stabled.Add( pet );
 
-					SayTo( from, Core.AOS ? 1049677 : 502679 ); // [AOS: Your pet has been stabled.] Very well, thy pet is stabled. Thou mayst recover it by saying 'claim' to me. In one real world week, I shall sell it off if it is not claimed!
+					SayTo( from, 502679 ); // Very well, thy pet is stabled. Thou mayst recover it by saying 'claim' to me. In one real world week, I shall sell it off if it is not claimed!
 				}
 				else
 				{
@@ -417,9 +414,6 @@ namespace Server.Mobiles
 
 			pet.IsStabled = false;
 			pet.StabledBy = null;
-
-			if ( Core.SE )
-				pet.Loyalty = BaseCreature.MaxLoyalty; // Wonderfully Happy
 		}
 
 		public override bool HandlesOnSpeech( Mobile from )

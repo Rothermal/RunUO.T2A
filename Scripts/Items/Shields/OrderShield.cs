@@ -20,9 +20,7 @@ namespace Server.Items
 		[Constructable]
 		public OrderShield() : base( 0x1BC4 )
 		{
-			if ( !Core.AOS )
-				LootType = LootType.Newbied;
-
+			LootType = LootType.Newbied;
 			Weight = 7.0;
 		}
 
@@ -60,7 +58,7 @@ namespace Server.Items
 
 		public virtual bool Validate( Mobile m )
 		{
-			if ( Core.AOS || m == null || !m.Player || m.AccessLevel != AccessLevel.Player )
+			if ( m == null || !m.Player || m.AccessLevel != AccessLevel.Player )
 				return true;
 
 			Guild g = m.Guild as Guild;

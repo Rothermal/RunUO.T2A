@@ -18,13 +18,7 @@ namespace Server.Items
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			if ( IsChildOf( from.Backpack ) )
-			{
-				if ( MondainsLegacy.CheckML( from ) )
-					from.SendGump( new ConfirmGump( this ) );
-			}
-			else
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
+			from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
 		}
 
 		public override void GetProperties( ObjectPropertyList list )

@@ -65,20 +65,9 @@ namespace Server.Spells.First
 
 				int toHeal;
 
-				if ( Core.AOS )
-				{
-					toHeal = Caster.Skills.Magery.Fixed / 120;
-					toHeal += Utility.RandomMinMax( 1, 4 );
-
-					if( Core.SE && Caster != m )
-						toHeal = (int)(toHeal * 1.5);
-				}
-				else
-				{
-					toHeal = (int)(Caster.Skills[SkillName.Magery].Value * 0.1);
-					toHeal += Utility.Random( 1, 5 );
-				}
-
+				toHeal = (int)(Caster.Skills[SkillName.Magery].Value * 0.1);
+				toHeal += Utility.Random( 1, 5 );
+                
 				//m.Heal( toHeal, Caster );
 				SpellHelper.Heal( toHeal, m, Caster );
 
@@ -93,7 +82,7 @@ namespace Server.Spells.First
 		{
 			private HealSpell m_Owner;
 
-			public InternalTarget( HealSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Beneficial )
+			public InternalTarget( HealSpell owner ) : base( 12, false, TargetFlags.Beneficial )
 			{
 				m_Owner = owner;
 			}

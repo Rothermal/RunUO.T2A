@@ -2818,17 +2818,6 @@ namespace Server.Network
 
 			IAccount acct = ns.Account as IAccount;
 
-			if ( acct != null && acct.Limit >= 6 )
-			{
-				flags |= FeatureFlags.Unk7;
-				flags &= ~FeatureFlags.UOTD;
-
-				if ( acct.Limit > 6 )
-					flags |= FeatureFlags.SeventhCharacterSlot;
-				else
-					flags |= FeatureFlags.SixthCharacterSlot;
-			}
-
 			if ( ns.ExtendedSupportedFeatures ) {
 				m_Stream.Write( (uint) flags );
 			} else {
@@ -3051,23 +3040,8 @@ namespace Server.Network
 			string name = m.Name;
 			if ( name == null ) name = "";
 
-			int type;
-
-			if ( Core.HS && ns != null && ns.ExtendedStatus )
-			{
-				type = 6;
-				EnsureCapacity( 121 );
-			}
-			else if ( Core.ML && ns != null && ns.SupportsExpansion( Expansion.ML ) )
-			{
-				type = 5;
-				EnsureCapacity( 91 );
-			}
-			else
-			{
-				type = Core.AOS ? 4 : 3;
-				EnsureCapacity( 88 );
-			}
+			int type = 3;
+			EnsureCapacity( 88 );
 
 			m_Stream.Write( (int) m.Serial );
 			m_Stream.WriteAsciiFixed( name, 30 );
@@ -3092,7 +3066,7 @@ namespace Server.Network
 			m_Stream.Write( (short) m.ManaMax );
 
 			m_Stream.Write( (int) m.TotalGold );
-			m_Stream.Write( (short) (Core.AOS ? m.PhysicalResistance : (int)(m.ArmorRating + 0.5)) );
+			m_Stream.Write( (short) (int)(m.ArmorRating + 0.5) );
 			m_Stream.Write( (short) (Mobile.BodyWeight + m.TotalWeight) );
 
 			if ( type >= 5 )
@@ -3153,19 +3127,9 @@ namespace Server.Network
 				type = 0;
 				EnsureCapacity( 43 );
 			}
-			else if ( Core.HS && ns != null && ns.ExtendedStatus )
-			{
-				type = 6;
-				EnsureCapacity( 121 );
-			}
-			else if ( Core.ML && ns != null && ns.SupportsExpansion( Expansion.ML ) )
-			{
-				type = 5;
-				EnsureCapacity( 91 );
-			}
 			else
 			{
-				type = Core.AOS ? 4 : 3;
+				type = 3;
 				EnsureCapacity( 88 );
 			}
 
@@ -3194,7 +3158,7 @@ namespace Server.Network
 				WriteAttr( beheld.Mana, beheld.ManaMax );
 
 				m_Stream.Write( (int) beheld.TotalGold );
-				m_Stream.Write( (short) (Core.AOS ? beheld.PhysicalResistance : (int)(beheld.ArmorRating + 0.5)) );
+				m_Stream.Write( (short) (int)(beheld.ArmorRating + 0.5) );
 				m_Stream.Write( (short) (Mobile.BodyWeight + beheld.TotalWeight) );
 
 				if ( type >= 5 )

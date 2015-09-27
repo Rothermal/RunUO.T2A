@@ -4,7 +4,7 @@ namespace Server.Mobiles
 {
     public class NatureFury : BaseCreature
 	{
-		public override bool DeleteCorpseOnDeath { get { return Core.AOS; } }
+		public override bool DeleteCorpseOnDeath { get { return false; } }
 		public override bool IsHouseSummonable { get { return true; } }
 
 		public override double DispelDifficulty { get { return 125.0; } }

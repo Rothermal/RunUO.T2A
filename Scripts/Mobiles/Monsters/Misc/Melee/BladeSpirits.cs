@@ -6,7 +6,7 @@ namespace Server.Mobiles
     [CorpseName( "a blade spirit corpse" )]
 	public class BladeSpirits : BaseCreature
 	{
-		public override bool DeleteCorpseOnDeath { get { return Core.AOS; } }
+		public override bool DeleteCorpseOnDeath { get { return false; } }
 		public override bool IsHouseSummonable { get { return true; } }
 
 		public override double DispelDifficulty { get { return 0.0; } }
@@ -28,7 +28,7 @@ namespace Server.Mobiles
 			SetDex( 150 );
 			SetInt( 100 );
 
-			SetHits( ( Core.SE ) ? 160 : 80 );
+			SetHits( 80 );
 			SetStam( 250 );
 			SetMana( 0 );
 
@@ -52,7 +52,7 @@ namespace Server.Mobiles
 			Karma = 0;
 
 			VirtualArmor = 40;
-			ControlSlots = ( Core.SE ) ? 2 : 1;
+			ControlSlots = 1;
 		}
 
 		public override bool BleedImmune{ get{ return true; } }
@@ -71,32 +71,6 @@ namespace Server.Mobiles
 		public override int GetHurtSound()
 		{
 			return 0x23A;
-		}
-
-		public override void OnThink()
-		{
-			if ( Core.SE && Summoned )
-			{
-				ArrayList spirtsOrVortexes = new ArrayList();
-
-				foreach ( Mobile m in GetMobilesInRange( 5 ) )
-				{
-					if ( m is EnergyVortex || m is BladeSpirits )
-					{
-						if ( ( (BaseCreature) m ).Summoned )
-							spirtsOrVortexes.Add( m );
-					}
-				}
-
-				while ( spirtsOrVortexes.Count > 6 )
-				{
-					int index = Utility.Random( spirtsOrVortexes.Count );
-					Dispel( ( (Mobile) spirtsOrVortexes[index] ) );
-					spirtsOrVortexes.RemoveAt( index );
-				}
-			}
-
-			base.OnThink();
 		}
 
 		public BladeSpirits( Serial serial )

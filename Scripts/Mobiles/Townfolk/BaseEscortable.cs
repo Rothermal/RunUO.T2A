@@ -593,10 +593,7 @@ namespace Server.Mobiles
 
 		public virtual string[] GetPossibleDestinations()
 		{
-			if (!Core.ML)
-				return m_TownNames;
-			else
-				return m_MLTownNames;
+			return m_TownNames;
 		}
 
 		public virtual string PickRandomDestination()

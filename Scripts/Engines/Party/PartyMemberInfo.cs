@@ -11,7 +11,7 @@ namespace Server.Engines.PartySystem
 		public PartyMemberInfo( Mobile m )
 		{
 			m_Mobile = m;
-			m_CanLoot = !Core.ML;
+			m_CanLoot = true;
 		}
 	}
 }

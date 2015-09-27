@@ -181,28 +181,7 @@ namespace Server.Mobiles
 
 		public static void CombineBackpacks( BaseCreature animal )
 		{
-			if ( Core.AOS )
-				return;
-
-			if ( animal.IsBonded || animal.IsDeadPet )
-				return;
-
-			Container pack = animal.Backpack;
-
-			if ( pack != null )
-			{
-				Container newPack = new Backpack();
-
-				for ( int i = pack.Items.Count - 1; i >= 0; --i )
-				{
-					if ( i >= pack.Items.Count )
-						continue;
-
-					newPack.DropItem( pack.Items[i] );
-				}
-
-				pack.DropItem( newPack );
-			}
+			return;
 		}
 
 		public static void TryPackOpen( BaseCreature animal, Mobile from )
