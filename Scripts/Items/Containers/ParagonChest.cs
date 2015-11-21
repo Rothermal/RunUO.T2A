@@ -158,7 +158,7 @@ namespace Server.Items
 				DropItem( item );
 			}
 
-			DropItem( new TreasureMap( level + 1, ( Utility.RandomBool() ? Map.Felucca : Map.Trammel ) ) );
+			DropItem( new TreasureMap( level + 1, Map.Felucca ) );
 		}
 
 		public ParagonChest( Serial serial ) : base( serial )

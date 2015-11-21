@@ -113,7 +113,7 @@ namespace Server.Engines.Events
 
 				if( player != null && !player.Deleted && m_ReAnimated.Count < m_TotalZombieLimit )
 				{
-					Map map = Utility.RandomBool() ? Map.Trammel : Map.Felucca;
+					Map map = Map.Felucca;
 
 					Point3D home = ( GetRandomPointInRect( m_Cemetaries[ Utility.Random( m_Cemetaries.Length ) ], map ));
 

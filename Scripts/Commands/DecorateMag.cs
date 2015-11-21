@@ -3,8 +3,6 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using Server.Items;
-using Server.Engines.Quests.Haven;
-using Server.Engines.Quests.Necro;
 
 namespace Server.Commands
 {
@@ -24,7 +22,6 @@ namespace Server.Commands
 
 			m_Mobile.SendMessage( "Generating world decoration, please wait." );
 
-			Generate( "Data/Decoration/RuinedMaginciaTram", Map.Trammel );
 			Generate( "Data/Decoration/RuinedMaginciaFel", Map.Felucca );
 
 
@@ -69,10 +66,8 @@ namespace Server.Commands
 		private static Type typeofAnkhNorth = typeof( AnkhNorth );
 		private static Type typeofBeverage = typeof( BaseBeverage );
 		private static Type typeofLocalizedSign = typeof( LocalizedSign );
-		private static Type typeofMarkContainer = typeof( MarkContainer );
 		private static Type typeofWarningItem = typeof( WarningItem );
 		private static Type typeofHintItem = typeof( HintItem );
-		private static Type typeofCannon = typeof( Cannon );
 		private static Type typeofSerpentPillar = typeof( SerpentPillar );
 
 		public Item Construct()
@@ -139,38 +134,6 @@ namespace Server.Commands
 						item = new AnkhWest( bloodied );
 					else
 						item = new AnkhNorth( bloodied );
-				}
-				else if ( m_Type == typeofMarkContainer )
-				{
-					bool bone = false;
-					bool locked = false;
-					Map map = Map.Malas;
-
-					for ( int i = 0; i < m_Params.Length; ++i )
-					{
-						if ( m_Params[i] == "Bone" )
-						{
-							bone = true;
-						}
-						else if ( m_Params[i] == "Locked" )
-						{
-							locked = true;
-						}
-						else if ( m_Params[i].StartsWith( "TargetMap" ) )
-						{
-							int indexOf = m_Params[i].IndexOf( '=' );
-
-							if ( indexOf >= 0 )
-								map = Map.Parse( m_Params[i].Substring( ++indexOf ) );
-						}
-					}
-
-					MarkContainer mc = new MarkContainer( bone, locked );
-
-					mc.TargetMap = map;
-					mc.Description = "strange location";
-
-					item = mc;
 				}
 				else if ( m_Type == typeofHintItem )
 				{
@@ -281,23 +244,6 @@ namespace Server.Commands
 
 					item = wi;
 				}
-				else if ( m_Type == typeofCannon )
-				{
-					CannonDirection direction = CannonDirection.North;
-
-					for ( int i = 0; i < m_Params.Length; ++i )
-					{
-						if ( m_Params[i].StartsWith( "CannonDirection" ) )
-						{
-							int indexOf = m_Params[i].IndexOf( '=' );
-
-							if ( indexOf >= 0 )
-								direction = (CannonDirection)Enum.Parse( typeof( CannonDirection ), m_Params[i].Substring( ++indexOf ), true );
-						}
-					}
-
-					item = new Cannon( direction );
-				}
 				else if ( m_Type == typeofSerpentPillar )
 				{
 					string word = null;
@@ -386,22 +332,7 @@ namespace Server.Commands
 
 			if ( item is BaseAddon )
 			{
-				if ( item is MaabusCoffin )
-				{
-					MaabusCoffin coffin = (MaabusCoffin)item;
-
-					for ( int i = 0; i < m_Params.Length; ++i )
-					{
-						if ( m_Params[i].StartsWith( "SpawnLocation" ) )
-						{
-							int indexOf = m_Params[i].IndexOf( '=' );
-
-							if ( indexOf >= 0 )
-								coffin.SpawnLocation = Point3D.Parse( m_Params[i].Substring( ++indexOf ) );
-						}
-					}
-				}
-				else if ( m_ItemID > 0 )
+				if ( m_ItemID > 0 )
 				{
 					List<AddonComponent> comps = ((BaseAddon)item).Components;
 
@@ -1009,11 +940,6 @@ namespace Server.Commands
 							}
 
 							eable.Free();
-						}
-						else if ( item is MarkContainer )
-						{
-							try{ ((MarkContainer)item).Target = Point3D.Parse( extra ); }
-							catch{}
 						}
 
 						item = null;

@@ -235,33 +235,7 @@ namespace Server.Engines.Events
 			new Point3D( 2701,  692, 5 ), // Minoc
 			new Point3D( 1828, 2948,-20), // Trinsic
 			new Point3D(  643, 2067, 5 ), // Skara Brae
-			new Point3D( 3563, 2139, Map.Trammel.GetAverageZ( 3563, 2139 ) ), // (New) Magincia
-		};
-
-		private static Point3D[] Malas_Locations =
-		{
-			new Point3D(1015, 527, -65), // Luna
-			new Point3D(1997, 1386, -85) // Umbra
-		};
-
-		private static Point3D[] Ilshenar_Locations =
-		{
-			new Point3D( 1215,  467, -13 ), // Compassion
-			new Point3D(  722, 1366, -60 ), // Honesty
-			new Point3D(  744,  724, -28 ), // Honor
-			new Point3D(  281, 1016,   0 ), // Humility
-			new Point3D(  987, 1011, -32 ), // Justice
-			new Point3D( 1174, 1286, -30 ), // Sacrifice
-			new Point3D( 1532, 1340, - 3 ), // Spirituality
-			new Point3D(  528,  216, -45 ), // Valor
-			new Point3D( 1721,  218,  96 )  // Chaos
-		};
-
-		private static Point3D[] Tokuno_Locations =
-		{
-			new Point3D( 1169,  998, 41 ), // Isamu-Jima
-			new Point3D(  802, 1204, 25 ), // Makoto-Jima
-			new Point3D(  270,  628, 15 )  // Homare-Jima
+			new Point3D( 3563, 2139, Map.Felucca.GetAverageZ( 3563, 2139 ) ), // Magincia
 		};
 
 		public NaughtyTwin( Mobile from )
@@ -336,9 +310,6 @@ namespace Server.Engines.Events
 
 			switch( target.Map.MapID )
 			{
-				case 2: return Ilshenar_Locations[ Utility.Random( Ilshenar_Locations.Length ) ];
-				case 3: return Malas_Locations[ Utility.Random( Malas_Locations.Length ) ];
-				case 4: return Tokuno_Locations[ Utility.Random( Tokuno_Locations.Length ) ];
 				default: return Felucca_Locations[ Utility.Random( Felucca_Locations.Length ) ];
 			}
 		}

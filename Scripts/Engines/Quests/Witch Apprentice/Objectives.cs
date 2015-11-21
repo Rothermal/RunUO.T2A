@@ -54,7 +54,7 @@ namespace Server.Engines.Quests.Hag
 			PlayerMobile player = System.From;
 			Map map = player.Map;
 
-			if ( ( m_Corpse == null || m_Corpse.Deleted ) && ( map == Map.Trammel || map == Map.Felucca ) && player.InRange( m_CorpseLocation, 8 ) )
+			if ( ( m_Corpse == null || m_Corpse.Deleted ) && map == Map.Felucca && player.InRange( m_CorpseLocation, 8 ) )
 			{
 				m_Corpse = new HagApprenticeCorpse();
 				m_Corpse.MoveToWorld( m_CorpseLocation, map );

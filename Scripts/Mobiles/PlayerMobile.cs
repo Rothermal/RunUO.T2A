@@ -1499,9 +1499,6 @@ namespace Server.Mobiles
 						else
 							list.Add( new CallbackEntry( 6200, new ContextCallback( AutoRenewInventoryInsurance ) ) ); // Auto Renew Inventory Insurance
 					}
-
-					if ( MLQuestSystem.Enabled )
-						list.Add( new CallbackEntry( 6169, new ContextCallback( ToggleQuestItem ) ) ); // Toggle Quest Item
 				}
 
 				BaseHouse house = BaseHouse.FindHouseAt( this );
@@ -1962,62 +1959,6 @@ namespace Server.Mobiles
 					m_From.SendGump( new ItemInsuranceMenuGump( m_From, m_Items, m_Insure, m_Page ) );
 				}
 			}
-		}
-
-		#endregion
-
-		#region Toggle Quest Item
-
-		private void ToggleQuestItem()
-		{
-			if ( !CheckAlive() )
-				return;
-
-			ToggleQuestItemTarget();
-		}
-
-		private void ToggleQuestItemTarget()
-		{
-			Server.Engines.MLQuests.Gumps.BaseQuestGump.CloseOtherGumps( this );
-			CloseGump( typeof( Server.Engines.MLQuests.Gumps.QuestLogDetailedGump ) );
-			CloseGump( typeof( Server.Engines.MLQuests.Gumps.QuestLogGump ) );
-			CloseGump( typeof( Server.Engines.MLQuests.Gumps.QuestOfferGump ) );
-			//CloseGump( typeof( UnknownGump802 ) );
-			//CloseGump( typeof( UnknownGump804 ) );
-
-			BeginTarget( -1, false, TargetFlags.None, new TargetCallback( ToggleQuestItem_Callback ) );
-			SendLocalizedMessage( 1072352 ); // Target the item you wish to toggle Quest Item status on <ESC> to cancel
-		}
-
-		private void ToggleQuestItem_Callback( Mobile from, object obj )
-		{
-			if ( !CheckAlive() )
-				return;
-
-			Item item = obj as Item;
-
-			if ( item == null )
-				return;
-
-			if ( from.Backpack == null || item.Parent != from.Backpack )
-			{
-				SendLocalizedMessage( 1074769 ); // An item must be in your backpack (and not in a container within) to be toggled as a quest item.
-			}
-			else if ( item.QuestItem )
-			{
-				item.QuestItem = false;
-				SendLocalizedMessage( 1072354 ); // You remove Quest Item status from the item
-			}
-			else if ( MLQuestSystem.MarkQuestItem( this, item ) )
-			{
-				SendLocalizedMessage( 1072353 ); // You set the item to Quest Item status
-			}
-			else
-			{
-				SendLocalizedMessage( 1072355, "", 0x23 ); // That item does not match any of your quest criteria
-			}
-
-			ToggleQuestItemTarget();
 		}
 
 		#endregion
@@ -2675,8 +2616,6 @@ namespace Server.Mobiles
 				Faction.HandleDeath( this, killer );
 
 			Server.Guilds.Guild.HandleDeath( this, killer );
-
-			MLQuestSystem.HandleDeath( this );
 
 			#region Dueling
 			if ( m_DuelContext != null )
@@ -3559,8 +3498,6 @@ namespace Server.Mobiles
 			if ( faction != null )
 				faction.RemoveMember( this );
 
-			MLQuestSystem.HandleDeletion( this );
-
 			BaseHouse.HandleDeletion( this );
 
 			DisguiseTimers.RemoveTimer( this );
@@ -3800,9 +3737,6 @@ namespace Server.Mobiles
 				if ( acc != null )
 					acc.RemoveYoungStatus( 1019036 ); // You have successfully obtained a respectable skill level, and have outgrown your status as a young player!
 			}
-
-			if ( MLQuestSystem.Enabled )
-				MLQuestSystem.HandleSkillGain( this, skill );
 
 			InvalidateMyRunUO();
 		}
@@ -4125,57 +4059,9 @@ namespace Server.Mobiles
 			return false;
 		}
 
-		private static Point3D[] m_TrammelDeathDestinations = new Point3D[]
-			{
-				new Point3D( 1481, 1612, 20 ),
-				new Point3D( 2708, 2153,  0 ),
-				new Point3D( 2249, 1230,  0 ),
-				new Point3D( 5197, 3994, 37 ),
-				new Point3D( 1412, 3793,  0 ),
-				new Point3D( 3688, 2232, 20 ),
-				new Point3D( 2578,  604,  0 ),
-				new Point3D( 4397, 1089,  0 ),
-				new Point3D( 5741, 3218, -2 ),
-				new Point3D( 2996, 3441, 15 ),
-				new Point3D(  624, 2225,  0 ),
-				new Point3D( 1916, 2814,  0 ),
-				new Point3D( 2929,  854,  0 ),
-				new Point3D(  545,  967,  0 ),
-				new Point3D( 3665, 2587,  0 )
-			};
-
-		private static Point3D[] m_IlshenarDeathDestinations = new Point3D[]
-			{
-				new Point3D( 1216,  468, -13 ),
-				new Point3D(  723, 1367, -60 ),
-				new Point3D(  745,  725, -28 ),
-				new Point3D(  281, 1017,   0 ),
-				new Point3D(  986, 1011, -32 ),
-				new Point3D( 1175, 1287, -30 ),
-				new Point3D( 1533, 1341,  -3 ),
-				new Point3D(  529,  217, -44 ),
-				new Point3D( 1722,  219,  96 )
-			};
-
-		private static Point3D[] m_MalasDeathDestinations = new Point3D[]
-			{
-				new Point3D( 2079, 1376, -70 ),
-				new Point3D(  944,  519, -71 )
-			};
-
-		private static Point3D[] m_TokunoDeathDestinations = new Point3D[]
-			{
-				new Point3D( 1166,  801, 27 ),
-				new Point3D(  782, 1228, 25 ),
-				new Point3D(  268,  624, 15 )
-			};
-
 		public bool YoungDeathTeleport()
 		{
-			if ( this.Region.IsPartOf( typeof( Jail ) )
-				|| this.Region.IsPartOf( "Samurai start location" )
-				|| this.Region.IsPartOf( "Ninja start location" )
-				|| this.Region.IsPartOf( "Ninja cave" ) )
+			if ( this.Region.IsPartOf( typeof( Jail ) ) )
 				return false;
 
 			Point3D loc;
@@ -4193,39 +4079,7 @@ namespace Server.Mobiles
 				map = this.Map;
 			}
 
-			Point3D[] list;
-
-			if ( map == Map.Trammel )
-				list = m_TrammelDeathDestinations;
-			else if ( map == Map.Ilshenar )
-				list = m_IlshenarDeathDestinations;
-			else if ( map == Map.Malas )
-				list = m_MalasDeathDestinations;
-			else if ( map == Map.Tokuno )
-				list = m_TokunoDeathDestinations;
-			else
-				return false;
-
-			Point3D dest = Point3D.Zero;
-			int sqDistance = int.MaxValue;
-
-			for ( int i = 0; i < list.Length; i++ )
-			{
-				Point3D curDest = list[i];
-
-				int width = loc.X - curDest.X;
-				int height = loc.Y - curDest.Y;
-				int curSqDistance = width * width + height * height;
-
-				if ( curSqDistance < sqDistance )
-				{
-					dest = curDest;
-					sqDistance = curSqDistance;
-				}
-			}
-
-			this.MoveToWorld( dest, map );
-			return true;
+			return false;
 		}
 
 		private void SendYoungDeathNotice()

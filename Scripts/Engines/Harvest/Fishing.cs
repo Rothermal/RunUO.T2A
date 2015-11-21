@@ -3,7 +3,6 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Engines.Quests;
-using Server.Engines.Quests.Collector;
 using System.Collections.Generic;
 
 namespace Server.Engines.Harvest
@@ -128,39 +127,6 @@ namespace Server.Engines.Harvest
 				new MutateEntry(   0.0, 200.0,  -200.0, false, new Type[1]{ null } )
 			};
 
-		public override bool SpecialHarvest( Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc )
-		{
-			PlayerMobile player = from as PlayerMobile;
-
-			if ( player != null )
-			{
-				QuestSystem qs = player.Quest;
-
-				if ( qs is CollectorQuest )
-				{
-					QuestObjective obj = qs.FindObjective( typeof( FishPearlsObjective ) );
-
-					if ( obj != null && !obj.Completed )
-					{
-						if ( Utility.RandomDouble() < 0.5 )
-						{
-							player.SendLocalizedMessage( 1055086, "", 0x59 ); // You pull a shellfish out of the water, and find a rainbow pearl inside of it.
-
-							obj.CurProgress++;
-						}
-						else
-						{
-							player.SendLocalizedMessage( 1055087, "", 0x2C ); // You pull a shellfish out of the water, but it doesn't have a rainbow pearl.
-						}
-
-						return true;
-					}
-				}
-			}
-
-			return false;
-		}
-
 		public override Type MutateType( Type type, Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc, HarvestResource resource )
 		{
 			bool deepWater = SpecialFishingNet.FullValidation( map, loc.X, loc.Y );
@@ -190,7 +156,7 @@ namespace Server.Engines.Harvest
 		private static Map SafeMap( Map map )
 		{
 			if ( map == null || map == Map.Internal )
-				return Map.Trammel;
+				return Map.Felucca;
 
 			return map;
 		}
@@ -207,7 +173,7 @@ namespace Server.Engines.Harvest
 				{
 					SOS sos = messages[i];
 
-					if ( ( from.Map == Map.Felucca || from.Map == Map.Trammel ) && from.InRange( sos.TargetLocation, 60 ) )
+					if ( from.Map == Map.Felucca && from.InRange( sos.TargetLocation, 60 ) )
 						return true;
 				}
 			}
@@ -220,16 +186,16 @@ namespace Server.Engines.Harvest
 			if ( type == typeof( TreasureMap ) )
 			{
 				int level;
-				if ( from is PlayerMobile && ((PlayerMobile)from).Young && from.Map == Map.Trammel && TreasureMap.IsInHavenIsland( from ) )
+				if ( from is PlayerMobile && ((PlayerMobile)from).Young )
 					level = 0;
 				else
 					level = 1;
 
-				return new TreasureMap( level, from.Map == Map.Felucca ? Map.Felucca : Map.Trammel );
+				return new TreasureMap( level, Map.Felucca );
 			}
 			else if ( type == typeof( MessageInABottle ) )
 			{
-				return new MessageInABottle( from.Map == Map.Felucca ? Map.Felucca : Map.Trammel );
+				return new MessageInABottle( Map.Felucca );
 			}
 
 			Container pack = from.Backpack;
@@ -242,7 +208,7 @@ namespace Server.Engines.Harvest
 				{
 					SOS sos = messages[i];
 
-					if ( ( from.Map == Map.Felucca || from.Map == Map.Trammel ) && from.InRange( sos.TargetLocation, 60 ) )
+					if ( from.Map == Map.Felucca && from.InRange( sos.TargetLocation, 60 ) )
 					{
 						Item preLoot = null;
 

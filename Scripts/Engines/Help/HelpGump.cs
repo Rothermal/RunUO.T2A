@@ -289,13 +289,9 @@ namespace Server.Engines.Help
 						{
 							from.SendLocalizedMessage( 1114345, "", 0x35 ); // You'll need a better jailbreak plan than that!
 						}
-						else if ( from.Region.IsPartOf( "Haven Island" ) )
-						{
-							from.SendLocalizedMessage( 1041529 ); // You're already in Haven
-						}
 						else
 						{
-							from.MoveToWorld( new Point3D( 3503, 2574, 14 ), Map.Trammel );
+							from.MoveToWorld( new Point3D( 3503, 2574, 14 ), Map.Felucca );
 						}
 					}
 

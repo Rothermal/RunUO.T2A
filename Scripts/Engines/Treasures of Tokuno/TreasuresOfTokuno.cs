@@ -118,7 +118,7 @@ namespace Server.Misc
 			if( r.IsPartOf( "Yomotsu Mines" ) || r.IsPartOf( "Fan Dancer's Dojo" ) )
 				return true;
 
-			return (m.Map == Map.Tokuno);
+			return (false);
 		}
 
 		public static void HandleKill( Mobile victim, Mobile killer )
@@ -286,8 +286,6 @@ namespace Server.Mobiles
 				}
 			}
 		}
-
-		public override void TurnToTokuno(){}
 	}
 }
 

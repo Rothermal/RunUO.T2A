@@ -45,7 +45,7 @@ namespace Server.Mobiles
 			int count = Utility.RandomMinMax( 2, 3 );
 
 			for ( int i = 0; i < count; ++i )
-				PackItem( new TreasureMap( 3, Map.Trammel ) );
+				PackItem( new TreasureMap( 3, Map.Felucca ) );
 		}
 
 		public override bool BleedImmune{ get{ return true; } }

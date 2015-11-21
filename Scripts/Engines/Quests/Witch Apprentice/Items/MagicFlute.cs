@@ -34,7 +34,7 @@ namespace Server.Engines.Quests.Hag
 
 					if ( obj != null && !obj.Completed )
 					{
-						if ( ( player.Map != Map.Trammel && player.Map != Map.Felucca ) || !player.InRange( obj.ImpLocation, 8 ) )
+						if ( ( player.Map != Map.Felucca ) || !player.InRange( obj.ImpLocation, 8 ) )
 						{
 							player.SendLocalizedMessage( 1055053 ); // Nothing happens. Zeefzorpul must not be hiding in this area.
 						}

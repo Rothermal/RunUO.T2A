@@ -15,8 +15,6 @@ namespace Server.Multis
 	public abstract class BaseBoat : BaseMulti
 	{
 		private static Rectangle2D[] m_BritWrap = new Rectangle2D[]{ new Rectangle2D( 16, 16, 5120 - 32, 4096 - 32 ), new Rectangle2D( 5136, 2320, 992, 1760 ) };
-		private static Rectangle2D[] m_IlshWrap = new Rectangle2D[]{ new Rectangle2D( 16, 16, 2304 - 32, 1600 - 32 ) };
-		private static Rectangle2D[] m_TokunoWrap = new Rectangle2D[] { new Rectangle2D( 16, 16, 1448 - 32, 1448 - 32 ) };
 
 		private static TimeSpan BoatDecayDelay = TimeSpan.FromDays( 9.0 );
 
@@ -946,7 +944,7 @@ namespace Server.Multis
 
 				return false;
 			}
-			else if ( ( this.Map != Map.Trammel && this.Map != Map.Felucca ) || NextNavPoint < 0 || NextNavPoint >= MapItem.Pins.Count )
+			else if ( this.Map != Map.Felucca || NextNavPoint < 0 || NextNavPoint >= MapItem.Pins.Count )
 			{
 				if ( message && TillerMan != null )
 					TillerMan.Say( 1042551 ); // I don't see that navpoint, sir.
@@ -1199,13 +1197,6 @@ namespace Server.Multis
 
 					int z = p.Z;
 
-					//int landZ = 0, landAvg = 0, landTop = 0;
-
-					//map.GetAverageZ( tx, ty, ref landZ, ref landAvg, ref landTop );
-
-					//if ( !landTile.Ignored && top > landZ && landTop > z )
-					//	return false;
-
 					for ( int i = 0; i < tiles.Length; ++i )
 					{
 						StaticTile tile = tiles[i];
@@ -1296,12 +1287,7 @@ namespace Server.Multis
 
 		public static Rectangle2D[] GetWrapFor( Map m )
 		{
-			if( m == Map.Ilshenar )
-				return m_IlshWrap;
-			else if( m == Map.Tokuno )
-				return m_TokunoWrap;
-			else
-				return m_BritWrap;
+			return m_BritWrap;
 		}
 
 		public Direction GetMovementFor( int x, int y, out int maxSpeed )
@@ -1349,7 +1335,7 @@ namespace Server.Multis
 
 				return false;
 			}
-			else if ( ( this.Map != Map.Trammel && this.Map != Map.Felucca ) || NextNavPoint < 0 || NextNavPoint >= MapItem.Pins.Count )
+			else if ( this.Map != Map.Felucca || NextNavPoint < 0 || NextNavPoint >= MapItem.Pins.Count )
 			{
 				if ( message && TillerMan != null )
 					TillerMan.Say( 1042551 ); // I don't see that navpoint, sir.

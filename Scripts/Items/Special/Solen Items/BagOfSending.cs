@@ -218,10 +218,6 @@ namespace Server.Items
 					{
 						MessageHelper.SendLocalizedMessageTo( m_Bag, from, 1054109, 0x59 ); // The bag of sending rejects that item.
 					}
-					else if ( Spells.SpellHelper.IsDoomGauntlet( from.Map, from.Location ) )
-					{
-						from.SendLocalizedMessage( 1062089 ); // You cannot use that here.
-					}
 					else if ( !from.BankBox.TryDropItem( from, item, false ) )
 					{
 						MessageHelper.SendLocalizedMessageTo( m_Bag, from, 1054110, 0x59 ); // Your bank box is full.

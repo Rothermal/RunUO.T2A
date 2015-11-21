@@ -37,54 +37,6 @@ namespace Server.Misc
 				new Point2D( 1840, 2640 ), new Point2D( 1928, 2952 ), new Point2D( 2120, 2712 )
 			};
 
-		private static Point2D[] m_Trammel = m_Felucca;
-
-		private static Point2D[] m_Ilshenar = new Point2D[]
-			{
-				new Point2D( 1252, 1180 ), new Point2D( 1562, 1090 ), new Point2D( 1444, 1016 ),
-				new Point2D( 1324, 968 ), new Point2D( 1418, 806 ), new Point2D( 1722, 874 ),
-				new Point2D( 1456, 684 ), new Point2D( 1036, 866 ), new Point2D( 612, 476 ),
-				new Point2D( 1476, 372 ), new Point2D( 762, 472 ), new Point2D( 812, 1162 ),
-				new Point2D( 1422, 1144 ), new Point2D( 1254, 1066 ), new Point2D( 1598, 870 ),
-				new Point2D( 1358, 866 ), new Point2D( 510, 302 ), new Point2D( 510, 392 )
-			};
-
-		private static Point2D[] m_Tokuno = new Point2D[]
-			{
-				//Makoto-Jima
-				new Point2D( 837, 1351 ), new Point2D( 941, 1241 ), new Point2D( 959, 1185 ),
-				new Point2D( 923, 1091 ), new Point2D( 904, 983 ), new Point2D( 845, 944 ),
-				new Point2D( 829, 896 ), new Point2D( 794, 852 ), new Point2D( 766, 821 ),
-				new Point2D( 695, 814 ), new Point2D( 576, 835 ), new Point2D( 518, 840 ),
-				new Point2D( 519, 902 ), new Point2D( 502, 950 ), new Point2D( 503, 1045 ),
-				new Point2D( 547, 1131 ), new Point2D( 518, 1204 ), new Point2D( 506, 1243 ),
-				new Point2D( 526, 1271 ), new Point2D( 562, 1295 ), new Point2D( 616, 1335 ),
-				new Point2D( 789, 1347 ), new Point2D( 712, 1359 ),
-
-				//Homare-Jima
-				new Point2D( 202, 498 ), new Point2D( 116, 600 ), new Point2D( 107, 699 ),
-				new Point2D( 162, 799 ), new Point2D( 158, 889 ), new Point2D( 169, 989 ),
-				new Point2D( 194, 1101 ), new Point2D( 250, 1163 ), new Point2D( 295, 1176 ),
-				new Point2D( 280, 1194 ), new Point2D( 286, 1102 ), new Point2D( 250, 1000 ),
-				new Point2D( 260, 906 ), new Point2D( 360, 838 ), new Point2D( 389, 763 ),
-				new Point2D( 415, 662 ), new Point2D( 500, 597 ), new Point2D( 570, 572 ),
-				new Point2D( 631, 577 ), new Point2D( 692, 500 ), new Point2D( 723, 445 ),
-				new Point2D( 672, 379 ), new Point2D( 626, 332 ), new Point2D( 494, 291 ),
-				new Point2D( 371, 336 ), new Point2D( 324, 334 ), new Point2D( 270, 362 ),
-
-				//Isamu-Jima
-				new Point2D( 1240, 1076 ), new Point2D( 1189, 1115 ), new Point2D( 1046, 1039 ),
-				new Point2D( 1025, 885 ), new Point2D( 907, 809 ), new Point2D( 840, 506 ),
-				new Point2D( 799, 396 ), new Point2D( 720, 258 ), new Point2D( 744, 158 ),
-				new Point2D( 904, 37 ), new Point2D( 974, 91 ), new Point2D( 1020, 187 ),
-				new Point2D( 1035, 288 ), new Point2D( 1104, 395 ), new Point2D( 1215, 462 ),
-				new Point2D( 1275, 488 ), new Point2D( 1348, 611 ), new Point2D( 1363, 739 ),
-				new Point2D( 1364, 765 ), new Point2D( 1364, 876 ), new Point2D( 1300, 936 ),
-				new Point2D( 1240, 1003 )
-
-
-			};
-
 		public static void Initialize()
 		{
 			EventSink.Login += new LoginEventHandler( EventSink_Login );
@@ -126,12 +78,6 @@ namespace Server.Misc
 
 			if( map == Map.Felucca )
 				list = m_Felucca;
-			else if( map == Map.Trammel )
-				list = m_Trammel;
-			else if( map == Map.Ilshenar )
-				list = m_Ilshenar;
-			else if( map == Map.Tokuno )
-				list = m_Tokuno;
 			else
 				return;
 

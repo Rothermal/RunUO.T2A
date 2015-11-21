@@ -25,31 +25,7 @@ namespace Server.Mobiles
 
 		public override void InitSBInfo()
 		{
-			/*m_SBInfos.Add( new SBSmithTools() );
-
-			m_SBInfos.Add( new SBMetalShields() );
-			m_SBInfos.Add( new SBWoodenShields() );
-
-			m_SBInfos.Add( new SBPlateArmor() );
-
-			m_SBInfos.Add( new SBHelmetArmor() );
-			m_SBInfos.Add( new SBChainmailArmor() );
-			m_SBInfos.Add( new SBRingmailArmor() );
-			m_SBInfos.Add( new SBAxeWeapon() );
-			m_SBInfos.Add( new SBPoleArmWeapon() );
-			m_SBInfos.Add( new SBRangedWeapon() );
-
-			m_SBInfos.Add( new SBKnifeWeapon() );
-			m_SBInfos.Add( new SBMaceWeapon() );
-			m_SBInfos.Add( new SBSpearForkWeapon() );
-			m_SBInfos.Add( new SBSwordWeapon() );*/
-			
 			m_SBInfos.Add( new SBBlacksmith() );
-			if ( IsTokunoVendor )
-			{
-				m_SBInfos.Add( new SBSEArmor() );	
-				m_SBInfos.Add( new SBSEWeapons() );
-			}
 		}
 
 		public override VendorShoeType ShoeType

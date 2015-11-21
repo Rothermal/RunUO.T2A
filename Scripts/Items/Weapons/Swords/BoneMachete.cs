@@ -1,7 +1,10 @@
-using Server.Engines.MLQuests.Items;
-
 namespace Server.Items
 {
+	public interface ITicket
+	{
+		void OnTicketUsed(Mobile from);
+	}
+	
     public class BoneMachete : ElvenMachete, ITicket
 	{
 		public override WeaponAbility PrimaryAbility { get { return null; } }

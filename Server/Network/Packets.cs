@@ -246,15 +246,6 @@ namespace Server.Network
 
 			m_Stream.Write( (int) Map.Felucca.Tiles.Patch.StaticBlocks );
 			m_Stream.Write( (int) Map.Felucca.Tiles.Patch.LandBlocks );
-
-			m_Stream.Write( (int) Map.Trammel.Tiles.Patch.StaticBlocks );
-			m_Stream.Write( (int) Map.Trammel.Tiles.Patch.LandBlocks );
-
-			m_Stream.Write( (int) Map.Ilshenar.Tiles.Patch.StaticBlocks );
-			m_Stream.Write( (int) Map.Ilshenar.Tiles.Patch.LandBlocks );
-
-			m_Stream.Write( (int) Map.Malas.Tiles.Patch.StaticBlocks );
-			m_Stream.Write( (int) Map.Malas.Tiles.Patch.LandBlocks );
 		}
 	}
 
@@ -3736,11 +3727,11 @@ namespace Server.Network
 		{
 		}
 
-		public CityInfo( string city, string building, int description, int x, int y, int z ) : this( city, building, description, x, y, z, Map.Trammel )
+		public CityInfo( string city, string building, int description, int x, int y, int z ) : this( city, building, description, x, y, z, Map.Felucca )
 		{
 		}
 
-		public CityInfo( string city, string building, int x, int y, int z ) : this( city, building, 0, x, y, z, Map.Trammel )
+		public CityInfo( string city, string building, int x, int y, int z ) : this( city, building, 0, x, y, z, Map.Felucca )
 		{
 		}
 

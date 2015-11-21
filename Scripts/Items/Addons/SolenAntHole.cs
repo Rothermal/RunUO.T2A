@@ -18,7 +18,7 @@ namespace Server.Items
 			{
 				Map map = Map;
 
-				if ( map == Map.Trammel || map == Map.Felucca )
+				if ( map == Map.Felucca )
 				{
 					from.MoveToWorld( new Point3D( 5922, 2024, 0 ), map );
 					PublicOverheadMessage( MessageType.Regular, 0x3B2, true, String.Format( "* {0} dives into the hole and disappears!*", from.Name ) ); 
@@ -101,14 +101,7 @@ namespace Server.Items
 			int random = Utility.Random( 3 );
 			Map map = Map;
 
-			if ( map == Map.Trammel )
-			{
-				if ( random < 2 )
-					SpawnAnt( new RedSolenWorker() );
-				else
-					SpawnAnt( new RedSolenWarrior() );
-			}
-			else if ( map == Map.Felucca )
+			if ( map == Map.Felucca )
 			{
 				if ( random < 2 )
 					SpawnAnt( new BlackSolenWorker() );

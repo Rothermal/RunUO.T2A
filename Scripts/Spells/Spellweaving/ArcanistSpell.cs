@@ -55,17 +55,6 @@ namespace Server.Spells.Spellweaving
 
 			Mobile caster = Caster;
 
-			if ( caster is PlayerMobile )
-			{
-				MLQuestContext context = MLQuestSystem.GetContext( (PlayerMobile)caster );
-
-				if ( context == null || !context.Spellweaving )
-				{
-					caster.SendLocalizedMessage( 1073220 ); // You must have completed the epic arcanist quest to use this ability.
-					return false;
-				}
-			}
-
 			int mana = ScaleMana( RequiredMana );
 
 			if ( caster.Mana < mana )

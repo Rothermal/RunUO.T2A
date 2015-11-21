@@ -211,8 +211,6 @@ namespace Server.Mobiles
 
 		public abstract void InitSBInfo();
 
-		public virtual bool IsTokunoVendor { get { return ( Map == Map.Tokuno ); } }
-
 		protected void LoadSBInfo()
 		{
 			m_LastRestock = DateTime.Now;
@@ -290,85 +288,9 @@ namespace Server.Mobiles
 			get { return VendorShoeType.Shoes; }
 		}
 
-		public virtual void CheckMorph()
-		{
-			if ( CheckGargoyle() )
-				return;
-
-			if ( CheckNecromancer() )
-				return;
-
-			CheckTokuno();
-		}
-
-		public virtual bool CheckTokuno()
-		{
-			if ( this.Map != Map.Tokuno )
-				return false;
-
-			NameList n;
-
-			if ( Female )
-				n = NameList.GetNameList( "tokuno female" );
-			else
-				n = NameList.GetNameList( "tokuno male" );
-
-			if ( !n.ContainsName( this.Name ) )
-				TurnToTokuno();
-
-			return true;
-		}
-
-		public virtual void TurnToTokuno()
-		{
-			if ( Female )
-				this.Name = NameList.RandomName( "tokuno female" );
-			else
-				this.Name = NameList.RandomName( "tokuno male" );
-		}
-
-		public virtual bool CheckGargoyle()
-		{
-			Map map = this.Map;
-
-			if ( map != Map.Ilshenar )
-				return false;
-
-			if ( !Region.IsPartOf( "Gargoyle City" ) )
-				return false;
-
-			if ( Body != 0x2F6 || ( Hue & 0x8000 ) == 0 )
-				TurnToGargoyle();
-
-			return true;
-		}
-
-		public virtual bool CheckNecromancer()
-		{
-			Map map = this.Map;
-
-			if ( map != Map.Malas )
-				return false;
-
-			if ( !Region.IsPartOf( "Umbra" ) )
-				return false;
-
-			if ( Hue != 0x83E8 )
-				TurnToNecromancer();
-
-			return true;
-		}
-
-		public override void OnAfterSpawn()
-		{
-			CheckMorph();
-		}
-
 		protected override void OnMapChange( Map oldMap )
 		{
 			base.OnMapChange( oldMap );
-
-			CheckMorph();
 
 			LoadSBInfo();
 		}
@@ -1361,8 +1283,6 @@ namespace Server.Mobiles
 
 			if ( IsParagon )
 				IsParagon = false;
-
-			Timer.DelayCall( TimeSpan.Zero, new TimerCallback( CheckMorph ) );
 		}
 
 		public override void AddCustomContextEntries( Mobile from, List<ContextMenuEntry> list )

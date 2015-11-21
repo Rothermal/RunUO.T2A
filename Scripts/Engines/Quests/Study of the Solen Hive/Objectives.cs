@@ -52,7 +52,7 @@ namespace Server.Engines.Quests.Naturalist
 			{
 				NestArea nest = m_CurrentNest;
 
-				if ( ( from.Map == Map.Trammel || from.Map == Map.Felucca ) && nest.Contains( from ) )
+				if ( ( from.Map == Map.Felucca ) && nest.Contains( from ) )
 				{
 					if ( m_StudyState != StudyState.Inactive )
 					{
@@ -91,7 +91,7 @@ namespace Server.Engines.Quests.Naturalist
 					m_CurrentNest = null;
 				}
 			}
-			else if ( from.Map == Map.Trammel || from.Map == Map.Felucca )
+			else if ( from.Map == Map.Felucca )
 			{
 				NestArea nest = NestArea.Find( from );
 
