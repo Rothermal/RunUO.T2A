@@ -45,7 +45,7 @@ namespace Server.Misc
 
 		private static TimeSpan Mobile_HitsRegenRate( Mobile from )
 		{
-			int points = AosAttributes.GetValue( from, AosAttribute.RegenHits );
+			int points = 0;
 
 			if ( from is BaseCreature && !((BaseCreature)from).IsAnimatedDead )
 				points += 4;
@@ -77,7 +77,7 @@ namespace Server.Misc
 			if( (from is BaseCreature && ((BaseCreature)from).IsParagon) || from is Leviathan )
 				points += 40;
 
-			int cappedPoints = AosAttributes.GetValue( from, AosAttribute.RegenStam );
+			int cappedPoints = 0;
 
 			if ( CheckTransform( from, typeof( VampiricEmbraceSpell ) ) )
 				cappedPoints += 15;
@@ -144,7 +144,7 @@ namespace Server.Misc
 
 		private static double GetArmorMeditationValue( BaseArmor ar )
 		{
-			if ( ar == null || ar.ArmorAttributes.MageArmor != 0 || ar.Attributes.SpellChanneling != 0 )
+			if ( ar == null )
 				return 0.0;
 
 			switch ( ar.MeditationAllowance )

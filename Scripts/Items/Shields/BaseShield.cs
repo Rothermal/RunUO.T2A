@@ -31,13 +31,6 @@ namespace Server.Items
 			{
 				if ( this is Aegis )
 					return;
-
-				// The 15 bonus points to resistances are not applied to shields on OSI.
-				PhysicalBonus = 0;
-				FireBonus = 0;
-				ColdBonus = 0;
-				PoisonBonus = 0;
-				EnergyBonus = 0;
 			}
 		}
 

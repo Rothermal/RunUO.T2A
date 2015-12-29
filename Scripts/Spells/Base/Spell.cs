@@ -139,13 +139,6 @@ namespace Server.Spells
 			int intBonus = Caster.Int / 10;
 			damageBonus += intBonus;
 
-			int sdiBonus = AosAttributes.GetValue( m_Caster, AosAttribute.SpellDamage );
-			// PvP spell damage increase cap of 15% from an item’s magic property
-			if ( playerVsPlayer && sdiBonus > 15 )
-				sdiBonus = 15;
-
-			damageBonus += sdiBonus;
-
 			TransformContext context = TransformationSpellHelper.GetContext( Caster );
 
 			if( context != null && context.Spell is ReaperFormSpell )
@@ -232,9 +225,6 @@ namespace Server.Spells
 		public virtual bool ConsumeReagents()
 		{
 			if ( m_Scroll != null || !m_Caster.Player )
-				return true;
-
-			if ( AosAttributes.GetValue( m_Caster, AosAttribute.LowerRegCost ) > Utility.Random( 100 ) )
 				return true;
 
 			if ( Engines.ConPVP.DuelContext.IsFreeConsume( m_Caster ) )
@@ -588,13 +578,6 @@ namespace Server.Spells
 			if ( !Necromancy.MindRotSpell.GetMindRotScalar( Caster, ref scalar ) )
 				scalar = 1.0;
 
-			// Lower Mana Cost = 40%
-			int lmc = AosAttributes.GetValue( m_Caster, AosAttribute.LowerManaCost );
-			if ( lmc > 40 )
-				lmc = 40;
-
-			scalar -= (double)lmc / 100;
-
 			return (int)(mana * scalar);
 		}
 
@@ -634,29 +617,9 @@ namespace Server.Spells
 			if ( m_Scroll is BaseWand )
 				return TimeSpan.Zero;
 
-			// Faster casting cap of 2 (if not using the protection spell) 
-			// Faster casting cap of 0 (if using the protection spell) 
-			// Paladin spells are subject to a faster casting cap of 4 
-			// Paladins with magery of 70.0 or above are subject to a faster casting cap of 2 
-			int fcMax = 4;
-
-			if ( CastSkill == SkillName.Magery || CastSkill == SkillName.Necromancy || ( CastSkill == SkillName.Chivalry && m_Caster.Skills[SkillName.Magery].Value >= 70.0 ) )
-				fcMax = 2;
-
-			int fc = AosAttributes.GetValue( m_Caster, AosAttribute.CastSpeed );
-
-			if ( fc > fcMax )
-				fc = fcMax;
-
-			if ( ProtectionSpell.Registry.Contains( m_Caster ) )
-				fc -= 2;
-
-			if( EssenceOfWindSpell.IsDebuffed( m_Caster ) )
-				fc -= EssenceOfWindSpell.GetFCMalus( m_Caster );
-
 			TimeSpan baseDelay = CastDelayBase;
 
-			TimeSpan fcDelay = TimeSpan.FromSeconds( -(CastDelayFastScalar * fc * CastDelaySecondsPerTick) );
+			TimeSpan fcDelay = TimeSpan.FromSeconds( -(CastDelayFastScalar * CastDelaySecondsPerTick) );
 
 			//int delay = CastDelayBase + circleDelay + fcDelay;
 			TimeSpan delay = baseDelay + fcDelay;

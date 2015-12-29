@@ -107,16 +107,6 @@ namespace Server.Engines.Craft
 
 				baseChance = 20;
 
-				dura = weapon.MaxHitPoints;
-				luck = weapon.Attributes.Luck;
-				lreq = weapon.WeaponAttributes.LowerStatReq;
-				dinc = weapon.Attributes.WeaponDamage;
-
-				fireBonus = ( attributes.WeaponFireDamage > 0 );
-				coldBonus = ( attributes.WeaponColdDamage > 0 );
-				nrgyBonus = ( attributes.WeaponEnergyDamage > 0 );
-				poisBonus = ( attributes.WeaponPoisonDamage > 0 );
-
 				duraBonus = ( attributes.WeaponDurability > 0 );
 				luckBonus = ( attributes.WeaponLuck > 0 );
 				lreqBonus = ( attributes.WeaponLowerRequirements > 0 );
@@ -131,21 +121,7 @@ namespace Server.Engines.Craft
 
 				baseChance = 20;
 
-				phys = armor.PhysicalResistance;
-				fire = armor.FireResistance;
-				cold = armor.ColdResistance;
-				pois = armor.PoisonResistance;
-				nrgy = armor.EnergyResistance;
-
 				dura = armor.MaxHitPoints;
-				luck = armor.Attributes.Luck;
-				lreq = armor.ArmorAttributes.LowerStatReq;
-
-				physBonus = ( attributes.ArmorPhysicalResist > 0 );
-				fireBonus = ( attributes.ArmorFireResist > 0 );
-				coldBonus = ( attributes.ArmorColdResist > 0 );
-				nrgyBonus = ( attributes.ArmorEnergyResist > 0 );
-				poisBonus = ( attributes.ArmorPoisonResist > 0 );
 
 				duraBonus = ( attributes.ArmorDurability > 0 );
 				luckBonus = ( attributes.ArmorLuck > 0 );
@@ -207,10 +183,6 @@ namespace Server.Engines.Craft
 						BaseWeapon w = (BaseWeapon)item;
 
 						w.Resource = resource;
-
-						int hue = w.GetElementalDamageHue();
-						if( hue > 0 )
-							w.Hue = hue;
 					}
 					else if( item is BaseArmor )	//Sanity
 					{

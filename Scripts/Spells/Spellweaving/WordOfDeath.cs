@@ -50,11 +50,6 @@ namespace Server.Spells.Spellweaving
 					int minDamage = (int)Caster.Skills.Spellweaving.Value / 5;
 					int maxDamage = (int)Caster.Skills.Spellweaving.Value / 3;
 					damage = Utility.RandomMinMax(minDamage, maxDamage);
-					int damageBonus = AosAttributes.GetValue( Caster, AosAttribute.SpellDamage );
-					if (m.Player && damageBonus > 15)
-						damageBonus = 15;
-					damage *= damageBonus + 100;
-					damage /= 100;
 				}
 
 				int[] types = new int[4];

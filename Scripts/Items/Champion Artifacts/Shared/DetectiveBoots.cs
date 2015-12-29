@@ -17,14 +17,13 @@ namespace Server.Items
 		public int Level
 		{
 			get{ return m_Level; }
-			set{ m_Level = Math.Max( Math.Min( 2, value), 0 ); Attributes.BonusInt = 2 + m_Level; InvalidateProperties(); }
+			set{ m_Level = Math.Max( Math.Min( 2, value), 0 ); }
 		}
 
 		[Constructable]
 		public DetectiveBoots()
 		{
 			Hue = 0x455;
-			Level = Utility.RandomMinMax( 0, 2 );
 		}
 
 		public DetectiveBoots( Serial serial ) : base( serial )
@@ -43,8 +42,6 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
-
-			Level = Attributes.BonusInt - 2;
 		}
 	}
 }

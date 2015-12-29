@@ -22,8 +22,6 @@ namespace Server.Spells.Necromancy
 		public override int Body{ get{ return Caster.Female ? 745 : 744; } }
 		public override int Hue{ get{ return 0x847E; } }
 
-		public override int FireResistOffset{ get{ return -25; } }
-
 		public VampiricEmbraceSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
 		}

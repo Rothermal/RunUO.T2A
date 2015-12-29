@@ -85,17 +85,7 @@ namespace Server.Spells
 
 		public virtual int ScaleMana( Mobile m, int mana )
 		{
-			double scalar = 1.0;
-
-			if ( !Server.Spells.Necromancy.MindRotSpell.GetMindRotScalar( m, ref scalar ) )
-				scalar = 1.0;
-
-			// Lower Mana Cost = 40%
-			int lmc = Math.Min( AosAttributes.GetValue( m, AosAttribute.LowerManaCost ), 40 );
-
-			scalar -= (double)lmc / 100;
-
-			int total = (int)(mana * scalar);
+			int total = (int)mana;
 
 			if ( m.Skills[MoveSkill].Value < 50.0 && GetContext( m ) != null )
 				total *= 2;

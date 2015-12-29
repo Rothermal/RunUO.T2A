@@ -48,9 +48,6 @@ namespace Server.Spells.Chivalry
 		{
 			int requiredTithing = this.RequiredTithing;
 
-			if ( AosAttributes.GetValue( Caster, AosAttribute.LowerRegCost ) > Utility.Random( 100 ) )
-				requiredTithing = 0;
-
 			int mana = ScaleMana( RequiredMana );
 
 			if ( Caster.TithingPoints < requiredTithing )

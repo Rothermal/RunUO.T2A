@@ -58,12 +58,6 @@ namespace Server.Spells.Bushido
 			{
 				ArrayList mods = new ArrayList();
 
-				mods.Add( new ResistanceMod( ResistanceType.Physical, -40 ) );
-				mods.Add( new ResistanceMod( ResistanceType.Fire, -40 ) );
-				mods.Add( new ResistanceMod( ResistanceType.Cold, -40 ) );
-				mods.Add( new ResistanceMod( ResistanceType.Poison, -40 ) );
-				mods.Add( new ResistanceMod( ResistanceType.Energy, -40 ) );
-
 				double resSpells = attacker.Skills[SkillName.MagicResist].Value;
 
 				if ( resSpells > 0.0 )
@@ -151,9 +145,7 @@ namespace Server.Spells.Bushido
 				{
 					object mod = m_Mods[i];
 
-					if ( mod is ResistanceMod )
-						m_Mobile.AddResistanceMod( (ResistanceMod) mod );
-					else if ( mod is SkillMod )
+					if ( mod is SkillMod )
 						m_Mobile.AddSkillMod( (SkillMod) mod );
 				}
 			}
@@ -167,9 +159,7 @@ namespace Server.Spells.Bushido
 				{
 					object mod = m_Mods[i];
 
-					if ( mod is ResistanceMod )
-						m_Mobile.RemoveResistanceMod( (ResistanceMod) mod );
-					else if ( mod is SkillMod )
+					if ( mod is SkillMod )
 						m_Mobile.RemoveSkillMod( (SkillMod) mod );
 				}
 			}

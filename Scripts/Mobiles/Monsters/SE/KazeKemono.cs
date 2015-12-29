@@ -23,17 +23,6 @@ namespace Server.Mobiles
 
 			SetDamage( 15, 20 );
 
-			SetDamageType( ResistanceType.Physical, 70 );
-			SetDamageType( ResistanceType.Fire, 10 );
-			SetDamageType( ResistanceType.Cold, 10 );
-			SetDamageType( ResistanceType.Poison, 10 );
-
-			SetResistance( ResistanceType.Physical, 50, 70 );
-			SetResistance( ResistanceType.Fire, 30, 60 );
-			SetResistance( ResistanceType.Cold, 30, 60 );
-			SetResistance( ResistanceType.Poison, 50, 70 );
-			SetResistance( ResistanceType.Energy, 60, 80 );
-
 			SetSkill( SkillName.MagicResist, 110.1, 125.0 );
 			SetSkill( SkillName.Tactics, 55.1, 65.0 );
 			SetSkill( SkillName.Wrestling, 85.1, 95.0 );
@@ -75,14 +64,6 @@ namespace Server.Mobiles
 				else
 					defender.SendLocalizedMessage( 1070850 ); // The creature's flurry of twigs has made you more susceptible to physical attacks!
 
-				int effect = -(defender.PhysicalResistance * 15 / 100);
-
-				ResistanceMod mod = new ResistanceMod( ResistanceType.Physical, effect );
-
-				defender.FixedEffect( 0x37B9, 10, 5 );
-				defender.AddResistanceMod( mod );
-
-				timer = new ExpireTimer( defender, mod, m_FlurryOfTwigsTable, TimeSpan.FromSeconds( 5.0 ) );
 				timer.Start();
 				m_FlurryOfTwigsTable[defender] = timer;
 			}
@@ -105,14 +86,6 @@ namespace Server.Mobiles
 				else
 					defender.SendLocalizedMessage( 1070827 ); // The creature's attack has made you more susceptible to energy attacks!
 
-				int effect = -(defender.EnergyResistance / 2);
-
-				ResistanceMod mod = new ResistanceMod( ResistanceType.Energy, effect );
-
-				defender.FixedEffect( 0x37B9, 10, 5 );
-				defender.AddResistanceMod( mod );
-
-				timer = new ExpireTimer( defender, mod, m_ChlorophylBlastTable, TimeSpan.FromSeconds( 10.0 ) );
 				timer.Start();
 				m_ChlorophylBlastTable[defender] = timer;
 			}
@@ -124,31 +97,25 @@ namespace Server.Mobiles
 		private class ExpireTimer : Timer
 		{
 			private Mobile m_Mobile;
-			private ResistanceMod m_Mod;
 			private Hashtable m_Table;
 
-			public ExpireTimer( Mobile m, ResistanceMod mod, Hashtable table, TimeSpan delay )
+			public ExpireTimer( Mobile m, string mod, Hashtable table, TimeSpan delay )
 				: base( delay )
 			{
 				m_Mobile = m;
-				m_Mod = mod;
 				m_Table = table;
 				Priority = TimerPriority.TwoFiftyMS;
 			}
 
 			public void DoExpire()
 			{
-				m_Mobile.RemoveResistanceMod( m_Mod );
 				Stop();
 				m_Table.Remove( m_Mobile );
 			}
 
 			protected override void OnTick()
 			{
-				if( m_Mod.Type == ResistanceType.Physical )
-					m_Mobile.SendLocalizedMessage( 1070852 ); // Your resistance to physical attacks has returned.
-				else
-					m_Mobile.SendLocalizedMessage( 1070829 ); // Your resistance to energy attacks has returned.
+				m_Mobile.SendLocalizedMessage( 1070852 ); // Your resistance to physical attacks has returned.
 
 				DoExpire();
 			}

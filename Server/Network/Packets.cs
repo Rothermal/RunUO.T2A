@@ -3073,12 +3073,6 @@ namespace Server.Network
 
 			if ( type >= 4 )
 			{
-				m_Stream.Write( (short) m.FireResistance ); // Fire
-				m_Stream.Write( (short) m.ColdResistance ); // Cold
-				m_Stream.Write( (short) m.PoisonResistance ); // Poison
-				m_Stream.Write( (short) m.EnergyResistance ); // Energy
-				m_Stream.Write( (short) m.Luck ); // Luck
-
 				IWeapon weapon = m.Weapon;
 
 				int min = 0, max = 0;
@@ -3165,12 +3159,6 @@ namespace Server.Network
 
 				if ( type >= 4 )
 				{
-					m_Stream.Write( (short) beheld.FireResistance ); // Fire
-					m_Stream.Write( (short) beheld.ColdResistance ); // Cold
-					m_Stream.Write( (short) beheld.PoisonResistance ); // Poison
-					m_Stream.Write( (short) beheld.EnergyResistance ); // Energy
-					m_Stream.Write( (short) beheld.Luck ); // Luck
-
 					IWeapon weapon = beheld.Weapon;
 
 					int min = 0, max = 0;

@@ -20,10 +20,6 @@ namespace Server.Spells.Necromancy
 
 		public override int Body{ get{ return 749; } }
 
-		public override int FireResistOffset{ get{ return -10; } }
-		public override int ColdResistOffset{ get{ return +10; } }
-		public override int PoisResistOffset{ get{ return +10; } }
-
 		public override double TickRate{ get{ return 2.5; } }
 
 		public LichFormSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )

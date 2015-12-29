@@ -28,16 +28,6 @@ namespace Server.Mobiles
 
 			SetDamage( 14, 18 );
 
-			SetDamageType( ResistanceType.Physical, 90 );
-			SetDamageType( ResistanceType.Cold, 5 );
-			SetDamageType( ResistanceType.Energy, 5 );
-
-			SetResistance( ResistanceType.Physical, 40, 60 );
-			SetResistance( ResistanceType.Fire, 50, 70 );
-			SetResistance( ResistanceType.Cold, 50, 70 );
-			SetResistance( ResistanceType.Poison, 50, 70 );
-			SetResistance( ResistanceType.Energy, 50, 70 );
-
 			SetSkill( SkillName.Anatomy, 65.1, 72.0 );
 			SetSkill( SkillName.MagicResist, 65.1, 70.0 );
 			SetSkill( SkillName.Tactics, 95.1, 110.0 );
@@ -70,80 +60,7 @@ namespace Server.Mobiles
 		public override int Hides { get { return 25; } }
 		public override FoodType FavoriteFood { get { return FoodType.Meat; } }
 
-		public override void OnGaveMeleeAttack( Mobile defender )
-		{
-			base.OnGaveMeleeAttack( defender );
-
-			if( 0.1 > Utility.RandomDouble() )
-			{
-				/* Blood Bath
-				 * Start cliloc 1070826
-				 * Sound: 0x52B
-				 * 2-3 blood spots
-				 * Damage: 2 hps per second for 5 seconds
-				 * End cliloc: 1070824
-				 */
-
-				ExpireTimer timer = (ExpireTimer)m_Table[defender];
-
-				if( timer != null )
-				{
-					timer.DoExpire();
-					defender.SendLocalizedMessage( 1070825 ); // The creature continues to rage!
-				}
-				else
-					defender.SendLocalizedMessage( 1070826 ); // The creature goes into a rage, inflicting heavy damage!
-
-				timer = new ExpireTimer( defender, this );
-				timer.Start();
-				m_Table[defender] = timer;
-			}
-		}
-
-		private static Hashtable m_Table = new Hashtable();
-
-		private class ExpireTimer : Timer
-		{
-			private Mobile m_Mobile;
-			private Mobile m_From;
-			private int m_Count;
-
-			public ExpireTimer( Mobile m, Mobile from )
-				: base( TimeSpan.FromSeconds( 1.0 ), TimeSpan.FromSeconds( 1.0 ) )
-			{
-				m_Mobile = m;
-				m_From = from;
-				Priority = TimerPriority.TwoFiftyMS;
-			}
-
-			public void DoExpire()
-			{
-				Stop();
-				m_Table.Remove( m_Mobile );
-			}
-
-			public void DrainLife()
-			{
-				if( m_Mobile.Alive )
-					m_Mobile.Damage( 2, m_From );
-				else
-					DoExpire();
-			}
-
-			protected override void OnTick()
-			{
-				DrainLife();
-
-				if( ++m_Count >= 5 )
-				{
-					DoExpire();
-					m_Mobile.SendLocalizedMessage( 1070824 ); // The creature's rage subsides.
-				}
-			}
-		}
-
-		public TsukiWolf( Serial serial )
-			: base( serial )
+		public TsukiWolf( Serial serial ) : base( serial )
 		{
 		}
 

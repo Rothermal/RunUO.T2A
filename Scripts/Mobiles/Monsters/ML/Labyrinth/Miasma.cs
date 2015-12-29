@@ -22,15 +22,6 @@ namespace Server.Mobiles
 
 			SetDamage( 20, 30 );
 
-			SetDamageType( ResistanceType.Physical, 60 );
-			SetDamageType( ResistanceType.Poison, 40 );
-
-			SetResistance( ResistanceType.Physical, 50, 54 );
-			SetResistance( ResistanceType.Fire, 40, 45 );
-			SetResistance( ResistanceType.Cold, 50, 55 );
-			SetResistance( ResistanceType.Poison, 70, 80 );
-			SetResistance( ResistanceType.Energy, 40, 45 );
-
 			SetSkill( SkillName.Wrestling, 84.9, 103.3 );
 			SetSkill( SkillName.Tactics, 98.4, 110.6 );
 			SetSkill( SkillName.Anatomy, 0 );
@@ -42,7 +33,6 @@ namespace Server.Mobiles
 		}
 
 			/* yes, this is OSI style */
-		public override double WeaponAbilityChance { get { return 0.75; } }
 		public override double HitPoisonChance { get { return 0.35; } }
 		public override Poison HitPoison { get { return ( Poison.Lethal ); } }
 		public override bool HasManaOveride { get { return true; } }
@@ -52,11 +42,6 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.UltraRich, 4 );
-		}
-
-		public override WeaponAbility GetWeaponAbility()
-		{
-			return WeaponAbility.MortalStrike;
 		}
 
 		/*

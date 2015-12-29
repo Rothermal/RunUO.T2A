@@ -9,7 +9,7 @@ namespace Server
 		{
 			Mobile.InsuranceEnabled = false;
 			ObjectPropertyList.Enabled = false;
-			Mobile.VisibleDamageType = VisibleDamageType.None; // Related
+			Mobile.VisibleDamageType = VisibleDamageType.Related; // None, Related or Everyone
             Mobile.GuildClickMessage = true;
 			Mobile.AsciiClickMessage = true;
 			Mobile.ActionDelay = TimeSpan.FromSeconds( 1.0 );

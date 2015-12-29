@@ -207,7 +207,7 @@ namespace Server.Items
 			double atSkillValue = attacker.Skills.Ninjitsu.Value;
 			double defSkillValue = defWeapon.GetDefendSkillValue(attacker, defender);
 
-			double attackValue = AosAttributes.GetValue(attacker, AosAttribute.AttackChance);
+			double attackValue = 0;
 
 			if (defSkillValue <= -20.0)
 			{
@@ -236,7 +236,7 @@ namespace Server.Items
 
 			attackValue = (atSkillValue + 20.0) * (100 + attackValue);
 
-			double defenseValue = AosAttributes.GetValue(defender, AosAttribute.DefendChance);
+			double defenseValue = 0;
 
 			if (Spells.Chivalry.DivineFurySpell.UnderEffect(defender))
 			{
@@ -249,11 +249,6 @@ namespace Server.Items
 			}
 
 			int refBonus = 0;
-
-			if (Block.GetBonus(defender, ref refBonus))
-			{
-				defenseValue += refBonus;
-			}
 
 			if (SkillHandlers.Discordance.GetEffect(attacker, ref refBonus))
 			{

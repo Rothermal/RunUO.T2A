@@ -23,15 +23,6 @@ namespace Server.Mobiles
 
 			SetDamage( 15, 22 );
 
-			SetDamageType( ResistanceType.Physical, 20 );
-			SetDamageType( ResistanceType.Poison, 80 );
-
-			SetResistance( ResistanceType.Physical, 60, 68 );
-			SetResistance( ResistanceType.Fire, 40, 49 );
-			SetResistance( ResistanceType.Cold, 41, 50 );
-			SetResistance( ResistanceType.Poison, 100 );
-			SetResistance( ResistanceType.Energy, 40, 49 );
-
 			SetSkill( SkillName.Wrestling, 92.8, 111.7 );
 			SetSkill( SkillName.Tactics, 91.6, 107.4 );
 			SetSkill( SkillName.MagicResist, 78.1, 93.3 );
@@ -46,11 +37,6 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.UltraRich, 3 );
-		}
-
-		public override WeaponAbility GetWeaponAbility()
-		{
-			return WeaponAbility.MortalStrike;
 		}
 
 		/*

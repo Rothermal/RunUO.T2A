@@ -94,7 +94,6 @@ namespace Server.Spells.Chivalry
 					StrangleSpell.RemoveCurse( m );
 					CorpseSkinSpell.RemoveCurse( m );
 					CurseSpell.RemoveEffect( m );
-					MortalStrike.EndWound( m );
 					MindRotSpell.ClearMindRotScalar ( m );
 
 					BuffInfo.RemoveBuff( m, BuffIcon.Clumsy );

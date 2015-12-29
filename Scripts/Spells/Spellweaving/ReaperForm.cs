@@ -27,12 +27,6 @@ namespace Server.Spells.Spellweaving
 
 		public override int Body { get { return 0x11D; } }
 
-		public override int FireResistOffset { get { return -25; } }
-		public override int PhysResistOffset { get { return 5 + FocusLevel; } }		
-		public override int ColdResistOffset { get { return 5 + FocusLevel; } }
-		public override int PoisResistOffset { get { return 5 + FocusLevel; } }
-		public override int NrgyResistOffset { get { return 5 + FocusLevel; } }
-
 		public virtual int SwingSpeedBonus { get { return 10 + FocusLevel; } }
 		public virtual int SpellDamageBonus { get { return 10 + FocusLevel; } }
 

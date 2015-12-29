@@ -22,15 +22,6 @@ namespace Server.Mobiles
 
 			SetDamage( 15, 22 );
 
-			SetDamageType( ResistanceType.Physical, 70 );
-			SetDamageType( ResistanceType.Energy, 30 );
-
-			SetResistance( ResistanceType.Physical, 40, 60 );
-			SetResistance( ResistanceType.Fire, 70, 90 );
-			SetResistance( ResistanceType.Cold, 40, 60 );
-			SetResistance( ResistanceType.Poison, 40, 60 );
-			SetResistance( ResistanceType.Energy, 40, 60 );
-
 			SetSkill( SkillName.EvalInt, 80.1, 90.0 );
 			SetSkill( SkillName.Magery, 80.1, 90.0 );
 			SetSkill( SkillName.MagicResist, 80.1, 100.0 );
@@ -151,77 +142,6 @@ namespace Server.Mobiles
 		}
 		#endregion
 
-		public override void OnGaveMeleeAttack( Mobile defender )
-		{
-			base.OnGaveMeleeAttack( defender );
-
-			if ( 0.1 > Utility.RandomDouble() )
-			{
-				/* Blood Bath
-				 * Start cliloc 1070826
-				 * Sound: 0x52B
-				 * 2-3 blood spots
-				 * Damage: 2 hps per second for 5 seconds
-				 * End cliloc: 1070824
-				 */
-			
-				ExpireTimer timer = (ExpireTimer)m_Table[defender];
-
-				if ( timer != null )
-		{
-					timer.DoExpire();
-					defender.SendLocalizedMessage( 1070825 ); // The creature continues to rage!
-				}
-				else
-					defender.SendLocalizedMessage( 1070826 ); // The creature goes into a rage, inflicting heavy damage!
-
-				timer = new ExpireTimer( defender, this );
-				timer.Start();
-				m_Table[defender] = timer;
-			}
-		}
-
-		private static Hashtable m_Table = new Hashtable();
-	
-		private class ExpireTimer : Timer
-		{
-			private Mobile m_Mobile;
-			private Mobile m_From;
-			private int m_Count;
-
-			public ExpireTimer( Mobile m, Mobile from ) : base( TimeSpan.FromSeconds( 1.0 ), TimeSpan.FromSeconds( 1.0 ) )
-			{
-				m_Mobile = m;
-				m_From = from;
-				Priority = TimerPriority.TwoFiftyMS;
-			}
-
-			public void DoExpire()
-			{
-				Stop();
-				m_Table.Remove( m_Mobile );
-			}
-
-			public void DrainLife()
-			{
-				if ( m_Mobile.Alive )
-					m_Mobile.Damage( 2, m_From );
-				else
-					DoExpire();
-			}
-
-			protected override void OnTick()
-			{
-				DrainLife();
-
-				if ( ++m_Count >= 5 )
-				{
-					DoExpire();
-					m_Mobile.SendLocalizedMessage( 1070824 ); // The creature's rage subsides.
-				}
-			}
-		}
-		
 		public override int GetAngerSound()
 		{
 			return 0x4DE;
@@ -261,15 +181,6 @@ namespace Server.Mobiles
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-
-			if ( version == 0 && PhysicalResistance > 60 )
-			{
-				SetResistance( ResistanceType.Physical, 40, 60 );
-				SetResistance( ResistanceType.Fire, 70, 90 );
-				SetResistance( ResistanceType.Cold, 40, 60 );
-				SetResistance( ResistanceType.Poison, 40, 60 );
-				SetResistance( ResistanceType.Energy, 40, 60 );
-			}
 
 			Timer.DelayCall( TimeSpan.Zero, new TimerCallback( RemoveDisguise ) );
 		}

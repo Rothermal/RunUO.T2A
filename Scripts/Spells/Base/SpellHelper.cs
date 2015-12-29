@@ -1079,11 +1079,6 @@ namespace Server.Spells
 			{
 				m_Table.Remove( m );
 
-				List<ResistanceMod> mods = context.Mods;
-
-				for( int i = 0; i < mods.Count; ++i )
-					m.RemoveResistanceMod( mods[i] );
-
 				if( resetGraphics )
 				{
 					m.HueMod = -1;
@@ -1187,22 +1182,7 @@ namespace Server.Spells
 
 				if( !ourTransform )
 				{
-					List<ResistanceMod> mods = new List<ResistanceMod>();
-
-					if( transformSpell.PhysResistOffset != 0 )
-						mods.Add( new ResistanceMod( ResistanceType.Physical, transformSpell.PhysResistOffset ) );
-
-					if( transformSpell.FireResistOffset != 0 )
-						mods.Add( new ResistanceMod( ResistanceType.Fire, transformSpell.FireResistOffset ) );
-
-					if( transformSpell.ColdResistOffset != 0 )
-						mods.Add( new ResistanceMod( ResistanceType.Cold, transformSpell.ColdResistOffset ) );
-
-					if( transformSpell.PoisResistOffset != 0 )
-						mods.Add( new ResistanceMod( ResistanceType.Poison, transformSpell.PoisResistOffset ) );
-
-					if( transformSpell.NrgyResistOffset != 0 )
-						mods.Add( new ResistanceMod( ResistanceType.Energy, transformSpell.NrgyResistOffset ) );
+					string mods = "";
 
 					if( !((Body)transformSpell.Body).IsHuman )
 					{
@@ -1214,9 +1194,6 @@ namespace Server.Spells
 
 					caster.BodyMod = transformSpell.Body;
 					caster.HueMod = transformSpell.Hue;
-
-					for( int i = 0; i < mods.Count; ++i )
-						caster.AddResistanceMod( mods[i] );
 
 					transformSpell.DoEffect( caster );
 
@@ -1237,12 +1214,6 @@ namespace Server.Spells
 		int Body { get; }
 		int Hue { get; }
 
-		int PhysResistOffset { get; }
-		int FireResistOffset { get; }
-		int ColdResistOffset { get; }
-		int PoisResistOffset { get; }
-		int NrgyResistOffset { get; }
-
 		double TickRate { get; }
 		void OnTick( Mobile m );
 
@@ -1254,19 +1225,16 @@ namespace Server.Spells
 	public class TransformContext
 	{
 		private Timer m_Timer;
-		private List<ResistanceMod> m_Mods;
 		private Type m_Type;
 		private ITransformationSpell m_Spell;
 
 		public Timer Timer { get { return m_Timer; } }
-		public List<ResistanceMod> Mods { get { return m_Mods; } }
 		public Type Type { get { return m_Type; } }
 		public ITransformationSpell Spell { get { return m_Spell; } }
 
-		public TransformContext( Timer timer, List<ResistanceMod> mods, Type type, ITransformationSpell spell )
+		public TransformContext( Timer timer, string mods, Type type, ITransformationSpell spell )
 		{
 			m_Timer = timer;
-			m_Mods = mods;
 			m_Type = type;
 			m_Spell = spell;
 		}

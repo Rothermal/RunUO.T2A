@@ -74,14 +74,6 @@ namespace Server.Spells.Fifth
 		{
 			if ( m_Table.Contains( m ) )
 			{
-				ResistanceMod[] mods = (ResistanceMod[]) m_Table[ m ];
-
-				if ( mods != null )
-				{
-					for ( int i = 0; i < mods.Length; ++i )
-						m.RemoveResistanceMod( mods[ i ] );
-				}
-
 				m_Table.Remove( m );
 				BuffInfo.RemoveBuff( m, BuffIcon.MagicReflection );
 			}

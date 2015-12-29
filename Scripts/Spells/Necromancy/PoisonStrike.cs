@@ -50,10 +50,6 @@ namespace Server.Spells.Necromancy
 
 				double damage = Utility.RandomMinMax( 36, 40 ) * ((300 + (GetDamageSkill( Caster ) * 9)) / 1000);
 				
-				double sdiBonus = (double)AosAttributes.GetValue( Caster, AosAttribute.SpellDamage )/100;
-				double pvmDamage = damage * (1 + sdiBonus);
-				double pvpDamage = damage * (1 + sdiBonus);
-
 				Map map = m.Map;
 
 				if( map != null )
@@ -81,7 +77,7 @@ namespace Server.Spells.Necromancy
 							num = 3;
 
 						Caster.DoHarmful( targ );
-						SpellHelper.Damage( this, targ, ((m.Player && Caster.Player) ? pvpDamage : pvmDamage) / num, 0, 0, 0, 100, 0 );
+						SpellHelper.Damage( this, targ, damage / num, 0, 0, 0, 100, 0 );
 					}
 				}
 			}

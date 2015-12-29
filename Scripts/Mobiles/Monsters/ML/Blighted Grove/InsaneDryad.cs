@@ -12,7 +12,7 @@ namespace Server.Mobiles
 
 			// TODO: Perhaps these should have negative karma?
 		}
-
+		
 		/*
 		// TODO: uncomment once added
 		public override void OnDeath( Container c )

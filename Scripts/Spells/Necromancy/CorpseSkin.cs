@@ -65,13 +65,7 @@ namespace Server.Spells.Necromancy
 
 				TimeSpan duration = TimeSpan.FromSeconds( ((ss - mr) / 2.5) + 40.0 );
 
-				ResistanceMod[] mods = new ResistanceMod[4]
-					{
-						new ResistanceMod( ResistanceType.Fire, -15 ),
-						new ResistanceMod( ResistanceType.Poison, -15 ),
-						new ResistanceMod( ResistanceType.Cold, +10 ),
-						new ResistanceMod( ResistanceType.Physical, +10 )
-					};
+				string mods = "";
 
 				timer = new ExpireTimer( m, mods, duration );
 				timer.Start();
@@ -79,9 +73,6 @@ namespace Server.Spells.Necromancy
 				BuffInfo.AddBuff( m, new BuffInfo( BuffIcon.CorpseSkin, 1075663, duration, m ) );
 
 				m_Table[m] = timer;
-
-				for ( int i = 0; i < mods.Length; ++i )
-					m.AddResistanceMod( mods[i] );
 
 				HarmfulSpell( m );
 			}
@@ -106,19 +97,14 @@ namespace Server.Spells.Necromancy
 		private class ExpireTimer : Timer
 		{
 			private Mobile m_Mobile;
-			private ResistanceMod[] m_Mods;
 
-			public ExpireTimer( Mobile m, ResistanceMod[] mods, TimeSpan delay ) : base( delay )
+			public ExpireTimer( Mobile m, string mods, TimeSpan delay ) : base( delay )
 			{
 				m_Mobile = m;
-				m_Mods = mods;
 			}
 
 			public void DoExpire()
 			{
-				for ( int i = 0; i < m_Mods.Length; ++i )
-					m_Mobile.RemoveResistanceMod( m_Mods[i] );
-
 				Stop();
 				BuffInfo.RemoveBuff( m_Mobile, BuffIcon.CorpseSkin );
 				m_Table.Remove( m_Mobile );

@@ -263,8 +263,6 @@ namespace Server.Items
 			}
 		}
 
-		public override int BasePhysicalResistance{ get{ return 3; } }
-
 		public override void OnAdded( object parent )
 		{
 			base.OnAdded( parent );
@@ -380,8 +378,6 @@ namespace Server.Items
 			}
 		}
 
-		public override int BasePhysicalResistance{ get{ return 3; } }
-
 		public override void OnAdded( object parent )
 		{
 			base.OnAdded( parent );
@@ -477,6 +473,8 @@ namespace Server.Items
 	[Flipable]
 	public class Robe : BaseOuterTorso, IArcaneEquip
 	{
+		public override int ArmorBase{ get{ return 3; } }
+		
 		#region Arcane Impl
 		private int m_MaxArcaneCharges, m_CurArcaneCharges;
 

@@ -18,11 +18,6 @@ namespace Server.Mobiles
 
 		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { }; } }
 
-		public override WeaponAbility GetWeaponAbility()
-		{
-			return WeaponAbility.DoubleStrike;
-		}
-
 		[Constructable]
 		public Serado() : base( AIType.AI_Melee )
 		{
@@ -40,16 +35,6 @@ namespace Server.Mobiles
 			SetMana( 300 );
 
 			SetDamage( 29, 35 );
-
-			SetDamageType( ResistanceType.Physical, 70 );
-			SetDamageType( ResistanceType.Poison, 20 );
-			SetDamageType( ResistanceType.Energy, 10 );
-
-			SetResistance( ResistanceType.Physical, 30 );
-			SetResistance( ResistanceType.Fire, 60 );
-			SetResistance( ResistanceType.Cold, 60 );
-			SetResistance( ResistanceType.Poison, 90 );
-			SetResistance( ResistanceType.Energy, 50 );
 
 			SetSkill( SkillName.MagicResist, 120.0 );
 			SetSkill( SkillName.Tactics, 120.0 );
@@ -86,7 +71,6 @@ namespace Server.Mobiles
 		{
 			base.OnDamagedBySpell( attacker );
 
-			ScaleResistances();
 			DoCounter( attacker );
 		}
 
@@ -94,19 +78,7 @@ namespace Server.Mobiles
 		{
 			base.OnGotMeleeAttack( attacker );
 
-			ScaleResistances();
 			DoCounter( attacker );
-		}
-
-		private void ScaleResistances()
-		{
-			double hitsLost = (HitsMax - Hits) / (double)HitsMax;
-
-			SetResistance( ResistanceType.Physical,	30 + (int)(hitsLost * ( 95 - 30 )) );
-			SetResistance( ResistanceType.Fire,		60 + (int)(hitsLost * ( 95 - 60 )) );
-			SetResistance( ResistanceType.Cold,		60 + (int)(hitsLost * ( 95 - 60 )) );
-			SetResistance( ResistanceType.Poison,	90 + (int)(hitsLost * ( 95 - 90 )) );
-			SetResistance( ResistanceType.Energy,	50 + (int)(hitsLost * ( 95 - 50 )) );
 		}
 
 		private void DoCounter( Mobile attacker )
