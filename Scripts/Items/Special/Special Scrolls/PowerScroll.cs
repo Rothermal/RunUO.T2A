@@ -55,23 +55,9 @@ namespace Server.Items
 
 		private static SkillName[] m_AOSSkills = new SkillName[]
 			{
-				SkillName.Chivalry,
-				SkillName.Focus,
-				SkillName.Necromancy,
 				SkillName.Stealing,
 				SkillName.Stealth,
 				SkillName.SpiritSpeak
-			};
-
-		private static SkillName[] m_SESkills = new SkillName[]
-			{
-				SkillName.Ninjitsu,
-				SkillName.Bushido
-			};
-
-		private static SkillName[] m_MLSkills = new SkillName[]
-			{
-				SkillName.Spellweaving
 			};
 
 		private static List<SkillName> _Skills = new List<SkillName>();

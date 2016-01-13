@@ -3,7 +3,7 @@ using Server.Engines.Craft;
 
 namespace Server.Items
 {
-    public class FukiyaDarts : Item, ICraftable, INinjaAmmo
+    public class FukiyaDarts : Item, ICraftable
 	{
 		private int m_UsesRemaining;
 

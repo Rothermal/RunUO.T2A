@@ -4,7 +4,6 @@ namespace Server.Mobiles
 	public class HellSteed : BaseMount
 	{
 		public override bool HasBreath { get { return true; } }
-		public override int BreathChaosDamage { get { return 100; } }
 		public override Poison PoisonImmune{ get{ return Poison.Lethal; } }
 
 		[Constructable] 

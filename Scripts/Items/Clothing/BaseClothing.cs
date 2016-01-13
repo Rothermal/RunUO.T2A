@@ -245,12 +245,7 @@ namespace Server.Items
 
 		public int ComputeStatReq( StatType type )
 		{
-			int v;
-
-			//if ( type == StatType.Str )
-				v = StrRequirement;
-
-			return AOS.Scale( v, 100 );
+			return StrRequirement;
 		}
 
 		public int ComputeStatBonus( StatType type )

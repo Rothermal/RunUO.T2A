@@ -6,7 +6,7 @@ using Server.Mobiles;
 namespace Server.Items
 {
     [FlipableAttribute( 0x27AA, 0x27F5 )]
-	public class Fukiya : Item, INinjaWeapon
+	public class Fukiya : Item
 	{
 		public virtual int WrongAmmoMessage { get { return 1063329; } } //You can only load fukiya darts
 		public virtual int NoFreeHandMessage { get { return 1063327; } } //You must have a free hand to use a fukiya.
@@ -78,22 +78,6 @@ namespace Server.Items
 
 			if ( m_Poison != null && m_PoisonCharges > 0 )
 				list.Add( 1062412 + m_Poison.Level, m_PoisonCharges.ToString() );
-		}
-
-		public override void OnDoubleClick( Mobile from )
-		{
-			NinjaWeapon.AttemptShoot((PlayerMobile)from, this);
-		}
-
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-
-			if ( IsChildOf( from ) )
-			{
-				list.Add(new NinjaWeapon.LoadEntry(this, 6224));
-				list.Add(new NinjaWeapon.UnloadEntry(this, 6225));
-			}
 		}
 
 		public override void Serialize( GenericWriter writer )

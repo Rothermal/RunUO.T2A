@@ -6,7 +6,7 @@ using Server.Mobiles;
 namespace Server.Items
 {
     [FlipableAttribute( 0x2790, 0x27DB )]
-	public class LeatherNinjaBelt : BaseWaist, IDyable, INinjaWeapon
+	public class LeatherNinjaBelt : BaseWaist, IDyable
 	{
 		public override CraftResource DefaultResource{ get{ return CraftResource.RegularLeather; } }
 
@@ -91,22 +91,6 @@ namespace Server.Items
 				return true;
 			}
 			return false;
-		}
-
-		public override void OnDoubleClick(Mobile from)
-		{
-			NinjaWeapon.AttemptShoot((PlayerMobile)from, this);
-		}
-
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-
-			if ( IsChildOf( from ) )
-			{
-				list.Add(new NinjaWeapon.LoadEntry(this, 6222));
-				list.Add(new NinjaWeapon.UnloadEntry(this, 6223));
-			}
 		}
 
 		public override void Serialize( GenericWriter writer )

@@ -244,8 +244,8 @@ namespace Server.Mobiles
 				if ( m_Mobile.CanBeHarmful( m_Target ) )
 				{
 					m_Mobile.DoHarmful( m_Target );
-					AOS.Damage( m_Target, m_Mobile, Utility.RandomMinMax( 10, 20 ), 100, 0, 0, 0, 0 );
-					new UnholyBone().MoveToWorld( m_Target.Location, m_Target.Map );
+                    m_Target.Damage(Utility.RandomMinMax(10, 20), m_Mobile);
+                    new UnholyBone().MoveToWorld( m_Target.Location, m_Target.Map );
 				}
 			}
 		}

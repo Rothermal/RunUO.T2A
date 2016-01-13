@@ -441,8 +441,7 @@ namespace Server.Items
 			to.BoltEffect( 0 );
 			to.LocalOverheadMessage( MessageType.Regular, 0xC9, true, "* Your body convulses from electric shock *" );
 			to.NonlocalOverheadMessage( MessageType.Regular, 0xC9, true, string.Format( "* {0} spasms from electric shock *", to.Name ) );
-
-			AOS.Damage( to, to, 60, 0, 0, 0, 0, 100 );
+            to.Damage(60, to);
 
 			if ( !to.Alive )
 				return;
@@ -485,10 +484,9 @@ namespace Server.Items
 
 				m_To.LocalOverheadMessage( MessageType.Regular, 0xC9, true, "* Your body convulses from electric shock *" );
 				m_To.NonlocalOverheadMessage( MessageType.Regular, 0xC9, true, string.Format( "* {0} spasms from electric shock *", m_To.Name ) );
+                m_To.Damage(20, m_To);
 
-				AOS.Damage( m_To, m_To, 20, 0, 0, 0, 0, 100 );
-
-				if ( ++m_Step >= 3 || !m_To.Alive )
+                if ( ++m_Step >= 3 || !m_To.Alive )
 				{
 					End();
 				}

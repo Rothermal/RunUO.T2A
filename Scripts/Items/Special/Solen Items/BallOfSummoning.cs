@@ -6,7 +6,6 @@ using Server.ContextMenus;
 using Server.Network;
 using Server.Regions;
 using Server.Spells;
-using Server.Spells.Ninjitsu;
 
 namespace Server.Items
 {

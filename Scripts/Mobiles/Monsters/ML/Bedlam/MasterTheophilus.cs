@@ -27,7 +27,6 @@ namespace Server.Mobiles
 			SetSkill( SkillName.MagicResist, 127.0, 132.8 );
 			SetSkill( SkillName.Magery, 138.1, 143.7 );
 			SetSkill( SkillName.EvalInt, 125.6, 133.8 );
-			SetSkill( SkillName.Necromancy, 125.6, 133.8 );
 			SetSkill( SkillName.SpiritSpeak, 125.6, 133.8 );
 			SetSkill( SkillName.Meditation, 128.8, 132.9 );
 

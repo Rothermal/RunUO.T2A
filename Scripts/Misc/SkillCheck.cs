@@ -195,9 +195,6 @@ namespace Server.Misc
 			if ( from is BaseCreature && ((BaseCreature)from).IsDeadPet )
 				return;
 
-			if ( skill.SkillName == SkillName.Focus && from is BaseCreature )
-				return;
-
 			if ( skill.Base < skill.Cap && skill.Lock == SkillLock.Up )
 			{
 				int toGain = 1;

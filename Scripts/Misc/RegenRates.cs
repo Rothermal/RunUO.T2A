@@ -1,8 +1,6 @@
 using System;
 using Server.Items;
 using Server.Spells;
-using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
 using Server.Mobiles;
 
 namespace Server.Misc
@@ -38,11 +36,6 @@ namespace Server.Misc
 			return TransformationSpellHelper.UnderTransformation( m, type );
 		}
 
-		private static bool CheckAnimal( Mobile m, Type type )
-		{
-			return AnimalForm.UnderTransformation( m, type );
-		}
-
 		private static TimeSpan Mobile_HitsRegenRate( Mobile from )
 		{
 			int points = 0;
@@ -56,12 +49,6 @@ namespace Server.Misc
 			if ( points < 0 )
 				points = 0;
 
-			if ( CheckTransform( from, typeof( HorrificBeastSpell ) ) )
-				points += 20;
-
-			if ( CheckAnimal( from, typeof( Dog ) ) || CheckAnimal( from, typeof( Cat ) ) )
-				points += from.Skills[SkillName.Ninjitsu].Fixed / 30;
-
 			return TimeSpan.FromSeconds( 1.0 / (0.1 * (1 + points)) );
 		}
 
@@ -70,22 +57,10 @@ namespace Server.Misc
 			if ( from.Skills == null )
 				return Mobile.DefaultStamRate;
 
-			CheckBonusSkill( from, from.Stam, from.StamMax, SkillName.Focus );
-
-			int points =(int)(from.Skills[SkillName.Focus].Value * 0.1);
+			int points = 0;
 
 			if( (from is BaseCreature && ((BaseCreature)from).IsParagon) || from is Leviathan )
 				points += 40;
-
-			int cappedPoints = 0;
-
-			if ( CheckTransform( from, typeof( VampiricEmbraceSpell ) ) )
-				cappedPoints += 15;
-
-			if ( CheckAnimal( from, typeof( Kirin ) ) )
-				cappedPoints += 20;
-
-			points += cappedPoints;
 
 			if ( points < -1 )
 				points = -1;

@@ -110,10 +110,10 @@ namespace Server.Items
 							else
 								damage = m_TrapPower;
 
-							AOS.Damage( from, damage, 0, 100, 0, 0, 0 );
+                                from.Damage(damage);
 
-							// Your skin blisters from the heat!
-							from.LocalOverheadMessage( Network.MessageType.Regular, 0x2A, 503000 );
+                                // Your skin blisters from the heat!
+                                from.LocalOverheadMessage( Network.MessageType.Regular, 0x2A, 503000 );
 						}
 
 						Effects.SendLocationEffect( loc, facet, 0x36BD, 15, 10 );
@@ -143,22 +143,22 @@ namespace Server.Items
 					{
 						SendMessageTo( from, 502999, 0x3B2 ); // You set off a trap!
 
-						if ( from.InRange( loc, 3 ) )
-						{
-							int damage;
+                            if (from.InRange(loc, 3))
+                            {
+                                int damage;
 
-							if ( m_TrapLevel > 0 )
-								damage = Utility.RandomMinMax( 5, 15 ) * m_TrapLevel;
-							else
-								damage = m_TrapPower;
+                                if (m_TrapLevel > 0)
+                                    damage = Utility.RandomMinMax(5, 15) * m_TrapLevel;
+                                else
+                                    damage = m_TrapPower;
 
-							AOS.Damage( from, damage, 100, 0, 0, 0, 0 );
+                                from.Damage(damage);
 
-							// A dart imbeds itself in your flesh!
-							from.LocalOverheadMessage( Network.MessageType.Regular, 0x62, 502998 );
-						}
+                                // A dart imbeds itself in your flesh!
+                                from.LocalOverheadMessage(Network.MessageType.Regular, 0x62, 502998);
+                            }
 
-						Effects.PlaySound( loc, facet, 0x223 );
+                            Effects.PlaySound( loc, facet, 0x223 );
 
 						break;
 					}
@@ -176,8 +176,8 @@ namespace Server.Items
 							}
 							else
 							{
-								AOS.Damage( from, m_TrapPower, 0, 0, 0, 100, 0 );
-								poison = Poison.Greater;
+                                    from.Damage(m_TrapPower);
+                                    poison = Poison.Greater;
 							}
 
 							from.ApplyPoison( from, poison );

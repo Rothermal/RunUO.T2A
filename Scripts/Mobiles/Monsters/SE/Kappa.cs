@@ -113,8 +113,8 @@ namespace Server.Mobiles
 		{
 			if ( m.Alive )
 			{
-				int damageGiven = AOS.Damage( m, from, 5, 0, 0, 0, 0, 100 );
-				from.Hits += damageGiven;
+                m.Damage(5, from);
+                from.Hits += 5;
 			}
 			else
 			{

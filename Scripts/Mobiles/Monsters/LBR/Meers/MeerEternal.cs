@@ -117,8 +117,9 @@ namespace Server.Mobiles
 					m.MovingParticles( this, 0x0001, 1, 0, false,  true, 32, 0, 9535, 9536, 0, (EffectLayer)255, 0 );
 
 					this.DoHarmful( m );
-					this.Hits += AOS.Damage( m, this, damage, 100, 0, 0, 0, 0 );
-				}
+					this.Hits += damage;
+                    m.Damage(damage, this);
+                }
 
 				this.Say( true, "If I cannot cleanse thy soul, I will destroy it!" );
 			}
@@ -156,8 +157,12 @@ namespace Server.Mobiles
 
 				this.PlaySound( 0x209 );
 				this.DoHarmful( combatant );
-				this.Hits += AOS.Damage( combatant, this, Utility.RandomMinMax( 20, 30 ), 100, 0, 0, 0, 0 );
-			}
+
+                int RandomInt = Utility.RandomMinMax(20, 30);
+
+                this.Hits += RandomInt;
+                combatant.Damage(RandomInt, this);
+            }
 		}
 
 		public override void OnThink()

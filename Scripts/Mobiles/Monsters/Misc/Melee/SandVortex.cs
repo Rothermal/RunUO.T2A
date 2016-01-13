@@ -74,8 +74,8 @@ namespace Server.Mobiles
 			protected override void OnTick()
 			{
 				m_Mobile.PlaySound( 0x4CF );
-				AOS.Damage( m_Mobile, m_From, Utility.RandomMinMax( 1, 40 ), 90, 10, 0, 0, 0 );
-			}
+                m_Mobile.Damage(Utility.RandomMinMax(1, 40), m_From);
+            }
 		}
 
 		public SandVortex( Serial serial ) : base( serial )

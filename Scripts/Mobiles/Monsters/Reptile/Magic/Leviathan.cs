@@ -66,9 +66,6 @@ namespace Server.Mobiles
 		}
 
 		public override bool HasBreath{ get{ return true; } }
-		public override int BreathPhysicalDamage{ get{ return 70; } } // TODO: Verify damage type
-		public override int BreathColdDamage{ get{ return 30; } }
-		public override int BreathFireDamage{ get{ return 0; } }
 		public override int BreathEffectHue{ get{ return 0x1ED; } }
 		public override double BreathDamageScalar{ get{ return 0.05; } }
 		public override double BreathMinDelay{ get{ return 5.0; } }

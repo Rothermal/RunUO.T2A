@@ -32,7 +32,6 @@ namespace Server.Mobiles
 
 			SetSkill( SkillName.DetectHidden, 100.0 );
 			SetSkill( SkillName.Meditation, 120.0 );
-			SetSkill( SkillName.Necromancy, 100.0 );
 			SetSkill( SkillName.SpiritSpeak, 120.0 );
 			SetSkill( SkillName.Magery, 160.0 );
 			SetSkill( SkillName.EvalInt, 100.0 );

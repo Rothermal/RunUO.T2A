@@ -287,11 +287,7 @@ namespace Server
 			if ( from != m_Source || m_Perfection == 100 )
 				return;
 
-			int bushido = (int) from.Skills.Bushido.Value;
-			if ( bushido < 50 )
-				return;
-
-			m_Perfection += bushido / 10;
+			m_Perfection += 0;
 
 			if ( m_Perfection >= 100 )
 			{

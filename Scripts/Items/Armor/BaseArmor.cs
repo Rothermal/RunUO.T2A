@@ -345,7 +345,7 @@ namespace Server.Items
 			else
 				v = IntRequirement;
 
-			return AOS.Scale( v, 100 );
+            return v;
 		}
 
 		public virtual int InitMinHits{ get{ return 0; } }

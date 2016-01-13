@@ -869,8 +869,6 @@ namespace Server.Misc
 				{
 					skills = new SkillNameValue[]
 						{
-							new SkillNameValue( SkillName.Necromancy, 50 ),
-							new SkillNameValue( SkillName.Focus, 30 ),
 							new SkillNameValue( SkillName.SpiritSpeak, 30 ),
 							new SkillNameValue( SkillName.Swords, 30 ),
 							new SkillNameValue( SkillName.Tactics, 20 )
@@ -882,9 +880,7 @@ namespace Server.Misc
 				{
 					skills = new SkillNameValue[]
 						{
-							new SkillNameValue( SkillName.Chivalry, 51 ),
 							new SkillNameValue( SkillName.Swords, 49 ),
-							new SkillNameValue( SkillName.Focus, 30 ),
 							new SkillNameValue( SkillName.Tactics, 30 )
 						};
 
@@ -894,7 +890,6 @@ namespace Server.Misc
 				{
 					skills = new SkillNameValue[]
 						{
-							new SkillNameValue( SkillName.Bushido, 50 ),
 							new SkillNameValue( SkillName.Swords, 50 ),
 							new SkillNameValue( SkillName.Anatomy, 30 ),
 							new SkillNameValue( SkillName.Healing, 30 )
@@ -905,7 +900,6 @@ namespace Server.Misc
 				{
 					skills = new SkillNameValue[]
 						{
-							new SkillNameValue( SkillName.Ninjitsu, 50 ),
 							new SkillNameValue( SkillName.Hiding, 50 ),
 							new SkillNameValue( SkillName.Fencing, 30 ),
 							new SkillNameValue( SkillName.Stealth, 30 )
@@ -1069,7 +1063,7 @@ namespace Server.Misc
 			{
 				SkillNameValue snv = skills[i];
 
-				if ( snv.Value > 0 && ( snv.Name != SkillName.Stealth || prof == 7 ) && snv.Name != SkillName.RemoveTrap && snv.Name != SkillName.Spellweaving )
+				if ( snv.Value > 0 && ( snv.Name != SkillName.Stealth || prof == 7 ) && snv.Name != SkillName.RemoveTrap )
 				{
 					Skill skill = m.Skills[snv.Name];
 
@@ -1283,13 +1277,6 @@ namespace Server.Misc
 					EquipItem( new HalfApron( Utility.RandomYellowHue() ) );
 					break;
 				}
-				case SkillName.Bushido:
-				{
-					EquipItem( new Hakama() );
-					EquipItem( new Kasa() );
-					EquipItem( new BookOfBushido() );
-					break;
-				}
 				case SkillName.Fletching:
 				{
 					PackItem( new Board( 14 ) );
@@ -1327,10 +1314,6 @@ namespace Server.Misc
 					PackItem( new RawFishSteak() );
 					PackItem( new SackFlour() );
 					PackItem( new Pitcher( BeverageType.Water ) );
-					break;
-				}
-				case SkillName.Chivalry:
-				{
 					break;
 				}
 				case SkillName.DetectHidden:
@@ -1470,17 +1453,6 @@ namespace Server.Misc
 				case SkillName.Musicianship:
 				{
 					PackInstrument();
-					break;
-				}
-				case SkillName.Necromancy:
-				{
-					break;
-				}
-				case SkillName.Ninjitsu:
-				{
-					EquipItem( new Hakama( 0x2C3 ) );	//Only ninjas get the hued one.
-					EquipItem( new Kasa() );
-					EquipItem( new BookOfNinjitsu() );
 					break;
 				}
 				case SkillName.Parry:

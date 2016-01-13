@@ -77,8 +77,8 @@ namespace Server.Mobiles
 
 			if ( aggressor.BodyMod == 183 || aggressor.BodyMod == 184 )
 			{
-				AOS.Damage( aggressor, 50, 0, 100, 0, 0, 0 );
-				aggressor.BodyMod = 0;
+                aggressor.Damage(50);
+                aggressor.BodyMod = 0;
 				aggressor.HueMod = -1;
 				aggressor.FixedParticles( 0x36BD, 20, 10, 5044, EffectLayer.Head );
 				aggressor.PlaySound( 0x307 );

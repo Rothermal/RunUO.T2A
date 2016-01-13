@@ -1843,7 +1843,6 @@ namespace Server
 
 					if( m_Mobile.InLOS( combatant ) )
 					{
-						weapon.OnBeforeSwing( m_Mobile, combatant );	//OnBeforeSwing for checking in regards to being hidden and whatnot
 						m_Mobile.RevealingAction();
 						m_Mobile.m_NextCombatTime = DateTime.Now + weapon.OnSwing( m_Mobile, combatant );
 					}
@@ -4960,17 +4959,17 @@ namespace Server
 		{
 		}
 
-		public virtual void Damage( int amount )
-		{
-			Damage( amount, null );
-		}
-
 		public virtual bool CanBeDamaged()
 		{
 			return !m_Blessed;
 		}
 
-		public virtual void Damage( int amount, Mobile from )
+        public virtual void Damage(int amount)
+        {
+            Damage(amount, null);
+        }
+
+        public virtual void Damage( int amount, Mobile from )
 		{
 			Damage( amount, from, true );
 		}
@@ -4990,9 +4989,6 @@ namespace Server
 
 				if( m_Spell != null )
 					m_Spell.OnCasterHurt();
-
-				//if ( m_Spell != null && m_Spell.State == SpellState.Casting )
-				//	m_Spell.Disturb( DisturbType.Hurt, false, true );
 
 				if( from != null )
 					RegisterDamage( amount, from );

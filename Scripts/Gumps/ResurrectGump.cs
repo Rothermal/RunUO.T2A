@@ -183,10 +183,10 @@ namespace Server.Gumps
 
 					switch( level )
 					{
-						case VirtueLevel.Seeker: from.Hits = AOS.Scale( from.HitsMax, 20 ); break;
-						case VirtueLevel.Follower: from.Hits = AOS.Scale( from.HitsMax, 40 ); break;
-						case VirtueLevel.Knight: from.Hits = AOS.Scale( from.HitsMax, 80 ); break;
-					}
+						case VirtueLevel.Seeker: from.Hits = (int)(from.HitsMax * 0.20); break; // 20%
+						case VirtueLevel.Follower: from.Hits = (int)(from.HitsMax * 0.40); break; // 40%
+                        case VirtueLevel.Knight: from.Hits = (int)(from.HitsMax * 0.80); break; // 80%
+                    }
 				}
 
 				if( m_FromSacrifice && from is PlayerMobile )

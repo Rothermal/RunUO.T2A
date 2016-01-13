@@ -123,23 +123,14 @@ namespace Server.Items
 
 			if ( book != null && book.HasSpell( spellID ) )
 			{
-				SpecialMove move = SpellRegistry.GetSpecialMove( spellID );
+                Spell spell = SpellRegistry.NewSpell(spellID, from, null);
 
-				if ( move != null )
-				{
-					SpecialMove.SetCurrentMove( from, move );
-				}
-				else
-				{
-					Spell spell = SpellRegistry.NewSpell( spellID, from, null );
-	
-					if ( spell != null )
-						spell.Cast();
-					else
-						from.SendLocalizedMessage( 502345 ); // This spell has been temporarily disabled.
-				}
-			}
-			else
+                if (spell != null)
+                    spell.Cast();
+                else
+                    from.SendLocalizedMessage(502345); // This spell has been temporarily disabled.
+            }
+            else
 			{
 				from.SendLocalizedMessage( 500015 ); // You do not have that spell!
 			}

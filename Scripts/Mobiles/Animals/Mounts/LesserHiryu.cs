@@ -71,13 +71,6 @@ namespace Server.Mobiles
 		}
 
 
-		public override bool OverrideBondingReqs()
-		{
-			if ( ControlMaster.Skills[SkillName.Bushido].Base >= 90.0 )
-				return true;
-			return false;
-		}
-
 		public override int GetAngerSound()
 		{
 			return 0x4FE;
@@ -107,30 +100,6 @@ namespace Server.Mobiles
 		{
 			AddLoot( LootPack.FilthyRich, 2 );
 			AddLoot( LootPack.Gems, 4 );
-		}
-
-		public override double GetControlChance( Mobile m, bool useBaseSkill )
-		{
-			double tamingChance = base.GetControlChance( m, useBaseSkill );
-
-			if( tamingChance >= 0.95 )
-			{
-				return tamingChance;
-			}
-
-			double skill = (useBaseSkill? m.Skills.Bushido.Base : m.Skills.Bushido.Value);
-
-			if( skill < 90.0 )
-			{
-				return tamingChance;
-			}
-
-			double bushidoChance = ( skill - 30.0 ) / 100;
-
-			if( m.Skills.Bushido.Base >= 120 )
-				bushidoChance += 0.05;
-
-			return bushidoChance > tamingChance ? bushidoChance : tamingChance;
 		}
 
 		public override int TreasureMapLevel { get { return 3; } }

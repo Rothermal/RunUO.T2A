@@ -24,7 +24,6 @@ namespace Server.Mobiles
 			SetSkill( SkillName.MagicResist, 102.7, 102.9 );
 			SetSkill( SkillName.Magery, 100.0, 106.6 );
 			SetSkill( SkillName.EvalInt, 99.6, 106.9 );
-			SetSkill( SkillName.Necromancy, 100.0, 106.6 );
 			SetSkill( SkillName.SpiritSpeak, 99.6, 106.9 );
 
 			Fame = 18000;

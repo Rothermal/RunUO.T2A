@@ -3,8 +3,6 @@ using Server.Items;
 using Server.Network;
 using Server.Mobiles;
 using Server.Spells;
-using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
 
 namespace Server
 {
@@ -75,7 +73,7 @@ namespace Server
 
 			protected override void OnTick()
 			{
-                if ( (m_Poison.Level < 3 && OrangePetals.UnderEffect(m_Mobile)) || AnimalForm.UnderTransformation(m_Mobile, typeof(Unicorn)))
+                if ( (m_Poison.Level < 3 && OrangePetals.UnderEffect(m_Mobile)) )
                 {
                     if (m_Mobile.CurePoison(m_Mobile))
                     {
@@ -124,9 +122,9 @@ namespace Server
 				if ( honorTarget != null && honorTarget.ReceivedHonorContext != null )
 					honorTarget.ReceivedHonorContext.OnTargetPoisoned();
 
-				AOS.Damage( m_Mobile, m_From, damage, 0, 0, 0, 100, 0 );
+                m_Mobile.Damage(damage, m_From);
 
-				if ( 0.60 <= Utility.RandomDouble() ) // OSI: randomly revealed between first and third damage tick, guessing 60% chance
+                if ( 0.60 <= Utility.RandomDouble() ) // OSI: randomly revealed between first and third damage tick, guessing 60% chance
 						m_Mobile.RevealingAction();
 
 				if ( (m_Index % m_Poison.m_MessageInterval) == 0 )

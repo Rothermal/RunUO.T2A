@@ -4,7 +4,6 @@ using Server.Items;
 using Server.Network;
 using Server.Spells.Fourth;
 using Server.Spells.Seventh;
-using Server.Spells.Chivalry;
 using Server.Prompts;
 
 namespace Server.Gumps

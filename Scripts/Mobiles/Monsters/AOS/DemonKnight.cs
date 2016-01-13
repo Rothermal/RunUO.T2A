@@ -138,7 +138,6 @@ namespace Server.Mobiles
 
 			SetDamage( 17, 21 );
 
-			SetSkill( SkillName.Necromancy, 120, 120.0 );
 			SetSkill( SkillName.SpiritSpeak, 120.0, 120.0 );
 
 			SetSkill( SkillName.DetectHidden, 80.0 );
@@ -175,9 +174,9 @@ namespace Server.Mobiles
 			if ( from != null && from != this && !m_InHere )
 			{
 				m_InHere = true;
-				AOS.Damage( from, this, Utility.RandomMinMax( 8, 20 ), 100, 0, 0, 0, 0 );
+                from.Damage(Utility.RandomMinMax(8, 20), this);
 
-				MovingEffect( from, 0xECA, 10, 0, false, false, 0, 0 );
+                MovingEffect( from, 0xECA, 10, 0, false, false, 0, 0 );
 				PlaySound( 0x491 );
 
 				if ( 0.05 > Utility.RandomDouble() )

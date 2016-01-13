@@ -368,8 +368,8 @@ namespace Server.Mobiles
 				}
 			}
 
-			AOS.Damage( m, 40, 0, 0, 0, 100, 0 );
-		}
+            m.Damage(40);
+        }
 
 		public StainedOoze( Serial serial )
 			: base( serial )

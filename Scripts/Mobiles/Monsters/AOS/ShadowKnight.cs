@@ -23,7 +23,6 @@ namespace Server.Mobiles
 
 			SetDamage( 20, 30 );
 
-			SetSkill( SkillName.Chivalry, 120.0 );
 			SetSkill( SkillName.DetectHidden, 80.0 );
 			SetSkill( SkillName.EvalInt, 100.0 );
 			SetSkill( SkillName.Magery, 100.0 );

@@ -114,9 +114,8 @@ namespace Server.Mobiles
 
 					DoHarmful( m );
 
-					AOS.Damage( m, this, Utility.RandomMinMax( 20, 25 ), true, 0, 0, 0, 100, 0 );
-
-					m.FixedParticles( 0x36BD, 1, 10, 0x1F78, 0xA6, 0, (EffectLayer)255 );
+	                m.Damage( Utility.RandomMinMax(20, 25) );
+                    m.FixedParticles( 0x36BD, 1, 10, 0x1F78, 0xA6, 0, (EffectLayer)255 );
 					m.ApplyPoison( this, Poison.Lethal );
 				}
 			}

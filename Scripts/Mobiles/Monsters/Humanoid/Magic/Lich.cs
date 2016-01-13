@@ -20,7 +20,6 @@ namespace Server.Mobiles
 
 			SetDamage( 24, 26 );
 
-			SetSkill( SkillName.Necromancy, 89, 99.1 );
 			SetSkill( SkillName.SpiritSpeak, 90.0, 99.0 );
 
 			SetSkill( SkillName.EvalInt, 100.0 );

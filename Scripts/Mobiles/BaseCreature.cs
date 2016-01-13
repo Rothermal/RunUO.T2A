@@ -13,9 +13,6 @@ using Server.Engines.MLQuests;
 using Server.Engines.PartySystem;
 using Server.Factions;
 using Server.SkillHandlers;
-using Server.Spells.Bushido;
-using Server.Spells.Spellweaving;
-using Server.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -479,9 +476,7 @@ namespace Server.Mobiles
 		public virtual bool BleedImmune{ get{ return false; } }
 		public virtual double BonusPetDamageScalar{ get{ return 1.0; } }
 
-		public virtual bool DeathAdderCharmable{ get{ return false; } }
-
-		//TODO: Find the pub 31 tweaks to the DispelDifficulty and apply them of course.
+    	//TODO: Find the pub 31 tweaks to the DispelDifficulty and apply them of course.
 		public virtual double DispelDifficulty{ get{ return 0.0; } } // at this skill level we dispel 50% chance
 		public virtual double DispelFocus{ get{ return 20.0; } } // at difficulty - focus we have 0%, at difficulty + focus we have 100%
 		public virtual bool DisplayWeight{ get{ return Backpack is StrongBackpack; } }
@@ -509,14 +504,6 @@ namespace Server.Mobiles
 		public virtual double BreathDamageDelay{ get{ return 1.0; } }
 
 		public virtual int BreathRange{ get{ return RangePerception; } }
-
-		// Damage types
-		public virtual int BreathChaosDamage{ get { return 0; } }
-		public virtual int BreathPhysicalDamage{ get{ return 0; } }
-		public virtual int BreathFireDamage{ get{ return 100; } }
-		public virtual int BreathColdDamage{ get{ return 0; } }
-		public virtual int BreathPoisonDamage{ get{ return 0; } }
-		public virtual int BreathEnergyDamage{ get{ return 0; } }
 
 		// Is immune to breath damages
 		public virtual bool BreathImmune{ get{ return false; } }
@@ -598,40 +585,6 @@ namespace Server.Mobiles
 			if ( CanBeHarmful( target ) )
 			{
 				DoHarmful( target );
-				BreathDealDamage( target );
-			}
-		}
-
-		public virtual void BreathDealDamage( Mobile target )
-		{
-			if( !Evasion.CheckSpellEvasion( target ) )
-			{
-				int physDamage = BreathPhysicalDamage;
-				int fireDamage = BreathFireDamage;
-				int coldDamage = BreathColdDamage;
-				int poisDamage = BreathPoisonDamage;
-				int nrgyDamage = BreathEnergyDamage;
-
-				if( BreathChaosDamage > 0 )
-				{
-					switch( Utility.Random( 5 ))
-					{
-						case 0: physDamage += BreathChaosDamage; break;
-						case 1: fireDamage += BreathChaosDamage; break;
-						case 2: coldDamage += BreathChaosDamage; break;
-						case 3: poisDamage += BreathChaosDamage; break;
-						case 4: nrgyDamage += BreathChaosDamage; break;
-					}
-				}
-
-				if( physDamage == 0 && fireDamage == 0 && coldDamage == 0 && poisDamage == 0 && nrgyDamage == 0 )
-				{
-					target.Damage( BreathComputeDamage(), this );// Unresistable damage even in AOS
-				}
-				else
-				{
-					AOS.Damage( target, this, BreathComputeDamage(), physDamage, fireDamage, coldDamage, poisDamage, nrgyDamage );
-				}
 			}
 		}
 
@@ -856,9 +809,6 @@ namespace Server.Mobiles
 			if ( !(m is BaseCreature) )
 				return true;
 
-			if( TransformationSpellHelper.UnderTransformation( m, typeof( EtherealVoyageSpell ) ) )
-				return false;
-
 			if ( m is PlayerMobile && ( (PlayerMobile)m ).HonorActive )
 				return false;
 
@@ -919,10 +869,7 @@ namespace Server.Mobiles
 
 			double dMinTameSkill = m_dMinTameSkill;
 
-			if ( dMinTameSkill > -24.9 && Server.SkillHandlers.AnimalTaming.CheckMastery( m, this ) )
-				dMinTameSkill = -24.9;
-
-			int taming = (int)((useBaseSkill ? m.Skills[SkillName.AnimalTaming].Base : m.Skills[SkillName.AnimalTaming].Value ) * 10);
+    		int taming = (int)((useBaseSkill ? m.Skills[SkillName.AnimalTaming].Base : m.Skills[SkillName.AnimalTaming].Value ) * 10);
 			int lore = (int)((useBaseSkill ? m.Skills[SkillName.AnimalLore].Base : m.Skills[SkillName.AnimalLore].Value )* 10);
 			int bonus = 0, chance = 700;
 			int difficulty = (int)(dMinTameSkill * 10);
@@ -974,34 +921,9 @@ namespace Server.Mobiles
 			}
 		}
 
-		public virtual bool IsNecroFamiliar
-		{
-			get
-			{
-				if ( !Summoned )
-					return false;
-
-				if ( m_ControlMaster != null && SummonFamiliarSpell.Table.Contains( m_ControlMaster ) )
-					return SummonFamiliarSpell.Table[ m_ControlMaster ] == this;
-
-				return false;
-			}
-		}
-
 		public override void Damage( int amount, Mobile from )
 		{
 			int oldHits = this.Hits;
-
-			if ( Spells.Necromancy.EvilOmenSpell.TryEndEffect( this ) )
-				amount = (int)(amount * 1.25);
-
-			Mobile oath = Spells.Necromancy.BloodOathSpell.GetBloodOath( from );
-
-			if ( oath == this )
-			{
-				amount = (int)(amount * 1.1);
-				from.Damage( amount, from );
-			}
 
 			base.Damage( amount, from );
 
@@ -1040,9 +962,6 @@ namespace Server.Mobiles
 		{
 			if ( !Alive || IsDeadPet )
 				return ApplyPoisonResult.Immune;
-
-			if ( Spells.Necromancy.EvilOmenSpell.TryEndEffect( this ) )
-				poison = PoisonImpl.IncreaseLevel( poison );
 
 			ApplyPoisonResult result = base.ApplyPoison( from, poison );
 
@@ -1298,9 +1217,6 @@ namespace Server.Mobiles
 				if( c != null )
 					c.Slip();
 			}
-
-			if( Confidence.IsRegenerating( this ) )
-				Confidence.StopRegenerating( this );
 
 			WeightOverloading.FatigueOnDamage( this, amount );
 
@@ -1890,9 +1806,6 @@ namespace Server.Mobiles
 			ChangeAIType(m_CurrentAI);
 
 			AddFollowers();
-
-			if ( IsAnimatedDead )
-				Spells.Necromancy.AnimateDeadSpell.Register( m_SummonMaster, this );
 		}
 
 		public virtual bool IsHumanInTown()
@@ -2743,9 +2656,6 @@ namespace Server.Mobiles
 
 			FocusMob = null;
 
-			if ( IsAnimatedDead )
-				Spells.Necromancy.AnimateDeadSpell.Unregister( m_SummonMaster, this );
-
 			base.OnAfterDelete();
 		}
 
@@ -2882,9 +2792,6 @@ namespace Server.Mobiles
 				return false;
 
 			if ( skill == SkillName.RemoveTrap && (from.Skills[SkillName.Lockpicking].Base < 50.0 || from.Skills[SkillName.DetectHidden].Base < 50.0) )
-				return false;
-
-			if ( (skill == SkillName.Focus || skill == SkillName.Chivalry || skill == SkillName.Necromancy) )
 				return false;
 
 			return true;
@@ -4089,57 +3996,14 @@ namespace Server.Mobiles
 					pack.DisplayTo( from );
 			}
 
-			if ( this.DeathAdderCharmable && from.CanBeHarmful( this, false ) )
-			{
-				DeathAdder da = Spells.Necromancy.SummonFamiliarSpell.Table[from] as DeathAdder;
-
-				if ( da != null && !da.Deleted )
-				{
-					from.SendAsciiMessage( "You charm the snake.  Select a target to attack." );
-					from.Target = new DeathAdderCharmTarget( this );
-				}
-			}
-
 			base.OnDoubleClick( from );
-		}
-
-		private class DeathAdderCharmTarget : Target
-		{
-			private BaseCreature m_Charmed;
-
-			public DeathAdderCharmTarget( BaseCreature charmed ) : base( -1, false, TargetFlags.Harmful )
-			{
-				m_Charmed = charmed;
-			}
-
-			protected override void OnTarget( Mobile from, object targeted )
-			{
-				if ( !m_Charmed.DeathAdderCharmable || m_Charmed.Combatant != null || !from.CanBeHarmful( m_Charmed, false ) )
-					return;
-
-				DeathAdder da = Spells.Necromancy.SummonFamiliarSpell.Table[from] as DeathAdder;
-				if ( da == null || da.Deleted )
-					return;
-
-				Mobile targ = targeted as Mobile;
-				if ( targ == null || !from.CanBeHarmful( targ, false ) )
-					return;
-
-				from.RevealingAction();
-				from.DoHarmful( targ, true );
-
-				m_Charmed.Combatant = targ;
-
-				if ( m_Charmed.AIObject != null )
-					m_Charmed.AIObject.Action = ActionType.Combat;
-			}
 		}
 
 		public override void AddNameProperties( ObjectPropertyList list )
 		{
 			base.AddNameProperties( list );
 
-			if ( Summoned && !IsAnimatedDead && !IsNecroFamiliar && !( this is Clone ) )
+			if ( Summoned && !IsAnimatedDead )
 				list.Add( 1049646 ); // (summoned)
 			else if ( Controlled && Commandable )
 			{
@@ -4451,8 +4315,6 @@ namespace Server.Mobiles
 				{
 					this.OwnerAbandonTime = DateTime.MinValue;
 				}
-
-				GiftOfLifeSpell.HandleDeath( this );
 
 				CheckStatTimers();
 			}
@@ -4882,12 +4744,6 @@ namespace Server.Mobiles
 		public virtual int AuraRange { get { return 4; } }
 
 		public virtual int AuraBaseDamage { get { return 5; } }
-		public virtual int AuraPhysicalDamage { get { return 0; } }
-		public virtual int AuraFireDamage { get { return 100; } }
-		public virtual int AuraColdDamage { get { return 0; } }
-		public virtual int AuraPoisonDamage { get { return 0; } }
-		public virtual int AuraEnergyDamage { get { return 0; } }
-		public virtual int AuraChaosDamage { get { return 0; } }
 
 		public virtual void AuraDamage()
 		{
@@ -4916,8 +4772,8 @@ namespace Server.Mobiles
 
 			foreach ( Mobile m in list )
 			{
-				AOS.Damage( m, this, AuraBaseDamage, AuraPhysicalDamage, AuraFireDamage, AuraColdDamage, AuraPoisonDamage, AuraEnergyDamage, AuraChaosDamage );
-				AuraEffect( m );
+                m.Damage(AuraBaseDamage, this);
+                AuraEffect( m );
 			}
 		}
 

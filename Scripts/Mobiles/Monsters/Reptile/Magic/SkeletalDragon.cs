@@ -23,7 +23,6 @@ namespace Server.Mobiles
 			SetSkill( SkillName.MagicResist, 100.3, 130.0 );
 			SetSkill( SkillName.Tactics, 97.6, 100.0 );
 			SetSkill( SkillName.Wrestling, 97.6, 100.0 );
-			SetSkill( SkillName.Necromancy, 120.1, 130.0 );
 			SetSkill( SkillName.SpiritSpeak, 120.1, 130.0 );
 
 			Fame = 22500;
@@ -40,8 +39,6 @@ namespace Server.Mobiles
 
 		public override bool ReacquireOnMovement{ get{ return true; } }
 		public override bool HasBreath{ get{ return true; } } // fire breath enabled
-		public override int BreathFireDamage{ get{ return 0; } }
-		public override int BreathColdDamage{ get{ return 100; } }
 		public override int BreathEffectHue{ get{ return 0x480; } }
 		public override double BonusPetDamageScalar{ get{ return 1.0; } }
 		// TODO: Undead summoning?

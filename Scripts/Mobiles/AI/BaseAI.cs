@@ -10,7 +10,6 @@ using Server.ContextMenus;
 using Server.Engines.Quests;
 using MoveImpl = Server.Movement.MovementImpl;
 using Server.Spells;
-using Server.Spells.Spellweaving;
 
 namespace Server.Mobiles
 {
@@ -2430,7 +2429,7 @@ namespace Server.Mobiles
 						continue;
 
 					// Let's not target ourselves...
-					if (m == m_Mobile || m is BaseFamiliar)
+					if (m == m_Mobile)
 						continue;
 
 					// Dead targets are invalid.
@@ -2466,10 +2465,6 @@ namespace Server.Mobiles
 
 					// If we only want faction friends, make sure it's one.
 					if (bFacFriend && !m_Mobile.IsFriend(m))
-						continue;
-
-					//Ignore anyone under EtherealVoyage
-					if (TransformationSpellHelper.UnderTransformation(m, typeof(EtherealVoyageSpell)))
 						continue;
 
 					// Ignore players with activated honor

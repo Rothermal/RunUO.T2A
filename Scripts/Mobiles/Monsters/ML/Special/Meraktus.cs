@@ -150,8 +150,8 @@ namespace Server.Mobiles
 				else if (damage > 75.0)
 					damage = 75.0;
 				DoHarmful(m);
-				AOS.Damage(m, this, (int)damage, 100, 0, 0, 0, 0);
-				if (m.Alive && m.Body.IsHuman && !m.Mounted)
+                m.Damage((int)damage, this);
+                if (m.Alive && m.Body.IsHuman && !m.Mounted)
 					m.Animate(20, 7, 1, true, false, 0); // take hit
 			}
 		}

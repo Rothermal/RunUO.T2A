@@ -74,8 +74,8 @@ namespace Server.Mobiles
 
 			if ( item is OrcishKinMask )
 			{
-				AOS.Damage( aggressor, 50, 0, 100, 0, 0, 0 );
-				item.Delete();
+                aggressor.Damage(50);
+                item.Delete();
 				aggressor.FixedParticles( 0x36BD, 20, 10, 5044, EffectLayer.Head );
 				aggressor.PlaySound( 0x307 );
 			}
@@ -127,9 +127,10 @@ namespace Server.Mobiles
 			protected override void OnTick()
 			{
 				m_Mobile.PlaySound( 0x11D );
-				AOS.Damage( m_Mobile, m_From, Utility.RandomMinMax( 10, 20 ), 0, 100, 0, 0, 0 );
-			}
-		}
+                m_Mobile.Damage(Utility.RandomMinMax(10, 20), m_From);
+
+            }
+        }
 
 		public OrcBomber( Serial serial ) : base( serial )
 		{

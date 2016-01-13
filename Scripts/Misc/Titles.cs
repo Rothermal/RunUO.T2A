@@ -270,8 +270,6 @@ namespace Server.Misc
 			switch ( skill.SkillName )
 			{
 				default: return 0;
-				case SkillName.Bushido: return 1;
-				case SkillName.Ninjitsu: return 2;
 			}
 		}
 

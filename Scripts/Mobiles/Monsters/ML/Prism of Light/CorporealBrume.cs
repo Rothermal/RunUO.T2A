@@ -42,8 +42,6 @@ namespace Server.Mobiles
 		public override int AuraRange { get { return 10; } }
 
 		public override int AuraBaseDamage { get { return Utility.RandomMinMax( 25, 35 ); } }
-		public override int AuraFireDamage { get { return 0; } }
-		public override int AuraColdDamage { get { return 100; } }
 
 		public override void AuraEffect( Mobile m )
 		{

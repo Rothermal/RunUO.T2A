@@ -75,8 +75,8 @@ namespace Server.Mobiles
 			int damage = 50;
 			this.MovingEffect( to, 0xF43, 10, 0, false, false );
 			this.DoHarmful( to );
-			AOS.Damage( to, this, damage, 100, 0, 0, 0, 0 );
-		}
+            to.Damage(damage, this);
+        }
 
 		public GargoyleDestroyer( Serial serial ) : base( serial )
 		{

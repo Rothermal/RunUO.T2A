@@ -57,8 +57,8 @@ namespace Server.Mobiles
 			if ( 0.8 > Utility.RandomDouble() && !attacker.InRange( this, 1 ) )
 			{
 				Effects.SendPacket( attacker, attacker.Map, new HuedEffect( EffectType.Moving, Serial.Zero, Serial.Zero, 0x27A3, this.Location, attacker.Location, 10, 0, false, false, 0, 0 ) );
-				AOS.Damage( attacker, this, Utility.RandomMinMax( 50, 65 ), 0, 0, 0, 0, 0 );
-			}
+                attacker.Damage(Utility.RandomMinMax(50, 65), this);
+            }
 		}
 
 		public override void OnGotMeleeAttack( Mobile attacker )
@@ -68,8 +68,8 @@ namespace Server.Mobiles
 			if ( 0.8 > Utility.RandomDouble() && !attacker.InRange( this, 1 ) )
 			{
 				Effects.SendPacket( attacker, attacker.Map, new HuedEffect( EffectType.Moving, Serial.Zero, Serial.Zero, 0x27A3, this.Location, attacker.Location, 10, 0, false, false, 0, 0 ) );
-				AOS.Damage( attacker, this, Utility.RandomMinMax( 50, 65 ), 0, 0, 0, 0, 0 );
-			}
+                attacker.Damage(Utility.RandomMinMax(50, 65), this);
+            }
 		}
 		
 		public FanDancer( Serial serial ) : base( serial )

@@ -84,16 +84,7 @@ namespace Server
 		Mining = 45,
 		Meditation = 46,
 		Stealth = 47,
-		RemoveTrap = 48,
-		Necromancy = 49,
-		Focus = 50,
-		Chivalry = 51,
-		Bushido = 52,
-		Ninjitsu = 53,
-		Spellweaving = 54,
-		Mysticism = 55,
-		Imbuing = 56,
-		Throwing = 57
+		RemoveTrap = 48
 	}
 
 	[PropertyObject]
@@ -842,33 +833,6 @@ namespace Server
 
 		[CommandProperty( AccessLevel.Counselor )]
 		public Skill RemoveTrap{ get{ return this[SkillName.RemoveTrap]; } set{} }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Necromancy{ get{ return this[SkillName.Necromancy]; } set{} }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Focus{ get{ return this[SkillName.Focus]; } set{} }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Chivalry{ get{ return this[SkillName.Chivalry]; } set{} }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Bushido{ get{ return this[SkillName.Bushido]; } set{} }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Ninjitsu{ get{ return this[SkillName.Ninjitsu]; } set{} }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Spellweaving { get { return this[SkillName.Spellweaving]; } set { } }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Mysticism { get { return this[SkillName.Mysticism]; } set { } }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Imbuing { get { return this[SkillName.Imbuing]; } set { } }
-
-		[CommandProperty( AccessLevel.Counselor )]
-		public Skill Throwing { get { return this[SkillName.Throwing]; } set { } }
 
 		#endregion
 

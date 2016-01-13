@@ -12,9 +12,6 @@ using Server.Network;
 using Server.Spells;
 using Server.Spells.Fifth;
 using Server.Spells.Seventh;
-using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
-using Server.Spells.Bushido;
 using Server.Targeting;
 using Server.Engines.Quests;
 using Server.Factions;
@@ -22,7 +19,6 @@ using Server.Regions;
 using Server.Accounting;
 using Server.Engines.CannedEvil;
 using Server.Engines.Craft;
-using Server.Spells.Spellweaving;
 using Server.Engines.PartySystem;
 using Server.Engines.MLQuests;
 
@@ -115,7 +111,6 @@ namespace Server.Mobiles
 		private bool m_IsStealthing; // IsStealthing should be moved to Server.Mobiles
 		private bool m_IgnoreMobiles; // IgnoreMobiles should be moved to Server.Mobiles
 		private int m_NonAutoreinsuredItems; // number of items that could not be automatically reinsured because gold in bank was not enough
-		private bool m_NinjaWepCooldown;
 		/*
 		 * a value of zero means, that the mobile is not executing the spell. Otherwise,
 		 * the value should match the BaseMana required
@@ -146,18 +141,6 @@ namespace Server.Mobiles
 		}
 
 		public List<Mobile> AutoStabled { get { return m_AutoStabled; } }
-
-		public bool NinjaWepCooldown
-		{
-			get
-			{
-				return m_NinjaWepCooldown;
-			}
-			set
-			{
-				m_NinjaWepCooldown = value;
-			}
-		}
 
 		public List<Mobile> AllFollowers
 		{
@@ -652,10 +635,6 @@ namespace Server.Mobiles
 				{
 					this.Mount.Rider = null;
 				}
-				else if( AnimalForm.UnderTransformation( this ) )
-				{
-					AnimalForm.RemoveContext(this, true);
-				}
 			}
 
 			if( ( m_MountBlock == null ) || !m_MountBlock.m_Timer.Running || ( m_MountBlock.m_Timer.Next < ( DateTime.UtcNow + duration ) ) )
@@ -707,18 +686,6 @@ namespace Server.Mobiles
 
 			ns.Send( GlobalLightLevel.Instantiate( global ) );
 			ns.Send( new PersonalLightLevel( this, personal ) );
-		}
-
-		public override void OnManaChange(int oldValue)
-		{
-			base.OnManaChange(oldValue);
-			if (m_ExecutesLightningStrike > 0)
-			{
-				if (Mana < m_ExecutesLightningStrike)
-				{
-					LightningStrike.ClearCurrentMove(this);
-				}
-			}
 		}
 
 		private static void OnLogin( LoginEventArgs e )
@@ -845,7 +812,7 @@ namespace Server.Mobiles
 
 						if( dex < weapon.DexRequirement )
 							drop = true;
-						else if( str < AOS.Scale( weapon.StrRequirement, 100 - weapon.GetLowerStatReq() ) )
+						else if( str < weapon.StrRequirement )
 							drop = true;
 						else if( intel < weapon.IntRequirement )
 							drop = true;
@@ -1028,15 +995,6 @@ namespace Server.Mobiles
 			}
 
 			DisguiseTimers.StartTimer( e.Mobile );
-
-			Timer.DelayCall( TimeSpan.Zero, new TimerStateCallback( ClearSpecialMovesCallback ), e.Mobile );
-		}
-
-		private static void ClearSpecialMovesCallback( object state )
-		{
-			Mobile from = (Mobile)state;
-
-			SpecialMove.ClearAllMoves( from );
 		}
 
 		private static void EventSink_Disconnected( DisconnectedEventArgs e )
@@ -1367,18 +1325,6 @@ namespace Server.Mobiles
 
 		public override bool AllowSkillUse( SkillName skill )
 		{
-			if ( AnimalForm.UnderTransformation( this ) )
-			{
-				for( int i = 0; i < m_AnimalFormRestrictedSkills.Length; i++ )
-				{
-					if( m_AnimalFormRestrictedSkills[i] == skill )
-					{
-						SendLocalizedMessage( 1070771 ); // You cannot use that skill in this form.
-						return false;
-					}
-				}
-			}
-
 			#region Dueling
 			if ( m_DuelContext != null && !m_DuelContext.AllowSkillUse( this, skill ) )
 				return false;
@@ -2226,7 +2172,7 @@ namespace Server.Mobiles
 
 		public override bool CheckShove( Mobile shoved )
 		{
-			if( m_IgnoreMobiles || TransformationSpellHelper.UnderTransformation( shoved, typeof( WraithFormSpell ) ) )
+			if( m_IgnoreMobiles )
 				return true;
 			else
 				return base.CheckShove( shoved );
@@ -2276,9 +2222,6 @@ namespace Server.Mobiles
 				if ( c != null )
 					c.Slip();
 			}
-
-			if( Confidence.IsRegenerating( this ) )
-				Confidence.StopRegenerating( this );
 
 			WeightOverloading.FatigueOnDamage( this, amount );
 
@@ -2780,26 +2723,6 @@ namespace Server.Mobiles
 
 		public override void Damage( int amount, Mobile from )
 		{
-			if ( Spells.Necromancy.EvilOmenSpell.TryEndEffect( this ) )
-				amount = (int)(amount * 1.25);
-
-			Mobile oath = Spells.Necromancy.BloodOathSpell.GetBloodOath( from );
-
-				/* Per EA's UO Herald Pub48 (ML):
-				 * ((resist spellsx10)/20 + 10=percentage of damage resisted)
-				 */
-
-			if ( oath == this )
-			{
-				amount = (int)(amount * 1.1);
-
-				if( amount > 35 && from is PlayerMobile )  /* capped @ 35, seems no expansion */
-				{
-					amount = 35;
-				}
-
-				from.Damage( amount, this );
-			}
 
 			if ( from != null && Talisman is BaseTalisman )
 			{
@@ -2823,9 +2746,6 @@ namespace Server.Mobiles
 		{
 			if ( !Alive )
 				return ApplyPoisonResult.Immune;
-
-			if ( Spells.Necromancy.EvilOmenSpell.TryEndEffect( this ) )
-				poison = PoisonImpl.IncreaseLevel( poison );
 
 			ApplyPoisonResult result = base.ApplyPoison( from, poison );
 
@@ -3734,16 +3654,14 @@ namespace Server.Mobiles
 
 			TransformContext context = TransformationSpellHelper.GetContext( this );
 
-			if ( context != null && context.Type == typeof( ReaperFormSpell ) )
+			if (false && context != null )
 				return Mobile.WalkFoot;
 
 			bool running = ( (dir & Direction.Running) != 0 );
 
 			bool onHorse = ( this.Mount != null );
-
-			AnimalFormContext animalContext = AnimalForm.GetContext( this );
-
-			if( onHorse || (animalContext != null && animalContext.SpeedBoost) )
+            
+			if( onHorse )
 				return ( running ? Mobile.RunMount : Mobile.WalkMount );
 
 			return ( running ? Mobile.RunFoot : Mobile.WalkFoot );

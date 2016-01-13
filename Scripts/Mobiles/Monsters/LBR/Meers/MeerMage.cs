@@ -186,9 +186,9 @@ namespace Server.Mobiles
 					m.PlaySound( 0x00E );
 					m.PlaySound( 0x1BC );
 
-					AOS.Damage( m, this, Utility.RandomMinMax( 20, 30 ), 100, 0, 0, 0, 0 );
+                    m.Damage(Utility.RandomMinMax(20, 30), this);
 
-					states[1] = count + 1;
+                    states[1] = count + 1;
 
 					if ( !m.Alive )
 						StopEffect( m, false );

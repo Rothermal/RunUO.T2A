@@ -122,21 +122,21 @@ namespace Server.Mobiles
 
 						if ( toScale > 0 )
 						{
-							toBuff.HitsMaxSeed += AOS.Scale( toScale, 75 );
-							toBuff.Hits += AOS.Scale( toScale, 75 );
+							toBuff.HitsMaxSeed += (int)(toScale * 0.75 );
+                            toBuff.Hits += (int)(toScale * 0.75);
 						}
 
 						toScale = toBuff.RawStr;
 
 						if ( toScale > 0 )
-							toBuff.RawStr += AOS.Scale( toScale, 50 );
+							toBuff.RawStr += (int)(toScale * 0.50);
 
 						toScale = toBuff.RawDex;
 
 						if ( toScale > 0 )
 						{
-							toBuff.RawDex += AOS.Scale( toScale, 50 );
-							toBuff.Stam += AOS.Scale( toScale, 50 );
+							toBuff.RawDex += (int)(toScale * 0.50);
+							toBuff.Stam += (int)(toScale * 0.50);
 						}
 
 						toBuff.Hits = toBuff.Hits;

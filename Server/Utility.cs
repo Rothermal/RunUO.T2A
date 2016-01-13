@@ -1064,13 +1064,7 @@ namespace Server
 				SkillName.Mining,
 				SkillName.Meditation,
 				SkillName.Stealth,
-				SkillName.RemoveTrap,
-				SkillName.Necromancy,
-				SkillName.Focus,
-				SkillName.Chivalry,
-				SkillName.Bushido,
-				SkillName.Ninjitsu,
-				SkillName.Spellweaving
+				SkillName.RemoveTrap
 			};
 
 		private static SkillName[] m_CombatSkills = new SkillName[]
