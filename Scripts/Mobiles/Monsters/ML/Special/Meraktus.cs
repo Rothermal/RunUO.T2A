@@ -150,7 +150,7 @@ namespace Server.Mobiles
 				else if (damage > 75.0)
 					damage = 75.0;
 				DoHarmful(m);
-                m.Damage((int)damage, this);
+                this.Damage((int)damage, m);
                 if (m.Alive && m.Body.IsHuman && !m.Mounted)
 					m.Animate(20, 7, 1, true, false, 0); // take hit
 			}

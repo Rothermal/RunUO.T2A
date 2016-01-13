@@ -91,7 +91,7 @@ namespace Server.Mobiles
                     }
                 case 2:
                     {
-                        defender.Damage(Utility.Random(10, 5), this);
+                        this.Damage(Utility.Random(10, 5), defender);
                         defender.SendAsciiMessage("You have been hit by a critical strike!");
                         break;
                     }

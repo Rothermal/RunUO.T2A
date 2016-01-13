@@ -91,7 +91,7 @@ namespace Server.Mobiles
 		{
 			base.OnGaveMeleeAttack( defender );
 
-			defender.Damage( Utility.Random( 20, 10 ), this );
+			this.Damage( Utility.Random( 20, 10 ), defender);
 			defender.Stam -= Utility.Random( 20, 10 );
 			defender.Mana -= Utility.Random( 20, 10 );
 		}

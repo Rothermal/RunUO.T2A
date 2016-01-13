@@ -280,7 +280,7 @@ namespace Server.Items
 					if ( damage > 40 )
 						damage = 40;
 
-                    m.Damage(damage, from);
+                    from.Damage(damage, m);
                 }
 				else if ( o is BaseExplosionPotion )
 				{

@@ -4772,7 +4772,7 @@ namespace Server.Mobiles
 
 			foreach ( Mobile m in list )
 			{
-                m.Damage(AuraBaseDamage, this);
+                this.Damage(AuraBaseDamage, m);
                 AuraEffect( m );
 			}
 		}

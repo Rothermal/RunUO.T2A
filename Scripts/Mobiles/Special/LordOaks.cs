@@ -174,7 +174,7 @@ namespace Server.Mobiles
 		{
 			base.OnGaveMeleeAttack( defender );
 
-			defender.Damage( Utility.Random( 20, 10 ), this );
+            this.Damage( Utility.Random( 20, 10 ), defender);
 			defender.Stam -= Utility.Random( 20, 10 );
 			defender.Mana -= Utility.Random( 20, 10 );
 		}
@@ -188,7 +188,7 @@ namespace Server.Mobiles
 			if ( m_Queen != null && 0.1 >= Utility.RandomDouble() )
 				SpawnPixies( attacker );
 
-			attacker.Damage( Utility.Random( 20, 10 ), this );
+			this.Damage( Utility.Random( 20, 10 ), attacker);
 			attacker.Stam -= Utility.Random( 20, 10 );
 			attacker.Mana -= Utility.Random( 20, 10 );
 		}

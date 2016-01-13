@@ -28,7 +28,7 @@ namespace Server.Items
 					defender.MeleeDamageAbsorb -= damage;
 					damage = 0;
 
-					attacker.Damage( react, defender );
+                    defender.Damage( react, attacker );
 
 					attacker.PlaySound( 0x1F1 );
 					attacker.FixedEffect( 0x374A, 10, 16 );

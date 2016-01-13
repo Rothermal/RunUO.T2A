@@ -143,7 +143,7 @@ namespace Server.Items
                                 {
                                     if (m_LitBy != null)
                                         m_LitBy.DoHarmful(victim);
-                                    victim.Damage(Utility.Random(3) + 4, m_LitBy);
+                                    m_LitBy.Damage(Utility.Random(3) + 4, victim);
                                 }
                             }
                         (new FirebombField(m_LitBy, toDamage)).MoveToWorld(Location, Map);

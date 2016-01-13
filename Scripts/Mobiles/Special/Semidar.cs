@@ -95,7 +95,7 @@ namespace Server.Mobiles
 				int toDrain = Utility.RandomMinMax( 10, 40 );
 
 				Hits += toDrain;
-				m.Damage( toDrain, this );
+                this.Damage( toDrain, m );
 			}
 		}
 

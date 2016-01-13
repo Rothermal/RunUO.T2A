@@ -159,7 +159,7 @@ namespace Server.Mobiles
 			this.MovingParticles( to, 0x379F, 7, 0, false, true, 0xBE3, 0xFCB, 0x211 );
 			to.PlaySound( 0x229 );
 			this.DoHarmful( to );
-            to.Damage(50, this);
+            this.Damage(50, to);
         }
 
 		public ExodusMinion( Serial serial ) : base( serial )

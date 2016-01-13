@@ -122,7 +122,7 @@ namespace Server
 				if ( honorTarget != null && honorTarget.ReceivedHonorContext != null )
 					honorTarget.ReceivedHonorContext.OnTargetPoisoned();
 
-                m_Mobile.Damage(damage, m_From);
+                m_From.Damage(damage, m_Mobile);
 
                 if ( 0.60 <= Utility.RandomDouble() ) // OSI: randomly revealed between first and third damage tick, guessing 60% chance
 						m_Mobile.RevealingAction();

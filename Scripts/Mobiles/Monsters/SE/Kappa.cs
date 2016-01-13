@@ -113,7 +113,7 @@ namespace Server.Mobiles
 		{
 			if ( m.Alive )
 			{
-                m.Damage(5, from);
+                from.Damage(5, m);
                 from.Hits += 5;
 			}
 			else

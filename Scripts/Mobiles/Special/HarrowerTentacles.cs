@@ -198,7 +198,7 @@ namespace Server.Mobiles
 					if ( m_Owner.Harrower != null )
 						m_Owner.Harrower.Hits += drain;
 
-					m.Damage( drain, m_Owner );
+                    m_Owner.Damage( drain, m );
 				}
 
 				m_ToDrain.Clear();

@@ -878,7 +878,7 @@ namespace Server.Items
             /// Add Blood On ground and do Damage
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             AddBlood( attacker, defender, damage );
-            attacker.Damage( damage, defender );
+            defender.Damage( damage, attacker );
 
             /// Slime Damage to Weapons
             //////////////////////////////////////////////////////////////////////////////////////////////////////

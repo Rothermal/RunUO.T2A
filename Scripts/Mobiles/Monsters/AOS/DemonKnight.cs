@@ -174,7 +174,7 @@ namespace Server.Mobiles
 			if ( from != null && from != this && !m_InHere )
 			{
 				m_InHere = true;
-                from.Damage(Utility.RandomMinMax(8, 20), this);
+                this.Damage(Utility.RandomMinMax(8, 20), from);
 
                 MovingEffect( from, 0xECA, 10, 0, false, false, 0, 0 );
 				PlaySound( 0x491 );

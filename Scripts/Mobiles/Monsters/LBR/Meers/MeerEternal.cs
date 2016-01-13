@@ -118,7 +118,7 @@ namespace Server.Mobiles
 
 					this.DoHarmful( m );
 					this.Hits += damage;
-                    m.Damage(damage, this);
+                    this.Damage(damage, m);
                 }
 
 				this.Say( true, "If I cannot cleanse thy soul, I will destroy it!" );
@@ -161,7 +161,7 @@ namespace Server.Mobiles
                 int RandomInt = Utility.RandomMinMax(20, 30);
 
                 this.Hits += RandomInt;
-                combatant.Damage(RandomInt, this);
+                this.Damage(RandomInt, combatant);
             }
 		}
 

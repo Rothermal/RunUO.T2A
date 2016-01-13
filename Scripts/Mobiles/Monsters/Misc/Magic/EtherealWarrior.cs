@@ -105,7 +105,7 @@ namespace Server.Mobiles
 		{
 			base.OnGaveMeleeAttack( defender );
 
-			defender.Damage( Utility.Random( 10, 10 ), this );
+            this.Damage( Utility.Random( 10, 10 ), defender);
 			defender.Stam -= Utility.Random( 10, 10 );
 			defender.Mana -= Utility.Random( 10, 10 );
 		}
@@ -114,7 +114,7 @@ namespace Server.Mobiles
 		{
 			base.OnGotMeleeAttack( attacker );
 
-			attacker.Damage( Utility.Random( 10, 10 ), this );
+			this.Damage( Utility.Random( 10, 10 ), attacker);
 			attacker.Stam -= Utility.Random( 10, 10 );
 			attacker.Mana -= Utility.Random( 10, 10 );
 		}

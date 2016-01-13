@@ -127,7 +127,7 @@ namespace Server.Mobiles
 			protected override void OnTick()
 			{
 				m_Mobile.PlaySound( 0x11D );
-                m_Mobile.Damage(Utility.RandomMinMax(10, 20), m_From);
+                m_From.Damage(Utility.RandomMinMax(10, 20), m_Mobile);
 
             }
         }

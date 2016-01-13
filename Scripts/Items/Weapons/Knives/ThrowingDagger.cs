@@ -84,7 +84,7 @@ namespace Server.Items
 						{
 							from.MovingEffect( m, 0x1BFE, 7, 1, false, false, 0x481, 0 );
 
-                            m.Damage(Utility.Random(5, from.Str / 10), from);
+                            from.Damage(Utility.Random(5, from.Str / 10), m);
                             m_Dagger.MoveToWorld( m.Location, m.Map );
 						}
 						else

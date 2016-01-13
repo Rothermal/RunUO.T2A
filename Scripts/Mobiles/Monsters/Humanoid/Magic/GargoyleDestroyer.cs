@@ -75,7 +75,7 @@ namespace Server.Mobiles
 			int damage = 50;
 			this.MovingEffect( to, 0xF43, 10, 0, false, false );
 			this.DoHarmful( to );
-            to.Damage(damage, this);
+            this.Damage(damage, to);
         }
 
 		public GargoyleDestroyer( Serial serial ) : base( serial )

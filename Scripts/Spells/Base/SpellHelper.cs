@@ -835,7 +835,7 @@ namespace Server.Spells
 				if( target is BaseCreature )
 					((BaseCreature)target).AlterSpellDamageFrom( from, ref iDamage );
 
-				target.Damage( iDamage, from );
+                from.Damage( iDamage, target );
 			}
 			else
 			{
@@ -882,7 +882,7 @@ namespace Server.Spells
 
 				WeightOverloading.DFA = dfa;
 
-                target.Damage(iDamage, from);
+                from.Damage(iDamage, target);
 
 				WeightOverloading.DFA = DFAlgorithm.Standard;
 			}
@@ -981,7 +981,7 @@ namespace Server.Spells
 
 				WeightOverloading.DFA = m_DFA;
 
-                m_Target.Damage(m_Damage, m_From);
+                m_From.Damage(m_Damage, m_Target);
 
                 WeightOverloading.DFA = DFAlgorithm.Standard;
 

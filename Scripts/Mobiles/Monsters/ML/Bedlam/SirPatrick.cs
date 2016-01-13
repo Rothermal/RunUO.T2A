@@ -83,7 +83,7 @@ namespace Server.Mobiles
 				int drain = Utility.RandomMinMax( 14, 30 );
 
 				Hits += drain;
-				m.Damage( drain, this );
+                this.Damage( drain, m );
 			}
 		}
 

@@ -244,7 +244,7 @@ namespace Server.Mobiles
 				if ( m_Mobile.CanBeHarmful( m_Target ) )
 				{
 					m_Mobile.DoHarmful( m_Target );
-                    m_Target.Damage(Utility.RandomMinMax(10, 20), m_Mobile);
+                    m_Mobile.Damage(Utility.RandomMinMax(10, 20), m_Target);
                     new UnholyBone().MoveToWorld( m_Target.Location, m_Target.Map );
 				}
 			}

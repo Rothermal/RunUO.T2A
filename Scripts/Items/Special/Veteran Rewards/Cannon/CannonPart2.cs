@@ -89,7 +89,7 @@ namespace Server.Engines.Quests.Haven
 		{
 			DoFireEffect( target );
 
-			target.Damage( 9999, from );
+			from.Damage( 9999, target);
 		}
 
 		public override bool HandlesOnMovement { get { return m_Canoneer != null && !m_Canoneer.Deleted && m_Canoneer.Active; } }

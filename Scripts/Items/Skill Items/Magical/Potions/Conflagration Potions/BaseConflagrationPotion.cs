@@ -277,7 +277,7 @@ namespace Server.Items
 				{
 					m_From.DoHarmful( m );
 
-                    m.Damage(GetDamage(), m_From);
+                    m_From.Damage(GetDamage(), m);
                     m.PlaySound( 0x208 );
 				}
 
@@ -327,8 +327,8 @@ namespace Server.Items
 						{
 							if ( from != null )
 								from.DoHarmful( m );
-							
-                            m.Damage(m_Item.GetDamage(), from);
+
+                            from.Damage(m_Item.GetDamage(), m);
                             m.PlaySound( 0x208 );
 						}              
 					}

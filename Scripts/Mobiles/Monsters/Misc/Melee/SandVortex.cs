@@ -74,7 +74,7 @@ namespace Server.Mobiles
 			protected override void OnTick()
 			{
 				m_Mobile.PlaySound( 0x4CF );
-                m_Mobile.Damage(Utility.RandomMinMax(1, 40), m_From);
+                m_From.Damage(Utility.RandomMinMax(1, 40), m_Mobile);
             }
 		}
 

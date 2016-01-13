@@ -193,7 +193,7 @@ namespace Server.Spells.Fourth
 						m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
 					}
 
-                    m.Damage(damage, m_Caster);
+                    m_Caster.Damage(damage, m);
                     m.PlaySound( 0x208 );
 
 					if ( m is BaseCreature )
@@ -273,7 +273,7 @@ namespace Server.Spells.Fourth
 									m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
 								}
 
-                                m.Damage(damage, caster);
+                                caster.Damage(damage, m);
                                 m.PlaySound( 0x208 );
 
 								if ( m is BaseCreature )

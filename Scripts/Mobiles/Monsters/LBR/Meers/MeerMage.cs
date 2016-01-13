@@ -186,7 +186,7 @@ namespace Server.Mobiles
 					m.PlaySound( 0x00E );
 					m.PlaySound( 0x1BC );
 
-                    m.Damage(Utility.RandomMinMax(20, 30), this);
+                    this.Damage(Utility.RandomMinMax(20, 30), m);
 
                     states[1] = count + 1;
 
