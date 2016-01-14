@@ -193,22 +193,22 @@ namespace Server.Spells
 			}
 		}
 
-		public static bool AddStatOffset( Mobile m, StatType type, int offset, TimeSpan duration )
+		public static bool AddStatOffset( Mobile m, StatType type, int offset )
 		{
 			if( offset > 0 )
-				return AddStatBonus( m, m, type, offset, duration );
+				return AddStatBonus( m, m, type );
 			else if( offset < 0 )
-				return AddStatCurse( m, m, type, -offset, duration );
+				return AddStatCurse( m, m, type );
 
 			return true;
 		}
 
 		public static bool AddStatBonus( Mobile caster, Mobile target, StatType type )
 		{
-			return AddStatBonus( caster, target, type, GetOffset( caster, target, type, false ), GetDuration( caster, target ) );
+			return AddStatBonus( caster, target, type );
 		}
 
-		public static bool AddStatBonus( Mobile caster, Mobile target, StatType type, int bonus, TimeSpan duration )
+		public static bool AddStatBonus( Mobile target, StatType type, int bonus, TimeSpan duration )
 		{
 			int offset = bonus;
 			string name = String.Format( "[Magic] {0} Offset", type );
@@ -231,10 +231,10 @@ namespace Server.Spells
 
 		public static bool AddStatCurse( Mobile caster, Mobile target, StatType type )
 		{
-			return AddStatCurse( caster, target, type, GetOffset( caster, target, type, true ), GetDuration( caster, target ) );
+			return AddStatCurse( caster, target, type );
 		}
 
-		public static bool AddStatCurse( Mobile caster, Mobile target, StatType type, int curse, TimeSpan duration )
+		public static bool AddStatCurse( Mobile target, StatType type, int curse, TimeSpan duration )
 		{
 			int offset = -curse;
 			string name = String.Format( "[Magic] {0} Offset", type );
@@ -255,7 +255,7 @@ namespace Server.Spells
 			return false;
 		}
 
-		public static TimeSpan GetDuration( Mobile caster, Mobile target )
+		public static TimeSpan GetDuration( Mobile caster )
 		{
 			return TimeSpan.FromSeconds( caster.Skills[SkillName.Magery].Value * 1.2 );
 		}
@@ -285,7 +285,7 @@ namespace Server.Spells
 			return percent;
 		}
 
-		public static int GetOffset( Mobile caster, Mobile target, StatType type, bool curse )
+		public static int GetOffset( Mobile caster )
 		{
 			return 1 + (int)(caster.Skills[SkillName.Magery].Value * 0.1);
 		}
@@ -1057,7 +1057,7 @@ namespace Server.Spells
 		}
 		#endregion
 
-		public static bool CheckCast( Mobile caster, Spell spell )
+		public static bool CheckCast( Mobile caster )
 		{
 			if( Factions.Sigil.ExistsOn( caster ) )
 			{
@@ -1118,8 +1118,6 @@ namespace Server.Spells
 
 				if( !ourTransform )
 				{
-					string mods = "";
-
 					if( !((Body)transformSpell.Body).IsHuman )
 					{
 						Mobiles.IMount mt = caster.Mount;
@@ -1136,7 +1134,7 @@ namespace Server.Spells
 					Timer timer = new TransformTimer( caster, transformSpell );
 					timer.Start();
 
-					AddContext( caster, new TransformContext( timer, mods, ourType, transformSpell ) );
+					AddContext( caster, new TransformContext( timer, ourType, transformSpell ) );
 					return true;
 				}
 			}
@@ -1168,7 +1166,7 @@ namespace Server.Spells
 		public Type Type { get { return m_Type; } }
 		public ITransformationSpell Spell { get { return m_Spell; } }
 
-		public TransformContext( Timer timer, string mods, Type type, ITransformationSpell spell )
+		public TransformContext( Timer timer, Type type, ITransformationSpell spell )
 		{
 			m_Timer = timer;
 			m_Type = type;

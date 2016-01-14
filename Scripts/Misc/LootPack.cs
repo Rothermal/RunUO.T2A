@@ -7,31 +7,6 @@ namespace Server
 {
     public class LootPack
 	{
-		public static int GetLuckChance( Mobile killer, Mobile victim )
-		{
-			return 0;
-		}
-
-		public static int GetLuckChanceForKiller( Mobile dead )
-		{
-			List<DamageStore> list = BaseCreature.GetLootingRights( dead.DamageEntries, dead.HitsMax );
-
-			DamageStore highest = null;
-
-			for ( int i = 0; i < list.Count; ++i )
-			{
-				DamageStore ds = list[i];
-
-				if ( ds.m_HasRight && (highest == null || ds.m_Damage > highest.m_Damage) )
-					highest = ds;
-			}
-
-			if ( highest == null )
-				return 0;
-
-			return GetLuckChance( highest.m_Mobile, dead );
-		}
-
 		public static bool CheckLuck( int chance )
 		{
 			return ( chance > Utility.Random( 10000 ) );
@@ -44,12 +19,10 @@ namespace Server
 			m_Entries = entries;
 		}
 
-		public void Generate( Mobile from, Container cont, bool spawning, int luckChance )
+		public void Generate( Mobile from, Container cont, bool spawning )
 		{
 			if ( cont == null )
 				return;
-
-			bool checkLuck = false;
 
 			for ( int i = 0; i < m_Entries.Length; ++i )
 			{
@@ -57,18 +30,10 @@ namespace Server
 
 				bool shouldAdd = ( entry.Chance > Utility.Random( 10000 ) );
 
-				if ( !shouldAdd && checkLuck )
-				{
-					checkLuck = false;
-
-					if( LootPack.CheckLuck( luckChance ) )
-						shouldAdd = ( entry.Chance > Utility.Random( 10000 ) );
-				}
-
 				if ( !shouldAdd )
 					continue;
 
-				Item item = entry.Construct( from, luckChance, spawning );
+				Item item = entry.Construct( from, spawning );
 
 				if ( item != null )
 				{
@@ -533,7 +498,7 @@ namespace Server
 			set{ m_Items = value; }
 		}
 
-		public Item Construct( Mobile from, int luckChance, bool spawning )
+		public Item Construct( Mobile from, bool spawning )
 		{
 			if ( m_AtSpawnTime != spawning )
 				return null;
@@ -550,7 +515,7 @@ namespace Server
 				LootPackItem item = m_Items[i];
 
 				if ( rnd < item.Chance )
-					return Mutate( from, luckChance, item.Construct( false, false ) );
+					return Mutate( from,  item.Construct() );
 
 				rnd -= item.Chance;
 			}
@@ -583,7 +548,7 @@ namespace Server
 			return 5;
 		}
 
-		public Item Mutate( Mobile from, int luckChance, Item item )
+		public Item Mutate( Mobile from, Item item )
 		{
 			if ( item != null )
 			{
@@ -778,18 +743,18 @@ namespace Server
 			return Loot.RandomScroll( minCircle * 8, (maxCircle * 8) + 7, SpellbookType.Regular );
 		}
 
-		public Item Construct( bool inTokuno, bool isMondain )
+		public Item Construct()
 		{
 			try
 			{
 				Item item;
 
 				if ( m_Type == typeof( BaseRanged ) )
-					item = Loot.RandomRangedWeapon( inTokuno, isMondain );
+					item = Loot.RandomRangedWeapon();
 				else if ( m_Type == typeof( BaseWeapon ) )
-					item = Loot.RandomWeapon( inTokuno, isMondain );
+					item = Loot.RandomWeapon();
 				else if ( m_Type == typeof( BaseArmor ) )
-					item = Loot.RandomArmorOrHat( inTokuno, isMondain );
+					item = Loot.RandomArmorOrHat();
 				else if ( m_Type == typeof( BaseShield ) )
 					item = Loot.RandomShield();
 				else if ( m_Type == typeof( BaseJewel ) )

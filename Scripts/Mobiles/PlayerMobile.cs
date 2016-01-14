@@ -900,7 +900,7 @@ namespace Server.Mobiles
 						else
 						{
 							int strBonus = clothing.ComputeStatBonus( StatType.Str );
-							int strReq = clothing.ComputeStatReq( StatType.Str );
+							int strReq = clothing.StrRequirement;
 
 							if( str < strReq || (str + strBonus) < 1 )
 								drop = true;
@@ -1436,9 +1436,9 @@ namespace Server.Mobiles
 
 		#region Insurance
 
-		private static int GetInsuranceCost( Item item )
+		private static int GetInsuranceCost( )
 		{
-			return 600; // TODO
+			return 600; 
 		}
 
 		private void ToggleItemInsurance()
@@ -1516,7 +1516,7 @@ namespace Server.Mobiles
 			{
 				if ( !item.PayedInsurance )
 				{
-					int cost = GetInsuranceCost( item );
+					int cost = GetInsuranceCost();
 
 					if ( Banker.Withdraw( from, cost ) )
 					{
@@ -1699,7 +1699,7 @@ namespace Server.Mobiles
 				for ( int i = 0; i < items.Length; ++i )
 				{
 					if ( insure[i] )
-						cost += GetInsuranceCost( items[i] );
+						cost += GetInsuranceCost();
 				}
 
 				AddHtmlLocalized( 15, 420, 300, 20, 1114310, 0x7FFF, false, false ); // GOLD AVAILABLE:
@@ -1724,12 +1724,12 @@ namespace Server.Mobiles
 					if ( insure[i] )
 					{
 						AddButton( 400, y, 9723, 9724, 100 + i, GumpButtonType.Reply, 0 );
-						AddLabel( 250, y, 0x481, GetInsuranceCost( item ).ToString() );
+						AddLabel( 250, y, 0x481, GetInsuranceCost().ToString() );
 					}
 					else
 					{
 						AddButton( 400, y, 9720, 9722, 100 + i, GumpButtonType.Reply, 0 );
-						AddLabel( 250, y, 0x66C, GetInsuranceCost( item ).ToString() );
+						AddLabel( 250, y, 0x66C, GetInsuranceCost().ToString() );
 					}
 				}
 
@@ -2228,7 +2228,7 @@ namespace Server.Mobiles
 			if ( m_ReceivedHonorContext != null )
 				m_ReceivedHonorContext.OnTargetDamaged( from, amount );
 			if ( m_SentHonorContext != null )
-				m_SentHonorContext.OnSourceDamaged( from, amount );
+				m_SentHonorContext.OnSourceDamaged( from );
 
 			if ( willKill && from is PlayerMobile )
 				Timer.DelayCall( TimeSpan.FromSeconds( 10 ), new TimerCallback( ((PlayerMobile) from).RecoverAmmo ) );
@@ -2338,7 +2338,7 @@ namespace Server.Mobiles
 
 				if ( AutoRenewInsurance )
 				{
-					int cost = GetInsuranceCost( item );
+					int cost = GetInsuranceCost();
 
 					if ( m_InsuranceAward != null )
 						cost /= 2;
@@ -2438,7 +2438,7 @@ namespace Server.Mobiles
 
 			MeerMage.StopEffect( this, false );
 
-			SkillHandlers.StolenItem.ReturnOnDeath( this, c );
+			SkillHandlers.StolenItem.ReturnOnDeath( c );
 
 			if ( m_PermaFlags.Count > 0 )
 			{
@@ -3987,7 +3987,7 @@ namespace Server.Mobiles
 		private ChampionTitleInfo m_ChampionTitles;
 
 		[CommandProperty( AccessLevel.GameMaster )]
-		public ChampionTitleInfo ChampionTitles { get { return m_ChampionTitles; } set { } }
+		public ChampionTitleInfo ChampionTitles { get { return m_ChampionTitles; } }
 
 		private void ToggleChampionTitleDisplay()
 		{

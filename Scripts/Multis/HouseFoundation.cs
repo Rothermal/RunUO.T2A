@@ -1049,7 +1049,7 @@ namespace Server.Multis
 				int newPrice = oldPrice + context.Foundation.CustomizationCost + ((context.Foundation.DesignState.Components.List.Length - ( context.Foundation.CurrentState.Components.List.Length + context.Foundation.Fixtures.Count) ) * 500);
 				int bankBalance = Banker.GetBalance( from );
 
-				from.SendGump( new ConfirmCommitGump( from, context.Foundation, bankBalance, oldPrice, newPrice ) );
+				from.SendGump( new ConfirmCommitGump( context.Foundation, bankBalance, oldPrice, newPrice ) );
 			}
 		}
 
@@ -1916,8 +1916,7 @@ namespace Server.Multis
 	{
 		private HouseFoundation m_Foundation;
 
-		public ConfirmCommitGump( Mobile from, HouseFoundation foundation, int bankBalance, int oldPrice, int newPrice )
-			: base( 50, 50 )
+		public ConfirmCommitGump( HouseFoundation foundation, int bankBalance, int oldPrice, int newPrice )	: base( 50, 50 )
 		{
 			m_Foundation = foundation;
 

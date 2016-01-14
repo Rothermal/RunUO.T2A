@@ -62,7 +62,7 @@ namespace Server.Spells.Fourth
 						if ( m == directTarget )
 							continue;
 
-						if ( AreaCanTarget( m, feluccaRules ) )
+						if ( AreaCanTarget( m ) )
 							targets.Add( m );
 					}
 
@@ -105,7 +105,7 @@ namespace Server.Spells.Fourth
 			FinishSequence();
 		}
 
-		private bool AreaCanTarget( Mobile target, bool feluccaRules )
+		private bool AreaCanTarget( Mobile target )
 		{
 			/* Arch cure area effect won't cure aggressors, victims, murderers, criminals or monsters.
 			 * In Felucca, it will also not cure summons and pets.

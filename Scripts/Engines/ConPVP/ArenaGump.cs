@@ -186,7 +186,7 @@ namespace Server.Engines.ConPVP
 				AddRadio( x + 3, y + 1, 9727, 9730, false, i );
 				x += 35;
 
-				AddBorderedText( x + 5, y + 5, 115 - 5, name, color, 0 );
+				AddBorderedText( x + 5, y + 5, 115 - 5, name, color );
 				x += 115;
 
 				StringBuilder sb = new StringBuilder();
@@ -242,10 +242,10 @@ namespace Server.Engines.ConPVP
 					sb.Append( "Empty" );
 				}
 
-				AddBorderedText( x + 5, y + 5, 325 - 5, sb.ToString(), color, 0 );
+				AddBorderedText( x + 5, y + 5, 325 - 5, sb.ToString(), color );
 				x += 325;
 
-				AddBorderedText( x, y + 5, 40, Center( ar.Spectators.ToString() ), color, 0 );
+				AddBorderedText( x, y + 5, 40, Center( ar.Spectators.ToString() ), color );
 			}
 		}
 
@@ -259,14 +259,8 @@ namespace Server.Engines.ConPVP
 			return String.Format( "<BASEFONT COLOR=#{0:X6}>{1}</BASEFONT>", color, text );
 		}
 
-		private void AddBorderedText( int x, int y, int width, string text, int color, int borderColor )
+		private void AddBorderedText( int x, int y, int width, string text, int color )
 		{
-			/*AddColoredText( x - 1, y, width, text, borderColor );
-			AddColoredText( x + 1, y, width, text, borderColor );
-			AddColoredText( x, y - 1, width, text, borderColor );
-			AddColoredText( x, y + 1, width, text, borderColor );*/
-			/*AddColoredText( x - 1, y - 1, width, text, borderColor );
-			AddColoredText( x + 1, y + 1, width, text, borderColor );*/
 			AddColoredText( x, y, width, text, color );
 		}
 
@@ -286,7 +280,7 @@ namespace Server.Engines.ConPVP
 			AddImageTiled( m_ColumnX + 2, 14, width - 4, 16, 0x2430 );
 
 			if ( name != null )
-				AddBorderedText( m_ColumnX, 13, width, Center( name ), 0xFFFFFF, 0 );
+				AddBorderedText( m_ColumnX, 13, width, Center( name ), 0xFFFFFF );
 
 			m_ColumnX += width;
 		}

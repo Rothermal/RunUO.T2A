@@ -389,11 +389,6 @@ namespace Server.Multis
 				m_SPlank.Map = Map;
 		}
 
-		public bool CanCommand( Mobile m )
-		{
-			return true;
-		}
-
 		public Point3D GetMarkedLocation()
 		{
 			Point3D p = new Point3D( X + MarkOffset.X, Y + MarkOffset.Y, Z + MarkOffset.Z );
@@ -825,7 +820,7 @@ namespace Server.Multis
 				m_TillerMan.Say( 502534 ); // This ship now has no name.
 		}
 
-		public void GiveName( Mobile m )
+		public void GiveName()
 		{
 			if ( m_TillerMan == null || CheckDecay() )
 				return;
@@ -976,7 +971,7 @@ namespace Server.Multis
 
 			Mobile from = e.Mobile;
 
-			if ( CanCommand( from ) && Contains( from ) )
+			if ( Contains( from ) )
 			{
 				for ( int i = 0; i < e.Keywords.Length; ++i )
 				{
@@ -988,7 +983,7 @@ namespace Server.Multis
 						{
 							case 0x42: SetName( e ); break;
 							case 0x43: RemoveName( e.Mobile ); break;
-							case 0x44: GiveName( e.Mobile ); break;
+							case 0x44: GiveName( ); break;
 							case 0x45: StartMove( Forward, true ); break;
 							case 0x46: StartMove( Backward, true ); break;
 							case 0x47: StartMove( Left, true ); break;
@@ -1272,9 +1267,9 @@ namespace Server.Multis
 			return false;
 		}
 
-		public static bool IsValidLocation( Point3D p, Map map )
+		public static bool IsValidLocation( Point3D p )
 		{
-			Rectangle2D[] wrap = GetWrapFor( map );
+			Rectangle2D[] wrap = GetWrapFor( );
 
 			for ( int i = 0; i < wrap.Length; ++i )
 			{
@@ -1285,9 +1280,9 @@ namespace Server.Multis
 			return false;
 		}
 
-		public static Rectangle2D[] GetWrapFor( Map m )
+		public static Rectangle2D[] GetWrapFor()
 		{
-			return m_BritWrap;
+    		return m_BritWrap;
 		}
 
 		public Direction GetMovementFor( int x, int y, out int maxSpeed )
@@ -1436,7 +1431,7 @@ namespace Server.Multis
 			int newX = X + xOffset;
 			int newY = Y + yOffset;
 
-			Rectangle2D[] wrap = GetWrapFor( map );
+			Rectangle2D[] wrap = GetWrapFor();
 
 			for ( int i = 0; i < wrap.Length; ++i )
 			{

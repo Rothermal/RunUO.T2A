@@ -221,7 +221,7 @@ namespace Server.Items
 				else
 				{
 					int strBonus = ComputeStatBonus( StatType.Str );
-					int strReq = ComputeStatReq( StatType.Str );
+					int strReq = StrRequirement;
 
 					if( from.Str < strReq || (from.Str + strBonus) < 1 )
 					{
@@ -242,11 +242,6 @@ namespace Server.Items
 		public virtual bool AllowMaleWearer{ get{ return true; } }
 		public virtual bool AllowFemaleWearer{ get{ return true; } }
 		public virtual bool CanBeBlessed{ get{ return true; } }
-
-		public int ComputeStatReq( StatType type )
-		{
-			return StrRequirement;
-		}
 
 		public int ComputeStatBonus( StatType type )
 		{
@@ -544,7 +539,7 @@ namespace Server.Items
 			if ( (prop = ArtifactRarity) > 0 )
 				list.Add( 1061078, prop.ToString() ); // artifact rarity ~1_val~
 
-			if ( (prop = ComputeStatReq( StatType.Str )) > 0 )
+			if ( (prop = StrRequirement) > 0 )
 				list.Add( 1061170, prop.ToString() ); // strength requirement ~1_val~
 
 			if ( m_HitPoints >= 0 && m_MaxHitPoints > 0 )

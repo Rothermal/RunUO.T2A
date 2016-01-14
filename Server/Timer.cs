@@ -559,8 +559,6 @@ namespace Server
 		{
 			private TimerCallback m_Callback;
 
-			public TimerCallback Callback{ get{ return m_Callback; } }
-
 			public override bool DefRegCreation{ get{ return false; } }
 
 			public DelayCallTimer( TimeSpan delay, TimeSpan interval, int count, TimerCallback callback ) : base( delay, interval, count )
@@ -585,8 +583,6 @@ namespace Server
 		{
 			private TimerStateCallback m_Callback;
 			private object m_State;
-
-			public TimerStateCallback Callback{ get{ return m_Callback; } }
 
 			public override bool DefRegCreation{ get{ return false; } }
 
@@ -614,8 +610,6 @@ namespace Server
 		{
 			private TimerStateCallback<T> m_Callback;
 			private T m_State;
-
-			public TimerStateCallback<T> Callback { get { return m_Callback; } }
 
 			public override bool DefRegCreation { get { return false; } }
 

@@ -10,7 +10,7 @@ namespace Server.Engines.ConPVP
 		private bool m_IsPrivate;
 
 		[CommandProperty( AccessLevel.GameMaster )]
-		public Arena Arena{ get{ return m_Arena; } set{} }
+		public Arena Arena{ get{ return m_Arena; } }
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public bool IsPrivate{ get{ return m_IsPrivate; } set{ m_IsPrivate = value; } }
@@ -317,7 +317,7 @@ namespace Server.Engines.ConPVP
 		public bool IsOccupied{ get{ return ( m_Players.Count > 0 ); } }
 
 		[CommandProperty( AccessLevel.GameMaster )]
-		public ArenaStartPoints Points{ get{ return m_Points; } set{} }
+		public ArenaStartPoints Points{ get{ return m_Points; } }
 
 		public Item Teleporter{ get{ return m_Teleporter; } set{ m_Teleporter = value; } }
 

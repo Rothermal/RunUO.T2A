@@ -973,7 +973,7 @@ namespace Server.Multis
 			return list;
 		}
 
-		public static bool CheckHold( Mobile m, Container cont, Item item, bool message, bool checkItems, int plusItems, int plusWeight )
+		public static bool CheckHold( Mobile m, Container cont, Item item, bool message, int plusItems )
 		{
 			BaseHouse house = FindHouseAt( cont );
 

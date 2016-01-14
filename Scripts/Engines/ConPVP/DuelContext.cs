@@ -123,7 +123,7 @@ namespace Server.Engines.ConPVP
 			if ( pl == null || pl.Eliminated )
 				return true;
 
-			if ( item is Dagger || CheckItemEquip( from, item ) )
+			if ( item is Dagger || CheckItemEquip( item ) )
 				return true;
 
 			from.SendMessage( "The dueling ruleset prevents you from equiping this item." );
@@ -164,9 +164,9 @@ namespace Server.Engines.ConPVP
 			return false;
 		}
 
-		public bool CheckItemEquip( Mobile from, Item item )
+		public bool CheckItemEquip( Item item )
 		{
-			if ( item is Fists )
+    		if ( item is Fists )
 			{
 				if ( !m_Ruleset.GetOption( "Weapons", "Wrestling" ) )
 					return false;
@@ -574,7 +574,7 @@ namespace Server.Engines.ConPVP
 			if ( m_Tournament != null && winner.TournyPart != null )
 			{
 				m_Match.Winner = winner.TournyPart;
-				winner.TournyPart.WonMatch( m_Match );
+				winner.TournyPart.WonMatch();
 				m_Tournament.HandleWon( m_Arena, m_Match, winner.TournyPart );
 			}
 
@@ -587,7 +587,7 @@ namespace Server.Engines.ConPVP
 					loser.Broadcast( 0x22, null, loser.Players.Length == 1 ? "{0} has lost the duel." : "{0} and {1} team have lost the duel.", loser.Players.Length == 1 ? "You have lost the duel." : "Your team has lost the duel." );
 
 					if ( m_Tournament != null && loser.TournyPart != null )
-						loser.TournyPart.LostMatch( m_Match );
+						loser.TournyPart.LostMatch();
 				}
 
 				for ( int j = 0; j < loser.Players.Length; ++j )
@@ -1845,7 +1845,7 @@ namespace Server.Engines.ConPVP
 
 				Item item = mob.Items[i];
 
-				if ( !CheckItemEquip( mob, item ) )
+				if ( !CheckItemEquip( item ) )
 				{
 					pack.DropItem( item );
 
@@ -1860,7 +1860,7 @@ namespace Server.Engines.ConPVP
 
 			Item inHand = mob.Holding;
 
-			if ( inHand != null && !CheckItemEquip( mob, inHand ) )
+			if ( inHand != null && !CheckItemEquip( inHand ) )
 			{
 				mob.Holding = null;
 
@@ -1917,7 +1917,7 @@ namespace Server.Engines.ConPVP
 					if ( count > 0 )
 					{
 						if ( count == 10 )
-							CloseAndSendGump( mob, new BeginGump( count ), types );
+							CloseAndSendGump( mob, new BeginGump(), types );
 
 						mob.Frozen = true;
 					}

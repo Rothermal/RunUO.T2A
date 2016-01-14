@@ -8,16 +8,12 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public AlchemyBag() : this( 1 )
+		public AlchemyBag()
 		{
-			Movable = true;
-			Hue = 0x250;
-		}
+            Movable = true;
+            Hue = 0x250;
 
-		[Constructable]
-		public AlchemyBag( int amount )
-		{
-			DropItem( new MortarPestle( 5 ) );
+            DropItem( new MortarPestle( 5 ) );
 			DropItem( new BagOfReagents( 5000 ) );
 			DropItem( new Bottle( 5000 ) );
 		}

@@ -332,9 +332,6 @@ namespace Server.Mobiles
 
 				return null;
 			}
-			set
-			{
-			}
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -948,14 +945,6 @@ namespace Server.Mobiles
 
 			if ( isTeleport && m_AI != null )
 				m_AI.OnTeleported();
-		}
-
-		public override void OnBeforeSpawn( Point3D location, Map m )
-		{
-			if ( Paragon.CheckConvert( this, location, m ) )
-				IsParagon = true;
-
-			base.OnBeforeSpawn( location, m );
 		}
 
 		public override ApplyPoisonResult ApplyPoison( Mobile from, Poison poison )
@@ -3593,16 +3582,6 @@ namespace Server.Mobiles
 			PackItem( Loot.RandomPotion() );
 		}
 
-		public void PackArcanceScroll( double chance )
-		{
-			return;
-		}
-
-		public void PackNecroScroll( int index )
-		{
-			return;
-		}
-
 		public void PackScroll( int minCircle, int maxCircle )
 		{
 			PackScroll( Utility.RandomMinMax( minCircle, maxCircle ) );
@@ -3656,9 +3635,6 @@ namespace Server.Mobiles
 		{
 			m_Spawning = spawning;
 
-			if ( !spawning )
-				m_KillersLuck = LootPack.GetLuckChanceForKiller( this );
-
 			GenerateLoot();
 
 			if ( m_Paragon )
@@ -3676,7 +3652,6 @@ namespace Server.Mobiles
 			}
 
 			m_Spawning = false;
-			m_KillersLuck = 0;
 		}
 
 		public virtual void GenerateLoot()
@@ -3705,7 +3680,7 @@ namespace Server.Mobiles
 				AddItem( backpack );
 			}
 
-			pack.Generate( this, backpack, m_Spawning, m_KillersLuck );
+			pack.Generate( this, backpack, m_Spawning );
 		}
 
 		public bool PackArmor( int minLevel, int maxLevel )
@@ -4249,11 +4224,6 @@ namespace Server.Mobiles
 
 		public virtual void OnKilledBy( Mobile mob )
 		{
-			if ( m_Paragon )
-			{
-				if ( Paragon.CheckArtifactChance( mob, this ) )
-					Paragon.GiveArtifactTo( mob );
-			}
 		}
 
 		public override void OnDeath( Container c )
@@ -4906,7 +4876,7 @@ namespace Server.Mobiles
 			return false;
 		}
 
-		public void Pacify( Mobile master, DateTime endtime )
+		public void Pacify( DateTime endtime )
 		{
 			BardPacified = true;
 			BardEndTime = endtime;
