@@ -4,20 +4,12 @@
 	public class Lollipops : CandyCane
 	{
 		[Constructable]
-		public Lollipops()
-			: this( 1 )
-		{
-		}
-
-		[Constructable]
-		public Lollipops( int amount )
-			: base( 0x468D + Utility.Random( 3 ))
+		public Lollipops() : base( 0x468D + Utility.Random( 3 ))
 		{
 			Stackable = true;
 		}
 
-		public Lollipops( Serial serial )
-			: base( serial )
+		public Lollipops( Serial serial ) : base( serial )
 		{
 		}
 

@@ -286,7 +286,7 @@ namespace Server.Items
 						else
 						{
 							m_Patient.CloseGump( typeof( ResurrectGump ) );
-							m_Patient.SendGump( new ResurrectGump( m_Patient, m_Healer ) );
+							m_Patient.SendGump( new ResurrectGump( m_Healer ) );
 						}
 					}
 				}

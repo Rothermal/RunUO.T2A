@@ -5,14 +5,7 @@
 		public override int LabelNumber { get { return 1096936; } } /* nougat swirl */
 
 		[Constructable]
-		public NougatSwirl() : this(1)
-		{
-
-		}
-
-		[Constructable]
-		public NougatSwirl( int amount )
-			: base( 0x4690 )
+		public NougatSwirl() : base( 0x4690 )
 		{
 			Stackable = true;
 		}

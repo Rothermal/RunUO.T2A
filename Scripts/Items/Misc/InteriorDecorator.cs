@@ -57,7 +57,7 @@ namespace Server.Items
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			if ( !CheckUse( this, from ) )
+			if ( !CheckUse( from ) )
 				return;
 			
 			if ( from.FindGump( typeof( InteriorDecorator.InternalGump ) ) == null )
@@ -74,11 +74,8 @@ namespace Server.Items
 			return ( house != null && house.IsCoOwner( from ) );
 		}
 
-		public static bool CheckUse( InteriorDecorator tool, Mobile from )
+		public static bool CheckUse( Mobile from )
 		{
-			/*if ( tool.Deleted || !tool.IsChildOf( from.Backpack ) )
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-			else*/
 			if ( !InHouse( from ) )
 				from.SendLocalizedMessage( 502092 ); // You must be in your house to do this.
 			else
@@ -147,7 +144,7 @@ namespace Server.Items
 
 			protected override void OnTarget( Mobile from, object targeted )
 			{
-				if ( targeted is Item && InteriorDecorator.CheckUse( m_Decorator, from ) )
+				if ( targeted is Item && InteriorDecorator.CheckUse( from ) )
 				{
 					BaseHouse house = BaseHouse.FindHouseAt( from );
 					Item item = (Item)targeted;

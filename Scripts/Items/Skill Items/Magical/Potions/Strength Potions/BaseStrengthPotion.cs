@@ -32,7 +32,7 @@ namespace Server.Items
 		public bool DoStrength( Mobile from )
 		{
 			// TODO: Verify scaled; is it offset, duration, or both?
-			if ( Spells.SpellHelper.AddStatOffset( from, StatType.Str, Scale( from, StrOffset ), Duration ) )
+			if ( Spells.SpellHelper.AddStatOffset( from, StatType.Str, StrOffset ) )
 			{
 				from.FixedEffect( 0x375A, 10, 15 );
 				from.PlaySound( 0x1E7 );

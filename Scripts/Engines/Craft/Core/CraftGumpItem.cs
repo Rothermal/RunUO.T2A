@@ -130,7 +130,7 @@ namespace Server.Engines.Craft
 				resIndex = ( m_CraftItem.UseSubRes2 ? context.LastResourceIndex2 : context.LastResourceIndex );
 
 			bool allRequiredSkills = true;
-			double chance = m_CraftItem.GetSuccessChance( m_From, resIndex > -1 ? res.GetAt( resIndex ).ItemType : null, m_CraftSystem, false, ref allRequiredSkills );
+			double chance = m_CraftItem.GetSuccessChance( m_From, m_CraftSystem, false, ref allRequiredSkills );
 			double excepChance = m_CraftItem.GetExceptionalChance( m_CraftSystem, chance, m_From );
 
 			if ( chance < 0.0 )

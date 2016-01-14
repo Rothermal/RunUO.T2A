@@ -972,7 +972,7 @@ namespace Server
 		public List<Mobile> Stabled { get { return m_Stabled; } }
 
 		[CommandProperty( AccessLevel.Counselor, AccessLevel.GameMaster )]
-		public VirtueInfo Virtues { get { return m_Virtues; } set { } }
+		public VirtueInfo Virtues { get { return m_Virtues; } }
 
 		public object Party { get { return m_Party; } set { m_Party = value; } }
 		public List<SkillMod> SkillMods { get { return m_SkillMods; } }
@@ -1080,10 +1080,6 @@ namespace Server
 
 			public bool Value
 			{
-				get
-				{
-					return m_Value;
-				}
 				set
 				{
 					m_Value = value;
@@ -2589,11 +2585,6 @@ namespace Server
 			{
 				m_Callback = callback;
 				m_CallbackHandlesCancel = callbackHandlesCancel;
-			}
-
-			public SimplePrompt( PromptCallback callback )
-				: this( callback, false )
-			{
 			}
 
 			public override void OnResponse( Mobile from, string text )
@@ -4498,12 +4489,6 @@ namespace Server
 
 			private IPoint3D m_RelativeTo;
 
-			public IPoint3D RelativeTo
-			{
-				get { return m_RelativeTo; }
-				set { m_RelativeTo = value; }
-			}
-
 			public LocationComparer( IPoint3D relativeTo )
 			{
 				m_RelativeTo = relativeTo;
@@ -6106,9 +6091,6 @@ namespace Server
 			{
 				return m_Skills;
 			}
-			set
-			{
-			}
 		}
 
 		[CommandProperty( AccessLevel.Counselor, AccessLevel.Administrator )]
@@ -6462,16 +6444,6 @@ namespace Server
 			}
 		}
 
-		[Obsolete( "Use CloseGump( Type ) instead." )]
-		public bool CloseGump( Type type, int buttonID ) {
-			return CloseGump( type );
-		}
-
-		[Obsolete( "Use CloseGump( Type ) instead." )]
-		public bool CloseGump( Type type, int buttonID, bool throwOnOffline ) {
-			return CloseGump( type );
-		}
-
 		public bool CloseAllGumps() {
 			NetState ns = m_NetState;
 
@@ -6492,18 +6464,8 @@ namespace Server
 			}
 		}
 
-		[Obsolete( "Use CloseAllGumps() instead.", false )]
-		public bool CloseAllGumps( bool throwOnOffline ) {
-			return CloseAllGumps();
-		}
-
 		public bool HasGump( Type type ) {
 			return ( FindGump( type ) != null );
-		}
-
-		[Obsolete( "Use HasGump( Type ) instead.", false )]
-		public bool HasGump( Type type, bool throwOnOffline ) {
-			return HasGump( type );
 		}
 
 		public bool SendGump( Gump g ) {
@@ -9943,7 +9905,7 @@ namespace Server
 
 				if( sendPublicStats || sendPrivateStats )
 				{
-					ourState.Send( new MobileStatusExtended( m, m_NetState ) );
+					ourState.Send( new MobileStatusExtended( m ) );
 				}
 				else if( sendAll )
 				{
@@ -10487,8 +10449,8 @@ namespace Server
 		{
 			NetState ns = m_NetState;
 
-			if( ns != null )
-				ns.Send( MessageLocalized.InstantiateGeneric( number ) );
+            if (ns != null)
+                ns.Send( MessageLocalized.InstantiateGeneric( number ) );
 		}
 
 		public void SendLocalizedMessage( int number, string args )
@@ -10710,7 +10672,7 @@ namespace Server
 		public virtual void OnStatsQuery( Mobile from )
 		{
 			if( from.Map == this.Map && Utility.InUpdateRange( this, from ) && from.CanSee( this ) )
-				from.Send( new MobileStatus( from, this, m_NetState ) );
+				from.Send( new MobileStatus( from, this ) );
 
 			if( from == this )
 				Send( new StatLockInfo( this ) );

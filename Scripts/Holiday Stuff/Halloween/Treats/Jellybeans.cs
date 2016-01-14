@@ -4,14 +4,7 @@
 	{
 		public override int LabelNumber { get { return 1096932; } } /* jellybeans */
 
-		[Constructable]
-		public JellyBeans() 
-			: this( 1 )
-		{
-		}
-
-		public JellyBeans( int amount )
-			: base( 0x468C )
+		public JellyBeans()	: base( 0x468C )
 		{
 			Stackable = true;
 		}

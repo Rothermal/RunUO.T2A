@@ -240,8 +240,8 @@ namespace Server.Items
 				int alchemySkill = m_From.Skills.Alchemy.Fixed;
 				int alchemyBonus = alchemySkill / 125 + alchemySkill / 250 ;
 
-				m_MinDamage = Scale( m_From, m_MinDamage + alchemyBonus );
-				m_MaxDamage = Scale( m_From, m_MaxDamage + alchemyBonus );
+				m_MinDamage = m_MinDamage + alchemyBonus;
+				m_MaxDamage = m_MaxDamage + alchemyBonus;
 			}
 
 			public override void Serialize( GenericWriter writer )

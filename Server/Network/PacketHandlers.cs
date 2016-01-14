@@ -1682,7 +1682,7 @@ namespace Server.Network
 
 			switch ( pvSrc.ReadByte() )
 			{
-				case 0x01: PartyMessage_AddMember( state, pvSrc ); break;
+				case 0x01: PartyMessage_AddMember( state ); break;
 				case 0x02: PartyMessage_RemoveMember( state, pvSrc ); break;
 				case 0x03: PartyMessage_PrivateMessage( state, pvSrc ); break;
 				case 0x04: PartyMessage_PublicMessage( state, pvSrc ); break;
@@ -1693,7 +1693,7 @@ namespace Server.Network
 			}
 		}
 
-		public static void PartyMessage_AddMember( NetState state, PacketReader pvSrc )
+		public static void PartyMessage_AddMember( NetState state )
 		{
 			if ( PartyCommands.Handler != null )
 				PartyCommands.Handler.OnAdd( state.Mobile );

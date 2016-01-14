@@ -666,8 +666,6 @@ namespace Server.Items
 			if ( magery >= 800 )
 			{
 				int[] propertyCounts;
-				int minIntensity;
-				int maxIntensity;
 
 				if ( magery >= 1000 )
 				{
@@ -677,26 +675,19 @@ namespace Server.Items
 						propertyCounts = m_ElderPropertyCounts;
 					else
 						propertyCounts = m_GrandPropertyCounts;
-
-					minIntensity = 55;
-					maxIntensity = 75;
 				}
 				else if ( magery >= 900 )
 				{
 					propertyCounts = m_MasterPropertyCounts;
-					minIntensity = 25;
-					maxIntensity = 45;
 				}
 				else
 				{
 					propertyCounts = m_AdeptPropertyCounts;
-					minIntensity = 0;
-					maxIntensity = 15;
 				}
 
 				int propertyCount = propertyCounts[Utility.Random( propertyCounts.Length )];
 
-				BaseRunicTool.ApplyAttributesTo( this, true, 0, propertyCount, minIntensity, maxIntensity );
+				BaseRunicTool.ApplyAttributesTo( this, true, 0, propertyCount );
 			}
 
 			if ( makersMark )

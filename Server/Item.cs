@@ -1921,12 +1921,6 @@ namespace Server
 			NullWeight		= 0x04000000
 		}
 
-		private static void SetSaveFlag( ref SaveFlag flags, SaveFlag toSet, bool setIf )
-		{
-			if ( setIf )
-				flags |= toSet;
-		}
-
 		private static bool GetSaveFlag( SaveFlag flags, SaveFlag toGet )
 		{
 			return ( (flags & toGet) != 0 );

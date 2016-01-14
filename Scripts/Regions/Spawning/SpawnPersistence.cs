@@ -56,9 +56,9 @@ namespace Server.Regions
 				SpawnEntry entry = (SpawnEntry) SpawnEntry.Table[id];
 
 				if ( entry != null )
-					entry.Deserialize( reader, version );
+					entry.Deserialize( reader );
 				else
-					SpawnEntry.Remove( reader, version );
+					SpawnEntry.Remove( reader );
 			}
 		}
 	}

@@ -239,7 +239,7 @@ namespace Server.Regions
 			}
 		}
 
-		public void Deserialize( GenericReader reader, int version )
+		public void Deserialize( GenericReader reader )
 		{
 			int count = reader.ReadInt();
 
@@ -273,7 +273,7 @@ namespace Server.Regions
 
 		private static List<IEntity> m_RemoveList;
 
-		public static void Remove( GenericReader reader, int version )
+		public static void Remove( GenericReader reader )
 		{
 			int count = reader.ReadInt();
 

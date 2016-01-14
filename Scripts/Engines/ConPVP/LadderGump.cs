@@ -168,7 +168,7 @@ namespace Server.Engines.ConPVP
 				int y = 32 + ((i - start) * 20);
 				int x = 12;
 
-				AddBorderedText( x, y, 75, Center( Rank( i+1 ) ), 0xFFFFFF, 0 );
+				AddBorderedText( x, y, 75, Center( Rank( i+1 ) ), 0xFFFFFF );
 				x += 75;
 
 				/*AddImage( 20, y + 5, 0x2616, 0x96C );
@@ -197,23 +197,23 @@ namespace Server.Engines.ConPVP
 
 				//AddImageTiled( 21, y + 6, width, 8, 0x2617 );
 				AddImageTiled( x + 3, y + 4, width, 11, 0x806 );
-				AddBorderedText( x, y, 115, Center( level.ToString() ), 0xFFFFFF, 0 );
+				AddBorderedText( x, y, 115, Center( level.ToString() ), 0xFFFFFF );
 				x += 115;
 
 				Mobile mob = entry.Mobile;
 
 				if ( mob.Guild != null )
-					AddBorderedText( x, y, 50, Center( mob.Guild.Abbreviation ), 0xFFFFFF, 0 );
+					AddBorderedText( x, y, 50, Center( mob.Guild.Abbreviation ), 0xFFFFFF );
 
 				x += 50;
 
-				AddBorderedText( x + 5, y, 115 - 5, ( mob.Name ), 0xFFFFFF, 0 );
+				AddBorderedText( x + 5, y, 115 - 5, ( mob.Name ), 0xFFFFFF );
 				x += 115;
 
-				AddBorderedText( x, y, 60, Center( entry.Wins.ToString() ), 0xFFFFFF, 0 );
+				AddBorderedText( x, y, 60, Center( entry.Wins.ToString() ), 0xFFFFFF );
 				x += 60;
 
-				AddBorderedText( x, y, 60, Center( entry.Losses.ToString() ), 0xFFFFFF, 0 );
+				AddBorderedText( x, y, 60, Center( entry.Losses.ToString() ), 0xFFFFFF );
 				x += 60;
 
 				//AddBorderedText( 292 + 15, y, 115 - 30, String.Format( "{0} <DIV ALIGN=CENTER>/</DIV> <DIV ALIGN=RIGHT>{1}</DIV>", entry.Wins, entry.Losses ), 0xFFC000, 0 );
@@ -230,7 +230,7 @@ namespace Server.Engines.ConPVP
 			return String.Format( "<BASEFONT COLOR=#{0:X6}>{1}</BASEFONT>", color, text );
 		}
 
-		private void AddBorderedText( int x, int y, int width, string text, int color, int borderColor )
+		private void AddBorderedText( int x, int y, int width, string text, int color )
 		{
 			/*AddColoredText( x - 1, y, width, text, borderColor );
 			AddColoredText( x + 1, y, width, text, borderColor );
@@ -255,7 +255,7 @@ namespace Server.Engines.ConPVP
 		{
 			AddBackground( m_ColumnX, 12, width, 20, 0x242C );
 			AddImageTiled( m_ColumnX + 2, 14, width - 4, 16, 0x2430 );
-			AddBorderedText( m_ColumnX, 13, width, Center( name ), 0xFFFFFF, 0 );
+			AddBorderedText( m_ColumnX, 13, width, Center( name ), 0xFFFFFF );
 
 			m_ColumnX += width;
 		}

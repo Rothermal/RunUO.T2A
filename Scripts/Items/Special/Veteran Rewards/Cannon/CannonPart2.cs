@@ -116,7 +116,7 @@ namespace Server.Engines.Quests.Haven
 					break;
 			}
 
-			if ( canFire && m_Canoneer.WillFire( this, m ) )
+			if ( canFire && m_Canoneer.WillFire( m ) )
 				Fire( m_Canoneer, m );
 		}
 

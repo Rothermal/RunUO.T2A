@@ -99,8 +99,6 @@ namespace Server.Mobiles
 			if ( !base.OnBeforeDeath() )
 				return false;
 
-			PackAnimal.CombineBackpacks( this );
-
 			return true;
 		}
 

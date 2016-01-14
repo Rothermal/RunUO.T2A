@@ -1186,7 +1186,7 @@ namespace Server.Engines.ConPVP
 		private Tournament m_Tournament;
 
 		[CommandProperty( AccessLevel.GameMaster )]
-		public Tournament Tournament{ get{ return m_Tournament; } set{} }
+		public Tournament Tournament{ get{ return m_Tournament; } }
 
 		private static ArrayList m_Instances = new ArrayList();
 
@@ -2530,12 +2530,12 @@ namespace Server.Engines.ConPVP
 			AddLog( String.Format( format, args ) );
 		}
 
-		public void WonMatch( TournyMatch match )
+		public void WonMatch()
 		{
 			AddLog( "Match won." );
 		}
 
-		public void LostMatch( TournyMatch match )
+		public void LostMatch()
 		{
 			AddLog( "Match lost." );
 		}

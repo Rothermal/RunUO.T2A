@@ -99,8 +99,7 @@ namespace Server.Mobiles
 			private Mobile m_Mobile;
 			private Hashtable m_Table;
 
-			public ExpireTimer( Mobile m, string mod, Hashtable table, TimeSpan delay )
-				: base( delay )
+			public ExpireTimer( Mobile m, Hashtable table, TimeSpan delay ) : base( delay )
 			{
 				m_Mobile = m;
 				m_Table = table;

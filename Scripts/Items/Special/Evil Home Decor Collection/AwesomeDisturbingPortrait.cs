@@ -28,7 +28,7 @@ namespace Server.Items
 				int hours;
 				int minutes;
 
-				Clock.GetTime( Map, X, Y, out hours, out minutes );
+				Clock.GetTime( Map, X, out hours, out minutes );
 
 				if ( hours < 4 || hours > 20 )
 					Effects.PlaySound( Location, Map, 0x569 );
@@ -69,7 +69,7 @@ namespace Server.Items
 			int hours;
 			int minutes;
 
-			Clock.GetTime( Map, X, Y, out hours, out minutes );
+			Clock.GetTime( Map, X, out hours, out minutes );
 
 			if ( FacingSouth )
 			{

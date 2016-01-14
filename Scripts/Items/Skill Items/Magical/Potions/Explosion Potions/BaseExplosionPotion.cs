@@ -259,8 +259,8 @@ namespace Server.Items
 
 			eable.Free();
 
-			int min = Scale( from, MinDamage );
-			int max = Scale( from, MaxDamage );
+			int min = MinDamage;
+			int max = MaxDamage;
 
 			for ( int i = 0; i < toExplode.Count; ++i )
 			{

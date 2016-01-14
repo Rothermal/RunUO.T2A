@@ -55,7 +55,7 @@ namespace Server.Engines.Craft
 				return EnhanceResult.BadItem;
 
 			bool allRequiredSkills = false;
-			if( craftItem.GetSuccessChance( from, resType, craftSystem, false, ref allRequiredSkills ) <= 0.0 )
+			if( craftItem.GetSuccessChance( from, craftSystem, false, ref allRequiredSkills ) <= 0.0 )
 				return EnhanceResult.NoSkill;
 
 			CraftResourceInfo info = CraftResources.GetInfo( resource );

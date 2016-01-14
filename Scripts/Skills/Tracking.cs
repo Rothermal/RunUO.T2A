@@ -175,7 +175,7 @@ namespace Server.SkillHandlers
 			foreach ( Mobile m in from.GetMobilesInRange( range ) )
 			{
 				// Ghosts can no longer be tracked 
-				if ( m != from && (!m.Hidden || m.AccessLevel == AccessLevel.Player || from.AccessLevel > m.AccessLevel) && check( m ) && CheckDifficulty( from, m ) )
+				if ( m != from && (!m.Hidden || m.AccessLevel == AccessLevel.Player || from.AccessLevel > m.AccessLevel) && check( m ) )
 					list.Add( m );
 			}
 
@@ -195,12 +195,6 @@ namespace Server.SkillHandlers
 				else
 					from.SendLocalizedMessage( 502995 ); // You see no evidence of people in the area.
 			}
-		}
-
-		// Tracking players uses tracking and detect hidden vs. hiding and stealth 
-		private static bool CheckDifficulty( Mobile from, Mobile m )
-		{
-			return true;
 		}
 
 		private static bool IsAnimal( Mobile m )

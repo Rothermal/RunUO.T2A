@@ -33,10 +33,7 @@ namespace Server.Mobiles
 			Fame = 28000;
 			Karma = -28000;
 
-			if ( Utility.RandomBool() )
-				PackNecroScroll( Utility.RandomMinMax( 5, 9 ) );
-			else
-				PackScroll( 4, 7 );
+			PackScroll( 4, 7 );
 		}
 
 		public override void GenerateLoot()

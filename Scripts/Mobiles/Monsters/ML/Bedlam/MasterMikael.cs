@@ -29,10 +29,7 @@ namespace Server.Mobiles
 			Fame = 18000;
 			Karma = -18000;
 
-			if ( Utility.RandomBool() )
-				PackNecroScroll( Utility.RandomMinMax( 5, 9 ) );
-			else
-				PackScroll( 4, 7 );
+			PackScroll( 4, 7 );
 
 			PackReg( 3 );
 			PackNecroReg( 1, 10 );

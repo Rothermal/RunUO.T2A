@@ -18,7 +18,7 @@ namespace Server.Items
 		{
 			from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1008155 ); // You peer into the heavens, seeking the moons...
 
-			from.Send( new MessageLocalizedAffix( from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 1008146 + (int)Clock.GetMoonPhase( Map.Felucca, from.X, from.Y ), "", AffixType.Prepend, "Felucca : ", "" ) );
+			from.Send( new MessageLocalizedAffix( from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 1008146 + (int)Clock.GetMoonPhase( Map.Felucca, from.X ), "", AffixType.Prepend, "Felucca : ", "" ) );
 
 			PlayerMobile player = from as PlayerMobile;
 
@@ -33,7 +33,7 @@ namespace Server.Items
 					if ( obj != null && !obj.Completed && obj.Ingredient == Ingredient.StarChart )
 					{
 						int hours, minutes;
-						Clock.GetTime( from.Map, from.X, from.Y, out hours, out minutes );
+						Clock.GetTime( from.Map, from.X, out hours, out minutes );
 
 						if ( hours < 5 || hours > 17 )
 						{

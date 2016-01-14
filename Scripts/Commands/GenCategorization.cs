@@ -44,7 +44,7 @@ namespace Server.Commands
 		{
 			CategoryEntry root = new CategoryEntry( null, "Add Menu", new CategoryEntry[]{ Items, Mobiles } );
 
-			Export( root, "Data/objects.xml", "Objects" );
+			Export( root, "Data/objects.xml" );
 
 			e.Mobile.SendMessage( "Categorization menu rebuilt." );
 		}
@@ -57,7 +57,7 @@ namespace Server.Commands
 				RecurseFindCategories( ce.SubCategories[i], list );
 		}
 
-		public static void Export( CategoryEntry ce, string fileName, string title )
+		public static void Export( CategoryEntry ce, string fileName )
 		{
 			XmlTextWriter xml = new XmlTextWriter( fileName, System.Text.Encoding.UTF8 );
 

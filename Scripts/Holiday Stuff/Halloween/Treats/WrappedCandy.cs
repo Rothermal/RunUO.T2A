@@ -4,14 +4,7 @@
 	{
 		public override int LabelNumber { get { return 1096950; } } /* wrapped candy */ 
 
-		[Constructable]
-		public WrappedCandy()
-			: this( 1 )
-		{
-		}
-
-		public WrappedCandy( int amount )
-			: base( 0x469e )
+		public WrappedCandy( ) : base( 0x469e )
 		{
 			Stackable = true;
 		}

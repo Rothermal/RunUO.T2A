@@ -60,7 +60,7 @@ namespace Server.Spells.Fourth
 
 				if ( Caster.Player && m.Player /*&& Caster != m */ && t == null )	//On OSI you CAN curse yourself and get this effect.
 				{
-					TimeSpan duration = SpellHelper.GetDuration( Caster, m );
+					TimeSpan duration = SpellHelper.GetDuration( Caster );
 					m_UnderEffect[m] = t = Timer.DelayCall( duration, new TimerStateCallback( RemoveEffect ), m );
 				}
 
@@ -73,7 +73,7 @@ namespace Server.Spells.Fourth
 				m.PlaySound( 0x1E1 );
 
 				int percentage = (int)(SpellHelper.GetOffsetScalar(Caster, m, true) * 100);
-				TimeSpan length = SpellHelper.GetDuration(Caster, m);
+				TimeSpan length = SpellHelper.GetDuration(Caster);
 
 				string args = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", percentage, percentage, percentage, 10, 10, 10, 10);
 

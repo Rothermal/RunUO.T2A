@@ -164,8 +164,7 @@ namespace Server.Items
 				else
 					entry = MessageEntry.Entries[m_MessageIndex = Utility.Random( MessageEntry.Entries.Length )];
 
-				//from.CloseGump( typeof( MessageGump ) );
-				from.SendGump( new MessageGump( entry, m_TargetMap, m_TargetLocation ) );
+				from.SendGump( new MessageGump( m_TargetMap, m_TargetLocation ) );
 			}
 			else
 			{
@@ -260,7 +259,7 @@ namespace Server.Items
 #else
 		private class MessageGump : Gump
 		{
-			public MessageGump( MessageEntry entry, Map map, Point3D loc ) : base( 150, 50 )
+			public MessageGump( Map map, Point3D loc ) : base( 150, 50 )
 			{
 				int xLong = 0, yLat = 0;
 				int xMins = 0, yMins = 0;

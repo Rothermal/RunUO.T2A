@@ -118,7 +118,7 @@ namespace Server.Items
 			BeginDecay( m_DefaultDecayTime );
 		}
 
-		public new bool Scissor( Mobile from, Scissors scissors )
+		public new bool Scissor( Mobile from )
 		{
 			from.SendLocalizedMessage( 502440 ); // Scissors can not be used on that to produce anything.
 			return false;

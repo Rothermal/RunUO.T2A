@@ -23,7 +23,7 @@ namespace Server.Misc
 				EventSink.Speech += new SpeechEventHandler( EventSink_Speech );
 		}
 
-		private static bool OnProfanityDetected( Mobile from, string speech )
+		private static bool OnProfanityDetected( Mobile from )
 		{
 			switch ( Action )
 			{
@@ -56,7 +56,7 @@ namespace Server.Misc
 				return;
 
 			if ( !NameVerification.Validate( e.Speech, 0, int.MaxValue, true, true, false, int.MaxValue, m_Exceptions, m_Disallowed, m_StartDisallowed ) )
-				e.Blocked = !OnProfanityDetected( from, e.Speech );
+				e.Blocked = !OnProfanityDetected( from );
 		}
 
 		public static char[]	Exceptions{	get{ return m_Exceptions; } }

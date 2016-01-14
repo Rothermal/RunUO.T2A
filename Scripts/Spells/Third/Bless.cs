@@ -53,7 +53,7 @@ namespace Server.Spells.Third
 				m.PlaySound( 0x1EA );
 
 				int percentage = (int)(SpellHelper.GetOffsetScalar(Caster, m, false) * 100);
-				TimeSpan length = SpellHelper.GetDuration(Caster, m);
+				TimeSpan length = SpellHelper.GetDuration(Caster);
 
 				string args = String.Format("{0}\t{1}\t{2}", percentage, percentage, percentage);
 

@@ -72,7 +72,7 @@ namespace Server.Items
 				if( !pm.HasRecipe( r ) )
 				{
 					bool allRequiredSkills = true;
-					double chance = r.CraftItem.GetSuccessChance( from, null, r.CraftSystem, false, ref allRequiredSkills );
+					double chance = r.CraftItem.GetSuccessChance( from, r.CraftSystem, false, ref allRequiredSkills );
 
 					if ( allRequiredSkills && chance >= 0.0 )
 					{

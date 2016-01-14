@@ -27,12 +27,12 @@ namespace Server.Engines.ConPVP
 
 			m_Options = new BitArray( newDefault.m_Options );
 
-			ApplyFlavorsTo( this );
+			ApplyFlavorsTo();
 		}
 
-		public void ApplyFlavorsTo( Ruleset ruleset )
+		public void ApplyFlavorsTo()
 		{
-			for ( int i = 0; i < m_Flavors.Count; ++i )
+        	for ( int i = 0; i < m_Flavors.Count; ++i )
 			{
 				Ruleset flavor = (Ruleset)m_Flavors[i];
 

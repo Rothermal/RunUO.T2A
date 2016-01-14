@@ -33,7 +33,7 @@ namespace Server.Items
 
 		public override bool CheckHold( Mobile m, Item item, bool message, bool checkItems, int plusItems, int plusWeight )
 		{
-			if ( this.IsSecure && !BaseHouse.CheckHold( m, this, item, message, checkItems, plusItems, plusWeight ) )
+			if ( this.IsSecure && !BaseHouse.CheckHold( m, this, item, message, plusItems ) )
 				return false;
 
 			return base.CheckHold( m, item, message, checkItems, plusItems, plusWeight );

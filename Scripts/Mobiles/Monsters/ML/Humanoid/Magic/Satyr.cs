@@ -28,9 +28,7 @@ namespace Server.Mobiles
 			Fame = 5000;
 			Karma = 0;
 
-			VirtualArmor = 28; // Don't know what it should be
-
-			PackArcanceScroll( 0.05 );
+			VirtualArmor = 28;
 		}
 
 		public override OppositionGroup OppositionGroup

@@ -112,7 +112,7 @@ namespace Server.SkillHandlers
 									m.Warmode = false;
 
 									if ( m is BaseCreature && !((BaseCreature)m).BardPacified )
-										((BaseCreature)m).Pacify( from, DateTime.Now + TimeSpan.FromSeconds( 1.0 ) );
+										((BaseCreature)m).Pacify( DateTime.Now + TimeSpan.FromSeconds( 1.0 ) );
 								}
 
 								if ( !calmed )
@@ -186,7 +186,7 @@ namespace Server.SkillHandlers
 									else if ( seconds < 10 )
 										seconds = 10;
 
-									bc.Pacify( from, DateTime.Now + TimeSpan.FromSeconds( seconds ) );
+									bc.Pacify( DateTime.Now + TimeSpan.FromSeconds( seconds ) );
 								}
 								else
 								{

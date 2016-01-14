@@ -671,7 +671,7 @@ namespace Server
 			get { return m_NeededAccess; }
 		}
 
-		public ClearanceException( Property property, AccessLevel playerAccess, AccessLevel neededAccess, string accessType )
+		public ClearanceException( Property property, AccessLevel neededAccess, string accessType )
 			: base( property, string.Format(
 				"You must be at least {0} to {1} this property.",
 				Mobile.GetAccessLevelName( neededAccess ),
@@ -683,16 +683,14 @@ namespace Server
 
 	public sealed class ReadAccessException : ClearanceException
 	{
-		public ReadAccessException( Property property, AccessLevel playerAccess, AccessLevel neededAccess )
-			: base( property, playerAccess, neededAccess, "read" )
+		public ReadAccessException( Property property, AccessLevel neededAccess )	: base( property, neededAccess, "read" )
 		{
 		}
 	}
 
 	public sealed class WriteAccessException : ClearanceException
 	{
-		public WriteAccessException( Property property, AccessLevel playerAccess, AccessLevel neededAccess )
-			: base( property, playerAccess, neededAccess, "write" )
+		public WriteAccessException( Property property, AccessLevel neededAccess ) : base( property, neededAccess, "write" )
 		{
 		}
 	}
@@ -763,10 +761,10 @@ namespace Server
 					throw new InternalAccessException( this );
 
 				if ( ( access & PropertyAccess.Read ) != 0 && from.AccessLevel < security.ReadLevel )
-					throw new ReadAccessException( this, from.AccessLevel, security.ReadLevel );
+					throw new ReadAccessException( this, security.ReadLevel );
 
 				if ( ( access & PropertyAccess.Write ) != 0 && (from.AccessLevel < security.WriteLevel || security.ReadOnly) )
-					throw new WriteAccessException( this, from.AccessLevel, security.ReadLevel );
+					throw new WriteAccessException( this, security.ReadLevel );
 			}
 
 			return true;

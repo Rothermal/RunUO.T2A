@@ -30,7 +30,7 @@ namespace Server.Items
 		{
 			if ( from.Stam < from.StamMax )
 			{
-				from.Stam += Scale( from, (int)(Refresh * from.StamMax) );
+				from.Stam += (int)(Refresh * from.StamMax);
 
 				BasePotion.PlayDrinkEffect( from );
 

@@ -117,7 +117,7 @@ namespace Server.Multis
 
 				p = new Point3D( p.X - m_Offset.X, p.Y - m_Offset.Y, p.Z - m_Offset.Z );
 
-				if ( BaseBoat.IsValidLocation( p, map ) && boat.CanFit( p, map, boat.ItemID ) )
+				if ( BaseBoat.IsValidLocation( p ) && boat.CanFit( p, map, boat.ItemID ) )
 				{
 					Delete();
 

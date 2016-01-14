@@ -62,8 +62,6 @@ namespace Server.Mobiles
 			if ( !base.OnBeforeDeath() )
 				return false;
 
-			PackAnimal.CombineBackpacks( this );
-
 			return true;
 		}
 
@@ -169,11 +167,6 @@ namespace Server.Mobiles
 				return true;
 
 			return false;
-		}
-
-		public static void CombineBackpacks( BaseCreature animal )
-		{
-			return;
 		}
 
 		public static void TryPackOpen( BaseCreature animal, Mobile from )

@@ -24,7 +24,7 @@ namespace Server.Items
 
 		public virtual bool Apply( Mobile from )
 		{
-			bool applied = Spells.SpellHelper.AddStatOffset( from, Type, Bonus, TimeSpan.FromMinutes( 1.0 ) );
+			bool applied = Spells.SpellHelper.AddStatOffset( from, Type, Bonus );
 
 			if ( !applied )
 				from.SendLocalizedMessage( 502173 ); // You are already under a similar effect.

@@ -181,21 +181,6 @@ namespace Server.Items
 				m.Animate( 34, 5, 1, true, false, 0 );
 		}
 
-		public static TimeSpan Scale( Mobile m, TimeSpan v )
-		{
-			return v;
-		}
-
-		public static double Scale( Mobile m, double v )
-		{
-            return v;
-        }
-
-        public static int Scale( Mobile m, int v )
-		{
-            return v;
-        }
-
         public override bool StackWith( Mobile from, Item dropped, bool playSound )
 		{
 			if( dropped is BasePotion && ((BasePotion)dropped).m_PotionEffect == m_PotionEffect )

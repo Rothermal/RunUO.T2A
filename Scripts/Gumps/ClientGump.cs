@@ -16,7 +16,7 @@ namespace Server.Gumps
 		{
 			TextRelay te = info.GetTextEntry( 0 );
 
-			to.SendGump( new ClientGump( to, m_State, te == null ? "" : te.Text ) );
+			to.SendGump( new ClientGump( to, m_State ) );
 		}
 
 		public override void OnResponse( NetState state, RelayInfo info )
@@ -170,10 +170,6 @@ namespace Server.Gumps
 			}
 		}
 
-		public ClientGump( Mobile from, NetState state ) : this( from, state, "" )
-		{
-		}
-
 		private const int LabelColor32 = 0xFFFFFF;
 
 		public string Center( string text )
@@ -186,7 +182,7 @@ namespace Server.Gumps
 			return String.Format( "<BASEFONT COLOR=#{0:X6}>{1}</BASEFONT>", color, text );
 		}
 
-		public ClientGump( Mobile from, NetState state, string initialText ) : base( 30, 20 )
+		public ClientGump( Mobile from, NetState state ) : base( 30, 20 )
 		{
 			if ( state == null )
 				return;

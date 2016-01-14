@@ -3022,11 +3022,7 @@ namespace Server.Network
 
 	public sealed class MobileStatusExtended : Packet
 	{
-		public MobileStatusExtended( Mobile m ) : this( m, m.NetState )
-		{
-		}
-
-		public MobileStatusExtended( Mobile m, NetState ns ) : base( 0x11 )
+		public MobileStatusExtended( Mobile m ) : base( 0x11 )
 		{
 			string name = m.Name;
 			if ( name == null ) name = "";
@@ -3068,11 +3064,7 @@ namespace Server.Network
 
 	public sealed class MobileStatus : Packet
 	{
-		public MobileStatus( Mobile beholder, Mobile beheld ) : this( beholder, beheld, beheld.NetState )
-		{
-		}
-
-		public MobileStatus( Mobile beholder, Mobile beheld, NetState ns ) : base( 0x11 )
+		public MobileStatus( Mobile beholder, Mobile beheld ) : base( 0x11 )
 		{
 			string name = beheld.Name;
 			if ( name == null ) name = "";
@@ -3486,7 +3478,7 @@ namespace Server.Network
 	{
 		public AsciiMessage( Serial serial, int graphic, MessageType type, int hue, int font, string name, string text ) : base( 0x1C )
 		{
-			if ( name == null )
+            if ( name == null )
 				name = "";
 
 			if ( text == null )

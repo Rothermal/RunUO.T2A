@@ -31,7 +31,7 @@ namespace Server.Items
 			set { m_PoisonCharges = value; InvalidateProperties(); }
 		}
 
-		public bool ShowUsesRemaining{ get{ return true; } set{} }
+		public bool ShowUsesRemaining{ get{ return true; } }
 
 		[Constructable]
 		public FukiyaDarts() : this( 1 )

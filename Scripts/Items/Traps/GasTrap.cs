@@ -64,11 +64,6 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public GasTrap(  Poison poison ) : this( GasTrapType.Floor, Poison.Lesser )
-		{
-		}
-
-		[Constructable]
 		public GasTrap( GasTrapType type, Poison poison ) : base( GetBaseID( type ) )
 		{
 			m_Poison = poison;

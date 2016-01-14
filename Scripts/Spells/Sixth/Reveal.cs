@@ -49,7 +49,7 @@ namespace Server.Spells.Sixth
 						if ( m is Mobiles.ShadowKnight && (m.X != p.X || m.Y != p.Y) )
 							continue;
 
-						if ( m.Hidden && (m.AccessLevel == AccessLevel.Player || Caster.AccessLevel > m.AccessLevel) && CheckDifficulty( Caster, m ) )
+						if ( m.Hidden && (m.AccessLevel == AccessLevel.Player || Caster.AccessLevel > m.AccessLevel) )
 							targets.Add( m );
 					}
 
@@ -68,12 +68,6 @@ namespace Server.Spells.Sixth
 			}
 
 			FinishSequence();
-		}
-
-		// Reveal uses magery and detect hidden vs. hide and stealth 
-		private static bool CheckDifficulty( Mobile from, Mobile m )
-		{
-			return true;
 		}
 
 		public class InternalTarget : Target

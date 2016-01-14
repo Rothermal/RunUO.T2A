@@ -8,16 +8,12 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public ScribeBag() : this( 1 )
+		public ScribeBag()
 		{
-			Movable = true;
-			Hue = 0x105;
-		}
+            Movable = true;
+            Hue = 0x105;
 
-		[Constructable]
-		public ScribeBag( int amount )
-		{
-			DropItem( new BagOfReagents( 5000 ) );
+            DropItem( new BagOfReagents( 5000 ) );
 			DropItem( new BlankScroll( 500 ) );
 		}
 

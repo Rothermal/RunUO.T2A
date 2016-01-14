@@ -435,7 +435,7 @@ namespace Server.SkillHandlers
 			return false;
 		}
 
-		public static void ReturnOnDeath( Mobile killed, Container corpse )
+		public static void ReturnOnDeath( Container corpse )
 		{
 			Clean();
 

@@ -29,7 +29,7 @@ namespace Server.Factions
 			LootType = LootType.Blessed;
 		}
 
-		public BaseFactionTrapDeed( bool createdFromDeed ) : this( 0x14F0 )
+		public BaseFactionTrapDeed() : this( 0x14F0 )
 		{
 		}
 

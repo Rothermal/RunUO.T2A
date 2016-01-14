@@ -38,10 +38,7 @@ namespace Server.Mobiles
 
 			for ( int i = 0; i < 2; ++i )
 			{
-				if ( Utility.RandomBool() )
-					PackNecroScroll( Utility.RandomMinMax( 5, 9 ) );
-				else
-					PackScroll( 4, 7 );
+				PackScroll( 4, 7 );
 			}
 
 			PackReg( 7 );

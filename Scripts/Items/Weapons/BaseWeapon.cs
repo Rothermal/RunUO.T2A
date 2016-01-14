@@ -645,7 +645,7 @@ namespace Server.Items
 			{
 				PlayerMobile pm = (PlayerMobile)attacker;
 
-				if ( pm.DuelContext != null && !pm.DuelContext.CheckItemEquip( attacker, this ) )
+				if ( pm.DuelContext != null && !pm.DuelContext.CheckItemEquip( this ) )
 					canSwing = false;
 			}
 			#endregion

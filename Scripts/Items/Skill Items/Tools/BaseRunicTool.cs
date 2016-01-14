@@ -54,45 +54,6 @@ namespace Server.Items
 
 		private static bool m_IsRunicTool;
 		private static int m_LuckChance;
-
-		private static int Scale( int min, int max, int low, int high )
-		{
-			int percent;
-
-			if ( m_IsRunicTool )
-			{
-				percent = Utility.RandomMinMax( min, max );
-			}
-			else
-			{
-				// Behold, the worst system ever!
-				int v = Utility.RandomMinMax( 0, 10000 );
-
-				v = (int) Math.Sqrt( v );
-				v = 100 - v;
-
-				if ( LootPack.CheckLuck( m_LuckChance ) )
-					v += 10;
-
-				if ( v < min )
-					v = min;
-				else if ( v > max )
-					v = max;
-
-				percent = v;
-			}
-
-			int scaledBy = Math.Abs( high - low ) + 1;
-
-			if ( scaledBy != 0 )
-				scaledBy = 10000 / scaledBy;
-
-			percent *= (10000 + scaledBy);
-
-			return low + (((high - low) * percent) / 1000001);
-		}
-
-
 		private const int MaxProperties = 32;
 		private static BitArray m_Props = new BitArray( MaxProperties );
 		private static int[] m_Possible = new int[MaxProperties];
@@ -117,31 +78,12 @@ namespace Server.Items
 			return v;
 		}
 
-		public void ApplyAttributesTo( BaseWeapon weapon )
+		public static void ApplyAttributesTo( BaseWeapon weapon, int attributeCount )
 		{
-			CraftResourceInfo resInfo = CraftResources.GetInfo( m_Resource );
-
-			if ( resInfo == null )
-				return;
-
-			CraftAttributeInfo attrs = resInfo.AttributeInfo;
-
-			if ( attrs == null )
-				return;
-
-			int attributeCount = Utility.RandomMinMax( attrs.RunicMinAttributes, attrs.RunicMaxAttributes );
-			int min = attrs.RunicMinIntensity;
-			int max = attrs.RunicMaxIntensity;
-
-			ApplyAttributesTo( weapon, true, 0, attributeCount, min, max );
+			ApplyAttributesTo( weapon, false, 0, attributeCount );
 		}
 
-		public static void ApplyAttributesTo( BaseWeapon weapon, int attributeCount, int min, int max )
-		{
-			ApplyAttributesTo( weapon, false, 0, attributeCount, min, max );
-		}
-
-		public static void ApplyAttributesTo( BaseWeapon weapon, bool isRunicTool, int luckChance, int attributeCount, int min, int max )
+		public static void ApplyAttributesTo( BaseWeapon weapon, bool isRunicTool, int luckChance, int attributeCount )
 		{
 			m_IsRunicTool = isRunicTool;
 			m_LuckChance = luckChance;
@@ -194,31 +136,12 @@ namespace Server.Items
 			return entry.Name;
 		}
 
-		public void ApplyAttributesTo( BaseArmor armor )
+		public static void ApplyAttributesTo( BaseArmor armor, int attributeCount)
 		{
-			CraftResourceInfo resInfo = CraftResources.GetInfo( m_Resource );
-
-			if ( resInfo == null )
-				return;
-
-			CraftAttributeInfo attrs = resInfo.AttributeInfo;
-
-			if ( attrs == null )
-				return;
-
-			int attributeCount = Utility.RandomMinMax( attrs.RunicMinAttributes, attrs.RunicMaxAttributes );
-			int min = attrs.RunicMinIntensity;
-			int max = attrs.RunicMaxIntensity;
-
-			ApplyAttributesTo( armor, true, 0, attributeCount, min, max );
+			ApplyAttributesTo( armor, false, 0, attributeCount );
 		}
 
-		public static void ApplyAttributesTo( BaseArmor armor, int attributeCount, int min, int max )
-		{
-			ApplyAttributesTo( armor, false, 0, attributeCount, min, max );
-		}
-
-		public static void ApplyAttributesTo( BaseArmor armor, bool isRunicTool, int luckChance, int attributeCount, int min, int max )
+		public static void ApplyAttributesTo( BaseArmor armor, bool isRunicTool, int luckChance, int attributeCount )
 		{
 			m_IsRunicTool = isRunicTool;
 			m_LuckChance = luckChance;
@@ -250,25 +173,12 @@ namespace Server.Items
 			}
 		}
 
-		public static void ApplyAttributesTo( BaseHat hat, int attributeCount, int min, int max )
+		public static void ApplyAttributesTo( int attributeCount )
 		{
-			ApplyAttributesTo( hat, false, 0, attributeCount, min, max );
+			ApplyAttributesTo( false, 0, attributeCount );
 		}
 
-		public static void ApplyAttributesTo( BaseHat hat, bool isRunicTool, int luckChance, int attributeCount, int min, int max )
-		{
-			m_IsRunicTool = isRunicTool;
-			m_LuckChance = luckChance;
-
-			m_Props.SetAll( false );
-		}
-
-		public static void ApplyAttributesTo( BaseJewel jewelry, int attributeCount, int min, int max )
-		{
-			ApplyAttributesTo( jewelry, false, 0, attributeCount, min, max );
-		}
-
-		public static void ApplyAttributesTo( BaseJewel jewelry, bool isRunicTool, int luckChance, int attributeCount, int min, int max )
+		public static void ApplyAttributesTo( bool isRunicTool, int luckChance, int attributeCount )
 		{
 			m_IsRunicTool = isRunicTool;
 			m_LuckChance = luckChance;
@@ -284,12 +194,7 @@ namespace Server.Items
 			}
 		}
 
-		public static void ApplyAttributesTo( Spellbook spellbook, int attributeCount, int min, int max )
-		{
-			ApplyAttributesTo( spellbook, false, 0, attributeCount, min, max );
-		}
-
-		public static void ApplyAttributesTo( Spellbook spellbook, bool isRunicTool, int luckChance, int attributeCount, int min, int max )
+		public static void ApplyAttributesTo( Spellbook spellbook, bool isRunicTool, int luckChance, int attributeCount )
 		{
 			m_IsRunicTool = isRunicTool;
 			m_LuckChance = luckChance;

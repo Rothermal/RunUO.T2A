@@ -336,7 +336,7 @@ namespace Server.Items
 				}
 
 				from.CloseGump( typeof( RunebookGump ) );
-				from.SendGump( new RunebookGump( from, this ) );
+				from.SendGump( new RunebookGump( this ) );
 				
 				m_Openers.Add( from );
 			}

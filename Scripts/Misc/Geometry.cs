@@ -122,7 +122,7 @@ namespace Server.Misc
 			if ( x == 0 && start.Quadrant == 3 )
 				quadrant = 3;
 			
-			if ( WithinCircleBounds( quadrant == 3 ? pointB : pointA, quadrant, loc, start, end, opposite ) )
+			if ( WithinCircleBounds( quadrant == 3 ? pointB : pointA, quadrant, start, end, opposite ) )
 				effect( new Point3D( loc.X + x, loc.Y + y, loc.Z ), map );
 			
 			quadrant = 3;
@@ -130,17 +130,17 @@ namespace Server.Misc
 			if ( y == 0 && start.Quadrant == 0 )
 				quadrant = 0;
 			
-			if ( x != 0 && WithinCircleBounds( quadrant == 0 ? pointA : pointB, quadrant, loc, start, end, opposite ) )
+			if ( x != 0 && WithinCircleBounds( quadrant == 0 ? pointA : pointB, quadrant, start, end, opposite ) )
 				effect( new Point3D( loc.X - x, loc.Y + y, loc.Z ), map );
-			if ( y != 0 && WithinCircleBounds( pointB, 1, loc, start, end, opposite ) )
+			if ( y != 0 && WithinCircleBounds( pointB, 1, start, end, opposite ) )
 				effect( new Point3D( loc.X + x, loc.Y - y, loc.Z ), map );
-			if ( x != 0 && y != 0 && WithinCircleBounds( pointA, 0, loc, start, end, opposite ) )
+			if ( x != 0 && y != 0 && WithinCircleBounds( pointA, 0, start, end, opposite ) )
 				effect( new Point3D( loc.X - x, loc.Y - y, loc.Z ), map );
 		}
 		
-		public static bool WithinCircleBounds( Point2D pointLoc, int pointQuadrant, Point3D center, CirclePoint start, CirclePoint end, bool opposite )
+		public static bool WithinCircleBounds( Point2D pointLoc, int pointQuadrant, CirclePoint start, CirclePoint end, bool opposite )
 		{
-			if ( start.Angle == 0 && end.Angle == 360 )
+    		if ( start.Angle == 0 && end.Angle == 360 )
 				return true;
 
 			int startX = start.Point.X;	

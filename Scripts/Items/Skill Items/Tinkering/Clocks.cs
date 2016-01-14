@@ -49,11 +49,11 @@ namespace Server.Items
 
 		private static DateTime WorldStart = new DateTime( 1997, 9, 1 );
 
-		public static MoonPhase GetMoonPhase( Map map, int x, int y )
+		public static MoonPhase GetMoonPhase( Map map, int x )
 		{
 			int hours, minutes, totalMinutes;
 
-			GetTime( map, x, y, out hours, out minutes, out totalMinutes );
+			GetTime( map, x, out hours, out minutes, out totalMinutes );
 
 			if ( map != null )
 				totalMinutes /= 10 + (map.MapIndex * 20);
@@ -61,14 +61,14 @@ namespace Server.Items
 			return (MoonPhase)(totalMinutes % 8);
 		}
 
-		public static void GetTime( Map map, int x, int y, out int hours, out int minutes )
+		public static void GetTime( Map map, int x, out int hours, out int minutes )
 		{
 			int totalMinutes;
 
-			GetTime( map, x, y, out hours, out minutes, out totalMinutes );
+			GetTime( map, x, out hours, out minutes, out totalMinutes );
 		}
 
-		public static void GetTime( Map map, int x, int y, out int hours, out int minutes, out int totalMinutes )
+		public static void GetTime( Map map, int x, out int hours, out int minutes, out int totalMinutes )
 		{
 			TimeSpan timeSpan = DateTime.Now - WorldStart;
 
@@ -86,19 +86,19 @@ namespace Server.Items
 
 		public static void GetTime( out int generalNumber, out string exactTime )
 		{
-			GetTime( null, 0, 0, out generalNumber, out exactTime );
+			GetTime( null, 0, out generalNumber, out exactTime );
 		}
 
 		public static void GetTime( Mobile from, out int generalNumber, out string exactTime )
 		{
-			GetTime( from.Map, from.X, from.Y, out generalNumber, out exactTime );
+			GetTime( from.Map, from.X,  out generalNumber, out exactTime );
 		}
 
-		public static void GetTime( Map map, int x, int y, out int generalNumber, out string exactTime )
+		public static void GetTime( Map map, int x, out int generalNumber, out string exactTime )
 		{
 			int hours, minutes;
 
-			GetTime( map, x, y, out hours, out minutes );
+			GetTime( map, x, out hours, out minutes );
 
 			// 00:00 AM - 00:59 AM : Witching hour
 			// 01:00 AM - 03:59 AM : Middle of night

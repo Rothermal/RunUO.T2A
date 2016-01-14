@@ -159,7 +159,7 @@ namespace Server.Gumps
 			AddLabelCropped( 145 + (half * 160), 60, 115, 17, hue, desc );
 		}
 
-		public RunebookGump( Mobile from, Runebook book ) : base( 150, 200 )
+		public RunebookGump( Runebook book ) : base( 150, 200 )
 		{
 			m_Book = book;
 
@@ -206,7 +206,7 @@ namespace Server.Gumps
 					m_Book.Description = Utility.FixHtml( text.Trim() );
 
 					from.CloseGump( typeof( RunebookGump ) );
-					from.SendGump( new RunebookGump( from, m_Book ) );
+					from.SendGump( new RunebookGump( m_Book ) );
 
 					from.SendMessage( "The book's title has been changed." );
 				}
@@ -225,7 +225,7 @@ namespace Server.Gumps
 				if ( !m_Book.Deleted && from.InRange( m_Book.GetWorldLocation(), 1 ) )
 				{
 					from.CloseGump( typeof( RunebookGump ) );
-					from.SendGump( new RunebookGump( from, m_Book ) );
+					from.SendGump( new RunebookGump( m_Book ) );
 				}
 			}
 		}
@@ -274,7 +274,7 @@ namespace Server.Gumps
 							if ( m_Book.CurCharges <= 0 )
 							{
 								from.CloseGump( typeof( RunebookGump ) );
-								from.SendGump( new RunebookGump( from, m_Book ) );
+								from.SendGump( new RunebookGump( m_Book ) );
 
 								from.SendLocalizedMessage( 502412 ); // There are no charges left on that item.
 							}
@@ -305,7 +305,7 @@ namespace Server.Gumps
 								m_Book.DropRune( from, e, index );
 
 								from.CloseGump( typeof( RunebookGump ) );
-								from.SendGump( new RunebookGump( from, m_Book ) );
+								from.SendGump( new RunebookGump( m_Book ) );
 							}
 							else
 							{
@@ -323,7 +323,7 @@ namespace Server.Gumps
 								m_Book.Default = e;
 
 								from.CloseGump( typeof( RunebookGump ) );
-								from.SendGump( new RunebookGump( from, m_Book ) );
+								from.SendGump( new RunebookGump( m_Book ) );
 
 								from.SendLocalizedMessage( 502417 ); // New default location set.
 							}

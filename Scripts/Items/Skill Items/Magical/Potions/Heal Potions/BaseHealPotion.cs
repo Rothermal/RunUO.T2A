@@ -33,8 +33,8 @@ namespace Server.Items
 
 		public void DoHeal( Mobile from )
 		{
-			int min = Scale( from, MinHeal );
-			int max = Scale( from, MaxHeal );
+			int min = MinHeal;
+			int max = MaxHeal;
 
 			from.Heal( Utility.RandomMinMax( min, max ) );
 		}

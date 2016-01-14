@@ -421,7 +421,7 @@ namespace Server.Mobiles
 			PrivateOverheadMessage( MessageType.Regular, 0x3B2, false, "I'll pass on the message.", from.NetState );
 		}
 
-		public void RemoveRumor( Mobile from, int index )
+		public void RemoveRumor( int index )
 		{
 			if ( index < 0 || index >= m_Rumors.Length )
 				return;
@@ -441,7 +441,7 @@ namespace Server.Mobiles
 			PrivateOverheadMessage( MessageType.Regular, 0x3B2, false, "I'll say that to anyone who gives me a good tip.", from.NetState );
 		}
 
-		public void RemoveTip( Mobile from )
+		public void RemoveTip()
 		{
 			m_TipMessage = null;
 		}
@@ -451,7 +451,7 @@ namespace Server.Mobiles
 			from.SendGump( new BarkeeperTitleGump( from, this ) );
 		}
 
-		public void EndChangeTitle( Mobile from, string title, bool vendor )
+		public void EndChangeTitle( string title )
 		{
 			this.Title = title;
 
@@ -469,7 +469,7 @@ namespace Server.Mobiles
 			from.SendGump( new PlayerVendorCustomizeGump( this, from ) );
 		}
 
-		public void ChangeGender( Mobile from )
+		public void ChangeGender()
 		{
 			Female = !Female;
 
@@ -761,7 +761,7 @@ namespace Server.Mobiles
 					--buttonID;
 
 					if ( buttonID >= 0 && buttonID < m_Entries.Length )
-						m_Barkeeper.EndChangeTitle( m_From, m_Entries[buttonID].m_Title, m_Entries[buttonID].m_Vendor );
+						m_Barkeeper.EndChangeTitle( m_Entries[buttonID].m_Title );
 				}
 				else
 				{
@@ -1041,7 +1041,7 @@ namespace Server.Mobiles
 				}
 				case 2: // Remove message
 				{
-					m_Barkeeper.RemoveRumor( m_From, index );
+					m_Barkeeper.RemoveRumor( index );
 					break;
 				}
 				case 3: // Change tip
@@ -1051,7 +1051,7 @@ namespace Server.Mobiles
 				}
 				case 4: // Remove tip
 				{
-					m_Barkeeper.RemoveTip( m_From );
+					m_Barkeeper.RemoveTip();
 					break;
 				}
 				case 5: // Appearance category selection
@@ -1060,7 +1060,7 @@ namespace Server.Mobiles
 					{
 						case 0: m_Barkeeper.BeginChangeTitle( m_From ); break;
 						case 1: m_Barkeeper.BeginChangeAppearance( m_From ); break;
-						case 2: m_Barkeeper.ChangeGender( m_From ); break;
+						case 2: m_Barkeeper.ChangeGender(); break;
 					}
 
 					break;

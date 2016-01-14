@@ -4,7 +4,7 @@ namespace Server.ContextMenus
 	{
 		private Mobile m_Banker;
 
-		public OpenBankEntry( Mobile from, Mobile banker ) : base( 6105, 12 )
+		public OpenBankEntry( Mobile banker ) : base( 6105, 12 )
 		{
 			m_Banker = banker;
 		}

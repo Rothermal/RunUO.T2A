@@ -235,7 +235,7 @@ namespace Server
 				} );
 		}
 
-		public void OnSourceDamaged( Mobile from, int amount )
+		public void OnSourceDamaged( Mobile from )
 		{
 			if ( from != m_Target )
 				return;

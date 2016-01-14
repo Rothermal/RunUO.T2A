@@ -8,16 +8,12 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public TailorBag() : this( 1 )
+		public TailorBag()
 		{
-			Movable = true;
-			Hue = 0x315;
-		}
+            Movable = true;
+            Hue = 0x315;
 
-		[Constructable]
-		public TailorBag( int amount )
-		{
-			DropItem( new SewingKit( 5 ) );
+            DropItem( new SewingKit( 5 ) );
 			DropItem( new Scissors() );
 			DropItem( new Hides( 500 ) );
 			DropItem( new BoltOfCloth( 20 ) );

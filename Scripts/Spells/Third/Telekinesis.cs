@@ -55,9 +55,6 @@ namespace Server.Spells.Third
 				{
 					item.OnSnoop( Caster );
 				}
-				else if ( item is Corpse && !((Corpse)item).CheckLoot( Caster, null ) )
-				{
-				}
 				else if ( Caster.Region.OnDoubleClick( Caster, item ) )
 				{
 					Effects.SendLocationParticles( EffectItem.Create( item.Location, item.Map, EffectItem.DefaultDuration ), 0x376A, 9, 32, 5022 );

@@ -872,7 +872,7 @@ namespace Server.Items
 				return false;
 
 			if ( item != this )
-				return CanLoot( from, item );
+				return CanLoot( from );
 
 			return true;
 		}
@@ -882,7 +882,7 @@ namespace Server.Items
 			if ( !base.CheckLift( from, item, ref reject ) )
 				return false;
 
-			return CanLoot( from,item );
+			return CanLoot( from );
 		}
 
 		public override void OnItemUsed( Mobile from, Item item )
@@ -955,18 +955,7 @@ namespace Server.Items
 			m_RestoreTable[item] = loc;
 		}
 
-		public void ClearRestoreInfo( Item item )
-		{
-			if ( m_RestoreTable == null || item == null )
-				return;
-
-			m_RestoreTable.Remove( item );
-
-			if ( m_RestoreTable.Count == 0 )
-				m_RestoreTable = null;
-		}
-
-		public bool CanLoot( Mobile from, Item item )
+		public bool CanLoot( Mobile from )
 		{
 			if ( !IsCriminalAction( from ) )
 				return true;
@@ -979,9 +968,9 @@ namespace Server.Items
 			return true;
 		}
 
-		public bool CheckLoot( Mobile from, Item item )
+		public bool CheckLoot( Mobile from )
 		{
-			if ( !CanLoot( from, item ) )
+			if ( !CanLoot( from ) )
 			{
 				if ( m_Owner == null || !m_Owner.Player )
 					from.SendLocalizedMessage( 1005035 ); // You did not earn the right to loot this creature!
@@ -1088,7 +1077,7 @@ namespace Server.Items
 				}
 				#endregion
 
-				if ( !CheckLoot( from, null ) )
+				if ( !CheckLoot( from ) )
 					return;
 
 				base.OnDoubleClick( from );

@@ -73,7 +73,7 @@ namespace Server.Engines.Quests.Haven
 			return m.Karma < 0;
 		}
 
-		public bool WillFire( Cannon cannon, Mobile target )
+		public bool WillFire( Mobile target )
 		{
 			if ( m_Active && IsEnemy( target ) )
 			{

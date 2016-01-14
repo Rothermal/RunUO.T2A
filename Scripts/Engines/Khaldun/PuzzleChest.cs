@@ -615,7 +615,7 @@ namespace Server.Items
 
 					GetRandomAOSStats( out attributeCount, out min, out max );
 
-					BaseRunicTool.ApplyAttributesTo( (BaseJewel)item, attributeCount, min, max );
+					BaseRunicTool.ApplyAttributesTo( attributeCount );
 
 					DropItem( item );
 				}

@@ -8,7 +8,7 @@ namespace Server.Engines.ConPVP
 		private Ladder m_Ladder;
 
 		//[CommandProperty( AccessLevel.GameMaster )]
-		public Ladder Ladder{ get{ return m_Ladder; } set{} }
+		public Ladder Ladder{ get{ return m_Ladder; } }
 
 		public override string DefaultName
 		{

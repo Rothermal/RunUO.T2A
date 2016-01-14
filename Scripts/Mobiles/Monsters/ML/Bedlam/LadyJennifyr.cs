@@ -51,7 +51,7 @@ namespace Server.Mobiles
 				defender.PlaySound( 0x208 );
 				defender.SendLocalizedMessage( 1070833 ); // The creature fans you with fire, reducing your resistance to fire attacks.
 
-				m_Table[defender] = timer = new ExpireTimer( defender, "" );
+				m_Table[defender] = timer = new ExpireTimer( defender );
 				timer.Start();
 			}
 		}
@@ -62,7 +62,7 @@ namespace Server.Mobiles
 		{
 			private Mobile m_Mobile;
 
-			public ExpireTimer( Mobile m, string mod ) : base( TimeSpan.FromSeconds( 10 ) )
+			public ExpireTimer( Mobile m ) : base( TimeSpan.FromSeconds( 10 ) )
 			{
 				m_Mobile = m;
 				Priority = TimerPriority.TwoFiftyMS;

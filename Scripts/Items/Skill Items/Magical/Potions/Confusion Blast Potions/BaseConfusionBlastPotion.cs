@@ -101,7 +101,7 @@ namespace Server.Items
 					if ( mon.Controlled || mon.Summoned )
 						continue;
 
-					mon.Pacify( from, DateTime.Now + TimeSpan.FromSeconds( 5.0 ) ); // TODO check
+					mon.Pacify( DateTime.Now + TimeSpan.FromSeconds( 5.0 ) ); // TODO check
 				}
 			}
 		}

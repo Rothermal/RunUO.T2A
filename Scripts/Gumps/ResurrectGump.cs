@@ -20,43 +20,23 @@ namespace Server.Gumps
 		private bool m_FromSacrifice;
 		private double m_HitsScalar;
 
-		public ResurrectGump( Mobile owner )
-			: this( owner, owner, ResurrectMessage.Generic, false )
+		public ResurrectGump( Mobile owner ) : this( owner, ResurrectMessage.Generic, false )
 		{
 		}
 
-		public ResurrectGump( Mobile owner, double hitsScalar )
-			: this( owner, owner, ResurrectMessage.Generic, false, hitsScalar )
+		public ResurrectGump( Mobile owner, bool fromSacrifice ) : this( owner, ResurrectMessage.Generic, fromSacrifice )
 		{
 		}
 
-		public ResurrectGump( Mobile owner, bool fromSacrifice )
-			: this( owner, owner, ResurrectMessage.Generic, fromSacrifice )
+		public ResurrectGump( Mobile owner, ResurrectMessage msg ) : this( owner, msg, false )
 		{
 		}
 
-		public ResurrectGump( Mobile owner, Mobile healer )
-			: this( owner, healer, ResurrectMessage.Generic, false )
+		public ResurrectGump( Mobile healer, ResurrectMessage msg, bool fromSacrifice ) : this( healer, msg, fromSacrifice, 0.0 )
 		{
 		}
 
-		public ResurrectGump( Mobile owner, ResurrectMessage msg )
-			: this( owner, owner, msg, false )
-		{
-		}
-
-		public ResurrectGump( Mobile owner, Mobile healer, ResurrectMessage msg )
-			: this( owner, healer, msg, false )
-		{
-		}
-
-		public ResurrectGump( Mobile owner, Mobile healer, ResurrectMessage msg, bool fromSacrifice )
-			: this( owner, healer, msg, fromSacrifice, 0.0 )
-		{
-		}
-
-		public ResurrectGump( Mobile owner, Mobile healer, ResurrectMessage msg, bool fromSacrifice, double hitsScalar )
-			: base( 100, 0 )
+		public ResurrectGump( Mobile healer, ResurrectMessage msg, bool fromSacrifice, double hitsScalar ) : base( 100, 0 )
 		{
 			m_Healer = healer;
 			m_FromSacrifice = fromSacrifice;
@@ -80,8 +60,7 @@ namespace Server.Gumps
 			AddHtmlLocalized( 100, 230, 110, 35, 1011011, false, false ); // CONTINUE
 		}
 
-		public ResurrectGump( Mobile owner, Mobile healer, int price )
-			: base( 150, 50 )
+		public ResurrectGump( Mobile healer, int price ) : base( 150, 50 )
 		{
 			m_Healer = healer;
 			m_Price = price;

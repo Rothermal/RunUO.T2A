@@ -417,40 +417,20 @@ namespace Server
 
 		public static BaseClothing RandomClothing()
 		{
-			return RandomClothing( false, false );
-		}
-
-		public static BaseClothing RandomClothing( bool inTokuno, bool isMondain )
-		{
 			return Construct( m_ClothingTypes ) as BaseClothing;
 		}
 
 		public static BaseWeapon RandomRangedWeapon()
-		{
-			return RandomRangedWeapon( false, false );
-		}
-
-		public static BaseWeapon RandomRangedWeapon( bool inTokuno, bool isMondain )
 		{
 			return Construct( m_RangedWeaponTypes ) as BaseWeapon;
 		}
 
 		public static BaseWeapon RandomWeapon()
 		{
-			return RandomWeapon( false, false );
-		}
-
-		public static BaseWeapon RandomWeapon( bool inTokuno, bool isMondain )
-		{
 			return Construct( m_WeaponTypes ) as BaseWeapon;
 		}
 
-		public static Item RandomWeaponOrJewelry()
-		{
-			return RandomWeaponOrJewelry( false, false );
-		}
-
-		public static Item RandomWeaponOrJewelry( bool inTokuno, bool isMondain )
+		public static Item RandomWeaponOrJewelry( )
 		{
 			return Construct( m_WeaponTypes, m_JewelryTypes );
 		}
@@ -462,30 +442,15 @@ namespace Server
 
 		public static BaseArmor RandomArmor()
 		{
-			return RandomArmor( false, false );
-		}
-
-		public static BaseArmor RandomArmor( bool inTokuno, bool isMondain )
-		{
 			return Construct( m_ArmorTypes ) as BaseArmor;
 		}
 
 		public static BaseHat RandomHat()
 		{
-			return RandomHat( false );
-		}
-
-		public static BaseHat RandomHat( bool inTokuno )
-		{
 			return Construct( m_HatTypes ) as BaseHat;
 		}
 
-		public static Item RandomArmorOrHat()
-		{
-			return RandomArmorOrHat( false, false );
-		}
-
-		public static Item RandomArmorOrHat( bool inTokuno, bool isMondain )
+		public static Item RandomArmorOrHat( )
 		{
 			return Construct( m_ArmorTypes, m_HatTypes );
 		}
@@ -497,40 +462,20 @@ namespace Server
 
 		public static BaseArmor RandomArmorOrShield()
 		{
-			return RandomArmorOrShield( false, false );
-		}
-
-		public static BaseArmor RandomArmorOrShield( bool inTokuno, bool isMondain )
-		{
 			return Construct( m_ArmorTypes, m_ShieldTypes ) as BaseArmor;
 		}
 
 		public static Item RandomArmorOrShieldOrJewelry()
-		{
-			return RandomArmorOrShieldOrJewelry( false, false );
-		}
-
-		public static Item RandomArmorOrShieldOrJewelry( bool inTokuno, bool isMondain )
 		{
     		return Construct( m_ArmorTypes, m_HatTypes, m_ShieldTypes, m_JewelryTypes );
 		}
 
 		public static Item RandomArmorOrShieldOrWeapon()
 		{
-			return RandomArmorOrShieldOrWeapon( false, false );
-		}
-
-		public static Item RandomArmorOrShieldOrWeapon( bool inTokuno, bool isMondain )
-		{
 			return Construct( m_WeaponTypes, m_RangedWeaponTypes, m_ArmorTypes, m_HatTypes, m_ShieldTypes );
 		}
 
 		public static Item RandomArmorOrShieldOrWeaponOrJewelry()
-		{
-			return RandomArmorOrShieldOrWeaponOrJewelry( false, false );
-		}
-
-		public static Item RandomArmorOrShieldOrWeaponOrJewelry( bool inTokuno, bool isMondain )
 		{
 			return Construct( m_WeaponTypes, m_RangedWeaponTypes, m_ArmorTypes, m_HatTypes, m_ShieldTypes, m_JewelryTypes );
 		}

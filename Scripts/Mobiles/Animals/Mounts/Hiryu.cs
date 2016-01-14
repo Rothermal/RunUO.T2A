@@ -152,7 +152,7 @@ namespace Server.Mobiles
 		{
 			private Mobile m_Mobile;
 
-			public ExpireTimer( Mobile m, string mod, TimeSpan delay ) : base( delay )
+			public ExpireTimer( Mobile m, TimeSpan delay ) : base( delay )
 			{
 				m_Mobile = m;
 				Priority = TimerPriority.TwoFiftyMS;

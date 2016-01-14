@@ -40,14 +40,6 @@ namespace Server.Mobiles
 			AddLoot( LootPack.UltraRich, 2 );
 		}
 
-		public override void OnDeath( Container c )
-		{
-			base.OnDeath( c );
-
-			if ( !Summoned && !NoKillAwards && DemonKnight.CheckArtifactChance( this ) )
-				DemonKnight.DistributeArtifact( this );
-		}
-
 		public override bool BardImmune{ get{ return true; } }
 		public override bool Unprovokable{ get{ return false; } }
 		public override bool AreaPeaceImmune { get { return false; } }

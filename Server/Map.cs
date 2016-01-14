@@ -1746,14 +1746,14 @@ namespace Server
 		}
 		#endregion
 
-		public Point3D GetPoint( object o, bool eye )
+		public Point3D GetPoint( object o )
 		{
 			Point3D p;
 
 			if( o is Mobile )
 			{
 				p = ((Mobile)o).Location;
-				p.Z += 14;//eye ? 15 : 10;
+				p.Z += 14;
 			}
 			else if( o is Item )
 			{
@@ -2032,7 +2032,7 @@ namespace Server
 			else if ( dest is Item && from is Mobile && ( (Item) dest ).RootParent == from )
 				return true;
 
-			return LineOfSight( GetPoint( from, true ), GetPoint( dest, false ) );
+			return LineOfSight( GetPoint( from ), GetPoint( dest ) );
 		}
 
 		public bool LineOfSight( Mobile from, Point3D target )

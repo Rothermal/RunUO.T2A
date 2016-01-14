@@ -5,13 +5,7 @@
 		public override int LabelNumber { get { return 1096949; } } /* taffy */
 
 		[Constructable]
-		public Taffy()
-			: this( 1 )
-		{
-		}
-
-		public Taffy( int amount )
-			: base( 0x469D )
+		public Taffy() : base( 0x469D )
 		{
 			Stackable = true;
 		}

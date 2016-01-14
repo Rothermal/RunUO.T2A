@@ -103,24 +103,6 @@ namespace Server.Mobiles
 			to.SendLocalizedMessage( 1062317 ); // For your valor in combating the fallen beast, a special artifact has been bestowed on you.
 		}
 
-		public static int GetArtifactChance( Mobile boss )
-		{
-			return 0;
-		}
-
-		public static bool CheckArtifactChance( Mobile boss )
-		{
-			return GetArtifactChance( boss ) > Utility.Random( 100000 );
-		}
-
-		public override void OnDeath( Container c )
-		{
-			base.OnDeath( c );
-
-			if ( !Summoned && !NoKillAwards && DemonKnight.CheckArtifactChance( this ) )
-				DemonKnight.DistributeArtifact( this );
-		}
-
 		[Constructable]
 		public DemonKnight() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 		{

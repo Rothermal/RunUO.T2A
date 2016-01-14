@@ -169,7 +169,7 @@ namespace Server.Engines.MyRunUO
 			{
 				case Stage.CollectingMobiles: CollectMobiles( endTime ); break;
 				case Stage.DumpingMobiles: DumpMobiles( endTime ); break;
-				case Stage.CollectingGuilds: CollectGuilds( endTime ); break;
+				case Stage.CollectingGuilds: CollectGuilds(); break;
 				case Stage.DumpingGuilds: DumpGuilds( endTime ); break;
 			}
 
@@ -570,7 +570,7 @@ namespace Server.Engines.MyRunUO
 			}
 		}
 
-		public void CollectGuilds( DateTime endTime )
+		public void CollectGuilds()
 		{
 			m_List.AddRange( Guild.List.Values );
 			m_Stage = Stage.DumpingGuilds;

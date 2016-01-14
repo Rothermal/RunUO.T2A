@@ -60,7 +60,7 @@ namespace Server.Items
 			{
 				CureLevelInfo li = info[i];
 
-				if ( li.Poison == from.Poison && Scale( from, li.Chance ) > Utility.RandomDouble() )
+				if ( li.Poison == from.Poison && li.Chance > Utility.RandomDouble() )
 				{
 					cure = true;
 					break;

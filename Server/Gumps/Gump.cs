@@ -368,11 +368,6 @@ namespace Server.Gumps
 		private static byte[] m_NoDispose = StringToBuffer( "{ nodispose }" );
 		private static byte[] m_NoResize = StringToBuffer( "{ noresize }" );
 
-		private Packet Compile()
-		{
-			return Compile( null );
-		}
-
 		private Packet Compile( NetState ns )
 		{
 			IGumpWriter disp;
