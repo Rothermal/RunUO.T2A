@@ -178,7 +178,7 @@ namespace Server.Items
 
 		public static bool CheckAccess( BaseHouse house, Mobile from )
 		{
-			if ( house.Public || !house.IsAosRules )
+			if ( house.Public )
 				return !house.IsBanned( from );
 
 			return house.HasAccess( from );

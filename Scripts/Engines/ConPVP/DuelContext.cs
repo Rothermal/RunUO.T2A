@@ -307,11 +307,6 @@ namespace Server.Engines.ConPVP
 				title = "Items";
 				option = "Shurikens";
 			}
-			else if ( item is Fukiya )
-			{
-				title = "Items";
-				option = "Fukiya Darts";
-			}
 			else if ( item is FireHorn )
 			{
 				title = "Items";

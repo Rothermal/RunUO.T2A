@@ -90,27 +90,15 @@ namespace Server.Regions
 			else if ( m is BaseCreature && ((BaseCreature)m).IsHouseSummonable && !(BaseCreature.Summoning || m_House.IsInside( oldLocation, 16 )) )
 			{
 			}
-			else if ( (m_House.Public || !m_House.IsAosRules) && m_House.IsBanned( m ) && m_House.IsInside( m ) )
+			else if ( (m_House.Public) && m_House.IsBanned( m ) && m_House.IsInside( m ) )
 			{
 				m.Location = m_House.BanLocation;
                 m.SendLocalizedMessage( 501284 ); // You may not enter.
-			}
-			else if ( m_House.IsAosRules && !m_House.Public && !m_House.HasAccess( m ) && m_House.IsInside( m ) )
-			{
-				m.Location = m_House.BanLocation;
-				m.SendLocalizedMessage( 501284 ); // You may not enter.
 			}
 			else if ( m_House.IsCombatRestricted( m ) && m_House.IsInside( m ) && !m_House.IsInside( oldLocation, 16 ) )
 			{
 				m.Location = m_House.BanLocation;
 				m.SendLocalizedMessage( 1061637 ); // You are not allowed to access this.
-			}
-			else if ( m_House is HouseFoundation )
-			{
-				HouseFoundation foundation = (HouseFoundation)m_House;
-
-				if ( foundation.Customizer != null && foundation.Customizer != m && m_House.IsInside( m ) )
-					m.Location = m_House.BanLocation;
 			}
 
 			if ( m_House.InternalizedVendors.Count > 0 && m_House.IsInside( m ) && !m_House.IsInside( oldLocation, 16 ) && m_House.IsOwner( m ) && m.Alive && !m.HasGump( typeof( NoticeGump ) ) )
@@ -143,18 +131,9 @@ namespace Server.Regions
 			{
 				return false;
 			}
-			else if ( from is BaseCreature && !((BaseCreature)from).Controlled && m_House.IsAosRules && !m_House.Public)
-			{
-				return false;
-			}
-			else if ( (m_House.Public || !m_House.IsAosRules) && m_House.IsBanned( from ) && m_House.IsInside( newLocation, 16 ) )
+			else if ( m_House.Public && m_House.IsBanned( from ) && m_House.IsInside( newLocation, 16 ) )
 			{
 				from.Location = m_House.BanLocation;
-				from.SendLocalizedMessage( 501284 ); // You may not enter.
-				return false;
-			}
-			else if ( m_House.IsAosRules && !m_House.Public && !m_House.HasAccess( from ) && m_House.IsInside( newLocation, 16 ) )
-			{
 				from.SendLocalizedMessage( 501284 ); // You may not enter.
 				return false;
 			}
@@ -162,13 +141,6 @@ namespace Server.Regions
 			{
 				from.SendLocalizedMessage( 1061637 ); // You are not allowed to access this.
 				return false;
-			}
-			else if ( m_House is HouseFoundation )
-			{
-				HouseFoundation foundation = (HouseFoundation)m_House;
-
-				if ( foundation.Customizer != null && foundation.Customizer != from && m_House.IsInside( newLocation, 16 ) )
-					return false;
 			}
 
 			if ( m_House.InternalizedVendors.Count > 0 && m_House.IsInside( from ) && !m_House.IsInside( oldLocation, 16 ) && m_House.IsOwner( from ) && from.Alive && !from.HasGump( typeof( NoticeGump ) ) )
@@ -230,7 +202,7 @@ namespace Server.Regions
 			if ( !from.Alive )
 				return;
 
-			if ( !m_House.IsInside( from ) || !m_House.IsActive )
+			if ( !m_House.IsInside( from ) )
 				return;
 			else if ( e.HasKeyword( 0x33 ) ) // remove thyself
 			{
@@ -249,10 +221,6 @@ namespace Server.Regions
 				if ( !isFriend )
 				{
 					from.SendLocalizedMessage( 502094 ); // You must be in your house to do this.
-				}
-				else if ( !m_House.Public && m_House.IsAosRules )
-				{
-					from.SendLocalizedMessage( 1062521 ); // You cannot ban someone from a private house.  Revoke their access instead.
 				}
 				else
 				{

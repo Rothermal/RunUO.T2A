@@ -20,9 +20,7 @@ namespace Server.Mobiles
 			public InternalBuyInfo()
 			{
 				Add( new GenericBuyInfo( typeof( Yumi ), 53, 20, 0x27A5, 0 ) );
-				Add( new GenericBuyInfo( typeof( Fukiya ), 20, 20, 0x27AA, 0 ) );
 				Add( new GenericBuyInfo( typeof( Nunchaku ), 35, 20, 0x27AE, 0 ) );
-				Add( new GenericBuyInfo( typeof( FukiyaDarts ), 3, 20, 0x2806, 0 ) );
 				Add( new GenericBuyInfo( typeof( Bokuto ), 21, 20, 0x27A8, 0 ) );
 			}
 		}
@@ -32,9 +30,7 @@ namespace Server.Mobiles
 			public InternalSellInfo()
 			{
 				Add( typeof( Yumi ), 26 );
-				Add( typeof( Fukiya ), 10 );
 				Add( typeof( Nunchaku ), 17 );
-				Add( typeof( FukiyaDarts ), 1 );
 				Add( typeof( Bokuto ), 10 );
 			}
 		}

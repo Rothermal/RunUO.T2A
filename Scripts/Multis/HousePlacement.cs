@@ -61,9 +61,6 @@ namespace Server.Multis
 			// This holds data describing the internal structure of the house
 			MultiComponentList mcl = MultiData.GetComponents( multiID );
 
-			if ( multiID >= 0x13EC && multiID < 0x1D00 )
-				HouseFoundation.AddStairsTo( ref mcl ); // this is a AOS house, add the stairs
-
 			// Location of the nortwest-most corner of the house
 			Point3D start = new Point3D( center.X + mcl.Min.X, center.Y + mcl.Min.Y, center.Z );
 
@@ -344,24 +341,6 @@ namespace Server.Multis
 					if ( b.Contains( yard[i] ) )
 						return HousePlacementResult.BadStatic; // Broke rule #3
 				}
-
-				/*Point2D yardPoint = yard[i];
-
-				IPooledEnumerable eable = map.GetMultiTilesAt( yardPoint.X, yardPoint.Y );
-
-				foreach ( StaticTile[] tile in eable )
-				{
-					for ( int j = 0; j < tile.Length; ++j )
-					{
-						if ( (TileData.ItemTable[tile[j].ID & TileData.MaxItemValue].Flags & (TileFlag.Impassable | TileFlag.Surface)) != 0 )
-						{
-							eable.Free();
-							return HousePlacementResult.BadStatic; // Broke rule #3
-						}
-					}
-				}
-
-				eable.Free();*/
 			}
 
 			return HousePlacementResult.Valid;

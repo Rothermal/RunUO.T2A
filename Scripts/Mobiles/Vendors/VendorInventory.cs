@@ -153,20 +153,6 @@ namespace Server.Mobiles
 
 				if ( house != null )
 				{
-					if ( m_Inventory.Gold > 0 )
-					{
-						if ( house.MovingCrate == null )
-							house.MovingCrate = new MovingCrate( house );
-
-						Banker.Deposit( house.MovingCrate, m_Inventory.Gold );
-					}
-
-					foreach ( Item item in m_Inventory.Items )
-					{
-						if ( !item.Deleted )
-							house.DropToMovingCrate( item );
-					}
-
 					m_Inventory.Gold = 0;
 					m_Inventory.Items.Clear();
 				}

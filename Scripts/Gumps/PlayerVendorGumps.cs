@@ -203,15 +203,6 @@ namespace Server.Gumps
 			AddLabel( 300, 82, 0x480, goldHeld.ToString() );
 
 			AddHtmlLocalized( 40, 108, 260, 20, 1062509, 0x7FFF, false, false ); // Shop Name:
-			AddLabel( 140, 106, 0x66D, vendor.ShopName );
-
-			if ( vendor is RentedVendor )
-			{
-				int days, hours;
-				((RentedVendor)vendor).ComputeRentalExpireDelay( out days, out hours );
-
-				AddLabel( 38, 132, 0x480, String.Format( "Location rental will expire in {0} day{1} and {2} hour{3}.", days, days != 1 ? "s" : "", hours, hours != 1 ? "s" : "" ) );
-			}
 
 			AddButton( 390, 24, 0x15E1, 0x15E5, 1, GumpButtonType.Reply, 0 );
 			AddHtmlLocalized( 408, 21, 120, 20, 1019068, 0x7FFF, false, false ); // See goods
@@ -242,9 +233,6 @@ namespace Server.Gumps
 		{
 			Mobile from = sender.Mobile;
 
-			if ( info.ButtonID == 1 || info.ButtonID == 2 ) // See goods or Customize
-				m_Vendor.CheckTeleport( from );
-
 			if ( !m_Vendor.CanInteractWith( from, true ) )
 				return;
 
@@ -264,13 +252,13 @@ namespace Server.Gumps
 				}
 				case 3: // Rename Shop
 				{
-					m_Vendor.RenameShop( from );
+//					m_Vendor.RenameShop( from );
 
 					break;
 				}
 				case 4: // Rename Vendor
 				{
-					m_Vendor.Rename( from );
+			//		m_Vendor.Rename( from );
 
 					break;
 				}
@@ -544,9 +532,6 @@ namespace Server.Gumps
 			if ( m_Vendor is PlayerVendor && !((PlayerVendor)m_Vendor).CanInteractWith( from, true ) )
 				return;
 
-			if ( m_Vendor is PlayerBarkeeper && !((PlayerBarkeeper)m_Vendor).IsOwner( from ) )
-				return;
-
 			if ( info.ButtonID == 0 )
 			{
 				if ( m_Vendor is PlayerVendor ) // do nothing for barkeeps
@@ -738,9 +723,6 @@ namespace Server.Gumps
 				if ( m_Vendor is PlayerVendor && !((PlayerVendor)m_Vendor).CanInteractWith( m_Mob, true ) )
 					return;
 
-				if ( m_Vendor is PlayerBarkeeper && !((PlayerBarkeeper)m_Vendor).IsOwner( m_Mob ) )
-					return;
-
 				m_Item.Hue = hue;
 				m_Mob.SendGump( new PlayerVendorCustomizeGump( m_Vendor, m_Mob ) );
 			}
@@ -765,9 +747,6 @@ namespace Server.Gumps
 					return;
 
 				if ( m_Vendor is PlayerVendor && !((PlayerVendor)m_Vendor).CanInteractWith( m_Mob, true ) )
-					return;
-
-				if ( m_Vendor is PlayerBarkeeper && !((PlayerBarkeeper)m_Vendor).IsOwner( m_Mob ) )
 					return;
 
 				if ( m_FacialHair )

@@ -133,22 +133,6 @@ namespace Server.Items
 			return BaseHouse.FindHouseAt( loc, Map, 20 );
 		}
 
-		public bool CheckAccess( Mobile m )
-		{
-			BaseHouse house = FindHouse();
-
-			if ( house == null )
-				return false;
-
-			if ( !house.IsAosRules )
-				return true;
-
-			if ( house.Public ? house.IsBanned( m ) : !house.HasAccess( m ) )
-				return false;
-
-			return house.HasSecureAccess( m, m_Level );
-		}
-
 		public override void OnOpened( Mobile from )
 		{
 			BaseHouse house = FindHouse();
@@ -164,15 +148,7 @@ namespace Server.Items
 		{
 			BaseHouse house = FindHouse();
 
-			return ( house == null || !house.IsAosRules );
-		}
-
-		public override void Use( Mobile from )
-		{
-			if ( !CheckAccess( from ) )
-				from.SendLocalizedMessage( 1061637 ); // You are not allowed to access this.
-			else
-				base.Use( from );
+			return ( house == null );
 		}
 
 		public BaseHouseDoor( Serial serial ) : base( serial )

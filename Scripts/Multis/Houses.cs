@@ -12,8 +12,6 @@ namespace Server.Multis
 
 		public override int DefaultPrice{ get{ return 43800; } }
 
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.TwoStoryFoundations[0]; } }
-
 		public SmallOldHouse( Mobile owner, int id ) : base( id, owner, 425, 3 )
 		{
 			uint keyValue = CreateKeys( owner );
@@ -54,13 +52,12 @@ namespace Server.Multis
 		}
 	}
 
-	public class GuildHouse : BaseHouse
+    public class GuildHouse : BaseHouse
 	{
 		public static Rectangle2D[] AreaArray = new Rectangle2D[]{ new Rectangle2D( -7, -7, 14, 14 ), new Rectangle2D( -2, 7, 4, 1 ) };
 
 		public override int DefaultPrice{ get{ return 144500; } }
 
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.ThreeStoryFoundations[20]; } }
 		public override int ConvertOffsetX{ get{ return -1; } }
 		public override int ConvertOffsetY{ get{ return -1; } }
 
@@ -152,7 +149,6 @@ namespace Server.Multis
 
 		public override int DefaultPrice{ get{ return 433200; } }
 
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.ThreeStoryFoundations[37]; } }
 		public override int ConvertOffsetY{ get{ return -1; } }
 
 		public override Rectangle2D[] Area{ get{ return AreaArray; } }
@@ -274,7 +270,6 @@ namespace Server.Multis
 
 		public override int DefaultPrice{ get{ return 152800; } }
 
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.ThreeStoryFoundations[29]; } }
 		public override int ConvertOffsetY{ get{ return -1; } }
 
 		public override Rectangle2D[] Area { get { return AreaArray; } }
@@ -318,7 +313,6 @@ namespace Server.Multis
 
 		public override int DefaultPrice{ get{ return 192000; } }
 
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.ThreeStoryFoundations[29]; } }
 		public override int ConvertOffsetY{ get{ return -1; } }
 
 		public override Rectangle2D[] Area { get { return AreaArray; } }
@@ -351,14 +345,68 @@ namespace Server.Multis
 			int version = reader.ReadInt();
 		}
 	}
+    
+    public class SmallShop : BaseHouse
+    {
+        public override Rectangle2D[] Area { get { return (ItemID == 0x40A2 ? AreaArray1 : AreaArray2); } }
+        public override Point3D BaseBanLocation { get { return new Point3D(3, 4, 0); } }
 
-	public class SmallTower : BaseHouse
+        public override int DefaultPrice { get { return 63000; } }
+
+        public static Rectangle2D[] AreaArray1 = new Rectangle2D[] { new Rectangle2D(-3, -3, 7, 7), new Rectangle2D(-1, 4, 4, 1) };
+        public static Rectangle2D[] AreaArray2 = new Rectangle2D[] { new Rectangle2D(-3, -3, 7, 7), new Rectangle2D(-2, 4, 3, 1) };
+
+        public SmallShop(Mobile owner, int id) : base(id, owner, 425, 3)
+        {
+            uint keyValue = CreateKeys(owner);
+
+            BaseDoor door = MakeDoor(false, DoorFacing.EastCW);
+
+            door.Locked = true;
+            door.KeyValue = keyValue;
+
+            if (door is BaseHouseDoor)
+                ((BaseHouseDoor)door).Facing = DoorFacing.EastCCW;
+
+            AddDoor(door, -2, 0, id == 0xA2 ? 24 : 27);
+
+            //AddSouthDoor( false, -2, 0, 27 - (id == 0xA2 ? 3 : 0), keyValue );
+
+            SetSign(3, 4, 7 - (id == 0xA2 ? 2 : 0));
+        }
+
+        public SmallShop(Serial serial) : base(serial)
+        {
+        }
+
+        public override HouseDeed GetDeed()
+        {
+            switch (ItemID)
+            {
+                case 0xA0: return new StoneWorkshopDeed();
+                case 0xA2:
+                default: return new MarbleWorkshopDeed();
+            }
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);//version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class SmallTower : BaseHouse
 	{
 		public static Rectangle2D[] AreaArray = new Rectangle2D[]{ new Rectangle2D( -3, -3, 8, 7 ), new Rectangle2D( 2, 4, 3, 1 ) };
 
 		public override int DefaultPrice{ get{ return 88500; } }
-
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.TwoStoryFoundations[6]; } }
 
 		public override Rectangle2D[] Area{ get{ return AreaArray; } }
 		public override Point3D BaseBanLocation{ get{ return new Point3D( 1, 4, 0 ); } }
@@ -396,8 +444,6 @@ namespace Server.Multis
 		public static Rectangle2D[] AreaArray = new Rectangle2D[]{ new Rectangle2D( -3, -6, 8, 13 ) };
 
 		public override int DefaultPrice{ get{ return 97800; } }
-
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.TwoStoryFoundations[12]; } }
 
 		public override Rectangle2D[] Area { get { return AreaArray; } }
 		public override Point3D BaseBanLocation { get { return new Point3D( 5, 8, 0 ); } }
@@ -438,7 +484,6 @@ namespace Server.Multis
 
 		public override int DefaultPrice{ get{ return 90900; } }
 
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.TwoStoryFoundations[35]; } }
 		public override int ConvertOffsetY{ get{ return -1; } }
 
 		public override Rectangle2D[] Area { get { return AreaArray; } }
@@ -478,8 +523,6 @@ namespace Server.Multis
 
 		public override int DefaultPrice{ get{ return 136500; } }
 
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.TwoStoryFoundations[31]; } }
-
 		public override Rectangle2D[] Area{ get{ return AreaArray; } }
 		public override Point3D BaseBanLocation{ get{ return new Point3D( 3, 8, 0 ); } }
 
@@ -498,66 +541,7 @@ namespace Server.Multis
 		public TwoStoryVilla( Serial serial ) : base( serial )
 		{
 		}
-
-		public override HouseDeed GetDeed() { return new VillaDeed(); }
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-			writer.Write( (int)0 );//version
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-			int version = reader.ReadInt();
-		}
-	}
-
-	public class SmallShop : BaseHouse
-	{
-		public override Rectangle2D[] Area { get { return ( ItemID == 0x40A2 ? AreaArray1 : AreaArray2 ); } }
-		public override Point3D BaseBanLocation { get { return new Point3D( 3, 4, 0 ); } }
-
-		public override int DefaultPrice{ get{ return 63000; } }
-
-		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.TwoStoryFoundations[0]; } }
-
-		public static Rectangle2D[] AreaArray1 = new Rectangle2D[]{ new Rectangle2D(-3,-3,7,7), new Rectangle2D( -1, 4, 4, 1 ) };
-		public static Rectangle2D[] AreaArray2 = new Rectangle2D[]{ new Rectangle2D(-3,-3,7,7), new Rectangle2D( -2, 4, 3, 1 ) };
-
-		public SmallShop( Mobile owner, int id ) : base( id, owner, 425, 3 )
-		{
-			uint keyValue = CreateKeys( owner );
-
-			BaseDoor door = MakeDoor( false, DoorFacing.EastCW );
-
-			door.Locked = true;
-			door.KeyValue = keyValue;
-
-			if ( door is BaseHouseDoor )
-				((BaseHouseDoor)door).Facing = DoorFacing.EastCCW;
-
-			AddDoor( door, -2, 0, id == 0xA2 ? 24 : 27 );
-
-			//AddSouthDoor( false, -2, 0, 27 - (id == 0xA2 ? 3 : 0), keyValue );
-			
-			SetSign( 3, 4, 7 - (id == 0xA2 ? 2 : 0) );
-		}
-
-		public SmallShop( Serial serial ) : base( serial )
-		{
-		}
-
-		public override HouseDeed GetDeed() 
-		{ 
-			switch ( ItemID )
-			{
-				case 0xA0: return new StoneWorkshopDeed(); 
-				case 0xA2:
-				default: return new MarbleWorkshopDeed();
-			}
-		}
+        public override HouseDeed GetDeed() { return new VillaDeed(); }
 
 		public override void Serialize( GenericWriter writer )
 		{

@@ -137,10 +137,7 @@ namespace Server.Multis
                     m.SendLocalizedMessage( 501293 ); // Welcome back to the house, friend!
 				}
 
-				if ( m_Owner.IsAosRules )
-					m.SendGump( new HouseGumpAOS( HouseGumpPageAOS.Information, m, m_Owner ) );
-				else
-					m.SendGump( new HouseGump( m, m_Owner ) );
+				m.SendGump( new HouseGump( m, m_Owner ) );
 			}
 		}
 
@@ -196,20 +193,6 @@ namespace Server.Multis
 			ShowSign( m );
 		}
 
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-
-			if ( BaseHouse.NewVendorSystem && from.Alive && Owner != null && Owner.IsAosRules )
-			{
-				if ( Owner.AreThereAvailableVendorsFor( from ) )
-					list.Add( new VendorsEntry( this ) );
-
-				if ( Owner.VendorInventories.Count > 0 )
-					list.Add( new ReclaimVendorInventoryEntry( this ) );
-			}
-		}
-
 		private class VendorsEntry : ContextMenuEntry
 		{
 			private HouseSign m_Sign;
@@ -232,7 +215,7 @@ namespace Server.Multis
 				}
 				else
 				{
-					from.SendGump( new HouseGumpAOS( HouseGumpPageAOS.Vendors, from, m_Sign.Owner ) );
+			//		from.SendGump( new HouseGumpAOS( HouseGumpPageAOS.Vendors, from, m_Sign.Owner ) );
 				}
 			}
 		}

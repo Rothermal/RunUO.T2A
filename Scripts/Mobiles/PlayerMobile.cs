@@ -99,8 +99,6 @@ namespace Server.Mobiles
 			}
 		}
 
-		private DesignContext m_DesignContext;
-
 		private NpcGuild m_NpcGuild;
 		private DateTime m_NpcGuildJoinTime;
 		private DateTime m_NextBODTurnInTime;
@@ -560,12 +558,6 @@ namespace Server.Mobiles
 				m_Flags &= ~flag;
 		}
 
-		public DesignContext DesignContext
-		{
-			get{ return m_DesignContext; }
-			set{ m_DesignContext = value; }
-		}
-
 		public static void Initialize()
 		{
 			if ( FastwalkPrevention )
@@ -1000,31 +992,6 @@ namespace Server.Mobiles
 		private static void EventSink_Disconnected( DisconnectedEventArgs e )
 		{
 			Mobile from = e.Mobile;
-			DesignContext context = DesignContext.Find( from );
-
-			if ( context != null )
-			{
-				/* Client disconnected
-				 *  - Remove design context
-				 *  - Eject all from house
-				 *  - Restore relocated entities
-				 */
-
-				// Remove design context
-				DesignContext.Remove( from );
-
-				// Eject all from house
-				from.RevealingAction();
-
-				foreach ( Item item in context.Foundation.GetItems() )
-					item.Location = context.Foundation.BanLocation;
-
-				foreach ( Mobile mobile in context.Foundation.GetMobiles() )
-					mobile.Location = context.Foundation.BanLocation;
-
-				// Restore relocated entities
-				context.Foundation.RestoreRelocatedEntities();
-			}
 
 			PlayerMobile pm = e.Mobile as PlayerMobile;
 
@@ -1044,9 +1011,6 @@ namespace Server.Mobiles
 
 		public override void RevealingAction()
 		{
-			if ( m_DesignContext != null )
-				return;
-
 			Spells.Sixth.InvisibilitySpell.RemoveTimer( this );
 
 			base.RevealingAction();
@@ -1092,9 +1056,6 @@ namespace Server.Mobiles
 
 		public override bool CanBeHarmful( Mobile target, bool message, bool ignoreOurBlessedness )
 		{
-			if ( m_DesignContext != null || (target is PlayerMobile && ((PlayerMobile)target).m_DesignContext != null) )
-				return false;
-
 			if ( (target is BaseCreature && ((BaseCreature)target).IsInvulnerable) || target is PlayerVendor || target is TownCrier )
 			{
 				if ( message )
@@ -1109,19 +1070,6 @@ namespace Server.Mobiles
 			}
 
 			return base.CanBeHarmful( target, message, ignoreOurBlessedness );
-		}
-
-		public override bool CanBeBeneficial( Mobile target, bool message, bool allowDead )
-		{
-			if ( m_DesignContext != null || (target is PlayerMobile && ((PlayerMobile)target).m_DesignContext != null) )
-				return false;
-
-			return base.CanBeBeneficial( target, message, allowDead );
-		}
-
-		public override bool CheckContextMenuDisplay( IEntity target )
-		{
-			return ( m_DesignContext == null );
 		}
 
 		public override void OnItemAdded( Item item )
@@ -1281,28 +1229,6 @@ namespace Server.Mobiles
 			return true;
 		}
 
-		public override bool CheckMovement( Direction d, out int newZ )
-		{
-			DesignContext context = m_DesignContext;
-
-			if ( context == null )
-				return base.CheckMovement( d, out newZ );
-
-			HouseFoundation foundation = context.Foundation;
-
-			newZ = foundation.Z + HouseFoundation.GetLevelZ( context.Level, context.Foundation );
-
-			int newX = this.X, newY = this.Y;
-			Movement.Movement.Offset( d, ref newX, ref newY );
-
-			int startX = foundation.X + foundation.Components.Min.X + 1;
-			int startY = foundation.Y + foundation.Components.Min.Y + 1;
-			int endX = startX + foundation.Components.Width - 1;
-			int endY = startY + foundation.Components.Height - 2;
-
-			return ( newX >= startX && newY >= startY && newX < endX && newY < endY && Map == foundation.Map );
-		}
-
 		public override bool AllowItemUse( Item item )
 		{
 			#region Dueling
@@ -1310,7 +1236,7 @@ namespace Server.Mobiles
 				return false;
 			#endregion
 
-			return DesignContext.Check( this );
+			return true;
 		}
 
 		public SkillName[] AnimalFormRestrictedSkills{ get{ return m_AnimalFormRestrictedSkills; } }
@@ -1330,7 +1256,7 @@ namespace Server.Mobiles
 				return false;
 			#endregion
 
-			return DesignContext.Check( this );
+			return true;
 		}
 
 		private bool m_LastProtectedMessage;
@@ -1398,17 +1324,6 @@ namespace Server.Mobiles
 						else
 							list.Add( new CallbackEntry( 6200, new ContextCallback( AutoRenewInventoryInsurance ) ) ); // Auto Renew Inventory Insurance
 					}
-				}
-
-				BaseHouse house = BaseHouse.FindHouseAt( this );
-
-				if ( house != null )
-				{
-					if ( Alive && house.InternalizedVendors.Count > 0 && house.IsOwner( this ) )
-						list.Add( new CallbackEntry( 6204, new ContextCallback( GetVendor ) ) );
-
-					if ( house.IsAosRules && !Region.IsPartOf( typeof( Engines.ConPVP.SafeZone ) ) ) // Dueling
-						list.Add( new CallbackEntry( 6207, new ContextCallback( LeaveHouse ) ) );
 				}
 
 				if ( m_JusticeProtectors.Count > 0 )
@@ -1862,30 +1777,6 @@ namespace Server.Mobiles
 
 		#endregion
 
-		private void ToggleTrades()
-		{
-			RefuseTrades = !RefuseTrades;
-		}
-
-		private void GetVendor()
-		{
-			BaseHouse house = BaseHouse.FindHouseAt( this );
-
-			if ( CheckAlive() && house != null && house.IsOwner( this ) && house.InternalizedVendors.Count > 0 )
-			{
-				CloseGump( typeof( ReclaimVendorGump ) );
-				SendGump( new ReclaimVendorGump( house ) );
-			}
-		}
-
-		private void LeaveHouse()
-		{
-			BaseHouse house = BaseHouse.FindHouseAt( this );
-
-			if ( house != null )
-				this.Location = house.BanLocation;
-		}
-
 		private delegate void ContextCallback();
 
 		private class CallbackEntry : ContextMenuEntry
@@ -1924,20 +1815,12 @@ namespace Server.Mobiles
 			{
 				IMount mount = Mount;
 
-				if ( mount != null && !DesignContext.Check( this ) )
+				if ( mount != null )
 					return;
 			}
 
 			base.OnDoubleClick( from );
 		}
-
-		public override void DisplayPaperdollTo( Mobile to )
-		{
-			if ( DesignContext.Check( this ) )
-				base.DisplayPaperdollTo( to );
-		}
-
-		private static bool m_NoRecursion;
 
 		public override bool CheckEquip( Item item )
 		{
@@ -2119,37 +2002,6 @@ namespace Server.Mobiles
 			if ( m_DuelContext != null )
 				m_DuelContext.OnLocationChanged( this );
 			#endregion
-
-			DesignContext context = m_DesignContext;
-
-			if ( context == null || m_NoRecursion )
-				return;
-
-			m_NoRecursion = true;
-
-			HouseFoundation foundation = context.Foundation;
-
-			int newX = this.X, newY = this.Y;
-			int newZ = foundation.Z + HouseFoundation.GetLevelZ( context.Level, context.Foundation );
-
-			int startX = foundation.X + foundation.Components.Min.X + 1;
-			int startY = foundation.Y + foundation.Components.Min.Y + 1;
-			int endX = startX + foundation.Components.Width - 1;
-			int endY = startY + foundation.Components.Height - 2;
-
-			if ( newX >= startX && newY >= startY && newX < endX && newY < endY && Map == foundation.Map )
-			{
-				if ( Z != newZ )
-					Location = new Point3D( X, Y, newZ );
-
-				m_NoRecursion = false;
-				return;
-			}
-
-			Location = new Point3D( foundation.X, foundation.Y, newZ );
-			Map = foundation.Map;
-
-			m_NoRecursion = false;
 		}
 
 		public override bool OnMoveOver( Mobile m )
@@ -2187,20 +2039,6 @@ namespace Server.Mobiles
 			if ( m_DuelContext != null )
 				m_DuelContext.OnMapChanged( this );
 			#endregion
-
-			DesignContext context = m_DesignContext;
-
-			if ( context == null || m_NoRecursion )
-				return;
-
-			m_NoRecursion = true;
-
-			HouseFoundation foundation = context.Foundation;
-
-			if ( Map != foundation.Map )
-				Map = foundation.Map;
-
-			m_NoRecursion = false;
 		}
 
 		public override void OnBeneficialAction( Mobile target, bool isCriminal )
@@ -3350,14 +3188,6 @@ namespace Server.Mobiles
 		public override void Animate( int action, int frameCount, int repeatCount, bool forward, bool repeat, int delay )
 		{
 			base.Animate( action, frameCount, repeatCount, forward, repeat, delay );
-		}
-
-		public override bool CanSee( Item item )
-		{
-			if ( m_DesignContext != null && m_DesignContext.Foundation.IsHiddenToCustomizer( item ) )
-				return false;
-
-			return base.CanSee( item );
 		}
 
 		public override void OnAfterDelete()

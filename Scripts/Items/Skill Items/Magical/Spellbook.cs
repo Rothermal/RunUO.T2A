@@ -86,9 +86,6 @@ namespace Server.Items
 		{
 			Mobile from = e.Mobile;
 
-			if ( !Multis.DesignContext.Check( from ) )
-				return; // They are customizing
-
 			SpellbookType type;
 
 			switch ( e.Type )
@@ -111,9 +108,6 @@ namespace Server.Items
 		private static void EventSink_CastSpellRequest( CastSpellRequestEventArgs e )
 		{
 			Mobile from = e.Mobile;
-
-			if ( !Multis.DesignContext.Check( from ) )
-				return; // They are customizing
 
 			Spellbook book = e.Spellbook as Spellbook;
 			int spellID = e.SpellID;

@@ -108,7 +108,7 @@ namespace Server.Gumps
 							AddButton( 190, 17, 0x15E3, 0x15E7, 0, GumpButtonType.Page, page-1 );
 					}
 
-					object name = FindHouseName( list[i] );
+                    object name = list[i].GetType().Name;
 
 					AddHtml( 15, 40 + ((i % 15) * 20),  20, 20, Color( String.Format( "{0}.", i+1 ), White ), false, false );
 
@@ -227,7 +227,7 @@ namespace Server.Gumps
 					case 3:
 					{
 						m_From.SendGump( new ViewHousesGump( m_From, m_List, m_Selection ) );
-						m_From.SendGump( new HouseDemolishGump( m_From, m_Selection ) );
+		//				m_From.SendGump( new HouseDemolishGump( m_From, m_Selection ) );
 
 						break;
 					}
@@ -240,38 +240,6 @@ namespace Server.Gumps
 					}
 				}
 			}
-		}
-
-		public object FindHouseName( BaseHouse house )
-		{
-			int multiID = house.ItemID;
-			HousePlacementEntry[] entries;
-
-			entries = HousePlacementEntry.ClassicHouses;
-
-			for ( int i = 0; i < entries.Length; ++i )
-			{
-				if ( entries[i].MultiID == multiID )
-					return entries[i].Description;
-			}
-
-			entries = HousePlacementEntry.TwoStoryFoundations;
-
-			for ( int i = 0; i < entries.Length; ++i )
-			{
-				if ( entries[i].MultiID == multiID )
-					return entries[i].Description;
-			}
-
-			entries = HousePlacementEntry.ThreeStoryFoundations;
-
-			for ( int i = 0; i < entries.Length; ++i )
-			{
-				if ( entries[i].MultiID == multiID )
-					return entries[i].Description;
-			}
-
-			return house.GetType().Name;
 		}
 
 		private const int White16 = 0x7FFF;

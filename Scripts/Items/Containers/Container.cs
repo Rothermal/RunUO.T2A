@@ -33,8 +33,8 @@ namespace Server.Items
 
 		public override bool CheckHold( Mobile m, Item item, bool message, bool checkItems, int plusItems, int plusWeight )
 		{
-			if ( this.IsSecure && !BaseHouse.CheckHold( m, this, item, message, plusItems ) )
-				return false;
+//			if ( this.IsSecure )
+//				return false;
 
 			return base.CheckHold( m, item, message, checkItems, plusItems, plusWeight );
 		}
@@ -62,12 +62,6 @@ namespace Server.Items
 
 			if ( house != null && house.IsLockedDown( this ) )
 			{
-				if ( dropped is VendorRentalContract || ( dropped is Container && ((Container)dropped).FindItemByType( typeof( VendorRentalContract ) ) != null ) )
-				{
-					from.SendLocalizedMessage( 1062492 ); // You cannot place a rental contract in a locked down container.
-					return false;
-				}
-
 				if ( !house.LockDown( from, dropped, false ) )
 					return false;
 			}
@@ -96,12 +90,6 @@ namespace Server.Items
 
 			if ( house != null && house.IsLockedDown( this ) )
 			{
-				if ( item is VendorRentalContract || ( item is Container && ((Container)item).FindItemByType( typeof( VendorRentalContract ) ) != null ) )
-				{
-					from.SendLocalizedMessage( 1062492 ); // You cannot place a rental contract in a locked down container.
-					return false;
-				}
-
 				if ( !house.LockDown( from, item, false ) )
 					return false;
 			}

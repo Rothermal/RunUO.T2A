@@ -41,12 +41,6 @@ namespace Server.Misc
 				{
 					BaseHouse house = (BaseHouse)item;
 
-					foreach ( RelocatedEntity relEntity in house.RelocatedEntities )
-					{
-						if ( relEntity.Entity is Item )
-							validItems.Add( (Item)relEntity.Entity );
-					}
-
 					foreach ( VendorInventory inventory in house.VendorInventories )
 					{
 						foreach ( Item subItem in inventory.Items )

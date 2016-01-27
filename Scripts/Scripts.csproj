@@ -87,7 +87,6 @@
     <Compile Include=".\Commands\GenCategorization.cs" />
     <Compile Include=".\Commands\Generic\Commands\BaseCommand.cs" />
     <Compile Include=".\Commands\Generic\Commands\Commands.cs" />
-    <Compile Include=".\Commands\Generic\Commands\DesignInsert.cs" />
     <Compile Include=".\Commands\Generic\Commands\Interface.cs" />
     <Compile Include=".\Commands\Generic\Extensions\BaseExtension.cs" />
     <Compile Include=".\Commands\Generic\Extensions\Compilers\ConditionalCompiler.cs" />
@@ -538,7 +537,6 @@
     <Compile Include=".\Gumps\ClientGump.cs" />
     <Compile Include=".\Gumps\ConfirmBreakCrystalGump.cs" />
     <Compile Include=".\Gumps\ConfirmHeritageGump.cs" />
-    <Compile Include=".\Gumps\ConfirmHouseResize.cs" />
     <Compile Include=".\Gumps\ConfirmReleaseGump.cs" />
     <Compile Include=".\Gumps\DawnsMusicBoxGump.cs" />
     <Compile Include=".\Gumps\Go\ChildNode.cs" />
@@ -584,10 +582,7 @@
     <Compile Include=".\Gumps\Guilds\RecruitTarget.cs" />
     <Compile Include=".\Gumps\HeritageTokenGump.cs" />
     <Compile Include=".\Gumps\HonorSelf.cs" />
-    <Compile Include=".\Gumps\HouseDemolishGump.cs" />
     <Compile Include=".\Gumps\HouseGump.cs" />
-    <Compile Include=".\Gumps\HouseGumpAOS.cs" />
-    <Compile Include=".\Gumps\HouseTransferGump.cs" />
     <Compile Include=".\Gumps\NoticeGump.cs" />
     <Compile Include=".\Gumps\PetResurrectGump.cs" />
     <Compile Include=".\Gumps\PlayerVendorGumps.cs" />
@@ -603,7 +598,6 @@
     <Compile Include=".\Gumps\Properties\SetPoint2DGump.cs" />
     <Compile Include=".\Gumps\Properties\SetPoint3DGump.cs" />
     <Compile Include=".\Gumps\Properties\SetTimeSpanGump.cs" />
-    <Compile Include=".\Gumps\ReclaimVendorGump.cs" />
     <Compile Include=".\Gumps\ReportMurderer.cs" />
     <Compile Include=".\Gumps\ResurrectGump.cs" />
     <Compile Include=".\Gumps\RewardGump.cs" />
@@ -613,7 +607,6 @@
     <Compile Include=".\Gumps\TithingGump.cs" />
     <Compile Include=".\Gumps\ToTAdminGump.cs" />
     <Compile Include=".\Gumps\VendorInventoryGump.cs" />
-    <Compile Include=".\Gumps\VendorRentalGumps.cs" />
     <Compile Include=".\Gumps\ViewHousesGump.cs" />
     <Compile Include=".\Gumps\WarningGump.cs" />
     <Compile Include=".\Gumps\WhoGump.cs" />
@@ -1018,7 +1011,7 @@
     <Compile Include=".\Items\Construction\Decorative\Tapestry.cs" />
     <Compile Include=".\Items\Construction\Doors\BaseDoor.cs" />
     <Compile Include=".\Items\Construction\Doors\Doors.cs" />
-    <Compile Include=".\Items\Construction\Doors\HouseDoors.cs" />
+    <Compile Include="Multis\HouseDoors.cs" />
     <Compile Include=".\Items\Construction\Doors\Portcullis.cs" />
     <Compile Include=".\Items\Construction\Doors\SecretDoors.cs" />
     <Compile Include=".\Items\Construction\Floors\Floors.cs" />
@@ -1059,7 +1052,6 @@
     <Compile Include=".\Items\Decoration Artifacts\DoomDecorationArtifacts.cs" />
     <Compile Include=".\Items\Decoration Artifacts\SEDecorationArtifacts.cs" />
     <Compile Include=".\Items\Decoration Artifacts\StealableArtifactsSpawner.cs" />
-    <Compile Include=".\Items\Deeds\BarkeepContract.cs" />
     <Compile Include=".\Items\Deeds\ClothingBlessDeed.cs" />
     <Compile Include=".\Items\Deeds\CommodityDeed.cs" />
     <Compile Include=".\Items\Deeds\DragonBardingDeed.cs" />
@@ -1067,7 +1059,6 @@
     <Compile Include=".\Items\Deeds\HolidayTreeDeed.cs" />
     <Compile Include=".\Items\Deeds\NameChangeDeed.cs" />
     <Compile Include=".\Items\Deeds\NewPlayerTicket.cs" />
-    <Compile Include=".\Items\Deeds\VendorRentalContract.cs" />
     <Compile Include=".\Items\Facial\Beard.cs" />
     <Compile Include=".\Items\Facial\Hair.cs" />
     <Compile Include=".\Items\Farming\FarmableCabbage.cs" />
@@ -1575,8 +1566,6 @@
     <Compile Include=".\Items\Skill Items\Musical Instruments\Tambourine.cs" />
     <Compile Include=".\Items\Skill Items\Musical Instruments\TambourineTassel.cs" />
     <Compile Include=".\Items\Skill Items\Ninjitsu\EggBomb.cs" />
-    <Compile Include=".\Items\Skill Items\Ninjitsu\Fukiya.cs" />
-    <Compile Include=".\Items\Skill Items\Ninjitsu\FukiyaDarts.cs" />
     <Compile Include=".\Items\Skill Items\Ninjitsu\LeatherNinjaBelt.cs" />
     <Compile Include=".\Items\Skill Items\Ninjitsu\Shuriken.cs" />
     <Compile Include=".\Items\Skill Items\Ninjitsu\SmokeBomb.cs" />
@@ -2742,10 +2731,8 @@
     <Compile Include=".\Mobiles\Vendors\NPC\Waiter.cs" />
     <Compile Include=".\Mobiles\Vendors\NPC\Weaponsmith.cs" />
     <Compile Include=".\Mobiles\Vendors\NPC\Weaver.cs" />
-    <Compile Include=".\Mobiles\Vendors\PlayerBarkeeper.cs" />
     <Compile Include=".\Mobiles\Vendors\PlayerVendor.cs" />
     <Compile Include=".\Mobiles\Vendors\PresetMapBuy.cs" />
-    <Compile Include=".\Mobiles\Vendors\RentedVendor.cs" />
     <Compile Include=".\Mobiles\Vendors\SBInfo\Armors\SBChainmailArmor.cs" />
     <Compile Include=".\Mobiles\Vendors\SBInfo\Armors\SBHelmetArmor.cs" />
     <Compile Include=".\Mobiles\Vendors\SBInfo\Armors\SBLeatherArmor.cs" />
@@ -2853,15 +2840,9 @@
     <Compile Include=".\Multis\Camps\RatCamp.cs" />
     <Compile Include=".\Multis\ComponentVerification.cs" />
     <Compile Include=".\Multis\Deeds.cs" />
-    <Compile Include=".\Multis\DynamicDecay.cs" />
-    <Compile Include=".\Multis\HouseFoundation.cs" />
     <Compile Include=".\Multis\HousePlacement.cs" />
-    <Compile Include=".\Multis\HousePlacementTool.cs" />
     <Compile Include=".\Multis\Houses.cs" />
     <Compile Include=".\Multis\HouseSign.cs" />
-    <Compile Include=".\Multis\HouseTeleporter.cs" />
-    <Compile Include=".\Multis\MovingCrate.cs" />
-    <Compile Include=".\Multis\PreviewHouse.cs" />
     <Compile Include=".\Regions\BaseRegion.cs" />
     <Compile Include=".\Regions\DungeonRegion.cs" />
     <Compile Include=".\Regions\GreenAcres.cs" />
