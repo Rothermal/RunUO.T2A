@@ -30,7 +30,7 @@ namespace Server.Engines.Plants
 		Stage9			= 9
 	}
 
-	public class PlantItem : Item, ISecurable
+	public class PlantItem : Item
 	{
 		/*
 		 * Clients 7.0.12.0+ expect a container type in the plant label.
@@ -44,15 +44,6 @@ namespace Server.Engines.Plants
 		private PlantType m_PlantType;
 		private PlantHue m_PlantHue;
 		private bool m_ShowType;
-
-		private SecureLevel m_Level;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
-		}
 
 		public PlantSystem PlantSystem { get { return m_PlantSystem; } }
 
@@ -199,19 +190,12 @@ namespace Server.Engines.Plants
 
 			m_PlantStatus = PlantStatus.BowlOfDirt;
 			m_PlantSystem = new PlantSystem( this, fertileDirt );
-			m_Level = SecureLevel.Owner;
 
 			m_Instances.Add( this );
 		}
 
 		public PlantItem( Serial serial ) : base( serial )
 		{
-		}
-
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-			SetSecureLevelEntry.AddTo( from, this, list );
 		}
 
 		public int GetLocalizedPlantStatus()
@@ -537,8 +521,6 @@ namespace Server.Engines.Plants
 
 			writer.Write( (int) 2 ); // version
 
-			writer.Write( (int) m_Level );
-
 			writer.Write( (int) m_PlantStatus );
 			writer.Write( (int) m_PlantType );
 			writer.Write( (int) m_PlantHue );
@@ -558,15 +540,8 @@ namespace Server.Engines.Plants
 			{
 				case 2:
 				case 1:
-				{
-					m_Level = (SecureLevel)reader.ReadInt();
-					goto case 0;
-				}
 				case 0:
 				{
-					if ( version < 1 )
-						m_Level = SecureLevel.CoOwners;
-
 					m_PlantStatus = (PlantStatus)reader.ReadInt();
 					m_PlantType = (PlantType)reader.ReadInt();
 					m_PlantHue = (PlantHue)reader.ReadInt();

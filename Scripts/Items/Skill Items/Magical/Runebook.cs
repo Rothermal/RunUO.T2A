@@ -9,7 +9,7 @@ using Server.ContextMenus;
 
 namespace Server.Items
 {
-    public class Runebook : Item, ISecurable, ICraftable
+    public class Runebook : Item, ICraftable
 	{
 		public static readonly TimeSpan UseDelay = TimeSpan.FromSeconds( 7.0 );
 
@@ -26,7 +26,6 @@ namespace Server.Items
 		private string m_Description;
 		private int m_CurCharges, m_MaxCharges;
 		private int m_DefaultIndex;
-		private SecureLevel m_Level;
 		private Mobile m_Crafter;
 		
 		private DateTime m_NextUse;
@@ -45,13 +44,6 @@ namespace Server.Items
 		{
 			get{ return m_Crafter; }
 			set{ m_Crafter = value; InvalidateProperties(); }
-		}
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -121,8 +113,6 @@ namespace Server.Items
 			m_MaxCharges = maxCharges;
 
 			m_DefaultIndex = -1;
-
-			m_Level = SecureLevel.CoOwners;
 		}
 
 		[Constructable]
@@ -165,12 +155,6 @@ namespace Server.Items
 			return true;
 		}
 
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-			SetSecureLevelEntry.AddTo( from, this, list );
-		}
-
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
@@ -180,8 +164,6 @@ namespace Server.Items
 			writer.Write( (byte) m_Quality );	
 
 			writer.Write( m_Crafter );
-
-			writer.Write( (int) m_Level );
 
 			writer.Write( m_Entries.Count );
 
@@ -213,10 +195,6 @@ namespace Server.Items
 					goto case 1;
 				}
 				case 1:
-				{
-					m_Level = (SecureLevel)reader.ReadInt();
-					goto case 0;
-				}
 				case 0:
 				{
 					int count = reader.ReadInt();
@@ -250,7 +228,6 @@ namespace Server.Items
 			rune.Target = e.Location;
 			rune.TargetMap = e.Map;
 			rune.Description = e.Description;
-			rune.House = e.House;
 			rune.Marked = true;
 
 			from.AddToBackpack( rune );
@@ -321,7 +298,7 @@ namespace Server.Items
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			if ( from.InRange( GetWorldLocation(), 1 ) && CheckAccess( from ) )
+			if ( from.InRange( GetWorldLocation(), 1 ) )
 			{
 				if ( RootParent is BaseCreature )
 				{
@@ -360,18 +337,8 @@ namespace Server.Items
 			{
 				RunebookEntry entry = m_Entries[i];
 
-				book.m_Entries.Add( new RunebookEntry( entry.Location, entry.Map, entry.Description, entry.House ) );
+				book.m_Entries.Add( new RunebookEntry( entry.Location, entry.Map, entry.Description ) );
 			}
-		}
-
-		public bool CheckAccess( Mobile m )
-		{
-			if ( !IsLockedDown || m.AccessLevel >= AccessLevel.GameMaster )
-				return true;
-
-			BaseHouse house = BaseHouse.FindHouseAt( this );
-
-			return ( house != null && house.HasSecureAccess( m, m_Level ) );
 		}
 
 		public override bool OnDragDrop( Mobile from, Item dropped )
@@ -392,7 +359,7 @@ namespace Server.Items
 
 					if ( rune.Marked && rune.TargetMap != null )
 					{
-						m_Entries.Add( new RunebookEntry( rune.Target, rune.TargetMap, rune.Description, rune.House ) );
+						m_Entries.Add( new RunebookEntry( rune.Target, rune.TargetMap, rune.Description ) );
 
 						dropped.Delete();
 
@@ -473,7 +440,6 @@ namespace Server.Items
 		private Point3D m_Location;
 		private Map m_Map;
 		private string m_Description;
-		private BaseHouse m_House;
 
 		public Point3D Location
 		{
@@ -490,17 +456,11 @@ namespace Server.Items
 			get{ return m_Description; }
 		}
 
-		public BaseHouse House
-		{
-			get{ return m_House; }
-		}
-
-		public RunebookEntry( Point3D loc, Map map, string desc, BaseHouse house )
+		public RunebookEntry( Point3D loc, Map map, string desc )
 		{
 			m_Location = loc;
 			m_Map = map;
 			m_Description = desc;
-			m_House = house;
 		}
 
 		public RunebookEntry( GenericReader reader )
@@ -510,10 +470,6 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 1:
-				{
-					m_House = reader.ReadItem() as BaseHouse;
-					goto case 0;
-				}
 				case 0:
 				{
 					m_Location = reader.ReadPoint3D();
@@ -527,16 +483,7 @@ namespace Server.Items
 
 		public void Serialize( GenericWriter writer )
 		{
-			if ( m_House != null && !m_House.Deleted )
-			{
-				writer.Write( (byte) 1 ); // version
-
-				writer.Write( m_House );
-			}
-			else
-			{
-				writer.Write( (byte) 0 ); // version
-			}
+			writer.Write( (byte) 0 );
 
 			writer.Write( m_Location );
 			writer.Write( m_Map );

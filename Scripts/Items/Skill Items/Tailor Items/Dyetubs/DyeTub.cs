@@ -11,11 +11,10 @@ namespace Server.Items
 		bool Dye( Mobile from, DyeTub sender );
 	}
 
-	public class DyeTub : Item, ISecurable
+	public class DyeTub : Item
 	{
 		private bool m_Redyable;
 		private int m_DyedHue;
-		private SecureLevel m_SecureLevel;
 
 		public virtual CustomHuePicker CustomHuePicker{ get{ return null; } }
 
@@ -50,7 +49,6 @@ namespace Server.Items
 
 			writer.Write( (int) 1 ); // version
 			
-			writer.Write( (int)m_SecureLevel );
 			writer.Write( (bool) m_Redyable );
 			writer.Write( (int) m_DyedHue );
 		}
@@ -64,10 +62,6 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 1:
-				{
-					m_SecureLevel = (SecureLevel)reader.ReadInt();
-					goto case 0;
-				}
 				case 0:
 				{
 					m_Redyable = reader.ReadBool();
@@ -108,19 +102,6 @@ namespace Server.Items
 			}
 		}
 		
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get
-			{
-				return m_SecureLevel;
-			}
-			set
-			{
-				m_SecureLevel = value;
-			}
-		}
-
 		[Constructable] 
 		public DyeTub() : base( 0xFAB )
 		{
@@ -128,12 +109,6 @@ namespace Server.Items
 			m_Redyable = true;
 		}
 		
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-			SetSecureLevelEntry.AddTo( from, this, list );
-		}
-
 		public DyeTub( Serial serial ) : base( serial )
 		{
 		}

@@ -90,10 +90,9 @@ namespace Server.Items
 		}
 	}
 
-	public abstract class BaseHouseDoor : BaseDoor, ISecurable
+	public abstract class BaseHouseDoor : BaseDoor
 	{
 		private DoorFacing m_Facing;
-		private SecureLevel m_Level;
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public DoorFacing Facing
@@ -102,23 +101,9 @@ namespace Server.Items
 			set{ m_Facing = value; }
 		}
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
-		}
-
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-			SetSecureLevelEntry.AddTo( from, this, list );
-		}
-
 		public BaseHouseDoor( DoorFacing facing, int closedID, int openedID, int openedSound, int closedSound, Point3D offset ) : base( closedID, openedID, openedSound, closedSound, offset )
 		{
 			m_Facing = facing;
-			m_Level = SecureLevel.Anyone;
 		}
 
 		public BaseHouse FindHouse()
@@ -144,13 +129,6 @@ namespace Server.Items
 				house.Visits++;
 		}
 
-		public override bool UseLocks()
-		{
-			BaseHouse house = FindHouse();
-
-			return ( house == null );
-		}
-
 		public BaseHouseDoor( Serial serial ) : base( serial )
 		{
 		}
@@ -160,8 +138,6 @@ namespace Server.Items
 			base.Serialize( writer );
 
 			writer.Write( (int) 1 ); // version
-
-			writer.Write( (int) m_Level );
 
 			writer.Write( (int) m_Facing );
 		}
@@ -175,15 +151,8 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 1:
-				{
-					m_Level = (SecureLevel)reader.ReadInt();
-					goto case 0;
-				}
 				case 0:
 				{
-					if ( version < 1 )
-						m_Level = SecureLevel.Anyone;
-
 					m_Facing = (DoorFacing)reader.ReadInt();
 					break;
 				}

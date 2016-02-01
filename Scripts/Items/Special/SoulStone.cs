@@ -8,21 +8,12 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-    public class SoulStone : Item, ISecurable
+    public class SoulStone : Item
 	{
 		public override int LabelNumber { get { return 1030899; } } // soulstone
 
 		private int m_ActiveItemID;
 		private int m_InactiveItemID;
-
-		private SecureLevel m_Level;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
-		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public virtual int ActiveItemID
@@ -758,8 +749,6 @@ namespace Server.Items
 			writer.Write( (string) m_LastUserName );
 
 			//version 2
-			writer.Write( (int)m_Level );
-
 			writer.Write( m_ActiveItemID );
 			writer.Write( m_InactiveItemID );
 
@@ -784,10 +773,6 @@ namespace Server.Items
 						goto case 2;
 					}
 				case 2:
-					{
-						m_Level = (SecureLevel)reader.ReadInt();
-						goto case 1;
-					}
 				case 1:
 					{
 						m_ActiveItemID = reader.ReadInt();

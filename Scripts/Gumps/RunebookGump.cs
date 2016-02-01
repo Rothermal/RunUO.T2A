@@ -201,21 +201,12 @@ namespace Server.Gumps
 				if ( m_Book.Deleted || !from.InRange( m_Book.GetWorldLocation(), 1 ) )
 					return;
 
-				if ( m_Book.CheckAccess( from ) )
-				{
 					m_Book.Description = Utility.FixHtml( text.Trim() );
 
 					from.CloseGump( typeof( RunebookGump ) );
 					from.SendGump( new RunebookGump( m_Book ) );
 
 					from.SendMessage( "The book's title has been changed." );
-				}
-				else
-				{
-					m_Book.Openers.Remove( from );
-					
-					from.SendLocalizedMessage( 502416 ); // That cannot be done while the book is locked down.
-				}
 			}
 
 			public override void OnCancel( Mobile from )
@@ -318,15 +309,12 @@ namespace Server.Gumps
 						}
 						case 2: // Set default
 						{
-							if ( m_Book.CheckAccess( from ) )
-							{
-								m_Book.Default = e;
+							m_Book.Default = e;
 
-								from.CloseGump( typeof( RunebookGump ) );
-								from.SendGump( new RunebookGump( m_Book ) );
+							from.CloseGump( typeof( RunebookGump ) );
+							from.SendGump( new RunebookGump( m_Book ) );
 
-								from.SendLocalizedMessage( 502417 ); // New default location set.
-							}
+							from.SendLocalizedMessage( 502417 ); // New default location set.
 
 							break;
 						}

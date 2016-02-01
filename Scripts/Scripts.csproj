@@ -582,7 +582,7 @@
     <Compile Include=".\Gumps\Guilds\RecruitTarget.cs" />
     <Compile Include=".\Gumps\HeritageTokenGump.cs" />
     <Compile Include=".\Gumps\HonorSelf.cs" />
-    <Compile Include=".\Gumps\HouseGump.cs" />
+    <Compile Include="Multis\Houses\HouseGump.cs" />
     <Compile Include=".\Gumps\NoticeGump.cs" />
     <Compile Include=".\Gumps\PetResurrectGump.cs" />
     <Compile Include=".\Gumps\PlayerVendorGumps.cs" />
@@ -602,7 +602,6 @@
     <Compile Include=".\Gumps\ResurrectGump.cs" />
     <Compile Include=".\Gumps\RewardGump.cs" />
     <Compile Include=".\Gumps\RunebookGump.cs" />
-    <Compile Include=".\Gumps\SetSecureLevelGump.cs" />
     <Compile Include=".\Gumps\SkillsGump.cs" />
     <Compile Include=".\Gumps\TithingGump.cs" />
     <Compile Include=".\Gumps\ToTAdminGump.cs" />
@@ -1011,7 +1010,6 @@
     <Compile Include=".\Items\Construction\Decorative\Tapestry.cs" />
     <Compile Include=".\Items\Construction\Doors\BaseDoor.cs" />
     <Compile Include=".\Items\Construction\Doors\Doors.cs" />
-    <Compile Include="Multis\HouseDoors.cs" />
     <Compile Include=".\Items\Construction\Doors\Portcullis.cs" />
     <Compile Include=".\Items\Construction\Doors\SecretDoors.cs" />
     <Compile Include=".\Items\Construction\Floors\Floors.cs" />
@@ -1044,7 +1042,13 @@
     <Compile Include=".\Items\Containers\LockableContainer.cs" />
     <Compile Include=".\Items\Containers\ParagonChest.cs" />
     <Compile Include=".\Items\Containers\SalvageBag.cs" />
-    <Compile Include=".\Items\Containers\Strongbox.cs" />
+    <Compile Include="Multis\Houses\BaseHouse.cs" />
+    <Compile Include="Multis\Houses\Deeds.cs" />
+    <Compile Include="Multis\Houses\HouseDoors.cs" />
+    <Compile Include="Multis\Houses\HousePlacement.cs" />
+    <Compile Include="Multis\Houses\Houses.cs" />
+    <Compile Include="Multis\Houses\HouseSign.cs" />
+    <Compile Include="Multis\Houses\Strongbox.cs" />
     <Compile Include=".\Items\Containers\TrapableContainer.cs" />
     <Compile Include=".\Items\Containers\TreasureChest.cs" />
     <Compile Include=".\Items\Containers\TreasureMapChest.cs" />
@@ -1302,7 +1306,7 @@
     <Compile Include=".\Items\Misc\The Citadel\TravestysCollectionOfShells.cs" />
     <Compile Include=".\Items\Misc\The Citadel\TravestysFineTeakwoodTray.cs" />
     <Compile Include=".\Items\Misc\The Citadel\TravestysSushiPreparations.cs" />
-    <Compile Include=".\Items\Misc\TrashBarrel.cs" />
+    <Compile Include="Multis\Houses\TrashBarrel.cs" />
     <Compile Include=".\Items\Misc\TrashChest.cs" />
     <Compile Include=".\Items\Misc\TribalBerry.cs" />
     <Compile Include=".\Items\Misc\TribalPaint.cs" />
@@ -2814,7 +2818,6 @@
     <Compile Include=".\Mobiles\Vendors\SBInfo\Weapons\SBStavesWeapon.cs" />
     <Compile Include=".\Mobiles\Vendors\SBInfo\Weapons\SBSwordWeapon.cs" />
     <Compile Include=".\Mobiles\Vendors\VendorInventory.cs" />
-    <Compile Include=".\Multis\BaseHouse.cs" />
     <Compile Include=".\Multis\Boats\BaseBoat.cs" />
     <Compile Include=".\Multis\Boats\BaseBoatDeed.cs" />
     <Compile Include=".\Multis\Boats\BaseDockedBoat.cs" />
@@ -2826,7 +2829,7 @@
     <Compile Include=".\Multis\Boats\MediumDragonBoat.cs" />
     <Compile Include=".\Multis\Boats\Plank.cs" />
     <Compile Include=".\Multis\Boats\RenameBoatPrompt.cs" />
-    <Compile Include=".\Multis\Boats\SmallBoat.cs" />
+    <Compile Include="Multis\Boats\SmallBoat.cs" />
     <Compile Include=".\Multis\Boats\SmallDragonBoat.cs" />
     <Compile Include=".\Multis\Boats\Strandedness.cs" />
     <Compile Include=".\Multis\Boats\TillerMan.cs" />
@@ -2838,11 +2841,6 @@
     <Compile Include=".\Multis\Camps\MageCamp.cs" />
     <Compile Include=".\Multis\Camps\OrcCamp.cs" />
     <Compile Include=".\Multis\Camps\RatCamp.cs" />
-    <Compile Include=".\Multis\ComponentVerification.cs" />
-    <Compile Include=".\Multis\Deeds.cs" />
-    <Compile Include=".\Multis\HousePlacement.cs" />
-    <Compile Include=".\Multis\Houses.cs" />
-    <Compile Include=".\Multis\HouseSign.cs" />
     <Compile Include=".\Regions\BaseRegion.cs" />
     <Compile Include=".\Regions\DungeonRegion.cs" />
     <Compile Include=".\Regions\GreenAcres.cs" />

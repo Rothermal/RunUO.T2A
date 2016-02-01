@@ -84,7 +84,7 @@ namespace Server.Items
 			{
 				from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
 			}
-			else if ( house != null && house.HasSecureAccess( from, SecureLevel.Friends ) )
+			else if ( house != null && (house.IsOwner(from) || house.IsCoOwner(from) || house.IsFriend(from)))
 			{
 				if ( m_Logs > 0 )
 				{

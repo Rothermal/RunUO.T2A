@@ -7,17 +7,8 @@ using Server.Gumps;
 
 namespace Server.Items
 {
-    public abstract class BaseBoard : Container, ISecurable
+    public abstract class BaseBoard : Container
 	{
-		private SecureLevel m_Level;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
-		}
-
 		public BaseBoard( int itemID ) : base( itemID )
 		{
 			CreatePieces();
@@ -55,21 +46,13 @@ namespace Server.Items
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			writer.Write( (int) 1 ); // version
-
-			writer.Write( (int)m_Level );
+			writer.Write( (int) 0 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-
-			if ( version == 1 )
-				m_Level = (SecureLevel)reader.ReadInt();
-
-			if ( Weight == 1.0 )
-				Weight = 5.0;
 		}
 
 		public override TimeSpan DecayTime{ get{ return TimeSpan.FromDays( 1.0 ); } }
@@ -117,8 +100,6 @@ namespace Server.Items
 
 			if ( ValidateDefault( from, this ) )
 				list.Add( new DefaultEntry( from, this ) );
-
-			SetSecureLevelEntry.AddTo( from, this, list );
 		}
 
 		public static bool ValidateDefault( Mobile from, BaseBoard board )

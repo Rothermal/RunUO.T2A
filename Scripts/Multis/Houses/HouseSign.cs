@@ -61,49 +61,6 @@ namespace Server.Multis
 				m_Owner.Delete();
 		}
 
-		public override void AddNameProperty(ObjectPropertyList list)
-		{
-			list.Add( 1061638 ); // A House Sign
-		}
-
-		public override bool ForceShowProperties{ get{ return ObjectPropertyList.Enabled; } }
-
-		private bool m_GettingProperties;
-
-		public bool GettingProperties
-		{
-			get { return m_GettingProperties; }
-		}
-
-		public override void GetProperties( ObjectPropertyList list )
-		{
-			base.GetProperties( list );
-
-			list.Add( 1061639, Utility.FixHtml( GetName() ) ); // Name: ~1_NAME~
-			list.Add( 1061640, (m_Owner == null || m_Owner.Owner == null) ? "nobody" : m_Owner.Owner.Name ); // Owner: ~1_OWNER~
-
-			if ( m_Owner != null )
-			{
-				list.Add( m_Owner.Public ? 1061641 : 1061642 ); // This House is Open to the Public : This is a Private Home
-
-				m_GettingProperties = true;
-				DecayLevel level = m_Owner.DecayLevel;
-				m_GettingProperties = false;
-
-				if ( level == DecayLevel.DemolitionPending )
-				{
-					list.Add( 1062497 ); // Demolition Pending
-				}
-				else if ( level != DecayLevel.Ageless )
-				{
-					if ( level == DecayLevel.Collapsed )
-						level = DecayLevel.IDOC;
-
-					list.Add( 1062028, String.Format( "#{0}", 1043009 + (int)level ) ); // Condition: This structure is ...
-				}
-			}
-		}
-
 		public override void OnSingleClick( Mobile from )
 		{
 			if ( m_Owner != null && BaseHouse.DecayEnabled && m_Owner.DecayPeriod != TimeSpan.Zero )
@@ -155,7 +112,6 @@ namespace Server.Multis
 				if ( canClaim && !BaseHouse.HasAccountHouse( from ) )
 				{
 					m_Owner.Owner = from;
-					m_Owner.LastTraded = DateTime.Now;
 				}
 			}
 
@@ -191,61 +147,6 @@ namespace Server.Multis
 			}
 
 			ShowSign( m );
-		}
-
-		private class VendorsEntry : ContextMenuEntry
-		{
-			private HouseSign m_Sign;
-
-			public VendorsEntry( HouseSign sign ) : base( 6211 )
-			{
-				m_Sign = sign;
-			}
-
-			public override void OnClick()
-			{
-				Mobile from = this.Owner.From;
-
-				if ( !from.CheckAlive() || m_Sign.Deleted || m_Sign.Owner == null || !m_Sign.Owner.AreThereAvailableVendorsFor( from ) )
-					return;
-
-				if ( from.Map != m_Sign.Map || !from.InRange( m_Sign, 5 ) )
-				{
-					from.SendLocalizedMessage( 1062429 ); // You must be within five paces of the house sign to use this option.
-				}
-				else
-				{
-			//		from.SendGump( new HouseGumpAOS( HouseGumpPageAOS.Vendors, from, m_Sign.Owner ) );
-				}
-			}
-		}
-
-		private class ReclaimVendorInventoryEntry : ContextMenuEntry
-		{
-			private HouseSign m_Sign;
-
-			public ReclaimVendorInventoryEntry( HouseSign sign ) : base( 6213 )
-			{
-				m_Sign = sign;
-			}
-
-			public override void OnClick()
-			{
-				Mobile from = this.Owner.From;
-
-				if ( m_Sign.Deleted || m_Sign.Owner == null || m_Sign.Owner.VendorInventories.Count == 0 || !from.CheckAlive() )
-					return;
-
-				if ( from.Map != m_Sign.Map || !from.InRange( m_Sign, 5 ) )
-				{
-					from.SendLocalizedMessage( 1062429 ); // You must be within five paces of the house sign to use this option.
-				}
-				else
-				{
-					from.CloseGump( typeof( VendorInventoryGump ) );
-					from.SendGump( new VendorInventoryGump( m_Sign.Owner, from ) );
-				}
-			}
 		}
 
 		public override void Serialize( GenericWriter writer )

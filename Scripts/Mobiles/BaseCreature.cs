@@ -3619,11 +3619,7 @@ namespace Server.Mobiles
 						b.DropItem( item );
 					}
 
-					BaseHouse house = BaseHouse.FindHouseAt( this );
-					if ( house  != null )
-						b.MoveToWorld( house.BanLocation, house.Map );
-					else
-						b.MoveToWorld( Location, Map );
+					b.MoveToWorld( Location, Map );
 				}
 			}
 		}

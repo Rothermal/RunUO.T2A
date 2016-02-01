@@ -54,13 +54,12 @@ namespace Server.Items
 		}
 	}
 
-	public class BaseBook : Item, ISecurable
+	public class BaseBook : Item
 	{
 		private string m_Title;
 		private string m_Author;
 		private BookPageInfo[] m_Pages;
 		private bool m_Writable;
-		private SecureLevel m_SecureLevel;
 		
 		[CommandProperty( AccessLevel.GameMaster )]
 		public string Title
@@ -161,12 +160,6 @@ namespace Server.Items
 			Content		= 0x08
 		}
 
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-			SetSecureLevelEntry.AddTo( from, this, list );
-		}
-
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
@@ -190,8 +183,6 @@ namespace Server.Items
 
 
 			writer.Write( (int) 4 ); // version
-
-			writer.Write( (int)m_SecureLevel );
 
 			writer.Write( (byte) flags );
 
@@ -219,10 +210,6 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 4:
-				{
-					m_SecureLevel = (SecureLevel)reader.ReadInt();
-					goto case 3;
-				}
 				case 3:
 				case 2:
 				{
@@ -460,23 +447,6 @@ namespace Server.Items
 				}
 			}
 		}
-
-		#region ISecurable Members
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get
-			{
-				return m_SecureLevel;
-			}
-			set
-			{
-				m_SecureLevel = value;
-			}
-		}
-
-		#endregion
 	}
 
 	public sealed class BookPageDetails : Packet

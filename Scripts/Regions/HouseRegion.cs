@@ -95,22 +95,6 @@ namespace Server.Regions
 				m.Location = m_House.BanLocation;
                 m.SendLocalizedMessage( 501284 ); // You may not enter.
 			}
-			else if ( m_House.IsCombatRestricted( m ) && m_House.IsInside( m ) && !m_House.IsInside( oldLocation, 16 ) )
-			{
-				m.Location = m_House.BanLocation;
-				m.SendLocalizedMessage( 1061637 ); // You are not allowed to access this.
-			}
-
-			if ( m_House.InternalizedVendors.Count > 0 && m_House.IsInside( m ) && !m_House.IsInside( oldLocation, 16 ) && m_House.IsOwner( m ) && m.Alive && !m.HasGump( typeof( NoticeGump ) ) )
-			{
-				/* This house has been customized recently, and vendors that work out of this
-				 * house have been temporarily relocated.  You must now put your vendors back to work.
-				 * To do this, walk to a location inside the house where you wish to station
-				 * your vendor, then activate the context-sensitive menu on your avatar and
-				 * select "Get Vendor".
-				 */
-				m.SendGump( new NoticeGump( 1060635, 30720, 1061826, 32512, 320, 180, null, null ) );
-			}
 
 			m_Recursion = false;
 		}
@@ -136,22 +120,6 @@ namespace Server.Regions
 				from.Location = m_House.BanLocation;
 				from.SendLocalizedMessage( 501284 ); // You may not enter.
 				return false;
-			}
-			else if ( m_House.IsCombatRestricted( from ) && !m_House.IsInside( oldLocation, 16 ) && m_House.IsInside( newLocation, 16 ) )
-			{
-				from.SendLocalizedMessage( 1061637 ); // You are not allowed to access this.
-				return false;
-			}
-
-			if ( m_House.InternalizedVendors.Count > 0 && m_House.IsInside( from ) && !m_House.IsInside( oldLocation, 16 ) && m_House.IsOwner( from ) && from.Alive && !from.HasGump( typeof( NoticeGump ) ) )
-			{
-				/* This house has been customized recently, and vendors that work out of this
-				 * house have been temporarily relocated.  You must now put your vendors back to work.
-				 * To do this, walk to a location inside the house where you wish to station
-				 * your vendor, then activate the context-sensitive menu on your avatar and
-				 * select "Get Vendor".
-				 */
-				from.SendGump( new NoticeGump( 1060635, 30720, 1061826, 32512, 320, 180, null, null ) );
 			}
 
 			return true;
@@ -318,25 +286,6 @@ namespace Server.Regions
 					from.SendLocalizedMessage( 502094 ); // You must be in your house to do this.
 				}
 			}
-		}
-
-		public override bool OnDoubleClick( Mobile from, object o )
-		{
-			if ( o is Container )
-			{
-				Container c = (Container)o;
-
-				SecureAccessResult res = m_House.CheckSecureAccess( from, c );
-
-				switch ( res )
-				{
-					case SecureAccessResult.Insecure: break;
-					case SecureAccessResult.Accessible: return true;
-					case SecureAccessResult.Inaccessible: c.SendLocalizedMessageTo( from, 1010563 ); return false;
-				}
-			}
-
-			return base.OnDoubleClick( from, o );
 		}
 
 		public override bool OnSingleClick( Mobile from, object o )

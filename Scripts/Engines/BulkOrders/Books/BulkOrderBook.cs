@@ -9,12 +9,11 @@ using Server.Items;
 
 namespace Server.Engines.BulkOrders
 {
-    public class BulkOrderBook : Item, ISecurable
+    public class BulkOrderBook : Item
 	{
 		private ArrayList m_Entries;
 		private BOBFilter m_Filter;
 		private string m_BookName;
-		private SecureLevel m_Level;
 		private int m_ItemCount;
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -22,13 +21,6 @@ namespace Server.Engines.BulkOrders
 		{
 			get{ return m_BookName; }
 			set{ m_BookName = value; InvalidateProperties(); }
-		}
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
 		}
 
 		public ArrayList Entries
@@ -55,8 +47,6 @@ namespace Server.Engines.BulkOrders
 
 			m_Entries = new ArrayList();
 			m_Filter = new BOBFilter();
-
-			m_Level = SecureLevel.CoOwners;
 		}
 
 		public override void OnDoubleClick( Mobile from )
@@ -188,8 +178,6 @@ namespace Server.Engines.BulkOrders
 			
 			writer.Write( (int) m_ItemCount );
 
-			writer.Write( (int) m_Level );
-
 			writer.Write( m_BookName );
 
 			m_Filter.Serialize( writer );
@@ -231,10 +219,6 @@ namespace Server.Engines.BulkOrders
 					goto case 1;
 				}
 				case 1:
-				{
-					m_Level = (SecureLevel)reader.ReadInt();
-					goto case 0;
-				}
 				case 0:
 				{
 					m_BookName = reader.ReadString();
@@ -277,8 +261,6 @@ namespace Server.Engines.BulkOrders
 
 			if ( from.CheckAlive() && IsChildOf( from.Backpack ) )
 				list.Add( new NameBookEntry( from, this ) );
-
-			SetSecureLevelEntry.AddTo( from, this, list );
 		}
 
 		private class NameBookEntry : ContextMenuEntry

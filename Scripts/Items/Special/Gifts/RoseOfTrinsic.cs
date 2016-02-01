@@ -8,7 +8,7 @@ using Server.ContextMenus;
 namespace Server.Items
 {
     [FlipableAttribute( 0x234C, 0x234D )]
-	public class RoseOfTrinsic : Item, ISecurable
+	public class RoseOfTrinsic : Item
 	{
 		private static readonly TimeSpan m_SpawnTime = TimeSpan.FromHours( 4.0 );
 
@@ -16,16 +16,7 @@ namespace Server.Items
 		private DateTime m_NextSpawnTime;
 		private SpawnTimer m_SpawnTimer;
 
-		private SecureLevel m_Level;
-
 		public override int LabelNumber{ get{ return 1062913; } } // Rose of Trinsic
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
-		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int Petals
@@ -68,13 +59,6 @@ namespace Server.Items
 			base.GetProperties( list );
 
 			list.Add( 1062925, Petals.ToString() ); // Petals:  ~1_COUNT~
-		}
-
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-
-			SetSecureLevelEntry.AddTo( from, this, list );
 		}
 
 		private void StartSpawnTimer( TimeSpan delay )
@@ -142,7 +126,6 @@ namespace Server.Items
 
 			writer.WriteEncodedInt( (int) m_Petals );
 			writer.WriteDeltaTime( (DateTime) m_NextSpawnTime );
-			writer.WriteEncodedInt( (int) m_Level );
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -153,7 +136,6 @@ namespace Server.Items
 
 			m_Petals = reader.ReadEncodedInt();
 			m_NextSpawnTime = reader.ReadDeltaTime();
-			m_Level = (SecureLevel) reader.ReadEncodedInt();
 
 			if ( m_Petals < 10 )
 				StartSpawnTimer( m_NextSpawnTime - DateTime.Now );

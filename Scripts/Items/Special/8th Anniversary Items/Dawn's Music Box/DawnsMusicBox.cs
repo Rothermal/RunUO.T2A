@@ -18,7 +18,7 @@ namespace Server.Items
 	}
 
 	[Flipable( 0x2AF9, 0x2AFD )]
-	public class DawnsMusicBox : Item, ISecurable
+	public class DawnsMusicBox : Item
 	{
 		public override int LabelNumber { get { return 1075198; } } // Dawn’s Music Box
 
@@ -27,15 +27,6 @@ namespace Server.Items
 		public List<MusicName> Tracks
 		{
 			get { return m_Tracks; }
-		}
-
-		private SecureLevel m_Level;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get { return m_Level; }
-			set { m_Level = value; }
 		}
 
 		[Constructable]
@@ -97,13 +88,6 @@ namespace Server.Items
 				list.Add( 1075236, rareSongs.ToString() ); // ~1_NUMBER~ Rare Tracks
 		}
 
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-
-			SetSecureLevelEntry.AddTo( from, this, list ); // Set secure level
-		}
-
 		public override void OnDoubleClick( Mobile from )
 		{
 			if ( !IsChildOf( from.Backpack ) && !IsLockedDown )
@@ -124,7 +108,7 @@ namespace Server.Items
 
 			BaseHouse house = BaseHouse.FindHouseAt( this );
 
-			return ( house != null && house.HasAccess( m ) );
+			return ( house != null );
 		}
 
 		private Timer m_Timer;
@@ -179,7 +163,6 @@ namespace Server.Items
 			for ( int i = 0; i < m_Tracks.Count; i++ )
 				writer.Write( (int) m_Tracks[ i ] );
 
-			writer.Write( (int) m_Level );
 			writer.Write( (int) m_ItemID );
 		}
 
@@ -195,7 +178,6 @@ namespace Server.Items
 			for ( int i = 0; i < count; i++ )
 				m_Tracks.Add( (MusicName) reader.ReadInt() );
 
-			m_Level = (SecureLevel) reader.ReadInt();
 			m_ItemID = reader.ReadInt();
 		}
 

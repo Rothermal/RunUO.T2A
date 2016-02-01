@@ -12,22 +12,12 @@ namespace Server.Items
 		private bool m_Marked;
 		private Point3D m_Target;
 		private Map m_TargetMap;
-		private BaseHouse m_House;
 
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
 
-			if ( m_House != null && !m_House.Deleted )
-			{
-				writer.Write( (int) 1 ); // version
-
-				writer.Write( (Item) m_House );
-			}
-			else
-			{
-				writer.Write( (int) 0 ); // version
-			}
+			writer.Write( (int) 0 ); // version
 
 			writer.Write( (string) m_Description );
 			writer.Write( (bool) m_Marked );
@@ -44,10 +34,6 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 1:
-				{
-					m_House = reader.ReadItem() as BaseHouse;
-					goto case 0;
-				}
 				case 0:
 				{
 					m_Description = reader.ReadString();
@@ -55,24 +41,9 @@ namespace Server.Items
 					m_Target = reader.ReadPoint3D();
 					m_TargetMap = reader.ReadMap();
 
-					CalculateHue();
-
 					break;
 				}
 			}
-		}
-
-		[CommandProperty( AccessLevel.Counselor, AccessLevel.GameMaster )]
-		public BaseHouse House
-		{
-			get
-			{
-				if ( m_House != null && m_House.Deleted )
-					House = null;
-
-				return m_House;
-			}
-			set{ m_House = value; CalculateHue(); InvalidateProperties(); }
 		}
 
 		[CommandProperty( AccessLevel.Counselor, AccessLevel.GameMaster )]
@@ -101,7 +72,6 @@ namespace Server.Items
 				if ( m_Marked != value )
 				{
 					m_Marked = value;
-					CalculateHue();
 					InvalidateProperties();
 				}
 			}
@@ -132,29 +102,18 @@ namespace Server.Items
 				if ( m_TargetMap != value )
 				{
 					m_TargetMap = value;
-					CalculateHue();
 					InvalidateProperties();
 				}
 			}
 		}
 
-		private void CalculateHue()
-		{
-			if ( !m_Marked )
-				Hue = 0;
-			else if ( m_TargetMap == Map.Felucca )
-				Hue = (House != null ? 0x66D : 0);
-		}
-
 		public void Mark( Mobile m )
 		{
 			m_Marked = true;
-            m_House = null;
 			m_Target = m.Location;
 			m_TargetMap = m.Map;
 			m_Description = BaseRegion.GetRuneNameFor( Region.Find( m_Target, m_TargetMap ) );
 
-			CalculateHue();
 			InvalidateProperties();
 		}
 
@@ -172,9 +131,9 @@ namespace Server.Items
 					desc = "an unknown location";
 
 				if ( m_TargetMap == Map.Felucca )
-					list.Add( (House != null ? 1062452 : 1060805), RuneFormat, desc ); // ~1_val~ (Felucca)[(House)]
+					list.Add( 1060805, RuneFormat, desc );
 				else
-					list.Add( (House != null ? "{0} ({1})(House)" : "{0} ({1})"), String.Format( RuneFormat, desc ), m_TargetMap );
+					list.Add( "{0} ({1})", String.Format( RuneFormat, desc ), m_TargetMap );
 			}
 		}
 
@@ -188,9 +147,9 @@ namespace Server.Items
 					desc = "an unknown location";
 
 				if ( m_TargetMap == Map.Felucca )
-					LabelTo( from, (House != null ? 1062452 : 1060805), String.Format( RuneFormat, desc ) ); // ~1_val~ (Felucca)[(House)]
+					LabelTo( from, 1060805, String.Format( RuneFormat, desc ) );
 				else
-					LabelTo( from, (House != null ? "{0} ({1})(House)" : "{0} ({1})"), String.Format( RuneFormat, desc ), m_TargetMap );
+					LabelTo( from, "{0} ({1})", String.Format( RuneFormat, desc ), m_TargetMap );
 			}
 			else
 			{
@@ -205,10 +164,6 @@ namespace Server.Items
 			if ( !IsChildOf( from.Backpack ) )
 			{
 				number = 1042001; // That must be in your pack for you to use it.
-			}
-			else if ( House != null )
-			{
-				number = 1062399; // You cannot edit the description for this rune.
 			}
 			else if ( m_Marked )
 			{
@@ -235,7 +190,7 @@ namespace Server.Items
 
 			public override void OnResponse( Mobile from, string text )
 			{
-				if ( m_Rune.House == null && m_Rune.Marked )
+				if ( m_Rune.Marked )
 				{
 					m_Rune.Description = text;
 					from.SendLocalizedMessage( 1010474 ); // The etching on the rune has been changed.
@@ -247,7 +202,6 @@ namespace Server.Items
 		public RecallRune() : base( 0x1F14 )
 		{
 			Weight = 1.0;
-			CalculateHue();
 		}
 
 		public RecallRune( Serial serial ) : base( serial )

@@ -32,7 +32,7 @@ namespace Server.Accounting
 		private HardwareInfo m_HardwareInfo;
 
 		/// <summary>
-		/// Deletes the account, all characters of the account, and all houses of those characters
+		/// Deletes the account, all characters of the account
 		/// </summary>
 		public void Delete()
 		{
@@ -42,11 +42,6 @@ namespace Server.Accounting
 
 				if ( m == null )
 					continue;
-
-				List<BaseHouse> list = BaseHouse.GetHouses( m );
-
-				for ( int j = 0; j < list.Count; ++j )
-					list[j].Delete();
 
 				m.Delete();
 

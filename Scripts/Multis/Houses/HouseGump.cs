@@ -301,14 +301,9 @@ public class HouseGump : Gump
         from.CloseGump(typeof(HouseListGump));
         from.CloseGump(typeof(HouseRemoveGump));
 
-        bool isCombatRestricted = house.IsCombatRestricted(from);
-
         bool isOwner = m_House.IsOwner(from);
         bool isCoOwner = isOwner || m_House.IsCoOwner(from);
         bool isFriend = isCoOwner || m_House.IsFriend(from);
-
-        if (isCombatRestricted)
-            isFriend = isCoOwner = isOwner = false;
 
         AddPage(0);
 
@@ -486,14 +481,9 @@ public class HouseGump : Gump
 
         Mobile from = sender.Mobile;
 
-        bool isCombatRestricted = m_House.IsCombatRestricted(from);
-
         bool isOwner = m_House.IsOwner(from);
         bool isCoOwner = isOwner || m_House.IsCoOwner(from);
         bool isFriend = isCoOwner || m_House.IsFriend(from);
-
-        if (isCombatRestricted)
-            isFriend = isCoOwner = isOwner = false;
 
         if (!isFriend || !from.Alive)
             return;

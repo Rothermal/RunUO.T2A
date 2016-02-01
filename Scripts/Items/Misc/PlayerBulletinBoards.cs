@@ -67,12 +67,11 @@ namespace Server.Items
 		}
 	}
 
-	public abstract class BasePlayerBB : Item, ISecurable
+	public abstract class BasePlayerBB : Item
 	{
 		private PlayerBBMessage m_Greeting;
 		private List<PlayerBBMessage> m_Messages;
 		private string m_Title;
-		private SecureLevel m_Level;
 
 		public List<PlayerBBMessage> Messages
 		{
@@ -92,27 +91,13 @@ namespace Server.Items
 			set{ m_Title = value; }
 		}
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public SecureLevel Level
-		{
-			get{ return m_Level; }
-			set{ m_Level = value; }
-		}
-
 		public BasePlayerBB( int itemID ) : base( itemID )
 		{
 			m_Messages = new List<PlayerBBMessage>();
-			m_Level = SecureLevel.Anyone;
 		}
 
 		public BasePlayerBB( Serial serial ) : base( serial )
 		{
-		}
-
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
-			SetSecureLevelEntry.AddTo( from, this, list );
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -120,8 +105,6 @@ namespace Server.Items
 			base.Serialize( writer );
 
 			writer.Write( (int) 1 );
-
-			writer.Write( (int) m_Level );
 
 			writer.Write( m_Title );
 
@@ -150,15 +133,8 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 1:
-				{
-					m_Level = (SecureLevel)reader.ReadInt();
-					goto case 0;
-				}
 				case 0:
 				{
-					if ( version < 1 )
-						m_Level = SecureLevel.Anyone;
-
 					m_Title = reader.ReadString();
 
 					if ( reader.ReadBool() )
@@ -181,7 +157,7 @@ namespace Server.Items
 			if ( house.Public )
 				return !house.IsBanned( from );
 
-			return house.HasAccess( from );
+			return true;
 		}
 
 		public override void OnDoubleClick( Mobile from )
