@@ -582,6 +582,7 @@
     <Compile Include=".\Gumps\Guilds\RecruitTarget.cs" />
     <Compile Include=".\Gumps\HeritageTokenGump.cs" />
     <Compile Include=".\Gumps\HonorSelf.cs" />
+    <Compile Include="Multis\Camps\EvilMageCamp.cs" />
     <Compile Include="Multis\Houses\HouseGump.cs" />
     <Compile Include=".\Gumps\NoticeGump.cs" />
     <Compile Include=".\Gumps\PetResurrectGump.cs" />

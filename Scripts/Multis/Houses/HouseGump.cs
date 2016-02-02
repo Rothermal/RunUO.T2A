@@ -571,7 +571,7 @@ public class HouseGump : Gump
                     if (isCoOwner)
                     {
                         from.SendLocalizedMessage(501317); // Target the person you wish to name a friend of your household.
-                        from.Target = new HouseFriendTarget(true, m_House);
+                        from.Target = new FriendTarget(true, m_House);
                     }
                     else
                     {
@@ -615,14 +615,14 @@ public class HouseGump : Gump
             case 10: // Ban
                 {
                     from.SendLocalizedMessage(501325); // Target the individual to ban from this house.
-                    from.Target = new HouseBanTarget(true, m_House);
+                    from.Target = new BanTarget(true, m_House);
 
                     break;
                 }
             case 11: // Eject
                 {
                     from.SendLocalizedMessage(501326); // Target the individual to eject from this house.
-                    from.Target = new HouseKickTarget(m_House);
+                    from.Target = new KickTarget(m_House);
 
                     break;
                 }
@@ -649,7 +649,7 @@ public class HouseGump : Gump
                     if (isOwner)
                     {
                         from.SendLocalizedMessage(501309); // Target the person to whom you wish to give this house.
-                        from.Target = new HouseOwnerTarget(m_House);
+                        from.Target = new TransferTarget(m_House);
                     }
                     else
                     {

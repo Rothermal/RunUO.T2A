@@ -2440,11 +2440,11 @@ namespace Server.Multis
 		}
 	}
 
-	public class HouseKickTarget : Target
+	public class KickTarget : Target
 	{
 		private BaseHouse m_House;
 
-		public HouseKickTarget( BaseHouse house ) : base( -1, false, TargetFlags.None )
+		public KickTarget( BaseHouse house ) : base( -1, false, TargetFlags.None )
 		{
 			CheckLOS = false;
 
@@ -2467,12 +2467,12 @@ namespace Server.Multis
 		}
 	}
 
-	public class HouseBanTarget : Target
+	public class BanTarget : Target
 	{
 		private BaseHouse m_House;
 		private bool m_Banning;
 
-		public HouseBanTarget( bool ban, BaseHouse house ) : base( -1, false, TargetFlags.None )
+		public BanTarget( bool ban, BaseHouse house ) : base( -1, false, TargetFlags.None )
 		{
 			CheckLOS = false;
 
@@ -2531,12 +2531,12 @@ namespace Server.Multis
 		}
 	}
 
-	public class HouseFriendTarget : Target
+	public class FriendTarget : Target
 	{
 		private BaseHouse m_House;
 		private bool m_Add;
 
-		public HouseFriendTarget( bool add, BaseHouse house ) : base( 12, false, TargetFlags.None )
+		public FriendTarget( bool add, BaseHouse house ) : base( 12, false, TargetFlags.None )
 		{
 			CheckLOS = false;
 
@@ -2563,11 +2563,11 @@ namespace Server.Multis
 		}
 	}
 
-	public class HouseOwnerTarget : Target
+	public class TransferTarget : Target
 	{
 		private BaseHouse m_House;
 
-		public HouseOwnerTarget( BaseHouse house ) : base( 12, false, TargetFlags.None )
+		public TransferTarget( BaseHouse house ) : base( 12, false, TargetFlags.None )
 		{
 			CheckLOS = false;
 

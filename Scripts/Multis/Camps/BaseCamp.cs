@@ -120,7 +120,7 @@ namespace Server.Multis
 			base.OnAfterDelete();
 
 			for ( int i = 0; i < m_Items.Count; ++i )
-				m_Items[i].Delete();
+                m_Items[i].Delete();
 
 			for ( int i = 0; i < m_Mobiles.Count; ++i )
 			{
