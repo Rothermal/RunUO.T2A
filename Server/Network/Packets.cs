@@ -2269,18 +2269,18 @@ namespace Server.Network
 	{
 		public MultiTargetReqHS( MultiTarget t ) : base( 0x99, 30 )
 		{
-			m_Stream.Write( (bool) t.AllowGround );
-			m_Stream.Write( (int) t.TargetID );
-			m_Stream.Write( (byte) t.Flags );
+            m_Stream.Write((bool)t.AllowGround);
+            m_Stream.Write((int)t.TargetID);
+            m_Stream.Write((byte)t.Flags);
 
-			m_Stream.Fill();
+            m_Stream.Fill();
 
-			m_Stream.Seek( 18, SeekOrigin.Begin );
-			m_Stream.Write( (short) t.MultiID );
-			m_Stream.Write( (short) t.Offset.X );
-			m_Stream.Write( (short) t.Offset.Y );
-			m_Stream.Write( (short) t.Offset.Z );
-		}
+            m_Stream.Seek(18, SeekOrigin.Begin);
+            m_Stream.Write((short)t.MultiID);
+            m_Stream.Write((short)t.Offset.X);
+            m_Stream.Write((short)t.Offset.Y);
+            m_Stream.Write((short)t.Offset.Z);
+        }
 	}
 
 	public sealed class MultiTargetReq : Packet

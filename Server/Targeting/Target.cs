@@ -1,23 +1,3 @@
-/***************************************************************************
- *                                Target.cs
- *                            -------------------
- *   begin                : May 1, 2002
- *   copyright            : (C) The RunUO Software Team
- *   email                : info@runuo.com
- *
- *   $Id: Target.cs 1070 2013-06-16 01:24:45Z eos@runuo.com $
- *
- ***************************************************************************/
-
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
-
 using System;
 using Server.Network;
 
@@ -132,49 +112,10 @@ namespace Server.Targeting
 			}
 		}
 
-		public bool CheckLOS
-		{
-			get
-			{
-				return m_CheckLOS;
-			}
-			set
-			{
-				m_CheckLOS = value;
-			}
-		}
-
-		public bool DisallowMultis
-		{
-			get
-			{
-				return m_DisallowMultis;
-			}
-			set
-			{
-				m_DisallowMultis = value;
-			}
-		}
-
-		public bool AllowNonlocal
-		{
-			get
-			{
-				return m_AllowNonlocal;
-			}
-			set
-			{
-				m_AllowNonlocal = value;
-			}
-		}
-
-		public int TargetID
-		{
-			get
-			{
-				return m_TargetID;
-			}
-		}
+		public bool CheckLOS { get { return m_CheckLOS; } set { m_CheckLOS = value; } }
+		public bool DisallowMultis { get { return m_DisallowMultis; } set { m_DisallowMultis = value; } }
+		public bool AllowNonlocal { get { return m_AllowNonlocal; } set { m_AllowNonlocal = value; } }
+        public int TargetID { get { return m_TargetID; } }
 
 		public virtual Packet GetPacketFor( NetState ns )
 		{
@@ -345,40 +286,8 @@ namespace Server.Targeting
 		{
 		}
 
-		public int Range
-		{
-			get
-			{
-				return m_Range;
-			}
-			set
-			{
-				m_Range = value;
-			}
-		}
-
-		public bool AllowGround
-		{
-			get
-			{
-				return m_AllowGround;
-			}
-			set
-			{
-				m_AllowGround = value;
-			}
-		}
-
-		public TargetFlags Flags
-		{
-			get
-			{
-				return m_Flags;
-			}
-			set
-			{
-				m_Flags = value;
-			}
-		}
+		public int Range { get { return m_Range; } set { m_Range = value; } }
+		public bool AllowGround { get { return m_AllowGround; } set { m_AllowGround = value; } }
+		public TargetFlags Flags { get { return m_Flags; } set { m_Flags = value; } }
 	}
 }

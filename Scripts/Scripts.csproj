@@ -41,7 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <CodeAnalysisRuleSet>..\..\..\UnusedCode.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
@@ -1745,10 +1745,6 @@
     <Compile Include=".\Items\Special\Holiday\WinterGiftPackage2003.cs" />
     <Compile Include=".\Items\Special\Holiday\Wreath.cs" />
     <Compile Include=".\Items\Special\Holiday\WristWatch.cs" />
-    <Compile Include=".\Items\Special\House Raffle\HouseRaffleDeed.cs" />
-    <Compile Include=".\Items\Special\House Raffle\HouseRaffleManagementGump.cs" />
-    <Compile Include=".\Items\Special\House Raffle\HouseRaffleRegion.cs" />
-    <Compile Include=".\Items\Special\House Raffle\HouseRaffleStone.cs" />
     <Compile Include=".\Items\Special\MiniHouses.cs" />
     <Compile Include=".\Items\Special\ML\BaseImprisonedMobile.cs" />
     <Compile Include=".\Items\Special\ML\GrizzledMareStatuette.cs" />
