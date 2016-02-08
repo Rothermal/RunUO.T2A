@@ -79,23 +79,6 @@
 +graveyard: 2437 1104 0 cemetery
 +graveyard: 5696 3660 0 cemetery passage
 -point of interest: 1538 1597 0 The Chamber of Virtue
-+champion: 5511 2360 1 Champ 1 "Ice West"
-+champion: 5559 3757 1 Champ 10 "Wild" (Lord Oaks)
-+champion: 5982 3882 1 Champ 11 "Khaldun"
-+champion: 5724 3991 1 Champ 12 "Tortoise"
-+champion: 6038 2400 1 Champ 2 "Ice East"
-+champion: 5549 2640 1 Champ 3 "Oasis"
-+champion: 5636 2916 1 Champ 4 "Desert"
-+champion: 6035 2944 1 Champ 5 "Terra Sanctum"
-+champion: 5267 3171 1 Champ 6 "Marble"
-+champion: 5281 3368 1 Champ 7 "Damwin"
-+champion: 5954 3475 1 Champ 8 "Hopper's Boog"
-+champion: 5207 3637 1 Champ 9 "City of Death"
-+champion: 5178 708 1 Champ Deceit: Neira (Unholy Terror)
-+champion: 5259 837 1 Champ Destard: Rikktor (Cold Blood)
-+champion: 5557 826 1 Champ of Despice: Barracoon (Vermin Horde)
-+champion: 5814 1351 1 Champ of Fire: Semidar (Abyss)
-+champion: 5189 1605 1 Champ of the Tera-Keep: Mephistis (Arachnid)
 -warriors guild: 2841 907 0 The Champion's of Light
 +shrine: 1458 844 0 Chaos
 -point of interest: 3727 1361 0 The Chessboard

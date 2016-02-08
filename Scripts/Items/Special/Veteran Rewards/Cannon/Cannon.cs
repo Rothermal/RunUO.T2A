@@ -2,11 +2,19 @@ using System;
 using Server.Gumps;
 using Server.Targeting;
 using Server.Network;
-using Server.Engines.Quests.Haven;
 using Server.Engines.VeteranRewards;
+using Server.Items;
 
 namespace Server.Items
 {
+    public enum CannonDirection
+    {
+        North,
+        East,
+        South,
+        West
+    }
+
     public class CannonAddonComponent : AddonComponent
 	{
 		public override int LabelNumber{ get{ return 1076157; } } // Decorative Cannon

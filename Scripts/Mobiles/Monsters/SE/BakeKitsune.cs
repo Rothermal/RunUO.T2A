@@ -34,10 +34,6 @@ namespace Server.Mobiles
 			Tamable = true;
 			ControlSlots = 2;
 			MinTameSkill = 80.7;
-
-
-			if ( Utility.RandomDouble() < .25 )
-				PackItem( Engines.Plants.Seed.RandomBonsaiSeed() );
 		}
 
 		public override void GenerateLoot()

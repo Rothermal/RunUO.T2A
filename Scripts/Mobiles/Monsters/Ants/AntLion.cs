@@ -30,7 +30,6 @@ namespace Server.Mobiles
 			VirtualArmor = 45;
 
 			PackItem( new Bone( 3 ) );
-			PackItem( new FertileDirt( Utility.RandomMinMax( 1, 5 ) ) );
 
 			Item orepile = null; /* no trust, no love :( */
 

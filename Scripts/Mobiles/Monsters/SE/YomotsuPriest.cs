@@ -48,8 +48,6 @@ namespace Server.Mobiles
 				case 2: PackItem( new Boots() ); break;
 				case 3: PackItem( new ThighBoots() ); break;
 			}
-
-			if ( Utility.RandomDouble() < .25 ) PackItem( Engines.Plants.Seed.RandomBonsaiSeed() );
 		}
 
 		public override FoodType FavoriteFood{ get{ return FoodType.Fish; } }

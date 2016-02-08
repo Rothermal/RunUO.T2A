@@ -32,7 +32,7 @@ namespace Server.Mobiles
 
 			PlayerMobile player = m as PlayerMobile;
 
-			return player != null && player.SolenFriendship == SolenFriendship.Red;
+			return false;
 		}
 
 		public static bool CheckBlackFriendship( Mobile m )
@@ -49,7 +49,7 @@ namespace Server.Mobiles
 
 			PlayerMobile player = m as PlayerMobile;
 
-			return player != null && player.SolenFriendship == SolenFriendship.Black;
+			return false;
 		}
 
 		public static void OnRedDamage( Mobile from )
@@ -63,15 +63,6 @@ namespace Server.Mobiles
 				else if ( bc.Summoned && bc.SummonMaster is PlayerMobile )
 					OnRedDamage( bc.SummonMaster );
 			}
-
-			PlayerMobile player = from as PlayerMobile;
-
-			if ( player != null && player.SolenFriendship == SolenFriendship.Red )
-			{
-				player.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1054103 ); // The solen revoke their friendship. You will now be considered an intruder.
-
-				player.SolenFriendship = SolenFriendship.None;
-			}
 		}
 
 		public static void OnBlackDamage( Mobile from )
@@ -84,15 +75,6 @@ namespace Server.Mobiles
 					OnBlackDamage( bc.ControlMaster );
 				else if ( bc.Summoned && bc.SummonMaster is PlayerMobile )
 					OnBlackDamage( bc.SummonMaster );
-			}
-
-			PlayerMobile player = from as PlayerMobile;
-
-			if ( player != null && player.SolenFriendship == SolenFriendship.Black )
-			{
-				player.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1054103 ); // The solen revoke their friendship. You will now be considered an intruder.
-
-				player.SolenFriendship = SolenFriendship.None;
 			}
 		}
 	}

@@ -39,9 +39,6 @@ namespace Server.Mobiles
 				case 5: PackItem( new LeatherChest() ); break;
 			}
 
-			if ( Utility.RandomDouble() < .5 )
-				PackItem( Engines.Plants.Seed.RandomBonsaiSeed() );
-
 			Tamable = true;
 			MinTameSkill = 41.1;
 			ControlSlots = 1;

@@ -221,7 +221,6 @@ namespace Server
 							case "-exit:":
 							case "-bridge:":
 							case "-other:":
-							case "+champion:":
 							case "-stairs:":
 							case "-guild:":
 							case "+graveyard:":

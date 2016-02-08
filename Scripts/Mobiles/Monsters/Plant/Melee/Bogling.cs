@@ -30,7 +30,6 @@ namespace Server.Mobiles
 			VirtualArmor = 28;
 
 			PackItem( new Log( 4 ) );
-			PackItem( new Engines.Plants.Seed() );
 		}
 
 		public override void GenerateLoot()
