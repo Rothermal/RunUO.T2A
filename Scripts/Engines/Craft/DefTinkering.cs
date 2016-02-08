@@ -316,7 +316,6 @@ namespace Server.Engines.Craft
 
 			MarkOption = true;
 			Repair = true;
-			CanEnhance = false;
 		}
 	}
 

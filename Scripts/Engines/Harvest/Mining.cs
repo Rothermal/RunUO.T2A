@@ -20,25 +20,13 @@ namespace Server.Engines.Harvest
 			}
 		}
 
-		private HarvestDefinition m_OreAndStone, m_Sand;
-
-		public HarvestDefinition OreAndStone
-		{
-			get{ return m_OreAndStone; }
-		}
-
-		public HarvestDefinition Sand
-		{
-			get{ return m_Sand; }
-		}
-
 		private Mining()
 		{
 			HarvestResource[] res;
 			HarvestVein[] veins;
 
 			#region Mining for ore and stone
-			HarvestDefinition oreAndStone = m_OreAndStone = new HarvestDefinition();
+			HarvestDefinition oreAndStone = new HarvestDefinition();
 
 			// Resource banks are every 8x8 tiles
 			oreAndStone.BankWidth = 8;
@@ -83,14 +71,14 @@ namespace Server.Engines.Harvest
 			res = new HarvestResource[]
 				{
 					new HarvestResource( 00.0, 00.0, 100.0, 1007072, typeof( IronOre ),			typeof( Granite ) ),
-					new HarvestResource( 65.0, 25.0, 105.0, 1007073, typeof( DullCopperOre ),	typeof( DullCopperGranite ),	typeof( DullCopperElemental ) ),
-					new HarvestResource( 70.0, 30.0, 110.0, 1007074, typeof( ShadowIronOre ),	typeof( ShadowIronGranite ),	typeof( ShadowIronElemental ) ),
-					new HarvestResource( 75.0, 35.0, 115.0, 1007075, typeof( CopperOre ),		typeof( CopperGranite ),		typeof( CopperElemental ) ),
-					new HarvestResource( 80.0, 40.0, 120.0, 1007076, typeof( BronzeOre ),		typeof( BronzeGranite ),		typeof( BronzeElemental ) ),
-					new HarvestResource( 85.0, 45.0, 125.0, 1007077, typeof( GoldOre ),			typeof( GoldGranite ),			typeof( GoldenElemental ) ),
-					new HarvestResource( 90.0, 50.0, 130.0, 1007078, typeof( AgapiteOre ),		typeof( AgapiteGranite ),		typeof( AgapiteElemental ) ),
-					new HarvestResource( 95.0, 55.0, 135.0, 1007079, typeof( VeriteOre ),		typeof( VeriteGranite ),		typeof( VeriteElemental ) ),
-					new HarvestResource( 99.0, 59.0, 139.0, 1007080, typeof( ValoriteOre ),		typeof( ValoriteGranite ),		typeof( ValoriteElemental ) )
+					new HarvestResource( 65.0, 25.0, 105.0, 1007073, typeof( DullCopperOre ),	typeof( DullCopperGranite ) ),
+					new HarvestResource( 70.0, 30.0, 110.0, 1007074, typeof( ShadowIronOre ),	typeof( ShadowIronGranite ) ),
+					new HarvestResource( 75.0, 35.0, 115.0, 1007075, typeof( CopperOre ),		typeof( CopperGranite ) ),
+					new HarvestResource( 80.0, 40.0, 120.0, 1007076, typeof( BronzeOre ),		typeof( BronzeGranite ) ),
+					new HarvestResource( 85.0, 45.0, 125.0, 1007077, typeof( GoldOre ),			typeof( GoldGranite ) ),
+					new HarvestResource( 90.0, 50.0, 130.0, 1007078, typeof( AgapiteOre ),		typeof( AgapiteGranite ) ),
+					new HarvestResource( 95.0, 55.0, 135.0, 1007079, typeof( VeriteOre ),		typeof( VeriteGranite ) ),
+					new HarvestResource( 99.0, 59.0, 139.0, 1007080, typeof( ValoriteOre ),		typeof( ValoriteGranite ) )
 				};
 
 			veins = new HarvestVein[]
@@ -116,7 +104,7 @@ namespace Server.Engines.Harvest
 			#endregion
 
 			#region Mining for sand
-			HarvestDefinition sand = m_Sand = new HarvestDefinition();
+			HarvestDefinition sand = new HarvestDefinition();
 
 			// Resource banks are every 8x8 tiles
 			sand.BankWidth = 8;
@@ -175,20 +163,6 @@ namespace Server.Engines.Harvest
 			#endregion
 		}
 
-		public override Type GetResourceType( Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc, HarvestResource resource )
-		{
-			if ( def == m_OreAndStone )
-			{
-				PlayerMobile pm = from as PlayerMobile;
-				if ( pm != null && pm.StoneMining && pm.ToggleMiningStone && from.Skills[SkillName.Mining].Base >= 100.0 && 0.1 > Utility.RandomDouble() )
-					return resource.Types[1];
-
-				return resource.Types[0];
-			}
-
-			return base.GetResourceType( from, tool, def, map, loc, resource );
-		}
-
 		public override bool CheckHarvest( Mobile from, Item tool )
 		{
 			if ( !base.CheckHarvest( from, tool ) )
@@ -221,12 +195,7 @@ namespace Server.Engines.Harvest
 			if ( !base.CheckHarvest( from, tool, def, toHarvest ) )
 				return false;
 
-			if ( def == m_Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 100.0 && ((PlayerMobile)from).SandMining) )
-			{
-				OnBadHarvestTarget( from, tool, toHarvest );
-				return false;
-			}
-			else if ( from.Mounted )
+			if ( from.Mounted )
 			{
 				from.SendLocalizedMessage( 501864 ); // You can't mine while riding.
 				return false;
@@ -240,19 +209,6 @@ namespace Server.Engines.Harvest
 			return true;
 		}
 
-		public override HarvestVein MutateVein( Mobile from, Item tool, HarvestDefinition def, HarvestBank bank, object toHarvest, HarvestVein vein )
-		{
-			if ( tool is GargoylesPickaxe && def == m_OreAndStone )
-			{
-				int veinIndex = Array.IndexOf( def.Veins, vein );
-
-				if ( veinIndex >= 0 && veinIndex < (def.Veins.Length - 1) )
-					return def.Veins[veinIndex + 1];
-			}
-
-			return base.MutateVein( from, tool, def, bank, toHarvest, vein );
-		}
-
 		private static int[] m_Offsets = new int[]
 			{
 				-1, -1,
@@ -264,65 +220,6 @@ namespace Server.Engines.Harvest
 				 1,  0,
 				 1,  1
 			};
-
-		public override void OnHarvestFinished( Mobile from, Item tool, HarvestDefinition def, HarvestVein vein, HarvestBank bank, HarvestResource resource, object harvested )
-		{
-			if ( tool is GargoylesPickaxe && def == m_OreAndStone && 0.1 > Utility.RandomDouble() )
-			{
-				HarvestResource res = vein.PrimaryResource;
-
-				if ( res == resource && res.Types.Length >= 3 )
-				{
-					try
-					{
-						Map map = from.Map;
-
-						if ( map == null )
-							return;
-
-						BaseCreature spawned = Activator.CreateInstance( res.Types[2], new object[]{ 25 } ) as BaseCreature;
-
-						if ( spawned != null )
-						{
-							int offset = Utility.Random( 8 ) * 2;
-
-							for ( int i = 0; i < m_Offsets.Length; i += 2 )
-							{
-								int x = from.X + m_Offsets[(offset + i) % m_Offsets.Length];
-								int y = from.Y + m_Offsets[(offset + i + 1) % m_Offsets.Length];
-
-								if ( map.CanSpawnMobile( x, y, from.Z ) )
-								{
-									spawned.OnBeforeSpawn( new Point3D( x, y, from.Z ), map );
-									spawned.MoveToWorld( new Point3D( x, y, from.Z ), map );
-									spawned.Combatant = from;
-									return;
-								}
-								else
-								{
-									int z = map.GetAverageZ( x, y );
-
-									if ( Math.Abs( z - from.Z ) < 10 && map.CanSpawnMobile( x, y, z ) )
-									{
-										spawned.OnBeforeSpawn( new Point3D( x, y, z ), map );
-										spawned.MoveToWorld( new Point3D( x, y, z ), map );
-										spawned.Combatant = from;
-										return;
-									}
-								}
-							}
-
-							spawned.OnBeforeSpawn( from.Location, from.Map );
-							spawned.MoveToWorld( from.Location, from.Map );
-							spawned.Combatant = from;
-						}
-					}
-					catch
-					{
-					}
-				}
-			}
-		}
 
 		public override bool BeginHarvesting( Mobile from, Item tool )
 		{

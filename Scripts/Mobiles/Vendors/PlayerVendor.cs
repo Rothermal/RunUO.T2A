@@ -119,7 +119,7 @@ namespace Server.Mobiles
 			if ( !base.CheckItemUse( from, item ) )
 				return false;
 
-			if ( item is Container || item is Engines.BulkOrders.BulkOrderBook )
+			if ( item is Container )
 				return true;
 
 			from.SendLocalizedMessage( 500447 ); // That is not accessible.
@@ -1196,7 +1196,7 @@ namespace Server.Mobiles
 						else
 							setPrice = true;
 					}
-					else if ( item is BaseBook || item is Engines.BulkOrders.BulkOrderBook )
+					else if ( item is BaseBook )
 					{
 						setPrice = true;
 					}

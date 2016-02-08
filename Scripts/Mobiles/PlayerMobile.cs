@@ -2470,8 +2470,6 @@ namespace Server.Mobiles
 			m_AntiMacroTable = new Hashtable();
 			m_RecentlyReported = new List<Mobile>();
 
-			m_BOBFilter = new Engines.BulkOrders.BOBFilter();
-
 			m_GameTime = TimeSpan.Zero;
 			m_ShortTermElapse = TimeSpan.FromHours( 8.0 );
 			m_LongTermElapse = TimeSpan.FromHours( 40.0 );
@@ -2680,13 +2678,6 @@ namespace Server.Mobiles
 			SetHairMods( -1, -1 );
 		}
 
-		private Engines.BulkOrders.BOBFilter m_BOBFilter;
-
-		public Engines.BulkOrders.BOBFilter BOBFilter
-		{
-			get{ return m_BOBFilter; }
-		}
-
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
@@ -2815,12 +2806,8 @@ namespace Server.Mobiles
 
 					goto case 13;
 				}
-				case 13: // just removed m_PayedInsurance list
+				case 13:
 				case 12:
-				{
-					m_BOBFilter = new Engines.BulkOrders.BOBFilter( reader );
-					goto case 11;
-				}
 				case 11:
 				{
 					if ( version < 13 )
@@ -2924,9 +2911,6 @@ namespace Server.Mobiles
 
 			if ( m_JusticeProtectors == null )
 				m_JusticeProtectors = new List<Mobile>();
-
-			if ( m_BOBFilter == null )
-				m_BOBFilter = new Engines.BulkOrders.BOBFilter();
 
 			if( m_GuildRank == null )
 				m_GuildRank = Guilds.RankDefinition.Member;	//Default to member if going from older version to new version (only time it should be null)
@@ -3040,8 +3024,6 @@ namespace Server.Mobiles
 
 			if ( m_CompassionGains > 0 )
 				writer.WriteDeltaTime( m_NextCompassionDay );
-
-			m_BOBFilter.Serialize( writer );
 
 			bool useMods = ( m_HairModID != -1 || m_BeardModID != -1 );
 

@@ -326,7 +326,6 @@ namespace Server.Engines.Craft
 			Resmelt = true;
 			Repair = true;
 			MarkOption = true;
-			CanEnhance = false;
 		}
 	}
 

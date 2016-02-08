@@ -19,7 +19,6 @@ namespace Server.Engines.Craft
 		private bool m_Resmelt;
 		private bool m_Repair;
 		private bool m_MarkOption;
-		private bool m_CanEnhance;
 
 		private CraftItemCol m_CraftItems;
 		private CraftGroupCol m_CraftGroups;
@@ -98,12 +97,6 @@ namespace Server.Engines.Craft
 		{
 			get{ return m_MarkOption; }
 			set{ m_MarkOption = value; }
-		}
-
-		public bool CanEnhance
-		{
-			get{ return m_CanEnhance; }
-			set{ m_CanEnhance = value; }
 		}
 
 		public CraftSystem( int minCraftEffect, int maxCraftEffect, double delay )

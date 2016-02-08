@@ -30,9 +30,6 @@ namespace Server.Mobiles
 			Karma = -3500;
 
 			VirtualArmor = 32;
-
-			if ( 0.025 > Utility.RandomDouble() )
-				PackItem( new GargoylesPickaxe() );
 		}
 
 		public override bool CanFly { get { return true; } }

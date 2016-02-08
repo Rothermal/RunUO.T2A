@@ -28,9 +28,6 @@ namespace Server.Mobiles
 			Karma = 0;
 
 			VirtualArmor = 35;
-
-			if ( 0.2 > Utility.RandomDouble() )
-				PackItem( new GargoylesPickaxe() );
 		}
 
 		public override void GenerateLoot()

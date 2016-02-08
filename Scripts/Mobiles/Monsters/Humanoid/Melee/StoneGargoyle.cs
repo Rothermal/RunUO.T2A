@@ -30,9 +30,6 @@ namespace Server.Mobiles
 			VirtualArmor = 50;
 
 			PackItem( new IronIngot( 12 ) );
-
-			if ( 0.05 > Utility.RandomDouble() )
-				PackItem( new GargoylesPickaxe() );
 		}
 
 		public override void GenerateLoot()

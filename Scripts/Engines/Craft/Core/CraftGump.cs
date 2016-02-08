@@ -95,14 +95,6 @@ namespace Server.Engines.Craft
 			}
 			// ****************************************
 
-			// Enhance option
-			if ( craftSystem.CanEnhance )
-			{
-				AddButton( 270, 382, 4005, 4007, GetButtonID( 6, 8 ), GumpButtonType.Reply, 0 );
-				AddHtmlLocalized( 305, 385, 150, 18, 1061001, LabelColor, false, false ); // ENHANCE ITEM
-			}
-			// ****************************************
-
 			if ( notice is int && (int)notice > 0 )
 				AddHtmlLocalized( 170, 295, 350, 40, (int)notice, LabelColor, false, false );
 			else if ( notice is string )
@@ -598,13 +590,6 @@ namespace Server.Engines.Craft
 						{
 							if ( system.CraftSubRes2.Init )
 								m_From.SendGump( new CraftGump( m_From, system, m_Tool, null, CraftPage.PickResource2 ) );
-
-							break;
-						}
-						case 8: // Enhance item
-						{
-							if ( system.CanEnhance )
-								Enhance.BeginTarget( m_From, system, m_Tool );
 
 							break;
 						}
