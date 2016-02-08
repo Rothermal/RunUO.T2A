@@ -22,33 +22,6 @@ namespace Server.Items
 			typeof( AnthropomorphistGlasses )
 		};
 
-		private static Type[] m_Replicas = new Type[]
-		{
-			typeof( ANecromancerShroud ),
-			typeof( BraveKnightOfTheBritannia ),
-			typeof( CaptainJohnsHat ),
-			typeof( DetectiveBoots ),
-			typeof( DjinnisRing ),
-			typeof( EmbroideredOakLeafCloak ),
-			typeof( GuantletsOfAnger ),
-			typeof( LieutenantOfTheBritannianRoyalGuard ),
-			typeof( OblivionsNeedle ),
-			typeof( RoyalGuardSurvivalKnife ),
-			typeof( SamaritanRobe ),
-			typeof( TheMostKnowledgePerson ),
-			typeof( TheRobeOfBritanniaAri ),
-			typeof( AcidProofRobe ),
-			typeof( Calm ),
-			typeof( CrownOfTalKeesh ),
-			typeof( FangOfRactus ),
-			typeof( GladiatorsCollar ),
-			typeof( OrcChieftainHelm ),
-			typeof( Pacify ),
-			typeof( Quell ),
-			typeof( ShroudOfDeciet ),
-			typeof( Subdue )
-		};
-
 		private static Type[] m_DyableHeritageItems = new Type[]
 		{
 			typeof( ChargerOfTheFallen ),
@@ -185,7 +158,6 @@ namespace Server.Items
 				|| IsInTypeList( t, StealableArtifactsSpawner.TypesOfEntires )
 				|| IsInTypeList( t, Paragon.Artifacts )
 				|| IsInTypeList( t, TreasureMapChest.Artifacts )
-				|| IsInTypeList( t, m_Replicas )
 				|| IsInTypeList( t, m_DyableHeritageItems )
 				|| IsInTypeList( t, m_Glasses )
 				);

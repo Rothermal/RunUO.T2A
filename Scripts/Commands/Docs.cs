@@ -901,19 +901,6 @@ namespace Server.Commands
 					rewards[14] = rewards[15] = true;
 				else if( item is ClothingBlessDeed )
 					rewards[16] = true;
-				else if( item is PowerScroll )
-				{
-					PowerScroll ps = (PowerScroll)item;
-
-					if( ps.Value == 105.0 )
-						rewards[6] = true;
-					else if( ps.Value == 110.0 )
-						rewards[7] = true;
-					else if( ps.Value == 115.0 )
-						rewards[8] = true;
-					else if( ps.Value == 120.0 )
-						rewards[9] = true;
-				}
 				else if( item is UncutCloth )
 				{
 					if( item.Hue == 0x483 || item.Hue == 0x48C || item.Hue == 0x488 || item.Hue == 0x48A )
@@ -1139,19 +1126,6 @@ namespace Server.Commands
 					rewards[6] = true;
 				else if( item is ColoredAnvil )
 					rewards[7] = true;
-				else if( item is PowerScroll )
-				{
-					PowerScroll ps = (PowerScroll)item;
-
-					if( ps.Value == 105.0 )
-						rewards[8] = true;
-					else if( ps.Value == 110.0 )
-						rewards[9] = true;
-					else if( ps.Value == 115.0 )
-						rewards[10] = true;
-					else if( ps.Value == 120.0 )
-						rewards[11] = true;
-				}
 				else if( item is RunicHammer )
 				{
 					RunicHammer rh = (RunicHammer)item;

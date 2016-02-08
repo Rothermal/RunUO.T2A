@@ -533,20 +533,19 @@ namespace Server.Spells
 				new TravelValidator( IsFeluccaSolenHive ),
 				new TravelValidator( IsSafeZone ),
 				new TravelValidator( IsFactionStronghold ),
-				new TravelValidator( IsChampionSpawn ),
 				new TravelValidator( IsHeartwood )
 			};
 
 		private static bool[,] m_Rules = new bool[,]
 			{
-					/*T2A(Fel),	Khaldun,	Wind(Fel),	Dungeons(Fel),	Solen(Fel),	SafeZone,	Stronghold,	ChampionSpawn,	Heartwood */
-/* Recall From */	{ false,	false,		false,		false,			false,		true,		true,		false,			false },
-/* Recall To */		{ false,	false,		false,		false,			false,		false,		false,		false,			false },
-/* Gate From */		{ false,	false,		false,		false,			false,		false,		false,		false,			false },
-/* Gate To */		{ false,	false,		false,		false,			false,		false,		false,		false,			false },
-/* Mark In */		{ false,	false,		false,		false,			false,		false,		false,		false,			false },
-/* Tele From */		{ true,		true,		true,		true,			true,		true,		false,		true,			false },
-/* Tele To */		{ true,		true,		true,		true,			true,		false,		false, 		true,			false },
+					/*T2A(Fel),	Khaldun,	Wind(Fel),	Dungeons(Fel),	Solen(Fel),	SafeZone,	Stronghold,	Heartwood */
+/* Recall From */	{ false,	false,		false,		false,			false,		true,		true,		false },
+/* Recall To */		{ false,	false,		false,		false,			false,		false,		false,		false },
+/* Gate From */		{ false,	false,		false,		false,			false,		false,		false,		false },
+/* Gate To */		{ false,	false,		false,		false,			false,		false,		false,		false },
+/* Mark In */		{ false,	false,		false,		false,			false,		false,		false,		false },
+/* Tele From */		{ true,		true,		true,		true,			true,		true,		false,		false },
+/* Tele To */		{ true,		true,		true,		true,			true,		false,		false, 		false },
 			};
 
 		public static void SendInvalidMessage( Mobile caster, TravelCheckType type )
@@ -684,11 +683,6 @@ namespace Server.Spells
 		public static bool IsFactionStronghold( Map map, Point3D loc )
 		{
 			return (Region.Find( loc, map ).IsPartOf( typeof( Factions.StrongholdRegion ) ));
-		}
-
-		public static bool IsChampionSpawn( Map map, Point3D loc )
-		{
-			return (Region.Find( loc, map ).IsPartOf( typeof( Engines.CannedEvil.ChampionSpawnRegion ) ));
 		}
 
 		public static bool IsHeartwood( Map map, Point3D loc )

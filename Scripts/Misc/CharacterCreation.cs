@@ -58,14 +58,7 @@ namespace Server.Misc
 		private static void FillBankAOS( Mobile m )
 		{
 			BankBox bank = m.BankBox;
-
-			// The new AOS bankboxes don't have powerscrolls, they are automatically 'applied':
-
-			for ( int i = 0; i < PowerScroll.Skills.Count; ++i )
-				m.Skills[PowerScroll.Skills[ i ]].Cap = 120.0;
-
 			m.StatCap = 250;
-
 
 			Container cont;
 
@@ -450,20 +443,6 @@ namespace Server.Misc
 			// 5 blank recall runes
 			for ( int i = 0; i < 5; ++i )
 				bank.DropItem( MakeNewbie( new RecallRune() ) );
-
-			AddPowerScrolls( bank );
-		}
-
-		private static void AddPowerScrolls( BankBox bank )
-		{
-			Bag bag = new Bag();
-
-			for ( int i = 0; i < PowerScroll.Skills.Count; ++i )
-				bag.DropItem( new PowerScroll( PowerScroll.Skills[i], 120.0 ) );
-
-			bag.DropItem( new StatCapScroll( 250 ) );
-
-			bank.DropItem( bag );
 		}
 
 		private static void AddShirt( Mobile m, int shirtHue )
