@@ -38,12 +38,7 @@ namespace Server.Spells.Seventh
 				return false;
 			}
 			else */
-			if ( Factions.Sigil.ExistsOn( Caster ) )
-			{
-				Caster.SendLocalizedMessage( 1010521 ); // You cannot polymorph while you have a Town Sigil
-				return false;
-			}
-			else if( TransformationSpellHelper.UnderTransformation( Caster ) )
+			if( TransformationSpellHelper.UnderTransformation( Caster ) )
 			{
 				Caster.SendLocalizedMessage( 1061633 ); // You cannot polymorph while in that form.
 				return false;
@@ -81,11 +76,7 @@ namespace Server.Spells.Seventh
 				Caster.SendLocalizedMessage( 1042561 ); //Please dismount first.
 			} 
 			else */
-			if ( Factions.Sigil.ExistsOn( Caster ) )
-			{
-				Caster.SendLocalizedMessage( 1010521 ); // You cannot polymorph while you have a Town Sigil
-			}
-			else if ( !Caster.CanBeginAction( typeof( PolymorphSpell ) ) )
+			if ( !Caster.CanBeginAction( typeof( PolymorphSpell ) ) )
 			{
 				Caster.SendLocalizedMessage( 1005559 ); // This spell is already in effect.
 			}

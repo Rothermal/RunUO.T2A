@@ -20,26 +20,8 @@ namespace Server.Items
 		int MaxArcaneCharges{ get; set; }
 	}
 
-	public abstract class BaseClothing : Item, IDyable, IScissorable, IFactionItem, ICraftable, IWearableDurability
+	public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability
 	{
-		#region Factions
-		private FactionItem m_FactionState;
-
-		public FactionItem FactionItemState
-		{
-			get{ return m_FactionState; }
-			set
-			{
-				m_FactionState = value;
-
-				if ( m_FactionState == null )
-					Hue = 0;
-
-				LootType = ( m_FactionState == null ? LootType.Regular : LootType.Blessed );
-			}
-		}
-		#endregion
-
 		public virtual bool CanFortify{ get{ return true; } }
 
 		private int m_MaxHitPoints;
@@ -512,11 +494,6 @@ namespace Server.Items
 			if ( m_Crafter != null )
 				list.Add( 1050043, m_Crafter.Name ); // crafted by ~1_NAME~
 
-			#region Factions
-			if ( m_FactionState != null )
-				list.Add( 1041350 ); // faction item
-			#endregion
-
 			if ( m_Quality == ClothingQuality.Exceptional )
 				list.Add( 1060636 ); // exceptional
 
@@ -570,11 +547,6 @@ namespace Server.Items
 				else if ( LootType == LootType.Cursed )
 					attrs.Add( new EquipInfoAttribute( 1049643 ) ); // cursed
 			}
-
-			#region Factions
-			if ( m_FactionState != null )
-				attrs.Add( new EquipInfoAttribute( 1041350 ) ); // faction item
-			#endregion
 
 			if ( m_Quality == ClothingQuality.Exceptional )
 				attrs.Add( new EquipInfoAttribute( 1018305 - (int)m_Quality ) );

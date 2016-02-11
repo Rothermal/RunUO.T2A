@@ -10,8 +10,6 @@ namespace Server.Mobiles
 	{
 		public override InhumanSpeech SpeechType{ get{ return InhumanSpeech.Wisp; } }
 
-		public override Faction FactionAllegiance{ get{ return CouncilOfMages.Instance; } }
-
 		public override TimeSpan ReacquireDelay { get { return TimeSpan.FromSeconds( 1.0 ); } }
 
 		[Constructable]

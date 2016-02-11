@@ -139,9 +139,6 @@ namespace Server.Items
 		{
 			if ( IsOpen )
 			{
-				if ( from is BaseFactionGuard )
-					return false;
-
 				if ( (from.Direction & Direction.Running) != 0 || (m_Boat != null && !m_Boat.Contains( from )) )
 					return true;
 
@@ -171,7 +168,7 @@ namespace Server.Items
 					{
 						z = from.Z + j;
 
-						if ( map.CanFit( x, y, z, 16, false, false ) && !Server.Spells.SpellHelper.CheckMulti( new Point3D( x, y, z ), map ) && !Region.Find( new Point3D( x, y, z ), map ).IsPartOf( typeof( Factions.StrongholdRegion ) ) )
+						if ( map.CanFit( x, y, z, 16, false, false ) && !Server.Spells.SpellHelper.CheckMulti( new Point3D( x, y, z ), map ) )
 						{
 							if ( i == 1 && j >= -2 && j <= 2 )
 								return true;
@@ -183,7 +180,7 @@ namespace Server.Items
 
 					z = map.GetAverageZ( x, y );
 
-					if ( map.CanFit( x, y, z, 16, false, false ) && !Server.Spells.SpellHelper.CheckMulti( new Point3D( x, y, z ), map ) && !Region.Find( new Point3D( x, y, z ), map ).IsPartOf( typeof( Factions.StrongholdRegion ) ) )
+					if ( map.CanFit( x, y, z, 16, false, false ) && !Server.Spells.SpellHelper.CheckMulti( new Point3D( x, y, z ), map ) )
 					{
 						if ( i == 1 )
 							return true;

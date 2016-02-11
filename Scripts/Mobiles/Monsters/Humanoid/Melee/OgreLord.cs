@@ -6,8 +6,6 @@ namespace Server.Mobiles
     [CorpseName( "an ogre lords corpse" )]
 	public class OgreLord : BaseCreature
 	{
-		public override Faction FactionAllegiance { get { return Minax.Instance; } }
-
 		[Constructable]
 		public OgreLord () : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 		{

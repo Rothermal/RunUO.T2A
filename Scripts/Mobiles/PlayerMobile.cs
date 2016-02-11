@@ -747,10 +747,6 @@ namespace Server.Mobiles
 				int dex = this.Dex;
 				int intel = this.Int;
 
-				#region Factions
-				int factionItemCount = 0;
-				#endregion
-
 				Mobile from = this;
 
 				for ( int i = items.Count - 1; i >= 0; --i )
@@ -872,26 +868,6 @@ namespace Server.Mobiles
 							from.SendLocalizedMessage( 1062002, name ); // You can no longer wear your ~1_ARMOR~
 
 							from.AddToBackpack( clothing );
-							moved = true;
-						}
-					}
-
-					FactionItem factionItem = FactionItem.Find( item );
-
-					if ( factionItem != null )
-					{
-						bool drop = false;
-
-						Faction ourFaction = Faction.Find( this );
-
-						if ( ourFaction == null || ourFaction != factionItem.Faction )
-							drop = true;
-						else if ( ++factionItemCount > FactionItem.GetMaxWearables( this ) )
-							drop = true;
-
-						if ( drop )
-						{
-							from.AddToBackpack( item );
 							moved = true;
 						}
 					}
@@ -1317,7 +1293,7 @@ namespace Server.Mobiles
 
 		private bool CanInsure( Item item )
 		{
-			if ( ( item is Container && !( item is BaseQuiver ) ) || item is BagOfSending || item is KeyRing || item is PotionKeg || item is Sigil )
+			if ( ( item is Container && !( item is BaseQuiver ) ) || item is BagOfSending || item is KeyRing || item is PotionKeg )
 				return false;
 
 			if ( item.Stackable )
@@ -1782,44 +1758,6 @@ namespace Server.Mobiles
 				return false;
 			#endregion
 
-			#region Factions
-			FactionItem factionItem = FactionItem.Find( item );
-
-			if ( factionItem != null )
-			{
-				Faction faction = Faction.Find( this );
-
-				if ( faction == null )
-				{
-					SendLocalizedMessage( 1010371 ); // You cannot equip a faction item!
-					return false;
-				}
-				else if ( faction != factionItem.Faction )
-				{
-					SendLocalizedMessage( 1010372 ); // You cannot equip an opposing faction's item!
-					return false;
-				}
-				else
-				{
-					int maxWearables = FactionItem.GetMaxWearables( this );
-
-					for ( int i = 0; i < Items.Count; ++i )
-					{
-						Item equiped = Items[i];
-
-						if ( item != equiped && FactionItem.Find( equiped ) != null )
-						{
-							if ( --maxWearables == 0 )
-							{
-								SendLocalizedMessage( 1010373 ); // You do not have enough rank to equip more faction items!
-								return false;
-							}
-						}
-					}
-				}
-			}
-			#endregion
-
 			if ( this.AccessLevel < AccessLevel.GameMaster && item.Layer != Layer.Mount && this.HasTrade )
 			{
 				BounceInfo bounce = item.GetBounce();
@@ -1982,9 +1920,6 @@ namespace Server.Mobiles
 
 		protected override void OnMapChange( Map oldMap )
 		{
-			if ( (Map != Faction.Facet && oldMap == Faction.Facet) || (Map == Faction.Facet && oldMap != Faction.Facet) )
-				InvalidateProperties();
-
 			#region Dueling
 			if ( m_DuelContext != null )
 				m_DuelContext.OnMapChanged( this );
@@ -2295,9 +2230,6 @@ namespace Server.Mobiles
 				if ( YoungDeathTeleport() )
 					Timer.DelayCall( TimeSpan.FromSeconds( 2.5 ), new TimerCallback( SendYoungDeathNotice ) );
 			}
-
-			if ( m_DuelContext == null || !m_DuelContext.Registered || !m_DuelContext.Started || m_DuelPlayer == null || m_DuelPlayer.Eliminated )
-				Faction.HandleDeath( this, killer );
 
 			Server.Guilds.Guild.HandleDeath( this, killer );
 
@@ -3060,81 +2992,12 @@ namespace Server.Mobiles
 		{
 			base.OnAfterDelete();
 
-			Faction faction = Faction.Find( this );
-
-			if ( faction != null )
-				faction.RemoveMember( this );
-
 			BaseHouse.HandleDeletion( this );
 
 			DisguiseTimers.RemoveTimer( this );
 		}
 
 		public override bool NewGuildDisplay { get { return Server.Guilds.Guild.NewGuildSystem; } }
-
-		public override void GetProperties( ObjectPropertyList list )
-		{
-			base.GetProperties( list );
-
-			if ( Map == Faction.Facet )
-			{
-				PlayerState pl = PlayerState.Find( this );
-
-				if ( pl != null )
-				{
-					Faction faction = pl.Faction;
-
-					if ( faction.Commander == this )
-						list.Add( 1042733, faction.Definition.PropName ); // Commanding Lord of the ~1_FACTION_NAME~
-					else if ( pl.Sheriff != null )
-						list.Add( 1042734, "{0}\t{1}", pl.Sheriff.Definition.FriendlyName, faction.Definition.PropName ); // The Sheriff of  ~1_CITY~, ~2_FACTION_NAME~
-					else if ( pl.Finance != null )
-						list.Add( 1042735, "{0}\t{1}", pl.Finance.Definition.FriendlyName, faction.Definition.PropName ); // The Finance Minister of ~1_CITY~, ~2_FACTION_NAME~
-					else if ( pl.MerchantTitle != MerchantTitle.None )
-						list.Add( 1060776, "{0}\t{1}", MerchantTitles.GetInfo( pl.MerchantTitle ).Title, faction.Definition.PropName ); // ~1_val~, ~2_val~
-					else
-						list.Add( 1060776, "{0}\t{1}", pl.Rank.Title, faction.Definition.PropName ); // ~1_val~, ~2_val~
-				}
-			}
-		}
-
-		public override void OnSingleClick( Mobile from )
-		{
-			if ( Map == Faction.Facet )
-			{
-				PlayerState pl = PlayerState.Find( this );
-
-				if ( pl != null )
-				{
-					string text;
-					bool ascii = false;
-
-					Faction faction = pl.Faction;
-
-					if ( faction.Commander == this )
-						text = String.Concat( this.Female ? "(Commanding Lady of the " : "(Commanding Lord of the ", faction.Definition.FriendlyName, ")" );
-					else if ( pl.Sheriff != null )
-						text = String.Concat( "(The Sheriff of ", pl.Sheriff.Definition.FriendlyName, ", ", faction.Definition.FriendlyName, ")" );
-					else if ( pl.Finance != null )
-						text = String.Concat( "(The Finance Minister of ", pl.Finance.Definition.FriendlyName, ", ", faction.Definition.FriendlyName, ")" );
-					else
-					{
-						ascii = true;
-
-						if ( pl.MerchantTitle != MerchantTitle.None )
-							text = String.Concat( "(", MerchantTitles.GetInfo( pl.MerchantTitle ).Title.String, ", ", faction.Definition.FriendlyName, ")" );
-						else
-							text = String.Concat( "(", pl.Rank.Title.String, ", ", faction.Definition.FriendlyName, ")" );
-					}
-
-					int hue = ( Faction.Find( from ) == faction ? 98 : 38 );
-
-					PrivateOverheadMessage( MessageType.Label, hue, ascii, text, from.NetState );
-				}
-			}
-
-			base.OnSingleClick( from );
-		}
 
 		private bool m_BedrollLogout;
 
@@ -3161,16 +3024,6 @@ namespace Server.Mobiles
 					RemoveBuff( BuffIcon.Paralyze );
 			}
 		}
-
-		#region Factions
-		private PlayerState m_FactionPlayerState;
-
-		public PlayerState FactionPlayerState
-		{
-			get{ return m_FactionPlayerState; }
-			set{ m_FactionPlayerState = value; }
-		}
-		#endregion
 
 		#region Dueling
 		private Engines.ConPVP.DuelContext m_DuelContext;

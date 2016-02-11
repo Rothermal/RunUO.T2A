@@ -532,20 +532,19 @@ namespace Server.Spells
 				new TravelValidator( IsFeluccaDungeon ),
 				new TravelValidator( IsFeluccaSolenHive ),
 				new TravelValidator( IsSafeZone ),
-				new TravelValidator( IsFactionStronghold ),
 				new TravelValidator( IsHeartwood )
 			};
 
 		private static bool[,] m_Rules = new bool[,]
 			{
-					/*T2A(Fel),	Khaldun,	Wind(Fel),	Dungeons(Fel),	Solen(Fel),	SafeZone,	Stronghold,	Heartwood */
-/* Recall From */	{ false,	false,		false,		false,			false,		true,		true,		false },
-/* Recall To */		{ false,	false,		false,		false,			false,		false,		false,		false },
-/* Gate From */		{ false,	false,		false,		false,			false,		false,		false,		false },
-/* Gate To */		{ false,	false,		false,		false,			false,		false,		false,		false },
-/* Mark In */		{ false,	false,		false,		false,			false,		false,		false,		false },
-/* Tele From */		{ true,		true,		true,		true,			true,		true,		false,		false },
-/* Tele To */		{ true,		true,		true,		true,			true,		false,		false, 		false },
+					/*T2A(Fel),	Khaldun,	Wind(Fel),	Dungeons(Fel),	Solen(Fel),	SafeZone,	Heartwood */
+/* Recall From */	{ false,	false,		false,		false,			false,		true,		false },
+/* Recall To */		{ false,	false,		false,		false,			false,		false,		false },
+/* Gate From */		{ false,	false,		false,		false,			false,		false,		false },
+/* Gate To */		{ false,	false,		false,		false,			false,		false,		false },
+/* Mark In */		{ false,	false,		false,		false,			false,		false,		false },
+/* Tele From */		{ true,		true,		true,		true,			true,		true,		false },
+/* Tele To */		{ true,		true,		true,		true,			true,		false,		false },
 			};
 
 		public static void SendInvalidMessage( Mobile caster, TravelCheckType type )
@@ -678,11 +677,6 @@ namespace Server.Spells
 			#endregion
 
 			return false;
-		}
-
-		public static bool IsFactionStronghold( Map map, Point3D loc )
-		{
-			return (Region.Find( loc, map ).IsPartOf( typeof( Factions.StrongholdRegion ) ));
 		}
 
 		public static bool IsHeartwood( Map map, Point3D loc )
@@ -1053,12 +1047,7 @@ namespace Server.Spells
 
 		public static bool CheckCast( Mobile caster )
 		{
-			if( Factions.Sigil.ExistsOn( caster ) )
-			{
-				caster.SendLocalizedMessage( 1061632 ); // You can't do that while carrying the sigil.
-				return false;
-			}
-			else if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
+			if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
 			{
 				caster.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
 				return false;
@@ -1074,11 +1063,7 @@ namespace Server.Spells
 			if( transformSpell == null )
 				return false;
 
-			if( Factions.Sigil.ExistsOn( caster ) )
-			{
-				caster.SendLocalizedMessage( 1061632 ); // You can't do that while carrying the sigil.
-			}
-			else if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
+			if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
 			{
 				caster.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
 			}

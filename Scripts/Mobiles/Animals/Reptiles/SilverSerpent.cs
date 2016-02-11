@@ -6,8 +6,6 @@ namespace Server.Mobiles
 	[TypeAlias( "Server.Mobiles.Silverserpant" )]
 	public class SilverSerpent : BaseCreature
 	{
-		public override Faction FactionAllegiance { get { return TrueBritannians.Instance; } }
-
 		[Constructable]
 		public SilverSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 		{

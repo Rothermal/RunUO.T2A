@@ -136,11 +136,7 @@ namespace Server
 					typeof( EnergyVortex ),
 					typeof( EliteNinja ),		typeof( Pixie ),			typeof( SilverSerpent ),
 					typeof( VorpalBunny ),		typeof( FleshRenderer ),	typeof( KhaldunRevenant ),
-					typeof( FactionDragoon ),	typeof( FactionKnight ),	typeof( FactionPaladin ),
-					typeof( FactionHenchman ),	typeof( FactionMercenary ),	typeof( FactionNecromancer ),
-					typeof( FactionSorceress ),	typeof( FactionWizard ),	typeof( FactionBerserker ),
-					typeof( FactionPaladin ),	typeof( Leviathan ),		typeof( FireBeetle ),
-					typeof( FanDancer ),		typeof( FactionDeathKnight )
+					typeof( Leviathan ),		typeof( FireBeetle ),		typeof( FanDancer )
 				} ),
 				/* Medium */
 				new SpeedInfo( 0.25, 0.5, new Type[]
