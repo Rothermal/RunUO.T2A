@@ -34,14 +34,6 @@ namespace Server.Mobiles
 		public override bool AlwaysMurderer{ get{ return true; } }
 		public override bool ClickTitle{ get{ return false; } } // Do not display title in OnSingleClick
 
-		public override void OnDeath( Container c )
-		{
-			base.OnDeath( c );
-
-			if ( Utility.RandomDouble() < 0.5 )
-				c.DropItem( new FragmentOfAMap() );
-		}
-
 		public EvilWanderingHealer( Serial serial ) : base( serial )
 		{
 		}
