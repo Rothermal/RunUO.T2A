@@ -91,7 +91,7 @@ namespace Server
 				/* Slow */
 				new SpeedInfo( 0.3, 0.6, new Type[]
 				{
-					typeof( AntLion ),			typeof( ArcticOgreLord ),	typeof( BogThing ),
+					typeof( ArcticOgreLord ),	typeof( BogThing ),
 					typeof( Bogle ),			typeof( BoneKnight ),		typeof( EarthElemental ),
 					typeof( Ettin ),			typeof( FrostOoze ),		typeof( FrostTroll ),
 					typeof( GazerLarva ),		typeof( Ghoul ),			typeof( Golem ),
@@ -142,8 +142,7 @@ namespace Server
 				{
 					typeof( AcidElemental ),	typeof( Alligator ),
 					typeof( AncientLich ),		typeof( Betrayer ),			typeof( Bird ),
-					typeof( BlackBear ),		typeof( BlackSolenInfiltratorQueen ), typeof( BlackSolenInfiltratorWarrior ),
-					typeof( BlackSolenQueen ),	typeof( BlackSolenWarrior ), typeof( BlackSolenWorker ),
+					typeof( BlackBear ),		
 					typeof( BloodElemental ),	typeof( Boar ),				typeof( Bogling ),
 					typeof( BoneMagi ),			typeof( Brigand ),
 					typeof( BrownBear ),		typeof( Bull ),				typeof( BullFrog ),
@@ -175,8 +174,7 @@ namespace Server
 					typeof( PackLlama ),		typeof( Panther ),			typeof( Pig ),
 					typeof( PlagueSpawn ),		typeof( PolarBear ),		typeof( Rabbit ),
 					typeof( Ratman ),			typeof( RatmanArcher ),		typeof( RatmanMage ),
-					typeof( RedSolenInfiltratorQueen ), typeof( RedSolenInfiltratorWarrior ), typeof( RedSolenQueen ),
-					typeof( RedSolenWarrior ),	typeof( RedSolenWorker ),	typeof( RidableLlama ),
+					typeof( RidableLlama ),
 					typeof( Ridgeback ),		typeof( Scorpion ),			typeof( SeaSerpent ),
 					typeof( SerpentineDragon ),	typeof( Shade ),
 					typeof( ShadowWisp ),		typeof( ShadowWyrm ),		typeof( Sheep ),

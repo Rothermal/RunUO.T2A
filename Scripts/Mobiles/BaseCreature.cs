@@ -636,11 +636,6 @@ namespace Server.Mobiles
 			}
 		}
 
-		/*
-			Solen Style, override me for other mobiles/items:
-			kappa+acidslime, grizzles+whatever, etc.
-		*/
-
 		public virtual Item NewHarmfulItem()
 		{
 			return new PoolOfAcid( TimeSpan.FromSeconds(10), 30, 30 );

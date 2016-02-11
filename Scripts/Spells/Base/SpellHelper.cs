@@ -503,21 +503,20 @@ namespace Server.Spells
 				new TravelValidator( IsKhaldun ),
 				new TravelValidator( IsFeluccaWind ),
 				new TravelValidator( IsFeluccaDungeon ),
-				new TravelValidator( IsFeluccaSolenHive ),
 				new TravelValidator( IsSafeZone ),
 				new TravelValidator( IsHeartwood )
 			};
 
 		private static bool[,] m_Rules = new bool[,]
 			{
-					/*T2A(Fel),	Khaldun,	Wind(Fel),	Dungeons(Fel),	Solen(Fel),	SafeZone,	Heartwood */
-/* Recall From */	{ false,	false,		false,		false,			false,		true,		false },
-/* Recall To */		{ false,	false,		false,		false,			false,		false,		false },
-/* Gate From */		{ false,	false,		false,		false,			false,		false,		false },
-/* Gate To */		{ false,	false,		false,		false,			false,		false,		false },
-/* Mark In */		{ false,	false,		false,		false,			false,		false,		false },
-/* Tele From */		{ true,		true,		true,		true,			true,		true,		false },
-/* Tele To */		{ true,		true,		true,		true,			true,		false,		false },
+					/*T2A(Fel),	Khaldun,	Wind(Fel),	Dungeons(Fel),	SafeZone,	Heartwood */
+/* Recall From */	{ false,	false,		false,		false,			true,		false },
+/* Recall To */		{ false,	false,		false,		false,			false,		false },
+/* Gate From */		{ false,	false,		false,		false,			false,		false },
+/* Gate To */		{ false,	false,		false,		false,			false,		false },
+/* Mark In */		{ false,	false,		false,		false,			false,		false },
+/* Tele From */		{ true,		true,		true,		true,			true,		false },
+/* Tele To */		{ true,		true,		true,		true,			false,		false },
 			};
 
 		public static void SendInvalidMessage( Mobile caster, TravelCheckType type )
@@ -593,18 +592,6 @@ namespace Server.Spells
 		public static bool IsFeluccaWind( Map map, Point3D loc )
 		{
 			return (map == Map.Felucca && IsWindLoc( loc ));
-		}
-
-		public static bool IsSolenHiveLoc( Point3D loc )
-		{
-			int x = loc.X, y = loc.Y;
-
-			return (x >= 5640 && y >= 1776 && x < 5935 && y < 2039);
-		}
-
-		public static bool IsFeluccaSolenHive( Map map, Point3D loc )
-		{
-			return (map == Map.Felucca && IsSolenHiveLoc( loc ));
 		}
 
 		public static bool IsFeluccaT2A( Map map, Point3D loc )

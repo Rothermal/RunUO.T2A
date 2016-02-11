@@ -58,13 +58,6 @@ namespace Server.Mobiles
 		BlacksmithsGuild
 	}
 
-	public enum SolenFriendship
-	{
-		None,
-		Red,
-		Black
-	}
-
 	public enum BlockMountType
 	{
 		None = -1,
@@ -1251,7 +1244,7 @@ namespace Server.Mobiles
 
 		private bool CanInsure( Item item )
 		{
-			if ( ( item is Container && !( item is BaseQuiver ) ) || item is BagOfSending || item is KeyRing || item is PotionKeg )
+			if ( ( item is Container && !( item is BaseQuiver ) ) || item is KeyRing || item is PotionKeg )
 				return false;
 
 			if ( item.Stackable )

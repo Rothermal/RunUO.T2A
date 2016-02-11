@@ -255,23 +255,6 @@ namespace Server.Mobiles
 					m_Mobile.SayTo(from, "Your pet refuses to attack this creature!");
 					return;
 				}
-
-				if ((SolenHelper.CheckRedFriendship(from) &&
-							(target is RedSolenInfiltratorQueen
-							|| target is RedSolenInfiltratorWarrior
-							|| target is RedSolenQueen
-							|| target is RedSolenWarrior
-							|| target is RedSolenWorker))
-					|| (SolenHelper.CheckBlackFriendship(from) &&
-							(target is BlackSolenInfiltratorQueen
-							|| target is BlackSolenInfiltratorWarrior
-							|| target is BlackSolenQueen
-							|| target is BlackSolenWarrior
-							|| target is BlackSolenWorker)))
-				{
-					from.SendAsciiMessage("You can not force your pet to attack a creature you are protected from.");
-					return;
-				}
 			}
 
 			if (m_Mobile.CheckControlChance(from))

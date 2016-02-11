@@ -96,32 +96,6 @@
 				<child name="Level 2" x="5332" y="1376" z="0" />
 				<child name="Level 3" x="5272" y="2036" z="0" />
 			</parent>
-			<parent name="Solen Hives">
-				<child name="Central Area" x="5774" y="1896" z="20" />
-				<parent name="Area A">
-					<child name="Entrance" x="729" y="1451" z="0" />
-					<child name="Level 1" x="5658" y="1795" z="3" />
-					<child name="Level 2" x="5726" y="1891" z="1" />
-				</parent>
-				<parent name="Area B">
-					<child name="Entrance" x="2607" y="763" z="0" />
-					<child name="Level 1" x="5921" y="1797" z="1" />
-					<child name="Level 2" x="5875" y="1866" z="2" />
-				</parent>
-				<parent name="Area C">
-					<child name="Entrance" x="1689" y="2789" z="0" />
-					<child name="Level 1" x="5659" y="2022" z="0" />
-					<child name="Level 2" x="5708" y="1955" z="0" />
-				</parent>
-				<parent name="Area D">
-					<child name="Entrance" x="1723" y="814" z="0" />
-					<child name="Level 1" x="5916" y="2019" z="3" />
-					<child name="Level 2" x="5813" y="2012" z="-1" />
-				</parent>
-				<parent name="Area E">
-					<child name="Entrance" x="5732" y="1858" z="0" />
-				</parent>
-			</parent>
 			<parent name="Khaldun">
 				<child name="Entrance 1" x="6009" y="3775" z="19" />
 				<child name="Entrance 2" x="5882" y="3819" z="-1" />

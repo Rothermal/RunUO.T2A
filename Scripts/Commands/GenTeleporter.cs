@@ -22,8 +22,6 @@ namespace Server.Commands
 
 			int count = new TeleportersCreator().CreateTeleporters();
 
-			count += new SHTeleporter.SHTeleporterCreator().CreateSHTeleporters();
-
 			e.Mobile.SendMessage( "Teleporter generating complete. {0} teleporters were generated.", count );
 		}
 
