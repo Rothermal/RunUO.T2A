@@ -1,7 +1,6 @@
 using System;
 using Server.Network;
 using Server.Targeting;
-using Server.Factions;
 using Server.Commands;
 using System.Collections.Generic;
 

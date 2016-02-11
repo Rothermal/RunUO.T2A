@@ -1,7 +1,7 @@
-namespace Server.Factions
+namespace Server.Items
 {
     public class Silver : Item
-	{
+    {
 		public override double DefaultWeight
 		{
 			get { return 0.02; }

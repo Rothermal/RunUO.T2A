@@ -1,6 +1,5 @@
 using Server.Guilds;
 using Server.Targeting;
-using Server.Factions;
 
 namespace Server.Gumps
 {

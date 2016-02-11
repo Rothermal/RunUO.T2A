@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Server.Engines.Craft;
-using Server.Factions;
 using Server.Network;
 
 namespace Server.Items

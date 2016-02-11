@@ -1,5 +1,3 @@
-using Server.Factions;
-
 namespace Server.Mobiles
 {
     [CorpseName( "a daemon corpse" )]

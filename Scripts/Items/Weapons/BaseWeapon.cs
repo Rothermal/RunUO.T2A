@@ -2,7 +2,6 @@ using System;
 using Server.Network;
 using Server.Mobiles;
 using Server.Spells;
-using Server.Factions;
 using Server.Engines.Craft;
 using System.Collections.Generic;
 
@@ -609,19 +608,7 @@ namespace Server.Items
 
 		public virtual TimeSpan OnSwing( Mobile attacker, Mobile defender, double damageBonus )
 		{
-			bool canSwing = true;
-
-			#region Dueling
-			if ( attacker is PlayerMobile )
-			{
-				PlayerMobile pm = (PlayerMobile)attacker;
-
-				if ( pm.DuelContext != null && !pm.DuelContext.CheckItemEquip( this ) )
-					canSwing = false;
-			}
-			#endregion
-
-			if ( canSwing && attacker.HarmfulCheck( defender ) )
+			if ( attacker.HarmfulCheck( defender ) )
 			{
 				attacker.DisruptiveAction();
 

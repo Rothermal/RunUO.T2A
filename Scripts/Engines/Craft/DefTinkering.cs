@@ -1,6 +1,5 @@
 using System;
 using Server.Items;
-using Server.Factions;
 using Server.Targeting;
 
 namespace Server.Engines.Craft

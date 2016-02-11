@@ -51,19 +51,7 @@ namespace Server.Items
 			// Make sure we've been standing still for .25/.5/1 second depending on Era
 			if ( DateTime.Now > (attacker.LastMoveTime + TimeSpan.FromSeconds( 1.0 )) )
 			{
-				bool canSwing = true;
-
-				#region Dueling
-				if ( attacker is PlayerMobile )
-				{
-					PlayerMobile pm = (PlayerMobile)attacker;
-
-					if ( pm.DuelContext != null && !pm.DuelContext.CheckItemEquip( this ) )
-						canSwing = false;
-				}
-				#endregion
-
-				if ( canSwing && attacker.HarmfulCheck( defender ) )
+				if ( attacker.HarmfulCheck( defender ) )
 				{
 					attacker.DisruptiveAction();
 					attacker.Send( new Swing( 0, attacker, defender ) );

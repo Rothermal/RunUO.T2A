@@ -2,7 +2,6 @@ using System;
 using Server.Guilds;
 using Server.Mobiles;
 using Server.Network;
-using Server.Factions;
 
 namespace Server.Gumps
 {

@@ -2,7 +2,6 @@ using System;
 using Server.Gumps;
 using Server.Guilds;
 using Server.Network;
-using Server.Factions;
 using Server.Multis;
 
 namespace Server.Items

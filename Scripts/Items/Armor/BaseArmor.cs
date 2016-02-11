@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Server.Network;
 using Server.Engines.Craft;
-using Server.Factions;
 using AMA = Server.Items.ArmorMeditationAllowance;
 using AMT = Server.Items.ArmorMaterialType;
 

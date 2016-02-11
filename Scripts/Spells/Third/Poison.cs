@@ -47,26 +47,8 @@ namespace Server.Spells.Third
 				{
 					int level;
 
-                    #region Dueling
                     double total = Caster.Skills[SkillName.Magery].Value;
-
-                    if (Caster is Mobiles.PlayerMobile)
-                    {
-                        Mobiles.PlayerMobile pm = (Mobiles.PlayerMobile)Caster;
-
-                        if (pm.DuelContext != null && pm.DuelContext.Started && !pm.DuelContext.Finished && !pm.DuelContext.Ruleset.GetOption("Skills", "Poisoning"))
-                        {
-                        }
-                        else
-                        {
-                            total += Caster.Skills[SkillName.Poisoning].Value;
-                        }
-                    }
-                    else
-                    {
-                        total += Caster.Skills[SkillName.Poisoning].Value;
-                    }
-                    #endregion
+                    total += Caster.Skills[SkillName.Poisoning].Value;
 
                     double dist = Caster.GetDistanceToSqrt(m);
 
