@@ -174,21 +174,10 @@ namespace Server.Items
 		public virtual int RevertArmorBase{ get{ return ArmorBase; } }
 		public virtual int ArmorBase{ get{ return 0; } }
 
-		public override bool AllowSecureTrade( Mobile from, Mobile to, Mobile newOwner, bool accepted )
-		{
-			if ( !Ethics.Ethic.CheckTrade( from, to, newOwner, this ) )
-				return false;
-
-			return base.AllowSecureTrade( from, to, newOwner, accepted );
-		}
-
 		public virtual Race RequiredRace { get { return null; } }
 
 		public override bool CanEquip( Mobile from )
 		{
-			if ( !Ethics.Ethic.CheckEquip( from, this ) )
-				return false;
-
 			if( from.AccessLevel < AccessLevel.GameMaster )
 			{
 				if( RequiredRace != null && from.Race != RequiredRace )
@@ -768,12 +757,6 @@ namespace Server.Items
 			if ( !IsChildOf( from.Backpack ) )
 			{
 				from.SendLocalizedMessage( 502437 ); // Items you wish to cut must be in your backpack.
-				return false;
-			}
-
-			if ( Ethics.Ethic.IsImbued( this ) )
-			{
-				from.SendLocalizedMessage( 502440 ); // Scissors can not be used on that to produce anything.
 				return false;
 			}
 

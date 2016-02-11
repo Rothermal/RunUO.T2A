@@ -745,8 +745,7 @@ namespace Server.Mobiles
 		#endregion
 
 		#region Allegiance
-		public virtual Ethics.Ethic EthicAllegiance { get { return null; } }
-
+		
 		public enum Allegiance
 		{
 			None,
@@ -767,19 +766,6 @@ namespace Server.Mobiles
 			return ( fac == FactionAllegiance ? Allegiance.Ally : Allegiance.Enemy );
 		}
 
-		public virtual Allegiance GetEthicAllegiance( Mobile mob )
-		{
-			if ( mob == null || mob.Map != Faction.Facet || EthicAllegiance == null )
-				return Allegiance.None;
-
-			Ethics.Ethic ethic = Ethics.Ethic.Find( mob, true );
-
-			if ( ethic == null )
-				return Allegiance.None;
-
-			return ( ethic == EthicAllegiance ? Allegiance.Ally : Allegiance.Enemy );
-		}
-
 		#endregion
 
 		public virtual bool IsEnemy( Mobile m )
@@ -793,12 +779,6 @@ namespace Server.Mobiles
 				return false;
 
 			if ( GetFactionAllegiance( m ) == Allegiance.Ally )
-				return false;
-
-			Ethics.Ethic ourEthic = EthicAllegiance;
-			Ethics.Player pl = Ethics.Player.Find( m, true );
-
-			if ( pl != null && pl.IsShielded && ( ourEthic == null || ourEthic == pl.Ethic ) )
 				return false;
 
 			if ( !(m is BaseCreature) )
@@ -2978,14 +2958,6 @@ namespace Server.Mobiles
 			StopFlee();
 
 			ForceReacquire();
-
-			if ( !IsEnemy( aggressor ) )
-			{
-				Ethics.Player pl = Ethics.Player.Find( aggressor, true );
-
-				if ( pl != null && pl.IsShielded )
-					pl.FinishShield();
-			}
 
 			if ( aggressor.ChangingCombatant && (m_bControlled || m_bSummoned) && (ct == OrderType.Come || ( ct == OrderType.Stay ) || ct == OrderType.Stop || ct == OrderType.None || ct == OrderType.Follow) )
 			{

@@ -98,14 +98,6 @@ namespace Server.Mobiles
 			if ( !base.CheckHold( m, item, message, checkItems, plusItems, plusWeight ) )
 				return false;
 
-			if ( Ethics.Ethic.IsImbued( item, true ) )
-			{
-				if ( message )
-					m.SendMessage( "Imbued items may not be sold here." );
-
-				return false;
-			}
-
 			return true;
 		}
 

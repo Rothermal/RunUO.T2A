@@ -862,10 +862,6 @@ namespace Server.Multis
 				{
 					m.SendLocalizedMessage( 1005525 );//That is not in your house
 				}
-				else if ( Ethics.Ethic.IsImbued( item ) )
-				{
-					m.SendLocalizedMessage( 1005377 );//You cannot lock that down
-				}
 				else if ( IsSecure( rootItem ) )
 				{
 					m.SendLocalizedMessage( 501737 ); // You need not lock down items in a secure container.
@@ -925,10 +921,6 @@ namespace Server.Multis
                 else if (checkIsInside && !IsInside(item.GetWorldLocation(), item.ItemData.Height))
                 {
                     m.SendLocalizedMessage(1005525);//That is not in your house
-                }
-                else if (Ethics.Ethic.IsImbued(item))
-                {
-                    m.SendLocalizedMessage(1005377);//You cannot lock that down
                 }
                 else if (IsSecure(rootItem))
                 {
