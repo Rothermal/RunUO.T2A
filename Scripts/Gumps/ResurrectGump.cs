@@ -17,29 +17,19 @@ namespace Server.Gumps
 	{
 		private Mobile m_Healer;
 		private int m_Price;
-		private bool m_FromSacrifice;
 		private double m_HitsScalar;
 
-		public ResurrectGump( Mobile owner ) : this( owner, ResurrectMessage.Generic, false )
+		public ResurrectGump( Mobile owner ) : this( owner, ResurrectMessage.Generic )
 		{
 		}
 
-		public ResurrectGump( Mobile owner, bool fromSacrifice ) : this( owner, ResurrectMessage.Generic, fromSacrifice )
+		public ResurrectGump( Mobile healer, ResurrectMessage msg ) : this( healer, msg, 0.0 )
 		{
 		}
 
-		public ResurrectGump( Mobile owner, ResurrectMessage msg ) : this( owner, msg, false )
-		{
-		}
-
-		public ResurrectGump( Mobile healer, ResurrectMessage msg, bool fromSacrifice ) : this( healer, msg, fromSacrifice, 0.0 )
-		{
-		}
-
-		public ResurrectGump( Mobile healer, ResurrectMessage msg, bool fromSacrifice, double hitsScalar ) : base( 100, 0 )
+		public ResurrectGump( Mobile healer, ResurrectMessage msg, double hitsScalar ) : base( 100, 0 )
 		{
 			m_Healer = healer;
-			m_FromSacrifice = fromSacrifice;
 			m_HitsScalar = hitsScalar;
 
 			AddPage( 0 );
@@ -155,39 +145,6 @@ namespace Server.Gumps
 				from.FixedEffect( 0x376A, 10, 16 );
 
 				from.Resurrect();
-
-				if( m_Healer != null && from != m_Healer )
-				{
-					VirtueLevel level = VirtueHelper.GetLevel( m_Healer, VirtueName.Compassion );
-
-					switch( level )
-					{
-						case VirtueLevel.Seeker: from.Hits = (int)(from.HitsMax * 0.20); break; // 20%
-						case VirtueLevel.Follower: from.Hits = (int)(from.HitsMax * 0.40); break; // 40%
-                        case VirtueLevel.Knight: from.Hits = (int)(from.HitsMax * 0.80); break; // 80%
-                    }
-				}
-
-				if( m_FromSacrifice && from is PlayerMobile )
-				{
-					((PlayerMobile)from).AvailableResurrects -= 1;
-
-					Container pack = from.Backpack;
-					Container corpse = from.Corpse;
-
-					if( pack != null && corpse != null )
-					{
-						List<Item> items = new List<Item>( corpse.Items );
-
-						for( int i = 0; i < items.Count; ++i )
-						{
-							Item item = items[i];
-
-							if( item.Layer != Layer.Hair && item.Layer != Layer.FacialHair && item.Movable )
-								pack.DropItem( item );
-						}
-					}
-				}
 
 				if( from.Fame > 0 )
 				{

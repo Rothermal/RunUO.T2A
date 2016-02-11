@@ -103,10 +103,6 @@ namespace Server
 				if ( m_From != null )
 					m_From.DoHarmful( m_Mobile, true );
 
-				IHonorTarget honorTarget = m_Mobile as IHonorTarget;
-				if ( honorTarget != null && honorTarget.ReceivedHonorContext != null )
-					honorTarget.ReceivedHonorContext.OnTargetPoisoned();
-
                 m_From.Damage(damage, m_Mobile);
 
                 if ( 0.60 <= Utility.RandomDouble() ) // OSI: randomly revealed between first and third damage tick, guessing 60% chance

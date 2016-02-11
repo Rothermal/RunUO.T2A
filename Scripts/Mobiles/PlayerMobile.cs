@@ -75,7 +75,7 @@ namespace Server.Mobiles
 
 	#endregion
 
-	public partial class PlayerMobile : Mobile, IHonorTarget
+	public partial class PlayerMobile : Mobile
 	{
 		private class CountAndTimeStamp
 		{
@@ -679,8 +679,6 @@ namespace Server.Mobiles
 		{
 			Mobile from = e.Mobile;
 
-			CheckAtrophies( from );
-
 			if ( AccountHandler.LockdownLevel > AccessLevel.Player )
 			{
 				string notice;
@@ -1232,25 +1230,7 @@ namespace Server.Mobiles
 							list.Add( new CallbackEntry( 6200, new ContextCallback( AutoRenewInventoryInsurance ) ) ); // Auto Renew Inventory Insurance
 					}
 				}
-
-				if ( m_JusticeProtectors.Count > 0 )
-					list.Add( new CallbackEntry( 6157, new ContextCallback( CancelProtection ) ) );
 			}
-		}
-
-		private void CancelProtection()
-		{
-			for ( int i = 0; i < m_JusticeProtectors.Count; ++i )
-			{
-				Mobile prot = m_JusticeProtectors[i];
-
-				string args = String.Format( "{0}\t{1}", this.Name, prot.Name );
-
-				prot.SendLocalizedMessage( 1049371, args ); // The protective relationship between ~1_PLAYER1~ and ~2_PLAYER2~ has been ended.
-				this.SendLocalizedMessage( 1049371, args ); // The protective relationship between ~1_PLAYER1~ and ~2_PLAYER2~ has been ended.
-			}
-
-			m_JusticeProtectors.Clear();
 		}
 
 		#region Insurance
@@ -1876,14 +1856,6 @@ namespace Server.Mobiles
 				return base.CheckShove( shoved );
 		}
 
-		public override void OnBeneficialAction( Mobile target, bool isCriminal )
-		{
-			if ( m_SentHonorContext != null )
-				m_SentHonorContext.OnSourceBeneficialAction( target );
-
-			base.OnBeneficialAction( target, isCriminal );
-		}
-
 		public override void OnDamage( int amount, Mobile from, bool willKill )
 		{
 			int disruptThreshold = 0;
@@ -1897,11 +1869,6 @@ namespace Server.Mobiles
 			}
 
 			WeightOverloading.FatigueOnDamage( this, amount );
-
-			if ( m_ReceivedHonorContext != null )
-				m_ReceivedHonorContext.OnTargetDamaged( from, amount );
-			if ( m_SentHonorContext != null )
-				m_SentHonorContext.OnSourceDamaged( from );
 
 			if ( willKill && from is PlayerMobile )
 				Timer.DelayCall( TimeSpan.FromSeconds( 10 ), new TimerCallback( ((PlayerMobile) from).RecoverAmmo ) );
@@ -1989,11 +1956,6 @@ namespace Server.Mobiles
 
 			if ( m_InsuranceAward is PlayerMobile )
 				((PlayerMobile)m_InsuranceAward).m_InsuranceBonus = 0;
-
-			if ( m_ReceivedHonorContext != null )
-				m_ReceivedHonorContext.OnTargetKilled();
-			if ( m_SentHonorContext != null )
-				m_SentHonorContext.OnSourceKilled();
 
 			RecoverAmmo();
 
@@ -2117,38 +2079,6 @@ namespace Server.Mobiles
 
 				if ( SkillHandlers.Stealing.ClassicMode )
 					Criminal = true;
-			}
-
-			if ( this.Kills >= 5 && DateTime.Now >= m_NextJustAward )
-			{
-				Mobile m = FindMostRecentDamager( false );
-
-				if( m is BaseCreature )
-					m = ((BaseCreature)m).GetMaster();
-
-				if ( m != null && m is PlayerMobile && m != this )
-				{
-					bool gainedPath = false;
-
-					int pointsToGain = 0;
-
-					pointsToGain += (int) Math.Sqrt( this.GameTime.TotalSeconds * 4 );
-					pointsToGain *= 5;
-					pointsToGain += (int) Math.Pow( this.Skills.Total / 250, 2 );
-
-					if ( VirtueHelper.Award( m, VirtueName.Justice, pointsToGain, ref gainedPath ) )
-					{
-						if ( gainedPath )
-							m.SendLocalizedMessage( 1049367 ); // You have gained a path in Justice!
-						else
-							m.SendLocalizedMessage( 1049363 ); // You have gained in Justice.
-
-						m.FixedParticles( 0x375A, 9, 20, 5027, EffectLayer.Waist );
-						m.PlaySound( 0x1F7 );
-
-						m_NextJustAward = DateTime.Now + TimeSpan.FromMinutes( pointsToGain / 3 );
-					}
-				}
 			}
 
 			if ( m_InsuranceAward is PlayerMobile )
@@ -2300,7 +2230,6 @@ namespace Server.Mobiles
 			m_ShortTermElapse = TimeSpan.FromHours( 8.0 );
 			m_LongTermElapse = TimeSpan.FromHours( 40.0 );
 
-			m_JusticeProtectors = new List<Mobile>();
 			m_GuildRank = Guilds.RankDefinition.Lowest;
 
 			InvalidateMyRunUO();
@@ -2531,16 +2460,8 @@ namespace Server.Mobiles
 					goto case 24;
 				}
 				case 24:
-				{
-					m_LastHonorLoss = reader.ReadDeltaTime();
-					goto case 23;
-				}
 				case 23:
 				case 22:
-				{
-					m_LastValorLoss = reader.ReadDateTime();
-					goto case 21;
-				}
 				case 21:
 				{
 					m_ToTItemsTurnedIn = reader.ReadEncodedInt();
@@ -2573,19 +2494,7 @@ namespace Server.Mobiles
 					goto case 15;
 				}
 				case 15:
-				{
-					m_LastCompassionLoss = reader.ReadDeltaTime();
-					goto case 14;
-				}
 				case 14:
-				{
-					m_CompassionGains = reader.ReadEncodedInt();
-
-					if ( m_CompassionGains > 0 )
-						m_NextCompassionDay = reader.ReadDeltaTime();
-
-					goto case 13;
-				}
 				case 13:
 				case 12:
 				case 11:
@@ -2647,18 +2556,7 @@ namespace Server.Mobiles
 					goto case 4;
 				}
 				case 4:
-				{
-					m_LastJusticeLoss = reader.ReadDeltaTime();
-					m_JusticeProtectors = reader.ReadStrongMobileList();
-					goto case 3;
-				}
 				case 3:
-				{
-					m_LastSacrificeGain = reader.ReadDeltaTime();
-					m_LastSacrificeLoss = reader.ReadDeltaTime();
-					m_AvailableResurrects = reader.ReadInt();
-					goto case 2;
-				}
 				case 2:
 				{
 					m_Flags = (PlayerFlag)reader.ReadInt();
@@ -2689,9 +2587,6 @@ namespace Server.Mobiles
 			if ( m_PermaFlags == null )
 				m_PermaFlags = new List<Mobile>();
 
-			if ( m_JusticeProtectors == null )
-				m_JusticeProtectors = new List<Mobile>();
-
 			if( m_GuildRank == null )
 				m_GuildRank = Guilds.RankDefinition.Member;	//Default to member if going from older version to new version (only time it should be null)
 
@@ -2714,8 +2609,6 @@ namespace Server.Mobiles
 				}
 			}
 
-			CheckAtrophies( this );
-
 			if( Hidden )	//Hiding is the only buff where it has an effect that's serialized.
 				AddBuff( new BuffInfo( BuffIcon.HidingAndOrStealth, 1075655 ) );
 		}
@@ -2737,8 +2630,6 @@ namespace Server.Mobiles
 			}
 
 			CheckKillDecay();
-
-			CheckAtrophies( this );
 
 			base.Serialize( writer );
 
@@ -2763,9 +2654,6 @@ namespace Server.Mobiles
 				}
 			}
 
-			writer.WriteDeltaTime( m_LastHonorLoss );
-
-			writer.Write( m_LastValorLoss );
 			writer.WriteEncodedInt( m_ToTItemsTurnedIn );
 			writer.Write( m_ToTTotalMonsterFame );	//This ain't going to be a small #.
 
@@ -2776,13 +2664,6 @@ namespace Server.Mobiles
 			writer.Write( m_LastOnline );
 
 			writer.WriteEncodedInt( (int) m_Profession );
-
-			writer.WriteDeltaTime( m_LastCompassionLoss );
-
-			writer.WriteEncodedInt( m_CompassionGains );
-
-			if ( m_CompassionGains > 0 )
-				writer.WriteDeltaTime( m_NextCompassionDay );
 
 			bool useMods = ( m_HairModID != -1 || m_BeardModID != -1 );
 
@@ -2808,25 +2689,11 @@ namespace Server.Mobiles
 
 			writer.Write( NextSmithBulkOrder );
 
-			writer.WriteDeltaTime( m_LastJusticeLoss );
-			writer.Write( m_JusticeProtectors, true );
-
-			writer.WriteDeltaTime( m_LastSacrificeGain );
-			writer.WriteDeltaTime( m_LastSacrificeLoss );
-			writer.Write( m_AvailableResurrects );
-
 			writer.Write( (int) m_Flags );
 
 			writer.Write( m_LongTermElapse );
 			writer.Write( m_ShortTermElapse );
 			writer.Write( this.GameTime );
-		}
-
-		public static void CheckAtrophies( Mobile m )
-		{
-			SacrificeVirtue.CheckAtrophy( m );
-			JusticeVirtue.CheckAtrophy( m );
-			CompassionVirtue.CheckAtrophy( m );
 		}
 
 		public void CheckKillDecay()
@@ -3017,11 +2884,6 @@ namespace Server.Mobiles
 
 		public override void OnDelete()
 		{
-			if ( m_ReceivedHonorContext != null )
-				m_ReceivedHonorContext.Cancel();
-			if ( m_SentHonorContext != null )
-				m_SentHonorContext.Cancel();
-
 			InvalidateMyRunUO();
 		}
 
@@ -3191,52 +3053,6 @@ namespace Server.Mobiles
 			CreateHair( hair, id, 0 );
 		}
 
-		#endregion
-
-		#region Virtues
-		private DateTime m_LastSacrificeGain;
-		private DateTime m_LastSacrificeLoss;
-		private int m_AvailableResurrects;
-
-		public DateTime LastSacrificeGain{ get{ return m_LastSacrificeGain; } set{ m_LastSacrificeGain = value; } }
-		public DateTime LastSacrificeLoss{ get{ return m_LastSacrificeLoss; } set{ m_LastSacrificeLoss = value; } }
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int AvailableResurrects{ get{ return m_AvailableResurrects; } set{ m_AvailableResurrects = value; } }
-
-		private DateTime m_NextJustAward;
-		private DateTime m_LastJusticeLoss;
-		private List<Mobile> m_JusticeProtectors;
-
-		public DateTime LastJusticeLoss{ get{ return m_LastJusticeLoss; } set{ m_LastJusticeLoss = value; } }
-		public List<Mobile> JusticeProtectors { get { return m_JusticeProtectors; } set { m_JusticeProtectors = value; } }
-
-		private DateTime m_LastCompassionLoss;
-		private DateTime m_NextCompassionDay;
-		private int m_CompassionGains;
-
-		public DateTime LastCompassionLoss{ get{ return m_LastCompassionLoss; } set{ m_LastCompassionLoss = value; } }
-		[CommandProperty( AccessLevel.GameMaster )]
-		public DateTime NextCompassionDay{ get{ return m_NextCompassionDay; } set{ m_NextCompassionDay = value; } }
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int CompassionGains{ get{ return m_CompassionGains; } set{ m_CompassionGains = value; } }
-
-		private DateTime m_LastValorLoss;
-
-		public DateTime LastValorLoss { get { return m_LastValorLoss; } set { m_LastValorLoss = value; } }
-
-		private DateTime m_LastHonorLoss;
-		private DateTime m_LastHonorUse;
-		private bool m_HonorActive;
-		private HonorContext m_ReceivedHonorContext;
-		private HonorContext m_SentHonorContext;
-		public DateTime m_hontime;
-
-		public DateTime LastHonorLoss{ get{ return m_LastHonorLoss; } set{ m_LastHonorLoss = value; } }
-		public DateTime LastHonorUse{ get{ return m_LastHonorUse; } set{ m_LastHonorUse = value; } }
-		public bool HonorActive{ get{ return m_HonorActive; } set{ m_HonorActive = value; } }
-		public HonorContext ReceivedHonorContext{ get{ return m_ReceivedHonorContext; } set{ m_ReceivedHonorContext = value; } }
-		public HonorContext SentHonorContext{ get{ return m_SentHonorContext; } set{ m_SentHonorContext = value; } }
 		#endregion
 
 		#region Young system

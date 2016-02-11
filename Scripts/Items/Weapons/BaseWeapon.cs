@@ -934,9 +934,6 @@ namespace Server.Items
 			PlaySwingAnimation( attacker );
 			attacker.PlaySound( GetMissAttackSound( attacker, defender ) );
 			defender.PlaySound( GetMissDefendSound( attacker, defender ) );
-
-			if ( defender is IHonorTarget && ((IHonorTarget)defender).ReceivedHonorContext != null )
-				((IHonorTarget)defender).ReceivedHonorContext.OnTargetMissed( attacker );
 		}
 
 		public virtual int VirtualDamageBonus{ get{ return 0; } }

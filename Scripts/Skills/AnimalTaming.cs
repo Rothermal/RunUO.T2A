@@ -176,7 +176,7 @@ namespace Server.SkillHandlers
 								if ( creature.AIObject != null )
 									creature.AIObject.DoMove( creature.Direction );
 
-								if ( from is PlayerMobile && !(( (PlayerMobile)from ).HonorActive ))
+								if ( from is PlayerMobile )
 									creature.Combatant = from;
 							}
 							else

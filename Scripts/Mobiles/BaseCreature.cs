@@ -159,7 +159,7 @@ namespace Server.Mobiles
 		}
 	}
 
-	public partial class BaseCreature : Mobile, IHonorTarget
+	public partial class BaseCreature : Mobile
 	{
 		public const int MaxLoyalty = 100;
 
@@ -753,9 +753,6 @@ namespace Server.Mobiles
 			if ( !(m is BaseCreature) )
 				return true;
 
-			if ( m is PlayerMobile && ( (PlayerMobile)m ).HonorActive )
-				return false;
-
 			BaseCreature c = (BaseCreature)m;
 
 			if ( ( FightMode == FightMode.Evil && m.Karma < 0 ) || ( c.FightMode == FightMode.Evil && Karma < 0 ) )
@@ -1111,21 +1108,6 @@ namespace Server.Mobiles
 			BardPacified = false;
 		}
 
-		private HonorContext m_ReceivedHonorContext;
-
-		public HonorContext ReceivedHonorContext{ get{ return m_ReceivedHonorContext; } set{ m_ReceivedHonorContext = value; } }
-
-        /*
-
-		Seems this actually was removed on OSI somewhere between the original bug report and now.
-		We will call it ML, until we can get better information. I suspect it was on the OSI TC when
-		originally it taken out of RunUO, and not implmented on OSIs production shards until more 
-		recently.  Either way, this is, or was, accurate OSI behavior, and just entirely 
-		removing it was incorrect.  OSI followers were distracted by being attacked well into
-		AoS, at very least.
-
-		*/
-
         public virtual bool CanBeDistracted { get { return true; } }
 
         public virtual void CheckDistracted( Mobile from )
@@ -1160,9 +1142,6 @@ namespace Server.Mobiles
 
 			if ( speechType != null && !willKill )
 				speechType.OnDamage( this, amount );
-
-			if ( m_ReceivedHonorContext != null )
-				m_ReceivedHonorContext.OnTargetDamaged( from, amount );
 
 			if( !willKill )
 			{
@@ -3979,9 +3958,6 @@ namespace Server.Mobiles
 			if ( speechType != null )
 				speechType.OnDeath( this );
 
-			if ( m_ReceivedHonorContext != null )
-				m_ReceivedHonorContext.OnTargetKilled();
-
 			return base.OnBeforeDeath();
 		}
 
@@ -4315,9 +4291,6 @@ namespace Server.Mobiles
 
 			SetControlMaster( null );
 			SummonMaster = null;
-
-			if ( m_ReceivedHonorContext != null )
-				m_ReceivedHonorContext.Cancel();
 
 			base.OnDelete();
 
