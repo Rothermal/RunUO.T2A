@@ -79,7 +79,6 @@
     <Compile Include=".\Commands\BoundingBoxPicker.cs" />
     <Compile Include=".\Commands\ConvertPlayers.cs" />
     <Compile Include=".\Commands\Decorate.cs" />
-    <Compile Include=".\Commands\DecorateMag.cs" />
     <Compile Include=".\Commands\Docs.cs" />
     <Compile Include=".\Commands\DragEffects.cs" />
     <Compile Include=".\Commands\Dupe.cs" />
