@@ -191,18 +191,6 @@
     <Compile Include=".\Engines\Help\SpeechLog.cs" />
     <Compile Include=".\Engines\Help\SpeechLogGump.cs" />
     <Compile Include=".\Engines\Help\StuckMenu.cs" />
-    <Compile Include=".\Engines\Khaldun\Books\GrimmochJournal.cs" />
-    <Compile Include=".\Engines\Khaldun\Books\LysanderNotebook.cs" />
-    <Compile Include=".\Engines\Khaldun\Books\TavarasJournal.cs" />
-    <Compile Include=".\Engines\Khaldun\KhaldunGen.cs" />
-    <Compile Include=".\Engines\Khaldun\KhaldunPitTeleporter.cs" />
-    <Compile Include=".\Engines\Khaldun\Mobiles\GrimmochDrummel.cs" />
-    <Compile Include=".\Engines\Khaldun\Mobiles\LysanderGathenwale.cs" />
-    <Compile Include=".\Engines\Khaldun\Mobiles\MorgBergen.cs" />
-    <Compile Include=".\Engines\Khaldun\Mobiles\TavaraSewel.cs" />
-    <Compile Include=".\Engines\Khaldun\PuzzleChest.cs" />
-    <Compile Include=".\Engines\Khaldun\RaisableItem.cs" />
-    <Compile Include=".\Engines\Khaldun\RaiseSwitch.cs" />
     <Compile Include=".\Engines\MyRunUO\Config.cs" />
     <Compile Include=".\Engines\MyRunUO\DatabaseCommandQueue.cs" />
     <Compile Include=".\Engines\MyRunUO\LayerComparer.cs" />
@@ -1348,27 +1336,27 @@
     <Compile Include=".\Items\Special\11th Year promo\EarringsOfProtection.cs" />
     <Compile Include=".\Items\Special\AoS Promotional\HoodedShroudOfShadows.cs" />
     <Compile Include=".\Items\Special\AoS Promotional\LuckyNecklace.cs" />
-    <Compile Include=".\Items\Special\Holiday\Christmas\HolidayTree.cs" />
-    <Compile Include=".\Items\Special\Holiday\GiftBox.cs" />
-    <Compile Include=".\Items\Special\Holiday\GingerBreadHouseDeed.cs" />
-    <Compile Include=".\Items\Special\Holiday\HolidayBell.cs" />
-    <Compile Include=".\Items\Special\Holiday\HolidayFoods.cs" />
-    <Compile Include=".\Items\Special\Holiday\HolidayGiftBoxes.cs" />
-    <Compile Include=".\Items\Special\Holiday\HolidayPottedPlant.cs" />
-    <Compile Include=".\Items\Special\Holiday\HolidayTimepiece.cs" />
-    <Compile Include=".\Items\Special\Holiday\Icecicles.cs" />
-    <Compile Include=".\Items\Special\Holiday\IcyPatch.cs" />
-    <Compile Include=".\Items\Special\Holiday\PKHolidayStuff.cs" />
-    <Compile Include=".\Items\Special\Holiday\Poinsettias.cs" />
-    <Compile Include=".\Items\Special\Holiday\Snowflakes.cs" />
-    <Compile Include=".\Items\Special\Holiday\SnowGlobes.cs" />
-    <Compile Include=".\Items\Special\Holiday\Snowman.cs" />
-    <Compile Include=".\Items\Special\Holiday\SnowPiles.cs" />
-    <Compile Include=".\Items\Special\Holiday\SnowStatue.cs" />
-    <Compile Include=".\Items\Special\Holiday\Stockings.cs" />
-    <Compile Include=".\Items\Special\Holiday\WinterGiftPackage2003.cs" />
-    <Compile Include=".\Items\Special\Holiday\Wreath.cs" />
-    <Compile Include=".\Items\Special\Holiday\WristWatch.cs" />
+    <Compile Include="Holiday Stuff\HolidayTree.cs" />
+    <Compile Include="Holiday Stuff\GiftBox.cs" />
+    <Compile Include="Holiday Stuff\GingerBreadHouseDeed.cs" />
+    <Compile Include="Holiday Stuff\HolidayBell.cs" />
+    <Compile Include="Holiday Stuff\HolidayFoods.cs" />
+    <Compile Include="Holiday Stuff\HolidayGiftBoxes.cs" />
+    <Compile Include="Holiday Stuff\HolidayPottedPlant.cs" />
+    <Compile Include="Holiday Stuff\HolidayTimepiece.cs" />
+    <Compile Include="Holiday Stuff\Icecicles.cs" />
+    <Compile Include="Holiday Stuff\IcyPatch.cs" />
+    <Compile Include="Holiday Stuff\PKHolidayStuff.cs" />
+    <Compile Include="Holiday Stuff\Poinsettias.cs" />
+    <Compile Include="Holiday Stuff\Snowflakes.cs" />
+    <Compile Include="Holiday Stuff\SnowGlobes.cs" />
+    <Compile Include="Holiday Stuff\Snowman.cs" />
+    <Compile Include="Holiday Stuff\SnowPiles.cs" />
+    <Compile Include="Holiday Stuff\SnowStatue.cs" />
+    <Compile Include="Holiday Stuff\Stockings.cs" />
+    <Compile Include="Holiday Stuff\WinterGiftPackage2003.cs" />
+    <Compile Include="Holiday Stuff\Wreath.cs" />
+    <Compile Include="Holiday Stuff\WristWatch.cs" />
     <Compile Include=".\Items\Special\MiniHouses.cs" />
     <Compile Include=".\Items\Special\ML\BaseImprisonedMobile.cs" />
     <Compile Include=".\Items\Special\ML\GrizzledMareStatuette.cs" />
@@ -1488,14 +1476,14 @@
     <Compile Include=".\Items\Special\Rares\Tinker\ToolKit.cs" />
     <Compile Include=".\Items\Special\RewardCake.cs" />
     <Compile Include=".\Items\Special\SoulStone.cs" />
-    <Compile Include=".\Items\Special\Valentines\2007\RedVelvetGiftBox.cs" />
-    <Compile Include=".\Items\Special\Valentines\2007\RoseInAVase.cs" />
-    <Compile Include=".\Items\Special\Valentines\2007\ValentinesCard.cs" />
+    <Compile Include="Holiday Stuff\Valentine\2007\RedVelvetGiftBox.cs" />
+    <Compile Include="Holiday Stuff\Valentine\2007\RoseInAVase.cs" />
+    <Compile Include="Holiday Stuff\Valentine\2007\ValentinesCard.cs" />
     <Compile Include=".\Items\Special\Veteran Rewards\AnkhOfSacrifice.cs" />
     <Compile Include=".\Items\Special\Veteran Rewards\Banner.cs" />
     <Compile Include=".\Items\Special\Veteran Rewards\BloodyPentagram.cs" />
     <Compile Include=".\Items\Special\Veteran Rewards\Brazier.cs" />
-    <Compile Include=".\Items\Special\Veteran Rewards\Cannon\Cannon.cs" />
+    <Compile Include="Items\Special\Veteran Rewards\Cannon.cs" />
     <Compile Include=".\Items\Special\Veteran Rewards\CommodityDeedBox.cs" />
     <Compile Include=".\Items\Special\Veteran Rewards\ContestMiniHouse.cs" />
     <Compile Include=".\Items\Special\Veteran Rewards\DecorativeShield.cs" />
@@ -2515,6 +2503,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
