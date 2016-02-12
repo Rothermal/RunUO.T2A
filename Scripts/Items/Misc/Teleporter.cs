@@ -1016,7 +1016,7 @@ namespace Server.Items
 					return false;
 				}
 
-				if (GetFlag(ConditionFlag.DenyPackEthereals) && (pack.FindItemByType(typeof(EtherealMount)) != null || pack.FindItemByType(typeof(BaseImprisonedMobile)) != null))
+				if (GetFlag(ConditionFlag.DenyPackEthereals) && (pack.FindItemByType(typeof(EtherealMount)) != null ))
 				{
 					m.SendMessage("You must empty your backpack of ethereal mounts before proceeding.");
 					return false;

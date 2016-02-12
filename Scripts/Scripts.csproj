@@ -75,7 +75,6 @@
     <Compile Include=".\Accounting\IPLimiter.cs" />
     <Compile Include=".\Commands\Add.cs" />
     <Compile Include=".\Commands\Attributes.cs" />
-    <Compile Include=".\Commands\Batch.cs" />
     <Compile Include=".\Commands\BoundingBoxPicker.cs" />
     <Compile Include=".\Commands\ConvertPlayers.cs" />
     <Compile Include=".\Commands\Decorate.cs" />
@@ -112,7 +111,6 @@
     <Compile Include=".\Commands\Generic\Implementors\SingleCommandImplementor.cs" />
     <Compile Include=".\Commands\GenTeleporter.cs" />
     <Compile Include=".\Commands\Handlers.cs" />
-    <Compile Include=".\Commands\HelpInfo.cs" />
     <Compile Include=".\Commands\Logging.cs" />
     <Compile Include=".\Commands\Profiling.cs" />
     <Compile Include=".\Commands\Properties.cs" />
@@ -270,12 +268,9 @@
     <Compile Include=".\Gumps\AddGump.cs" />
     <Compile Include=".\Gumps\AdminGump.cs" />
     <Compile Include=".\Gumps\BanDurationGump.cs" />
-    <Compile Include=".\Gumps\BaseConfirmGump.cs" />
     <Compile Include=".\Gumps\BaseGridGump.cs" />
-    <Compile Include=".\Gumps\BaseImageTileButtonsGump.cs" />
     <Compile Include=".\Gumps\CategorizedAddGump.cs" />
     <Compile Include=".\Gumps\ClientGump.cs" />
-    <Compile Include=".\Gumps\ConfirmBreakCrystalGump.cs" />
     <Compile Include=".\Gumps\ConfirmReleaseGump.cs" />
     <Compile Include=".\Gumps\Go\ChildNode.cs" />
     <Compile Include=".\Gumps\Go\GoGump.cs" />
@@ -434,12 +429,8 @@
     <Compile Include=".\Items\Addons\LargeBedSouthAddon.cs" />
     <Compile Include=".\Items\Addons\LargeForgeEastAddon.cs" />
     <Compile Include=".\Items\Addons\LargeForgeSouthAddon.cs" />
-    <Compile Include=".\Items\Addons\LargeStoneTableEastAddon.cs" />
-    <Compile Include=".\Items\Addons\LargeStoneTableSouthAddon.cs" />
     <Compile Include=".\Items\Addons\LoomEastAddon.cs" />
     <Compile Include=".\Items\Addons\LoomSouthAddon.cs" />
-    <Compile Include=".\Items\Addons\MediumStoneTableEastAddon.cs" />
-    <Compile Include=".\Items\Addons\MediumStoneTableSouthAddon.cs" />
     <Compile Include=".\Items\Addons\OrnateElvenTableEastAddon.cs" />
     <Compile Include=".\Items\Addons\OrnateElvenTableSouthAddon.cs" />
     <Compile Include=".\Items\Addons\ParrotPerchAddon.cs" />
@@ -715,7 +706,6 @@
     <Compile Include=".\Items\Misc\MoonstoneGate.cs" />
     <Compile Include=".\Items\Misc\MorphItem.cs" />
     <Compile Include=".\Items\Misc\OilCloth.cs" />
-    <Compile Include=".\Items\Misc\Origami.cs" />
     <Compile Include=".\Items\Misc\PlayerBulletinBoards.cs" />
     <Compile Include=".\Items\Misc\PlayerVendorDeed.cs" />
     <Compile Include=".\Items\Misc\PoolOfAcid.cs" />
@@ -899,7 +889,6 @@
     <Compile Include=".\Items\Skill Items\Magical\Spellbook.cs" />
     <Compile Include=".\Items\Skill Items\Misc\Bandage.cs" />
     <Compile Include=".\Items\Skill Items\Misc\RepairDeed.cs" />
-    <Compile Include=".\Items\Skill Items\Musical Instruments\BambooFlute.cs" />
     <Compile Include=".\Items\Skill Items\Musical Instruments\BaseInstrument.cs" />
     <Compile Include=".\Items\Skill Items\Musical Instruments\Drums.cs" />
     <Compile Include=".\Items\Skill Items\Musical Instruments\Harp.cs" />
@@ -971,9 +960,6 @@
     <Compile Include=".\Items\Skill Items\Tools\SmoothingPlane.cs" />
     <Compile Include=".\Items\Skill Items\Tools\TinkerTools.cs" />
     <Compile Include=".\Items\Skill Items\Tools\Tongs.cs" />
-    <Compile Include=".\Items\Special\11th Year promo\EarringsOfProtection.cs" />
-    <Compile Include=".\Items\Special\AoS Promotional\HoodedShroudOfShadows.cs" />
-    <Compile Include=".\Items\Special\AoS Promotional\LuckyNecklace.cs" />
     <Compile Include="Holiday Stuff\HolidayTree.cs" />
     <Compile Include="Holiday Stuff\GiftBox.cs" />
     <Compile Include="Holiday Stuff\GingerBreadHouseDeed.cs" />
@@ -996,10 +982,6 @@
     <Compile Include="Holiday Stuff\Wreath.cs" />
     <Compile Include="Holiday Stuff\WristWatch.cs" />
     <Compile Include=".\Items\Special\MiniHouses.cs" />
-    <Compile Include=".\Items\Special\ML\BaseImprisonedMobile.cs" />
-    <Compile Include=".\Items\Special\ML\GrizzledMareStatuette.cs" />
-    <Compile Include=".\Items\Special\ML\MinotaurHedge.cs" />
-    <Compile Include=".\Items\Special\ML\TormentedChains.cs" />
     <Compile Include=".\Items\Special\MonsterStatuette.cs" />
     <Compile Include=".\Items\Special\Mutation Core\PlagueBeastBackpack.cs" />
     <Compile Include=".\Items\Special\Mutation Core\PlagueBeastBlood.cs" />
