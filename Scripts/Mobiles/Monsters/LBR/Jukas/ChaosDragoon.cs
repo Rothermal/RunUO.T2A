@@ -55,32 +55,32 @@ namespace Server.Mobiles
 			melee.Movable = false;
 			AddItem( melee );
 
-			DragonHelm helm = new DragonHelm();
+            PlateHelm helm = new PlateHelm();
 			helm.Resource = res;
 			helm.Movable = false;
 			AddItem( helm );
 
-			DragonChest chest = new DragonChest();
+            PlateChest chest = new PlateChest();
 			chest.Resource = res;
 			chest.Movable = false;
 			AddItem( chest );
 
-			DragonArms arms = new DragonArms();
+            PlateArms arms = new PlateArms();
 			arms.Resource = res;
 			arms.Movable = false;
 			AddItem( arms );
 
-			DragonGloves gloves = new DragonGloves();
+            PlateGloves gloves = new PlateGloves();
 			gloves.Resource = res;
 			gloves.Movable = false;
 			AddItem( gloves );
 
-			DragonLegs legs = new DragonLegs();
+            PlateLegs legs = new PlateLegs();
 			legs.Resource = res;
 			legs.Movable = false;
 			AddItem( legs );
 
-			ChaosShield shield = new ChaosShield();
+            MetalKiteShield shield = new MetalKiteShield();
 			shield.Movable = false;
 			AddItem( shield );
 
@@ -88,16 +88,6 @@ namespace Server.Mobiles
 			AddItem( new Boots() );
 
 			int amount = Utility.RandomMinMax( 1, 3 );
-
-			switch ( res )
-			{
-				case CraftResource.BlackScales: AddItem( new BlackScales( amount ) ); break;
-				case CraftResource.RedScales: AddItem( new RedScales( amount ) ); break;
-				case CraftResource.BlueScales: AddItem( new BlueScales( amount ) ); break;
-				case CraftResource.YellowScales: AddItem( new YellowScales( amount ) ); break;
-				case CraftResource.GreenScales: AddItem( new GreenScales( amount ) ); break;
-				case CraftResource.WhiteScales: AddItem( new WhiteScales( amount ) ); break;
-			}
 
 			new SwampDragon().Rider = this;
 		}

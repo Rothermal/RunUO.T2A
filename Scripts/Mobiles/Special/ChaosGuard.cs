@@ -6,7 +6,7 @@ namespace Server.Mobiles
     public class ChaosGuard : BaseShieldGuard
 	{
 		public override int Keyword{ get{ return 0x22; } } // *chaos shield*
-		public override BaseShield Shield{ get{ return new ChaosShield(); } }
+		public override BaseShield Shield{ get{ return new MetalKiteShield(); } }
 		public override int SignupNumber{ get{ return 1007140; } } // Sign up with a guild of chaos if thou art interested.
 		public override GuildType Type{ get{ return GuildType.Chaos; } }
 

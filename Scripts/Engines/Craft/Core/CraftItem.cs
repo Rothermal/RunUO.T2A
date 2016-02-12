@@ -353,8 +353,7 @@ namespace Server.Engines.Craft
             {
                 typeof( BaseIngot ), typeof( BaseOre ),
                 typeof( BaseLeather ), typeof( BaseHides ),
-                typeof( UncutCloth ), typeof( Cloth ),
-                typeof( BaseScales )
+                typeof( UncutCloth ), typeof( Cloth )
             };
 
         private static Type[] m_MarkableTable = new Type[]
@@ -366,9 +365,7 @@ namespace Server.Engines.Craft
                     typeof( DragonBardingDeed ),
                     typeof( BaseTool ),
                     typeof( BaseHarvestTool ),
-                    typeof( Shuriken ),
-                    typeof( Spellbook ), typeof( Runebook ),
-                    typeof( BaseQuiver )
+                    typeof( Spellbook ), typeof( Runebook )
                 };
 
         private static Type[] m_NeverColorTable = new Type[]
@@ -851,17 +848,6 @@ namespace Server.Engines.Craft
 
             double bonus = 0.0;
 
-            if (from.Talisman is BaseTalisman)
-            {
-                BaseTalisman talisman = (BaseTalisman)from.Talisman;
-
-                if (talisman.Skill == system.MainSkill)
-                {
-                    chance -= talisman.SuccessBonus / 100.0;
-                    bonus = talisman.ExceptionalBonus / 100.0;
-                }
-            }
-
             switch (system.ECA)
             {
                 default:
@@ -938,14 +924,6 @@ namespace Server.Engines.Craft
                 chance = craftSystem.GetChanceAtMin(this) + ((valMainSkill - minMainSkill) / (maxMainSkill - minMainSkill) * (1.0 - craftSystem.GetChanceAtMin(this)));
             else
                 chance = 0.0;
-
-            if (allRequiredSkills && from.Talisman is BaseTalisman)
-            {
-                BaseTalisman talisman = (BaseTalisman)from.Talisman;
-
-                if (talisman.Skill == craftSystem.MainSkill)
-                    chance += talisman.SuccessBonus / 100.0;
-            }
 
             if (allRequiredSkills && valMainSkill == maxMainSkill)
                 chance = 1.0;

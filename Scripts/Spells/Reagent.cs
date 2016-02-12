@@ -5,7 +5,7 @@ namespace Server.Spells
 {
 	public class Reagent
 	{
-		private static Type[] m_Types = new Type[13]
+		private static Type[] m_Types = new Type[8]
 			{
 				typeof( BlackPearl ),
 				typeof( Bloodmoss ),
@@ -14,12 +14,7 @@ namespace Server.Spells
 				typeof( MandrakeRoot ),
 				typeof( Nightshade ),
 				typeof( SulfurousAsh ),
-				typeof( SpidersSilk ),
-				typeof( BatWing ),
-				typeof( GraveDust ),
-				typeof( DaemonBlood ),
-				typeof( NoxCrystal ),
-				typeof( PigIron )
+				typeof( SpidersSilk )
 			};
 
 		public Type[] Types

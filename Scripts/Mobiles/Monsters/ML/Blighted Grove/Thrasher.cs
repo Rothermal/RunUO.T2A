@@ -35,13 +35,6 @@ namespace Server.Mobiles
 			AddLoot( LootPack.FilthyRich, 4 );
 		}
 
-		public override void OnDeath( Container c )
-		{
-			base.OnDeath( c );
-
-			c.DropItem( new ThrashersTail() );
-		}
-
 		public override bool GivesMLMinorArtifact { get { return true; } }
 		public override int Hides { get { return 48; } }
 		public override int Meat { get { return 1; } }

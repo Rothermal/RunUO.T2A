@@ -30,11 +30,6 @@ namespace Server.Mobiles
 
 			Fame = 9000;
 			Karma = -9000;
-			
-			AddItem( new Tessen() );
-			
-			if ( 0.02 >= Utility.RandomDouble() )
-				PackItem( new OrigamiPaper() );
 		}
 				
 				

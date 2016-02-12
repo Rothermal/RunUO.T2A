@@ -1244,7 +1244,7 @@ namespace Server.Mobiles
 
 		private bool CanInsure( Item item )
 		{
-			if ( ( item is Container && !( item is BaseQuiver ) ) || item is KeyRing || item is PotionKeg )
+			if ( item is Container || item is KeyRing || item is PotionKeg )
 				return false;
 
 			if ( item.Stackable )
@@ -2297,25 +2297,6 @@ namespace Server.Mobiles
 		private static void SendToStaffMessage( Mobile from, string format, params object[] args )
 		{
 			SendToStaffMessage( from, String.Format( format, args ) );
-		}
-
-		public override void Damage( int amount, Mobile from )
-		{
-
-			if ( from != null && Talisman is BaseTalisman )
-			{
-				BaseTalisman talisman = (BaseTalisman) Talisman;
-
-				if ( talisman.Protection != null && talisman.Protection.Type != null )
-				{
-					Type type = talisman.Protection.Type;
-
-					if ( type.IsAssignableFrom( from.GetType() ) )
-						amount = (int)( amount * ( 1 - (double)talisman.Protection.Amount / 100 ) );
-				}
-			}
-
-			base.Damage( amount, from );
 		}
 
 		#region Poison

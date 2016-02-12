@@ -57,32 +57,32 @@ namespace Server.Mobiles
 			melee.Movable = false;
 			AddItem(melee);
 
-			DragonChest Tunic = new DragonChest();
+			PlateChest Tunic = new PlateChest();
 			Tunic.Resource = res;
 			Tunic.Movable = false;
 			AddItem(Tunic);
 
-			DragonLegs Legs = new DragonLegs();
+            PlateLegs Legs = new PlateLegs();
 			Legs.Resource = res;
 			Legs.Movable = false;
 			AddItem(Legs);
 
-			DragonArms Arms = new DragonArms();
+            PlateArms Arms = new PlateArms();
 			Arms.Resource = res;
 			Arms.Movable = false;
 			AddItem(Arms);
 
-			DragonGloves Gloves = new DragonGloves();
+            PlateGloves Gloves = new PlateGloves();
 			Gloves.Resource = res;
 			Gloves.Movable = false;
 			AddItem(Gloves);
 
-			DragonHelm Helm = new DragonHelm();
+            PlateHelm Helm = new PlateHelm();
 			Helm.Resource = res;
 			Helm.Movable = false;
 			AddItem(Helm);
 
-			ChaosShield shield = new ChaosShield();
+            MetalKiteShield shield = new MetalKiteShield();
 			shield.Movable = false;
 			AddItem(shield);
 
@@ -91,15 +91,6 @@ namespace Server.Mobiles
 
 			int amount = Utility.RandomMinMax(1, 3);
 
-			switch (res)
-			{
-				case CraftResource.BlackScales: AddItem(new BlackScales(amount)); break;
-				case CraftResource.RedScales: AddItem(new RedScales(amount)); break;
-				case CraftResource.BlueScales: AddItem(new BlueScales(amount)); break;
-				case CraftResource.YellowScales: AddItem(new YellowScales(amount)); break;
-				case CraftResource.GreenScales: AddItem(new GreenScales(amount)); break;
-				case CraftResource.WhiteScales: AddItem(new WhiteScales(amount)); break;
-			}
 			switch (Utility.Random(9))
 			{
 				case 0: res = CraftResource.DullCopper; break;

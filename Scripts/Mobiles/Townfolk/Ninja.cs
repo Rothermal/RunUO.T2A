@@ -35,14 +35,6 @@ namespace Server.Mobiles
 				Name = NameList.RandomName( "male" );
 			}
 
-			if ( !Female )
-				AddItem( new LeatherNinjaHood() );
-
-			AddItem( new LeatherNinjaPants() );
-			AddItem( new LeatherNinjaBelt() );
-			AddItem( new LeatherNinjaJacket() );
-			AddItem( new NinjaTabi() );
-
 			int hairHue = Utility.RandomNondyedHue();
 
 

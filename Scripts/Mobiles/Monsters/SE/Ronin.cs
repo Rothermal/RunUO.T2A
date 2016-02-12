@@ -38,44 +38,13 @@ namespace Server.Mobiles
 			Fame = 8500;
 			Karma = -8500;
 
-			AddItem( new SamuraiTabi() );
-			AddItem( new LeatherHiroSode());
-			AddItem( new LeatherDo());
+			AddItem( new Halberd() );
 
-			switch ( Utility.Random( 4 ))
-			{
-				case 0: AddItem( new LightPlateJingasa()); break;
-				case 1: AddItem( new ChainHatsuburi() ); break;
-				case 2: AddItem( new DecorativePlateKabuto() ); break;
-				case 3: AddItem( new LeatherJingasa()); break;
-			}
-
-			switch ( Utility.Random( 3 ))
-			{
-				case 0: AddItem( new StuddedHaidate()); break;
-				case 1: AddItem( new LeatherSuneate() ); break;
-				case 2: AddItem( new PlateSuneate() ); break;
-			}
-			
-
-			
-			if( Utility.RandomDouble() > .2 )
-				AddItem( new NoDachi() );
-			else
-				AddItem( new Halberd() );
-
-			PackItem( new Wakizashi() );
 			PackItem( new Longsword() );
 
 			Utility.AssignRandomHair( this );
 		}
 		
-		public override void OnDeath( Container c )
- 		{
-			base.OnDeath( c );
-	 		c.DropItem( new BookOfBushido() );
- 		}
-
 		// TODO: Bushido abilities
 
 		public override void GenerateLoot()

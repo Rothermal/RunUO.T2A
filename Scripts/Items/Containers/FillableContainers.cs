@@ -1047,7 +1047,6 @@ namespace Server.Items
 				new FillableEntry( 10, typeof( Garlic ) ),
 				new FillableEntry( 10, typeof( Ginseng ) ),
 				new FillableEntry( 10, typeof( MandrakeRoot ) ),
-				new FillableEntry(  1, typeof( DeadWood ) ),
 				new FillableEntry(  1, typeof( WhiteDriedFlowers ) ),
 				new FillableEntry(  1, typeof( GreenDriedFlowers ) ),
 				new FillableEntry(  1, typeof( DriedOnions ) ),

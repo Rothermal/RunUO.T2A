@@ -1203,9 +1203,8 @@ namespace Server.Mobiles
 			int wool = Wool;
 			int meat = Meat;
 			int hides = Hides;
-			int scales = Scales;
 
-			if ( ( feathers == 0 && wool == 0 && meat == 0 && hides == 0 && scales == 0 ) || Summoned || IsBonded || corpse.Animated )
+			if ( ( feathers == 0 && wool == 0 && meat == 0 && hides == 0 ) || Summoned || IsBonded || corpse.Animated )
 			{
 				if ( corpse.Animated )
 					corpse.SendLocalizedMessageTo( from, 500464 ); // Use this on corpses to carve away meat and hide
@@ -1289,33 +1288,6 @@ namespace Server.Mobiles
 
 						from.SendLocalizedMessage( 500471 ); // You skin it, and the hides are now in the corpse.
 					}
-				}
-
-				if ( scales != 0 )
-				{
-					ScaleType sc = this.ScaleType;
-
-					switch ( sc )
-					{
-						case ScaleType.Red:     corpse.AddCarvedItem( new RedScales( scales ), from ); break;
-						case ScaleType.Yellow:  corpse.AddCarvedItem( new YellowScales( scales ), from ); break;
-						case ScaleType.Black:   corpse.AddCarvedItem( new BlackScales( scales ), from ); break;
-						case ScaleType.Green:   corpse.AddCarvedItem( new GreenScales( scales ), from ); break;
-						case ScaleType.White:   corpse.AddCarvedItem( new WhiteScales( scales ), from ); break;
-						case ScaleType.Blue:    corpse.AddCarvedItem( new BlueScales( scales ), from ); break;
-						case ScaleType.All:
-						{
-							corpse.AddCarvedItem( new RedScales( scales ), from );
-							corpse.AddCarvedItem( new YellowScales( scales ), from );
-							corpse.AddCarvedItem( new BlackScales( scales ), from );
-							corpse.AddCarvedItem( new GreenScales( scales ), from );
-							corpse.AddCarvedItem( new WhiteScales( scales ), from );
-							corpse.AddCarvedItem( new BlueScales( scales ), from );
-							break;
-						}
-					}
-
-					from.SendMessage( "You cut away some scales, but they remain on the corpse." );
 				}
 
 				corpse.Carved = true;
@@ -3925,17 +3897,6 @@ namespace Server.Mobiles
 						PackItem( new ParagonChest( this.Name, treasureLevel ) );
 					else if ( Map == Map.Felucca && TreasureMap.LootChance >= Utility.RandomDouble() )
 						PackItem( new TreasureMap( treasureLevel, Map ) );
-				}
-
-				if ( m_Paragon && Paragon.ChocolateIngredientChance > Utility.RandomDouble() )
-				{
-					switch ( Utility.Random( 4 ) )
-					{
-						case 0: PackItem( new CocoaButter() ); break;
-						case 1: PackItem( new CocoaLiquor() ); break;
-						case 2: PackItem( new SackOfSugar() ); break;
-						case 3: PackItem( new Vanilla() ); break;
-					}
 				}
 			}
 

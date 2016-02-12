@@ -71,15 +71,6 @@ namespace Server.Items
 				{		
 					from.SendLocalizedMessage( 1076178 ); // Your tinkering skill is too low to fix this yourself.  An NPC tinkerer can help you repair this for a fee.
 				}
-				else
-				{					
-					Item diamond = from.Backpack.FindItemByType( typeof( BlueDiamond ) );	
-					
-					if ( diamond != null )
-						from.SendGump( new ConfirmGump( this, null ) );	
-					else					
-						from.SendLocalizedMessage( 1076166 ); // You do not have a blue diamond needed to recharge the engraving tool.	
-				}
 				
 				from.SendLocalizedMessage( 1076163 ); // There are no charges left on this engraving tool.
 			}		
@@ -120,15 +111,12 @@ namespace Server.Items
 		{			
 			if ( from.Backpack != null )
 			{
-				Item diamond = from.Backpack.FindItemByType( typeof( BlueDiamond ) );			
-									
 				if ( guildmaster != null )
 				{
 					if ( m_UsesRemaining <= 0 )
 					{			
-						if ( diamond != null && Banker.Withdraw( from, 100000 ) )
+						if ( Banker.Withdraw( from, 100000 ) )
 						{							
-							diamond.Consume();
 							UsesRemaining = 10;			
 							guildmaster.Say( 1076165 ); // Your weapon engraver should be good as new!
 						}
@@ -148,10 +136,8 @@ namespace Server.Items
 					{		
 						from.SendLocalizedMessage( 1076178 ); // Your tinkering skill is too low to fix this yourself.  An NPC tinkerer can help you repair this for a fee.
 					}
-					else if ( diamond != null )
+					else
 					{
-						diamond.Consume();
-						
 						if ( Utility.RandomDouble() < from.Skills.Tinkering.Value / 100 )
 						{	
 							UsesRemaining = 10;			
@@ -160,8 +146,6 @@ namespace Server.Items
 						else
 							from.SendLocalizedMessage( 1076175 ); // You cracked the diamond attempting to fix the weapon engraver.
 					}
-					else
-						from.SendLocalizedMessage( 1076166 ); // You do not have a blue diamond needed to recharge the engraving tool.	
 				}	
 			}		
 		}
