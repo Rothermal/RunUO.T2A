@@ -2,10 +2,8 @@ using Server.Engines.Craft;
 
 namespace Server.Items
 {
-    public class MalletAndChisel : BaseTool
+    public class MalletAndChisel : Item
 	{
-		public override CraftSystem CraftSystem { get { return DefMasonry.CraftSystem; } }
-
 		[Constructable]
 		public MalletAndChisel() : base( 0x12B3 )
 		{
@@ -13,7 +11,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public MalletAndChisel( int uses ) : base( uses, 0x12B3 )
+		public MalletAndChisel( int uses ) : base( 0x12B3 )
 		{
 			Weight = 1.0;
 		}

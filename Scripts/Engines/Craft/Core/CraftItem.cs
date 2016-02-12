@@ -354,7 +354,7 @@ namespace Server.Engines.Craft
                 typeof( BaseIngot ), typeof( BaseOre ),
                 typeof( BaseLeather ), typeof( BaseHides ),
                 typeof( UncutCloth ), typeof( Cloth ),
-                typeof( BaseGranite ), typeof( BaseScales )
+                typeof( BaseScales )
             };
 
         private static Type[] m_MarkableTable = new Type[]

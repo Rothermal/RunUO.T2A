@@ -25,60 +25,59 @@ namespace Server.Engines.Harvest
 			HarvestResource[] res;
 			HarvestVein[] veins;
 
-			#region Mining for ore and stone
-			HarvestDefinition oreAndStone = new HarvestDefinition();
+			#region Mining for ore
+			HarvestDefinition ore = new HarvestDefinition();
 
-			// Resource banks are every 8x8 tiles
-			oreAndStone.BankWidth = 8;
-			oreAndStone.BankHeight = 8;
+            // Resource banks are every 8x8 tiles
+            ore.BankWidth = 8;
+            ore.BankHeight = 8;
 
-			// Every bank holds from 10 to 34 ore
-			oreAndStone.MinTotal = 10;
-			oreAndStone.MaxTotal = 34;
+            // Every bank holds from 10 to 34 ore
+            ore.MinTotal = 10;
+            ore.MaxTotal = 34;
 
-			// A resource bank will respawn its content every 10 to 20 minutes
-			oreAndStone.MinRespawn = TimeSpan.FromMinutes( 10.0 );
-			oreAndStone.MaxRespawn = TimeSpan.FromMinutes( 20.0 );
+            // A resource bank will respawn its content every 10 to 20 minutes
+            ore.MinRespawn = TimeSpan.FromMinutes( 10.0 );
+            ore.MaxRespawn = TimeSpan.FromMinutes( 20.0 );
 
-			// Skill checking is done on the Mining skill
-			oreAndStone.Skill = SkillName.Mining;
+            // Skill checking is done on the Mining skill
+            ore.Skill = SkillName.Mining;
 
-			// Set the list of harvestable tiles
-			oreAndStone.Tiles = m_MountainAndCaveTiles;
+            // Set the list of harvestable tiles
+            ore.Tiles = m_MountainAndCaveTiles;
 
-			// Players must be within 2 tiles to harvest
-			oreAndStone.MaxRange = 2;
+            // Players must be within 2 tiles to harvest
+            ore.MaxRange = 2;
 
-			// One ore per harvest action
-			oreAndStone.ConsumedPerHarvest = 1;
-			oreAndStone.ConsumedPerFeluccaHarvest = 2;
+            // One ore per harvest action
+            ore.ConsumedPerHarvest = 1;
 
-			// The digging effect
-			oreAndStone.EffectActions = new int[]{ 11 };
-			oreAndStone.EffectSounds = new int[]{ 0x125, 0x126 };
-			oreAndStone.EffectCounts = new int[]{ 1 };
-			oreAndStone.EffectDelay = TimeSpan.FromSeconds( 1.6 );
-			oreAndStone.EffectSoundDelay = TimeSpan.FromSeconds( 0.9 );
+            // The digging effect
+            ore.EffectActions = new int[]{ 11 };
+            ore.EffectSounds = new int[]{ 0x125, 0x126 };
+            ore.EffectCounts = new int[]{ 1 };
+            ore.EffectDelay = TimeSpan.FromSeconds( 1.6 );
+            ore.EffectSoundDelay = TimeSpan.FromSeconds( 0.9 );
 
-			oreAndStone.NoResourcesMessage = 503040; // There is no metal here to mine.
-			oreAndStone.DoubleHarvestMessage = 503042; // Someone has gotten to the metal before you.
-			oreAndStone.TimedOutOfRangeMessage = 503041; // You have moved too far away to continue mining.
-			oreAndStone.OutOfRangeMessage = 500446; // That is too far away.
-			oreAndStone.FailMessage = 503043; // You loosen some rocks but fail to find any useable ore.
-			oreAndStone.PackFullMessage = 1010481; // Your backpack is full, so the ore you mined is lost.
-			oreAndStone.ToolBrokeMessage = 1044038; // You have worn out your tool!
+            ore.NoResourcesMessage = 503040; // There is no metal here to mine.
+            ore.DoubleHarvestMessage = 503042; // Someone has gotten to the metal before you.
+            ore.TimedOutOfRangeMessage = 503041; // You have moved too far away to continue mining.
+            ore.OutOfRangeMessage = 500446; // That is too far away.
+            ore.FailMessage = 503043; // You loosen some rocks but fail to find any useable ore.
+            ore.PackFullMessage = 1010481; // Your backpack is full, so the ore you mined is lost.
+            ore.ToolBrokeMessage = 1044038; // You have worn out your tool!
 
 			res = new HarvestResource[]
 				{
-					new HarvestResource( 00.0, 00.0, 100.0, 1007072, typeof( IronOre ),			typeof( Granite ) ),
-					new HarvestResource( 65.0, 25.0, 105.0, 1007073, typeof( DullCopperOre ),	typeof( DullCopperGranite ) ),
-					new HarvestResource( 70.0, 30.0, 110.0, 1007074, typeof( ShadowIronOre ),	typeof( ShadowIronGranite ) ),
-					new HarvestResource( 75.0, 35.0, 115.0, 1007075, typeof( CopperOre ),		typeof( CopperGranite ) ),
-					new HarvestResource( 80.0, 40.0, 120.0, 1007076, typeof( BronzeOre ),		typeof( BronzeGranite ) ),
-					new HarvestResource( 85.0, 45.0, 125.0, 1007077, typeof( GoldOre ),			typeof( GoldGranite ) ),
-					new HarvestResource( 90.0, 50.0, 130.0, 1007078, typeof( AgapiteOre ),		typeof( AgapiteGranite ) ),
-					new HarvestResource( 95.0, 55.0, 135.0, 1007079, typeof( VeriteOre ),		typeof( VeriteGranite ) ),
-					new HarvestResource( 99.0, 59.0, 139.0, 1007080, typeof( ValoriteOre ),		typeof( ValoriteGranite ) )
+					new HarvestResource( 00.0, 00.0, 100.0, 1007072, typeof( IronOre ) ),
+					new HarvestResource( 65.0, 25.0, 105.0, 1007073, typeof( DullCopperOre ) ),
+					new HarvestResource( 70.0, 30.0, 110.0, 1007074, typeof( ShadowIronOre ) ),
+					new HarvestResource( 75.0, 35.0, 115.0, 1007075, typeof( CopperOre ) ),
+					new HarvestResource( 80.0, 40.0, 120.0, 1007076, typeof( BronzeOre ) ),
+					new HarvestResource( 85.0, 45.0, 125.0, 1007077, typeof( GoldOre ) ),
+					new HarvestResource( 90.0, 50.0, 130.0, 1007078, typeof( AgapiteOre ) ),
+					new HarvestResource( 95.0, 55.0, 135.0, 1007079, typeof( VeriteOre ) ),
+					new HarvestResource( 99.0, 59.0, 139.0, 1007080, typeof( ValoriteOre ) )
 				};
 
 			veins = new HarvestVein[]
@@ -94,72 +93,13 @@ namespace Server.Engines.Harvest
 					new HarvestVein( 01.4, 0.5, res[8], res[0] )  // Valorite
 				};
 
-			oreAndStone.Resources = res;
-			oreAndStone.Veins = veins;
+            ore.Resources = res;
+            ore.Veins = veins;
 
-			oreAndStone.RaceBonus = false;
-			oreAndStone.RandomizeVeins = false;
+            ore.RaceBonus = false;
+            ore.RandomizeVeins = false;
 
-			Definitions.Add( oreAndStone );
-			#endregion
-
-			#region Mining for sand
-			HarvestDefinition sand = new HarvestDefinition();
-
-			// Resource banks are every 8x8 tiles
-			sand.BankWidth = 8;
-			sand.BankHeight = 8;
-
-			// Every bank holds from 6 to 12 sand
-			sand.MinTotal = 6;
-			sand.MaxTotal = 12;
-
-			// A resource bank will respawn its content every 10 to 20 minutes
-			sand.MinRespawn = TimeSpan.FromMinutes( 10.0 );
-			sand.MaxRespawn = TimeSpan.FromMinutes( 20.0 );
-
-			// Skill checking is done on the Mining skill
-			sand.Skill = SkillName.Mining;
-
-			// Set the list of harvestable tiles
-			sand.Tiles = m_SandTiles;
-
-			// Players must be within 2 tiles to harvest
-			sand.MaxRange = 2;
-
-			// One sand per harvest action
-			sand.ConsumedPerHarvest = 1;
-			sand.ConsumedPerFeluccaHarvest = 1;
-
-			// The digging effect
-			sand.EffectActions = new int[]{ 11 };
-			sand.EffectSounds = new int[]{ 0x125, 0x126 };
-			sand.EffectCounts = new int[]{ 6 };
-			sand.EffectDelay = TimeSpan.FromSeconds( 1.6 );
-			sand.EffectSoundDelay = TimeSpan.FromSeconds( 0.9 );
-
-			sand.NoResourcesMessage = 1044629; // There is no sand here to mine.
-			sand.DoubleHarvestMessage = 1044629; // There is no sand here to mine.
-			sand.TimedOutOfRangeMessage = 503041; // You have moved too far away to continue mining.
-			sand.OutOfRangeMessage = 500446; // That is too far away.
-			sand.FailMessage = 1044630; // You dig for a while but fail to find any of sufficient quality for glassblowing.
-			sand.PackFullMessage = 1044632; // Your backpack can't hold the sand, and it is lost!
-			sand.ToolBrokeMessage = 1044038; // You have worn out your tool!
-
-			res = new HarvestResource[]
-				{
-					new HarvestResource( 100.0, 70.0, 400.0, 1044631, typeof( Sand ) )
-				};
-
-			veins = new HarvestVein[]
-				{
-					new HarvestVein( 100.0, 0.0, res[0], null )
-				};
-
-			sand.Resources = res;
-			sand.Veins = veins;
-
-			Definitions.Add( sand );
+			Definitions.Add(ore);
 			#endregion
 		}
 
@@ -180,14 +120,6 @@ namespace Server.Engines.Harvest
 			}
 
 			return true;
-		}
-
-		public override void SendSuccessTo( Mobile from, Item item, HarvestResource resource )
-		{
-			if ( item is BaseGranite )
-				from.SendLocalizedMessage( 1044606 ); // You carefully extract some workable stone from the ore vein!
-			else
-				base.SendSuccessTo( from, item, resource );
 		}
 
 		public override bool CheckHarvest( Mobile from, Item tool, HarvestDefinition def, object toHarvest )

@@ -218,8 +218,8 @@ namespace Server
 
 		private static Type[] m_StatueTypes = new Type[]
 		{
-			typeof( StatueSouth ),			typeof( StatueSouth2 ),			typeof( StatueNorth ),
-			typeof( StatueWest ),			typeof( StatueEast ),			typeof( StatueEast2 ),
+			typeof( StatueSouth2 ),			
+			typeof( StatueWest ),			typeof( StatueEast2 ),
 			typeof( StatueSouthEast ),		typeof( BustSouth ),			typeof( BustEast )
 		};
 

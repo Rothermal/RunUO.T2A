@@ -1,34 +1,5 @@
 namespace Server.Items
 {
-    public class StatueSouth : Item 
-	{ 
-		[Constructable] 
-		public StatueSouth() : base(0x139A) 
-		{ 
-			Weight = 10; 
-		} 
-
-		public StatueSouth(Serial serial) : base(serial) 
-		{ 
-		} 
-
-		public override bool ForceShowProperties{ get{ return ObjectPropertyList.Enabled; } } 
-
-		public override void Serialize(GenericWriter writer) 
-		{ 
-			base.Serialize(writer); 
-
-			writer.Write((int) 0); 
-		} 
-
-		public override void Deserialize(GenericReader reader) 
-		{ 
-			base.Deserialize(reader); 
-
-			int version = reader.ReadInt(); 
-		} 
-	} 
-
 	public class StatueSouth2 : Item 
 	{ 
 		[Constructable] 
@@ -58,35 +29,6 @@ namespace Server.Items
 		} 
 	} 
 
-	public class StatueNorth : Item 
-	{ 
-		[Constructable] 
-		public StatueNorth() : base(0x139B) 
-		{ 
-			Weight = 10; 
-		} 
-
-		public StatueNorth(Serial serial) : base(serial) 
-		{ 
-		} 
-
-		public override bool ForceShowProperties{ get{ return ObjectPropertyList.Enabled; } } 
-
-		public override void Serialize(GenericWriter writer) 
-		{ 
-			base.Serialize(writer); 
-
-			writer.Write((int) 0); 
-		} 
-
-		public override void Deserialize(GenericReader reader) 
-		{ 
-			base.Deserialize(reader); 
-
-			int version = reader.ReadInt(); 
-		} 
-	} 
-
 	public class StatueWest : Item 
 	{ 
 		[Constructable] 
@@ -96,35 +38,6 @@ namespace Server.Items
 		} 
 
 		public StatueWest(Serial serial) : base(serial) 
-		{ 
-		} 
-
-		public override bool ForceShowProperties{ get{ return ObjectPropertyList.Enabled; } } 
-
-		public override void Serialize(GenericWriter writer) 
-		{ 
-			base.Serialize(writer); 
-
-			writer.Write((int) 0); 
-		} 
-
-		public override void Deserialize(GenericReader reader) 
-		{ 
-			base.Deserialize(reader); 
-
-			int version = reader.ReadInt(); 
-		} 
-	} 
-
-	public class StatueEast : Item 
-	{ 
-		[Constructable] 
-		public StatueEast() : base(0x139C) 
-		{ 
-			Weight = 10; 
-		} 
-
-		public StatueEast(Serial serial) : base(serial) 
 		{ 
 		} 
 
@@ -241,35 +154,6 @@ namespace Server.Items
 		} 
 
 		public BustEast(Serial serial) : base(serial) 
-		{ 
-		} 
-
-		public override bool ForceShowProperties{ get{ return ObjectPropertyList.Enabled; } } 
-
-		public override void Serialize(GenericWriter writer) 
-		{ 
-			base.Serialize(writer); 
-
-			writer.Write((int) 0); 
-		} 
-
-		public override void Deserialize(GenericReader reader) 
-		{ 
-			base.Deserialize(reader); 
-
-			int version = reader.ReadInt(); 
-		} 
-	} 
-
-	public class StatuePegasus : Item 
-	{ 
-		[Constructable] 
-		public StatuePegasus() : base(0x139D) 
-		{ 
-			Weight = 10; 
-		} 
-
-		public StatuePegasus(Serial serial) : base(serial) 
 		{ 
 		} 
 

@@ -129,35 +129,6 @@ namespace Server.Items
 	}
 
 	[DynamicFliping]
-	[Flipable(0x1218, 0x1219, 0x121A, 0x121B)]
-	public class StoneChair : Item
-	{
-		[Constructable]
-		public StoneChair() : base(0x1218)
-		{
-			Weight = 20;
-		}
-
-		public StoneChair(Serial serial) : base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write((int) 0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-
-	[DynamicFliping]
 	[Flipable( 0x2DE3, 0x2DE4, 0x2DE5, 0x2DE6 )]
 	public class OrnateElvenChair : Item
 	{

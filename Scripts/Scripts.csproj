@@ -164,9 +164,7 @@
     <Compile Include=".\Engines\Craft\DefCarpentry.cs" />
     <Compile Include=".\Engines\Craft\DefCartography.cs" />
     <Compile Include=".\Engines\Craft\DefCooking.cs" />
-    <Compile Include=".\Engines\Craft\DefGlassblowing.cs" />
     <Compile Include=".\Engines\Craft\DefInscription.cs" />
-    <Compile Include=".\Engines\Craft\DefMasonry.cs" />
     <Compile Include=".\Engines\Craft\DefTailoring.cs" />
     <Compile Include=".\Engines\Craft\DefTinkering.cs" />
     <Compile Include="Items\Misc\Silver.cs" />
@@ -715,7 +713,6 @@
     <Compile Include=".\Items\Construction\Misc\Obelisk.cs" />
     <Compile Include=".\Items\Construction\Misc\Screens.cs" />
     <Compile Include=".\Items\Construction\Misc\Statues.cs" />
-    <Compile Include=".\Items\Construction\Misc\Vase.cs" />
     <Compile Include=".\Items\Construction\Misc\Vines.cs" />
     <Compile Include=".\Items\Construction\Ruined\RuinedItemSingle.cs" />
     <Compile Include=".\Items\Construction\Signs\BaseSign.cs" />
@@ -951,7 +948,6 @@
     <Compile Include=".\Items\Misc\Firebomb.cs" />
     <Compile Include=".\Items\Misc\FlipableAddonAttribute.cs" />
     <Compile Include=".\Items\Misc\FlipableAttribute.cs" />
-    <Compile Include=".\Items\Misc\GlassItems.cs" />
     <Compile Include=".\Items\Misc\Gold.cs" />
     <Compile Include=".\Items\Misc\Guillotine.cs" />
     <Compile Include=".\Items\Misc\HairDye.cs" />
@@ -1057,7 +1053,6 @@
     <Compile Include=".\Items\Resources\Fishing\BigFish.cs" />
     <Compile Include=".\Items\Resources\Fishing\Fish.cs" />
     <Compile Include=".\Items\Resources\Fishing\MagicFish.cs" />
-    <Compile Include=".\Items\Resources\Masonry\Granite.cs" />
     <Compile Include=".\Items\Resources\MiscMLResources.cs" />
     <Compile Include=".\Items\Resources\Reagents\BagOfAllReagents.cs" />
     <Compile Include=".\Items\Resources\Reagents\BagOfNecroReagents.cs" />
@@ -1264,11 +1259,6 @@
     <Compile Include=".\Items\Skill Items\Ninjitsu\LeatherNinjaBelt.cs" />
     <Compile Include=".\Items\Skill Items\Ninjitsu\Shuriken.cs" />
     <Compile Include=".\Items\Skill Items\Ninjitsu\SmokeBomb.cs" />
-    <Compile Include=".\Items\Skill Items\Specialized\GlassblowingBook.cs" />
-    <Compile Include=".\Items\Skill Items\Specialized\MasonryBook.cs" />
-    <Compile Include=".\Items\Skill Items\Specialized\Sand.cs" />
-    <Compile Include=".\Items\Skill Items\Specialized\SandMiningBook.cs" />
-    <Compile Include=".\Items\Skill Items\Specialized\StoneMiningBook.cs" />
     <Compile Include=".\Items\Skill Items\Tailor Items\Dyetubs\BlackDyeTub.cs" />
     <Compile Include=".\Items\Skill Items\Tailor Items\Dyetubs\BlazeDyeTub.cs" />
     <Compile Include=".\Items\Skill Items\Tailor Items\Dyetubs\CustomHuePicker.cs" />
