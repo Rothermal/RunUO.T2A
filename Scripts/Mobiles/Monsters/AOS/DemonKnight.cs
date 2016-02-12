@@ -13,43 +13,10 @@ namespace Server.Mobiles
 		public static Type[] ArtifactRarity11 { get { return m_ArtifactRarity11; } }
 		private static Type[] m_ArtifactRarity10 = new Type[]
 			{
-				typeof( LegacyOfTheDreadLord ),
-				typeof( TheTaskmaster )
 			};
 
 		private static Type[] m_ArtifactRarity11 = new Type[]
 			{
-				typeof( TheDragonSlayer ),
-				typeof( ArmorOfFortune ),
-				typeof( GauntletsOfNobility ),
-				typeof( HelmOfInsight ),
-				typeof( HolyKnightsBreastplate ),
-				typeof( JackalsCollar ),
-				typeof( LeggingsOfBane ),
-				typeof( MidnightBracers ),
-				typeof( OrnateCrownOfTheHarrower ),
-				typeof( ShadowDancerLeggings ),
-				typeof( TunicOfFire ),
-				typeof( VoiceOfTheFallenKing ),
-				typeof( BraceletOfHealth ),
-				typeof( OrnamentOfTheMagician ),
-				typeof( RingOfTheElements ),
-				typeof( RingOfTheVile ),
-				typeof( Aegis ),
-				typeof( ArcaneShield ),
-				typeof( AxeOfTheHeavens ),
-				typeof( BladeOfInsanity ),
-				typeof( BoneCrusher ),
-				typeof( BreathOfTheDead ),
-				typeof( Frostbringer ),
-				typeof( SerpentsFang ),
-				typeof( StaffOfTheMagi ),
-				typeof( TheBeserkersMaul ),
-				typeof( TheDryadBow ),
-				typeof( DivineCountenance ),
-				typeof( HatOfTheMagi ),
-				typeof( HuntersHeaddress ),
-				typeof( SpiritOfTheTotem )
 			};
 
 		public static Item CreateRandomArtifact()

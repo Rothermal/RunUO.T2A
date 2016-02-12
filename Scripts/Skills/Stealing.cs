@@ -47,10 +47,6 @@ namespace Server.SkillHandlers
 
 				object root = toSteal.RootParent;
 
-				StealableArtifactsSpawner.StealableInstance si = null;
-				if ( toSteal.Parent == null || !toSteal.Movable )
-					si = StealableArtifactsSpawner.GetStealableInstance( toSteal );
-
 				if ( !IsEmptyHanded( m_Thief ) )
 				{
 					m_Thief.SendLocalizedMessage( 1005584 ); // Both hands must be free to steal.
@@ -79,10 +75,6 @@ namespace Server.SkillHandlers
 				{
 					m_Thief.SendLocalizedMessage( 1048147 ); // Your backpack can't hold anything else.
 				}
-				else if ( si == null && ( toSteal.Parent == null || !toSteal.Movable ) )
-				{
-					m_Thief.SendLocalizedMessage( 502710 ); // You can't steal that!
-				}
 				else if ( toSteal.LootType == LootType.Newbied || toSteal.CheckBlessed( root ) )
 				{
 					m_Thief.SendLocalizedMessage( 502710 ); // You can't steal that!
@@ -90,10 +82,6 @@ namespace Server.SkillHandlers
 				else if ( !m_Thief.InRange( toSteal.GetWorldLocation(), 1 ) )
 				{
 					m_Thief.SendLocalizedMessage( 502703 ); // You must be standing next to an item to steal it.
-				}
-				else if ( si != null && m_Thief.Skills[SkillName.Stealing].Value < 100.0 )
-				{
-					m_Thief.SendLocalizedMessage( 1060025, "", 0x66D ); // You're not skilled enough to attempt the theft of this item.
 				}
 				else if ( toSteal.Parent is Mobile )
 				{
@@ -169,12 +157,6 @@ namespace Server.SkillHandlers
 						if ( stolen != null )
 						{
 							m_Thief.SendLocalizedMessage( 502724 ); // You succesfully steal the item.
-
-							if ( si != null )
-							{
-								toSteal.Movable = true;
-								si.Item = null;
-							}
 						}
 						else
 						{
