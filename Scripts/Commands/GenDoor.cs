@@ -25,16 +25,6 @@ namespace Server
 				new Rectangle2D( new Point2D( 5120, 2300 ), new Point2D( 6143, 4095 ) )
 			};
 
-		private static Rectangle2D[] m_IlshRegions = new Rectangle2D[]
-			{
-				new Rectangle2D( new Point2D( 0, 0 ), new Point2D( 288*8, 200*8 ) )
-			};
-
-		private static Rectangle2D[] m_MalasRegions = new Rectangle2D[]
-			{
-				new Rectangle2D( new Point2D( 0, 0 ), new Point2D( 320*8, 256*8 ) )
-			};
-
 		private static int[] m_SouthFrames = new int[]
 			{
 				0x0006,

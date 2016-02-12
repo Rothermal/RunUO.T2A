@@ -168,7 +168,6 @@
     <Compile Include=".\Engines\Craft\DefTinkering.cs" />
     <Compile Include="Items\Construction\Doors\Portcullis.cs" />
     <Compile Include="Items\Construction\Doors\SecretDoors.cs" />
-    <Compile Include="Items\Construction\Misc\Obelisk.cs" />
     <Compile Include="Items\Misc\Silver.cs" />
     <Compile Include=".\Engines\Harvest\Core\BonusHarvestResource.cs" />
     <Compile Include=".\Engines\Harvest\Core\HarvestBank.cs" />
@@ -1657,7 +1656,7 @@
     <Compile Include=".\Misc\DataPath.cs" />
     <Compile Include=".\Misc\DispellableAttribute.cs" />
     <Compile Include=".\Misc\DispellableFieldAttribute.cs" />
-    <Compile Include=".\Misc\DoorGenerator.cs" />
+    <Compile Include="Commands\GenDoor.cs" />
     <Compile Include=".\Misc\Email.cs" />
     <Compile Include=".\Misc\Emitter.cs" />
     <Compile Include=".\Misc\Fastwalk.cs" />
@@ -1703,9 +1702,9 @@
     <Compile Include=".\Misc\Titles.cs" />
     <Compile Include=".\Misc\ToggleItem.cs" />
     <Compile Include=".\Misc\TreasureMapProtection.cs" />
-    <Compile Include=".\Misc\uoamVendors.cs" />
+    <Compile Include="Commands\uoamVendors.cs" />
     <Compile Include=".\Misc\ValidationQueue.cs" />
-    <Compile Include=".\Misc\VendorGenerator.cs" />
+    <Compile Include="Commands\VendorGenerator.cs" />
     <Compile Include=".\Misc\Weather.cs" />
     <Compile Include=".\Misc\WebStatus.cs" />
     <Compile Include=".\Misc\WeightOverloading.cs" />
