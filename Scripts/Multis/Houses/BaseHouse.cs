@@ -1486,7 +1486,7 @@ namespace Server.Multis
 			{
 				Item item = (Item)m_LockDowns[i];
 
-				if ( item is Container && !(item is BaseBoard || item is Aquarium || item is FishBowl) )
+				if ( item is Container && !(item is BaseBoard ) )
 				{
 					Container cont = (Container)item;
 					List<Item> children = cont.Items;
