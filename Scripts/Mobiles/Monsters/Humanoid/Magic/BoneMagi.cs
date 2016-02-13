@@ -46,11 +46,6 @@ namespace Server.Mobiles
 		
 		public override bool BleedImmune{ get{ return true; } }
 		
-		public override OppositionGroup OppositionGroup
-		{
-			get{ return OppositionGroup.FeyAndUndead; }
-		}
-
 		public override Poison PoisonImmune{ get{ return Poison.Regular; } }
 
 		public BoneMagi( Serial serial ) : base( serial )

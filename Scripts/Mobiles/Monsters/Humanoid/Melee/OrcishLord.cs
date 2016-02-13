@@ -44,9 +44,6 @@ namespace Server.Mobiles
 
 			if ( 0.3 > Utility.RandomDouble() )
 				PackItem( Loot.RandomPossibleReagent() );
-
-			if ( 0.2 > Utility.RandomDouble() )
-				PackItem( new BolaBall() );
 		}
 
 		public override void GenerateLoot()
@@ -59,11 +56,6 @@ namespace Server.Mobiles
 		public override bool CanRummageCorpses{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 1; } }
 		public override int Meat{ get{ return 1; } }
-
-		public override OppositionGroup OppositionGroup
-		{
-			get{ return OppositionGroup.SavagesAndOrcs; }
-		}
 
 		public override bool IsEnemy( Mobile m )
 		{

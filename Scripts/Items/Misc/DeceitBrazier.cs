@@ -22,17 +22,16 @@ namespace Server.Items
 				#region Demons
 				typeof( Balron ), 			typeof( Daemon ),				typeof( Imp ),					typeof( GreaterMongbat ),
 				typeof( Mongbat ), 			typeof( IceFiend ), 			typeof( Gargoyle ), 			typeof( StoneGargoyle ),
-				typeof( FireGargoyle ), 	typeof( HordeMinion ),
 				#endregion
 
 				#region Gazers
-				typeof( Gazer ), 			typeof( ElderGazer ), 			typeof( GazerLarva ),
+				typeof( Gazer ), 			typeof( ElderGazer ),
 				#endregion
 
 				#region Uncategorized
 				typeof( Harpy ),			typeof( StoneHarpy ), 			typeof( HeadlessOne ),			typeof( HellHound ),
-				typeof( HellCat ),			typeof( Phoenix ),				typeof( LavaLizard ),			typeof( SandVortex ),
-				typeof( ShadowWisp ),		typeof( SwampTentacle ),		typeof( PredatorHellCat ),		typeof( Wisp ),
+				typeof( HellCat ),			typeof( Phoenix ),				typeof( LavaLizard ),
+				typeof( SwampTentacle ),		typeof( PredatorHellCat ),		typeof( Wisp ),
 				#endregion
 
 				#region Arachnid
@@ -40,24 +39,24 @@ namespace Server.Items
 				#endregion
 
 				#region Repond
-				typeof( ArcticOgreLord ), 	typeof( Cyclops ), 				typeof( Ettin ), 				typeof( EvilMage ),
+				typeof( Cyclops ), 			typeof( Ettin ), 				typeof( EvilMage ),
 				typeof( FrostTroll ), 		typeof( Ogre ), 				typeof( OgreLord ), 			typeof( Orc ),
-				typeof( OrcishLord ), 		typeof( OrcishMage ), 			typeof( OrcBrute ),				typeof( Ratman ),
+				typeof( OrcishLord ), 		typeof( OrcishMage ), 			typeof( Ratman ),
 				typeof( RatmanMage ),		typeof( OrcCaptain ),			typeof( Troll ),				typeof( Titan ),
-				typeof( EvilMageLord ), 	typeof( OrcBomber ),			typeof( RatmanArcher ),
+				typeof( EvilMageLord ), 	typeof( RatmanArcher ),
 				#endregion
 
 				#region Reptilian
-				typeof( Dragon ), 			typeof( Drake ), 				typeof( Snake ),				typeof( GreaterDragon ),
+				typeof( Dragon ), 			typeof( Drake ), 				typeof( Snake ),
 				typeof( IceSerpent ), 		typeof( GiantSerpent ), 		typeof( IceSnake ), 			typeof( LavaSerpent ),
 				typeof( Lizardman ), 		typeof( Wyvern ),				typeof( WhiteWyrm ),
-				typeof( ShadowWyrm ), 		typeof( SilverSerpent ), 		typeof( LavaSnake ),
+				typeof( SilverSerpent ), 		typeof( LavaSnake ),
 				#endregion
 
 				#region Elementals
 				typeof( EarthElemental ), 	typeof( PoisonElemental ),		typeof( FireElemental ),		typeof( SnowElemental ),
-				typeof( IceElemental ),		typeof( AcidElemental ),		typeof( WaterElemental ),		typeof( Efreet ),
-				typeof( AirElemental ),		typeof( Golem ),
+				typeof( IceElemental ),		typeof( WaterElemental ),		typeof( Efreet ),
+				typeof( AirElemental ),
 				#endregion
 
 				#region Random Critters

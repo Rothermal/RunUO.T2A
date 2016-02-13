@@ -424,19 +424,7 @@ namespace Server.Mobiles
 		public bool IsParagon
 		{
 			get{ return m_Paragon; }
-			set
-			{
-				if ( m_Paragon == value )
-					return;
-				else if ( value )
-					Paragon.Convert( this );
-				else
-					Paragon.UnConvert( this );
-
-				m_Paragon = value;
-
-				InvalidateProperties();
-			}
+			set { }
 		}
 
 		public virtual bool HasManaOveride { get { return false; } }
@@ -582,9 +570,6 @@ namespace Server.Mobiles
 		public virtual int BreathComputeDamage()
 		{
 			int damage = (int)(Hits * BreathDamageScalar);
-
-			if ( IsParagon )
-				damage = (int)(damage / Paragon.HitsBuff);
 
 			if ( damage > 200 )
 				damage = 200;
@@ -832,11 +817,10 @@ namespace Server.Mobiles
 
 		private static Type[] m_AnimateDeadTypes = new Type[]
 			{
-				typeof( MoundOfMaggots ), typeof( HellSteed ), typeof( SkeletalMount ),
-				typeof( WailingBanshee ), typeof( Wraith ), typeof( SkeletalDragon ),
-				typeof( LichLord ), typeof( FleshGolem ), typeof( Lich ),
+				typeof( Wraith ),
+				typeof( LichLord ), typeof( Lich ),
 				typeof( SkeletalKnight ), typeof( BoneKnight ), typeof( Mummy ),
-				typeof( SkeletalMage ), typeof( BoneMagi ), typeof( PatchworkSkeleton )
+				typeof( SkeletalMage ), typeof( BoneMagi )
 			};
 
 		public virtual bool IsAnimatedDead
@@ -1677,11 +1661,6 @@ namespace Server.Mobiles
 
 			if ( version >= 18 )
 				m_CorpseNameOverride = reader.ReadString();
-
-			if( version <= 14 && m_Paragon && Hue == 0x31 )
-			{
-				Hue = Paragon.Hue; //Paragon hue fixed, should now be 0x501.
-			}
 
 			CheckStatTimers();
 
@@ -3893,9 +3872,7 @@ namespace Server.Mobiles
 			{
 				if ( treasureLevel >= 0 )
 				{
-					if ( m_Paragon && Paragon.ChestChance > Utility.RandomDouble() )
-						PackItem( new ParagonChest( this.Name, treasureLevel ) );
-					else if ( Map == Map.Felucca && TreasureMap.LootChance >= Utility.RandomDouble() )
+					if ( Map == Map.Felucca && TreasureMap.LootChance >= Utility.RandomDouble() )
 						PackItem( new TreasureMap( treasureLevel, Map ) );
 				}
 			}
@@ -4086,8 +4063,6 @@ namespace Server.Mobiles
 
 		public override void OnDeath( Container c )
 		{
-			MeerMage.StopEffect( this, false );
-
 			if ( IsBonded )
 			{
 				int sound = this.GetDeathSound();

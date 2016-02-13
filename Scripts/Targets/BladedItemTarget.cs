@@ -14,14 +14,6 @@ namespace Server.Targets
 			m_Item = item;
 		}
 
-		protected override void OnTargetOutOfRange( Mobile from, object targeted )
-		{
-			if ( targeted is UnholyBone && from.InRange( ((UnholyBone)targeted), 12 ) )
-				((UnholyBone)targeted).Carve( from, m_Item );
-			else
-				base.OnTargetOutOfRange (from, targeted);
-		}
-
 		protected override void OnTarget( Mobile from, object targeted )
 		{
 			if ( m_Item.Deleted )
@@ -30,15 +22,6 @@ namespace Server.Targets
 			if ( targeted is ICarvable )
 			{
 				((ICarvable)targeted).Carve( from, m_Item );
-			}
-			else if ( targeted is SwampDragon && ((SwampDragon)targeted).HasBarding )
-			{
-				SwampDragon pet = (SwampDragon)targeted;
-
-				if ( !pet.Controlled || pet.ControlMaster != from )
-					from.SendLocalizedMessage( 1053022 ); // You cannot remove barding from a swamp dragon you do not own.
-				else
-					pet.HasBarding = false;
 			}
 			else
 			{

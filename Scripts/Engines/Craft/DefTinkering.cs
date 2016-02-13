@@ -189,7 +189,6 @@ namespace Server.Engines.Craft
 			AddCraft( typeof( SextantParts ), 1044047, 1024185, 30.0, 80.0, typeof( IronIngot ), 1044036, 4, 1044037 );
 			AddCraft( typeof( BarrelHoops ), 1044047, 1024321, -15.0, 35.0, typeof( IronIngot ), 1044036, 5, 1044037 );
 			AddCraft( typeof( Hinge ), 1044047, 1024181, 5.0, 55.0, typeof( IronIngot ), 1044036, 2, 1044037 );
-			AddCraft( typeof( BolaBall ), 1044047, 1023699, 45.0, 95.0, typeof( IronIngot ), 1044036, 10, 1044037 );
 			#endregion
 
 			#region Utensils
@@ -247,9 +246,6 @@ namespace Server.Engines.Craft
 			AddRes( index, typeof( ClockParts ), 1044173, 1, 1044253 );
 
 			AddCraft( typeof( Sextant ), 1044051, 1024183, 0.0, 0.0, typeof( SextantParts ), 1044175, 1, 1044253 );
-
-			index = AddCraft( typeof( Bola ), 1044051, 1046441, 60.0, 80.0, typeof( BolaBall ), 1046440, 4, 1042613 );
-			AddRes( index, typeof( Leather ), 1044462, 3, 1044463 );
 
 			index = AddCraft( typeof( PotionKeg ), 1044051, 1044258, 75.0, 100.0, typeof( Keg ), 1044255, 1, 1044253 );
 			AddRes( index, typeof( Bottle ), 1044250, 10, 1044253 );

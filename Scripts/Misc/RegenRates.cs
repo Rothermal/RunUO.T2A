@@ -43,7 +43,7 @@ namespace Server.Misc
 			if ( from is BaseCreature && !((BaseCreature)from).IsAnimatedDead )
 				points += 4;
 
-			if ( (from is BaseCreature && ((BaseCreature)from).IsParagon) || from is Leviathan )
+			if ( (from is BaseCreature && ((BaseCreature)from).IsParagon) )
 				points += 40;
 
 			if ( points < 0 )
@@ -59,7 +59,7 @@ namespace Server.Misc
 
 			int points = 0;
 
-			if( (from is BaseCreature && ((BaseCreature)from).IsParagon) || from is Leviathan )
+			if( (from is BaseCreature && ((BaseCreature)from).IsParagon) )
 				points += 40;
 
 			if ( points < -1 )

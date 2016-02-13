@@ -51,11 +51,6 @@ namespace Server.Mobiles
 		public override int TreasureMapLevel{ get{ return 1; } }
 		public override int Meat{ get{ return 1; } }
 
-		public override OppositionGroup OppositionGroup
-		{
-			get{ return OppositionGroup.SavagesAndOrcs; }
-		}
-
 		public override bool IsEnemy( Mobile m )
 		{
 			if ( m.Player && m.FindItemOnLayer( Layer.Helm ) is OrcishKinMask )

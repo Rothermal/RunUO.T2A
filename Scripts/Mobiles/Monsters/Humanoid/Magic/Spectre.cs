@@ -40,11 +40,6 @@ namespace Server.Mobiles
 		
 		public override bool BleedImmune{ get{ return true; } }
 
-		public override OppositionGroup OppositionGroup
-		{
-			get{ return OppositionGroup.FeyAndUndead; }
-		}
-
 		public override Poison PoisonImmune{ get{ return Poison.Lethal; } }
 
 		public Spectre( Serial serial ) : base( serial )
