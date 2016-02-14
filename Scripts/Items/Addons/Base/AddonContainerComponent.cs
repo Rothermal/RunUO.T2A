@@ -123,47 +123,4 @@ namespace Server.Items
 				from.SendLocalizedMessage( 500446 ); // That is too far away.
 		}
 	}
-
-	public class LocalizedContainerComponent : AddonContainerComponent
-	{
-		private int m_LabelNumber;
-
-		public override int LabelNumber
-		{
-			get
-			{
-				if ( m_LabelNumber > 0 )
-					return m_LabelNumber;
-
-				return base.LabelNumber;
-			}
-		}
-
-		public LocalizedContainerComponent( int itemID, int labelNumber ) : base( itemID )
-		{
-			m_LabelNumber = labelNumber;
-		}
-
-		public LocalizedContainerComponent( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-
-			writer.Write( m_LabelNumber );
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-
-			m_LabelNumber = reader.ReadInt();
-		}
-	}
 }
